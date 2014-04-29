@@ -1,0 +1,13 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+   <qresource>
+      <file alias="icon-main-512">resources/img/icon/main-512x512.png</file>
+      <file alias="icon-main-256">resources/img/icon/main-256x256.png</file>
+      <file alias="icon-main-128">resources/img/icon/main-128x128.png</file>
+      <file alias="icon-main-64">resources/img/icon/main-64x64.png</file>
+      <file alias="icon-main-32">resources/img/icon/main-32x32.png</file>
+      <file alias="icon-main-16">resources/img/icon/main-16x16.png</file>
+      <file alias="lang-english">resources/txt/english.lang</file>
+      <file alias="lang-spanish">resources/txt/spanish.lang</file>
+   </qresource>
+</RCC> 
