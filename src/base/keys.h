@@ -40,6 +40,7 @@ namespace Base
    const QString KeyTxtGuiMenuFile = "txt.gui.menu.file";
    const QString KeyTxtGuiMenuFileOpenRom = "txt.gui.menu.file.openrom";
    const QString KeyTxtGuiMenuFileOpenGameDisc = "txt.gui.menu.file.opengamedisc";
+   const QString KeyTxtGuiMenuFileLibrary = "txt.gui.menu.file.library";
    const QString KeyTxtGuiMenuFileExit = "txt.gui.menu.file.exit";
    const QString KeyTxtGuiMenuConfig = "txt.gui.menu.config";
    const QString KeyTxtGuiMenuConfigConfig = "txt.gui.menu.config.config";
@@ -56,6 +57,8 @@ namespace Base
    const QString KeyTxtGuiMainConfigDescription = "txt.gui.main.configdescription";
    const QString KeyTxtGuiMainAbout = "txt.gui.main.about";
    const QString KeyTxtGuiMainExit = "txt.gui.main.exit";
+   const QString KeyTxtGuiMainLibrary = "txt.gui.main.library";
+   const QString KeyTxtGuiMainLibraryDescription = "txt.gui.main.librarydescription";
 }
 
 # endif

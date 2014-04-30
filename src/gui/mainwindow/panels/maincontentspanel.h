@@ -17,28 +17,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-# ifndef MAINWINDOW_H_
-# define MAINWINDOW_H_
+# ifndef MAINCONTENTSPANEL_H_
+# define MAINCONTENTSPANEL_H_
 
-# include <QtGui/QMainWindow>
-# include <QtGui/QMenuBar>
-# include <QtGui/QMenu>
-# include <QtGui/QAction>
-# include <QtGui/QIcon>
+# include <QtGui/QWidget>
+# include <QtGui/QVBoxLayout>
 
-# include "../../base/base.h"
-# include "menubar/menubar.h"
-# include "panels/maincontentspanel.h"
+# include "../../../base/base.h"
+# include "welcomepanel.h"
+# include "controlspanel.h"
+# include "buttonspanel.h"
 
 namespace Gui
 {
-   class MainWindow : public QMainWindow
+   class MainContentsPanel : public QWidget
    {
       Q_OBJECT
-      
+
       public:
-         explicit MainWindow ( Base::SharedComponents* new_shared_components );
-         virtual ~MainWindow ( void );
+         explicit MainContentsPanel ( Base::SharedComponents* new_shared_components );
+         virtual ~MainContentsPanel ( void );
          
       signals:
          void openRom ( void );
@@ -47,18 +45,17 @@ namespace Gui
          void config ( void );
          void exitNow ( void );
          void about ( void );
-      
-      public slots:
-         void updateText ( void );
          
       private:
          void buildGui ( void );
          void connectAll ( void );
-         
+
       private:
          Base::SharedComponents* shared_components;
-         Gui::MenuBar* menubar;
-         Gui::MainContentsPanel* main_contents_panel;
+         QVBoxLayout* main_layout;
+         Gui::WelcomePanel* welcome_panel;
+         Gui::ControlsPanel* controls_panel;
+         Gui::ButtonsPanel* buttons_panel;
    };
 }
 

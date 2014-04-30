@@ -24,7 +24,7 @@
 # include <QtGui/QMenu>
 # include <QtGui/QAction>
 
-# include "../../base/base.h"
+# include "../../../base/base.h"
 
 namespace Gui
 {
@@ -36,13 +36,31 @@ namespace Gui
          explicit MenuBar ( Base::SharedComponents* new_shared_components );
          virtual ~MenuBar ( void );
          
+      signals:
+         void openRom ( void );
+         void openGameDisc ( void );
+         void library ( void );
+         void config ( void );
+         void exitNow ( void );
+         void about ( void );
+         
+      public slots:
+         void updateText ( void );
+         
+      private:
+         void buildGui ( void );
+         void connectAll ( void );
+         
       private:
          Base::SharedComponents* shared_components;
-         QMenu* file;
-         QMenu* config;
-         QMenu* help;
+         QMenu* menu_file;
+         QMenu* menu_config;
+         QMenu* menu_help;
          QAction* file_openrom;
          QAction* file_opengamedisc;
+         QAction* file_separator1;
+         QAction* file_library;
+         QAction* file_separator2;
          QAction* file_exit;
          QAction* config_config;
          QAction* help_about;

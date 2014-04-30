@@ -15,32 +15,58 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */ 
+ */  
 
-# ifndef MAINCONTENTSPANEL_H_
-# define MAINCONTENTSPANEL_H_
+# include "kernel.h"
 
-# include <QtGui/QWidget>
-# include <QtGui/QVBoxLayout>
-
-# include "../../base/base.h"
-# include "../welcomepanel/welcomepanel.h"
-
-namespace Gui
+Core::Kernel::Kernel ( Base::SharedComponents* new_shared_components ) :
+   QObject ()
 {
-   class MainContentsPanel : public QWidget
-   {
-      Q_OBJECT
-
-      public:
-         explicit MainContentsPanel ( Base::SharedComponents* new_shared_components );
-         virtual ~MainContentsPanel ( void );
-
-      private:
-         Base::SharedComponents* shared_components;
-         QVBoxLayout* main_layout;
-         Gui::WelcomePanel* welcome_panel;
-   };
+   shared_components = new_shared_components;
 }
 
-# endif
+Core::Kernel::~Kernel ( void )
+{
+}
+
+void Core::Kernel::about ( void )
+{
+   qDebug () << "Kernel: About";
+   
+   return;
+}
+
+void Core::Kernel::config ( void )
+{
+   qDebug () << "Kernel: config";
+   
+   return;
+}
+
+void Core::Kernel::exitNow ( void )
+{
+   qDebug () << "Kernel: Exit now";
+   
+   return;
+}
+
+void Core::Kernel::library ( void )
+{
+   qDebug () << "Kernel: Library";
+   
+   return;
+}
+
+void Core::Kernel::openGameDisc ( void )
+{
+   qDebug () << "Kernel: Open game disc";
+   
+   return;
+}
+
+void Core::Kernel::openRom ( void )
+{
+   qDebug () << "Kernel: Open ROM";
+   
+   return;
+}

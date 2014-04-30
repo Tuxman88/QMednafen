@@ -19,6 +19,7 @@
 
 # include <QtGui/QApplication>
 # include "gui/gui.h"
+# include "core/core.h"
 # include "base/base.h"
 
 int main ( int argc , char** argv )
@@ -26,10 +27,19 @@ int main ( int argc , char** argv )
    QApplication app ( argc , argv );
    
    Base::SharedComponents* shared_components;
+   Core::Kernel* kernel;
    Gui::MainWindow* main_window;
    
    shared_components = new Base::SharedComponents ();
+   kernel = new Core::Kernel ( shared_components );
    main_window = new Gui::MainWindow ( shared_components );
+   
+   QObject::connect ( main_window , SIGNAL ( exitNow () )      , kernel , SLOT ( exitNow () ) );
+   QObject::connect ( main_window , SIGNAL ( about () )        , kernel , SLOT ( about () ) );
+   QObject::connect ( main_window , SIGNAL ( openGameDisc () ) , kernel , SLOT ( openGameDisc () ) );
+   QObject::connect ( main_window , SIGNAL ( openRom () )      , kernel , SLOT ( openRom () ) );
+   QObject::connect ( main_window , SIGNAL ( config () )       , kernel , SLOT ( config () ) );
+   QObject::connect ( main_window , SIGNAL ( library () )      , kernel , SLOT ( library () ) );
    
    main_window->show ();
    main_window->setFixedSize ( main_window->size () );
@@ -37,6 +47,7 @@ int main ( int argc , char** argv )
    app.exec ();
    
    delete shared_components;
+   delete kernel;
    delete main_window;
    
    return ( 0 );

@@ -15,41 +15,36 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+ */  
 
-# ifndef WELCOMEPANEL_H_
-# define WELCOMEPANEL_H_
+# ifndef KERNEL_H_
+# define KERNEL_H_
 
-# include <QtGui/QWidget>
-# include <QtGui/QHBoxLayout>
-# include <QtGui/QVBoxLayout>
-# include <QtGui/QLabel>
-# include <QtGui/QPixmap>
+# include <QtCore/QObject>
+# include <QtCore/QDebug>
 
 # include "../../base/base.h"
 
-namespace Gui
+namespace Core
 {
-   class WelcomePanel : public QWidget
+   class Kernel : public QObject
    {
       Q_OBJECT
       
       public:
-         explicit WelcomePanel ( Base::SharedComponents* new_shared_components );
-         virtual ~WelcomePanel ( void );
+         explicit Kernel ( Base::SharedComponents* new_shared_components );
+         virtual ~Kernel ( void );
          
       public slots:
-         void updateText ( void );
+         void openRom ( void );
+         void openGameDisc ( void );
+         void library ( void );
+         void config ( void );
+         void exitNow ( void );
+         void about ( void );
          
       private:
          Base::SharedComponents* shared_components;
-         QHBoxLayout* main_layout;
-         QVBoxLayout* info_layout;
-         QVBoxLayout* version_layout;
-         QLabel* program_icon;
-         QLabel* program_name;
-         QLabel* program_description;
-         QLabel* program_version;
    };
 }
 

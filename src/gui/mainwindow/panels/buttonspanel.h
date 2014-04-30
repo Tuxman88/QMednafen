@@ -15,39 +15,31 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */ 
+ */
 
-# ifndef MAINWINDOW_H_
-# define MAINWINDOW_H_
+# ifndef BUTTONSPANEL_H_
+# define BUTTONSPANEL_H_
 
-# include <QtGui/QMainWindow>
-# include <QtGui/QMenuBar>
-# include <QtGui/QMenu>
-# include <QtGui/QAction>
-# include <QtGui/QIcon>
+# include <QtGui/QWidget>
+# include <QtGui/QHBoxLayout>
+# include <QtGui/QPushButton>
 
-# include "../../base/base.h"
-# include "menubar/menubar.h"
-# include "panels/maincontentspanel.h"
+# include "../../../base/base.h"
 
 namespace Gui
 {
-   class MainWindow : public QMainWindow
+   class ButtonsPanel : public QWidget
    {
       Q_OBJECT
       
       public:
-         explicit MainWindow ( Base::SharedComponents* new_shared_components );
-         virtual ~MainWindow ( void );
+         explicit ButtonsPanel ( Base::SharedComponents* new_shared_components );
+         virtual ~ButtonsPanel ( void );
          
       signals:
-         void openRom ( void );
-         void openGameDisc ( void );
-         void library ( void );
-         void config ( void );
-         void exitNow ( void );
          void about ( void );
-      
+         void exitNow ( void );
+         
       public slots:
          void updateText ( void );
          
@@ -57,8 +49,9 @@ namespace Gui
          
       private:
          Base::SharedComponents* shared_components;
-         Gui::MenuBar* menubar;
-         Gui::MainContentsPanel* main_contents_panel;
+         QPushButton* button_about;
+         QPushButton* button_exit;
+         QHBoxLayout* main_layout;
    };
 }
 

@@ -55,10 +55,11 @@ Base::Text::~Text ( void )
 void Base::Text::fillDefault ( void )
 {
    current_text[ QString ( "txt.program.name" ) ] = QString ( "QMednafen" );
-   current_text[ QString ( "txt.program.version" ) ] = QString ( "0.1" );
+   current_text[ QString ( "txt.program.version" ) ] = QString ( "0.1.0" );
    current_text[ QString ( "txt.gui.menu.file" ) ] = QString ( "File" );
    current_text[ QString ( "txt.gui.menu.file.openrom" ) ] = QString ( "Open ROM" );
    current_text[ QString ( "txt.gui.menu.file.opengamedisc" ) ] = QString ( "Open game disc" );
+   current_text[ QString ( "txt.gui.menu.file.library" ) ] = QString ( "Games library" );
    current_text[ QString ( "txt.gui.menu.file.exit" ) ] = QString ( "Exit" );
    current_text[ QString ( "txt.gui.menu.config" ) ] = QString ( "Options" );
    current_text[ QString ( "txt.gui.menu.config.config" ) ] = QString ( "Config" );
@@ -75,6 +76,8 @@ void Base::Text::fillDefault ( void )
    current_text[ QString ( "txt.gui.main.configdescription" ) ] = QString ( "Configure QMefnafen" );
    current_text[ QString ( "txt.gui.main.about" ) ] = QString ( "About" );
    current_text[ QString ( "txt.gui.main.exit" ) ] = QString ( "Exit" );
+   current_text[ QString ( "txt.gui.main.library" ) ] = QString ( "Library" );
+   current_text[ QString ( "txt.gui.main.librarydescription" ) ] = QString ( "Games library" );
    
    return;
 }

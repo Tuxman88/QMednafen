@@ -15,15 +15,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+ */ 
 
-# ifndef GUI_H_
-# define GUI_H_
+# ifndef CORE_H_
+# define CORE_H_
 
-# include "mainwindow/mainwindow.h"
-# include "mainwindow/menubar/menubar.h"
-# include "mainwindow/panels/maincontentspanel.h"
-# include "mainwindow/panels/controlspanel.h"
-# include "mainwindow/panels/buttonspanel.h"
+# include "kernel/kernel.h"
 
 # endif

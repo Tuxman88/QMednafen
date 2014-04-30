@@ -59,7 +59,22 @@ void Gui::WelcomePanel::updateText ( void )
 {
    program_name->setText ( shared_components->text ()->operator[] ( Base::KeyTxtProgramName ) );
    program_description->setText ( shared_components->text ()->operator[] ( Base::KeyTxtGuiMainDescription ) );
-   program_version->setText ( shared_components->text ()->operator[] ( Base::KeyTxtProgramVersion ) );
+   program_version->setText ( shared_components->text ()->operator[] ( Base::KeyTxtGuiMainVersion ) + 
+                              QString ( ": " ) +
+                              shared_components->text ()->operator[] ( Base::KeyTxtProgramVersion ) );
+   
+   QFont font;
+   font = program_name->font ();
+   font.setPointSize ( 22 );
+   program_name->setFont ( font );
+   
+   font = program_version->font ();
+   font.setPointSize ( 10 );
+   program_version->setFont ( font );
+   
+   font = program_description->font ();
+   font.setPointSize ( 10 );
+   program_description->setFont ( font );
    
    return;
 }
