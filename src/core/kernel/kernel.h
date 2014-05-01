@@ -35,6 +35,9 @@ namespace Core
          explicit Kernel ( Base::SharedComponents* new_shared_components );
          virtual ~Kernel ( void );
          
+      signals:
+         void closeMainWindow ( void );
+         
       public slots:
          void openRom ( void );
          void openGameDisc ( void );

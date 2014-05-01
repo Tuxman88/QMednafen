@@ -15,15 +15,27 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+ */  
 
-# ifndef BASE_H_
-# define BASE_H_
+# ifndef PLUGIN_H_
+# define PLUGIN_H_
 
-# include "configuration/configuration.h"
-# include "text/text.h"
-# include "sharedcomponents/sharedcomponents.h"
-# include "pluginloader/pluginloader.h"
-# include "pluginloader/plugin.h"
+# include <QtCore/QObject>
+# include <QtCore/QString>
+
+namespace Base
+{
+   class Plugin : public QObject
+   {
+      Q_OBJECT
+      
+      public:
+         explicit Plugin ( void );
+         virtual ~Plugin ( void );
+         
+      private:
+         
+   };
+}
 
 # endif

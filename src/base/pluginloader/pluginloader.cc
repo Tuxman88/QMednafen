@@ -15,15 +15,20 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+ */ 
 
-# ifndef BASE_H_
-# define BASE_H_
+# include "pluginloader.h"
 
-# include "configuration/configuration.h"
-# include "text/text.h"
-# include "sharedcomponents/sharedcomponents.h"
-# include "pluginloader/pluginloader.h"
-# include "pluginloader/plugin.h"
+Base::PluginLoader::PluginLoader ( void )
+   : QObject ()
+{
+}
 
-# endif
+Base::PluginLoader::~PluginLoader ( void )
+{
+}
+
+Base::PluginLoader::LoadState Base::PluginLoader::load ( QString file_path )
+{
+   return ( AllOk );
+}

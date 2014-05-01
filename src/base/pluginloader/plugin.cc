@@ -15,15 +15,14 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+ */  
 
-# ifndef BASE_H_
-# define BASE_H_
+# include "plugin.h"
 
-# include "configuration/configuration.h"
-# include "text/text.h"
-# include "sharedcomponents/sharedcomponents.h"
-# include "pluginloader/pluginloader.h"
-# include "pluginloader/plugin.h"
+Base::Plugin::Plugin ( void )
+{
+}
 
-# endif
+Base::Plugin::~Plugin ( void )
+{
+}

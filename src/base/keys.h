@@ -30,6 +30,27 @@ namespace Base
 
    const QString KeyCfgGuiLanguage = "cfg.gui.language";
    const QString ValCfgGuiLanguage = "english";
+   
+   const QString KeyCfgGuiShortcutOpenRom = "cfg.gui.shortcut.openrom";
+   const QString ValCfgGuiShortcutOpenRom = "Ctrl+O";
+   
+   const QString KeyCfgGuiShortcutOpenGameDisc = "cfg.gui.shortcut.opengamedisc";
+   const QString ValCfgGuiShortcutOpenGameDisc = "Ctrl+D";
+   
+   const QString KeyCfgGuiShortcutLibrary = "cfg.gui.shortcut.library";
+   const QString ValCfgGuiShortcutLibrary = "Ctrl+L";
+   
+   const QString KeyCfgGuiShortcutExit = "cfg.gui.shortcut.exit";
+   const QString ValCfgGuiShortcutExit = "Ctrl+X";
+   
+   const QString KeyCfgGuiShortcutConfig = "cfg.gui.shortcut.config";
+   const QString ValCfgGuiShortcutConfig = "Ctrl+C";
+   
+   const QString KeyCfgGuiShortcutAbout = "cfg.gui.shortcut.about";
+   const QString ValCfgGuiShortcutAbout = "Ctrl+A";
+   
+   const QString KeyCfgCorePathPlugins = "cfg.core.plugins.path";
+   const QString ValCfgCorePathPlugins = "~/.qmednafen/plugins/";
 
    /*
    * Keys about text. (there are just keys, the values are controlled in other place, in the "Text" class).

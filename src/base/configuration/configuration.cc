@@ -28,6 +28,24 @@ Base::Configuration::Configuration ( void )
    
    if ( !settings->contains ( Base::KeyCfgGuiLanguage ) )
       settings->setValue ( Base::KeyCfgGuiLanguage , Base::ValCfgGuiLanguage );
+   
+   if ( !settings->contains ( Base::KeyCfgGuiShortcutOpenRom ) )
+      settings->setValue ( Base::KeyCfgGuiShortcutOpenRom , Base::ValCfgGuiShortcutOpenRom );
+   
+   if ( !settings->contains ( Base::KeyCfgGuiShortcutOpenGameDisc ) )
+      settings->setValue ( Base::KeyCfgGuiShortcutOpenGameDisc , Base::ValCfgGuiShortcutOpenGameDisc );
+   
+   if ( !settings->contains ( Base::KeyCfgGuiShortcutLibrary ) )
+      settings->setValue ( Base::KeyCfgGuiShortcutLibrary , Base::ValCfgGuiShortcutLibrary );
+   
+   if ( !settings->contains ( Base::KeyCfgGuiShortcutExit ) )
+      settings->setValue ( Base::KeyCfgGuiShortcutExit , Base::ValCfgGuiShortcutExit );
+   
+   if ( !settings->contains ( Base::KeyCfgGuiShortcutConfig ) )
+      settings->setValue ( Base::KeyCfgGuiShortcutConfig , Base::ValCfgGuiShortcutConfig );
+   
+   if ( !settings->contains ( Base::KeyCfgGuiShortcutAbout ) )
+      settings->setValue ( Base::KeyCfgGuiShortcutAbout , Base::ValCfgGuiShortcutAbout );
 }
 
 Base::Configuration::~Configuration ( void )
@@ -38,6 +56,12 @@ Base::Configuration::~Configuration ( void )
 void Base::Configuration::resetValues ( void )
 {
    settings->setValue ( Base::KeyCfgGuiLanguage , Base::ValCfgGuiLanguage );
+   settings->setValue ( Base::KeyCfgGuiShortcutOpenRom , Base::ValCfgGuiShortcutOpenRom );
+   settings->setValue ( Base::KeyCfgGuiShortcutOpenGameDisc , Base::ValCfgGuiShortcutOpenGameDisc );
+   settings->setValue ( Base::KeyCfgGuiShortcutLibrary , Base::ValCfgGuiShortcutLibrary );
+   settings->setValue ( Base::KeyCfgGuiShortcutExit , Base::ValCfgGuiShortcutExit );
+   settings->setValue ( Base::KeyCfgGuiShortcutConfig , Base::ValCfgGuiShortcutConfig );
+   settings->setValue ( Base::KeyCfgGuiShortcutAbout , Base::ValCfgGuiShortcutAbout );
    
    emit updateValues ();
    

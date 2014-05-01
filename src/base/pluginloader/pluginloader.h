@@ -15,15 +15,36 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+ */ 
 
-# ifndef BASE_H_
-# define BASE_H_
+# ifndef PLUGINLOADER_H_
+# define PLUGINLOADER_H_
 
-# include "configuration/configuration.h"
-# include "text/text.h"
-# include "sharedcomponents/sharedcomponents.h"
-# include "pluginloader/pluginloader.h"
-# include "pluginloader/plugin.h"
+# include <QtCore/QObject>
+# include <QtCore/QString>
+
+# include "plugin.h"
+
+namespace Base
+{
+   class PluginLoader : public QObject
+   {
+      Q_OBJECT
+      
+      public:
+         enum LoadState
+         {
+            AllOk = 0 ,
+            CantOpenFile
+         };
+      
+      public:
+         explicit PluginLoader ( void );
+         virtual ~PluginLoader ( void );
+         LoadState load ( QString file_path );
+         
+      private:
+   };
+}
 
 # endif

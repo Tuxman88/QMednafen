@@ -41,6 +41,8 @@ int main ( int argc , char** argv )
    QObject::connect ( main_window , SIGNAL ( config () )       , kernel , SLOT ( config () ) );
    QObject::connect ( main_window , SIGNAL ( library () )      , kernel , SLOT ( library () ) );
    
+   QObject::connect ( kernel , SIGNAL ( closeMainWindow () ) , main_window , SLOT ( closeMainWindow () ) );
+   
    main_window->show ();
    main_window->setFixedSize ( main_window->size () );
    

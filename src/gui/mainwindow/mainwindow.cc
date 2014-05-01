@@ -40,7 +40,6 @@ void Gui::MainWindow::buildGui ( void )
    
    setMenuBar ( menubar );
    setCentralWidget ( main_contents_panel );
-   
    setWindowIcon ( QIcon ( ":/icon-main-32" ) );
    
    return;
@@ -70,6 +69,13 @@ void Gui::MainWindow::updateText ( void )
    setWindowTitle ( shared_components->text ()->operator[] ( Base::KeyTxtProgramName ) +
                     QString ( " " ) + 
                     shared_components->text ()->operator[] ( Base::KeyTxtProgramVersion ) );
+   
+   return;
+}
+
+void Gui::MainWindow::closeMainWindow ( void )
+{
+   this->close ();
    
    return;
 }

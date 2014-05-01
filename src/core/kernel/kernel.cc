@@ -31,42 +31,43 @@ Core::Kernel::~Kernel ( void )
 
 void Core::Kernel::about ( void )
 {
-   qDebug () << "Kernel: About";
+   qDebug () << "Kernel: Displaying About dialog";
    
    return;
 }
 
 void Core::Kernel::config ( void )
 {
-   qDebug () << "Kernel: config";
+   qDebug () << "Kernel: Displaying Config dialog";
    
    return;
 }
 
 void Core::Kernel::exitNow ( void )
 {
-   qDebug () << "Kernel: Exit now";
+   qDebug () << "Kernel: Closing program now";
+   emit closeMainWindow ();
    
    return;
 }
 
 void Core::Kernel::library ( void )
 {
-   qDebug () << "Kernel: Library";
+   qDebug () << "Kernel: Displaying Library dialog";
    
    return;
 }
 
 void Core::Kernel::openGameDisc ( void )
 {
-   qDebug () << "Kernel: Open game disc";
+   qDebug () << "Kernel: Opening game disc";
    
    return;
 }
 
 void Core::Kernel::openRom ( void )
 {
-   qDebug () << "Kernel: Open ROM";
+   qDebug () << "Kernel: Opening ROM";
    
    return;
 }

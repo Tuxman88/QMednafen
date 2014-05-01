@@ -50,6 +50,7 @@ namespace Gui
       
       public slots:
          void updateText ( void );
+         void closeMainWindow ( void );
          
       private:
          void buildGui ( void );

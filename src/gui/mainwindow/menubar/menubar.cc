@@ -27,6 +27,7 @@ Gui::MenuBar::MenuBar ( Base::SharedComponents* new_shared_components )
    buildGui ();
    connectAll ();
    updateText ();
+   updateConfig ();
 }
 
 Gui::MenuBar::~MenuBar ( void )
@@ -47,6 +48,18 @@ void Gui::MenuBar::buildGui(void)
    file_exit         = menu_file->addAction ( "..." );
    config_config     = menu_config->addAction ( "..." );
    help_about        = menu_help->addAction ( "..." );
+   
+   return;
+}
+
+void Gui::MenuBar::updateConfig ( void )
+{
+   file_openrom->setShortcut ( QKeySequence ( shared_components->config ()->operator[] ( Base::KeyCfgGuiShortcutOpenRom ) ) );
+   file_opengamedisc->setShortcut ( QKeySequence ( shared_components->config ()->operator[] ( Base::KeyCfgGuiShortcutOpenGameDisc ) ) );
+   file_library->setShortcut ( QKeySequence ( shared_components->config ()->operator[] ( Base::KeyCfgGuiShortcutLibrary ) ) );
+   file_exit->setShortcut ( QKeySequence ( shared_components->config ()->operator[] ( Base::KeyCfgGuiShortcutExit ) ) );
+   config_config->setShortcut ( QKeySequence ( shared_components->config ()->operator[] ( Base::KeyCfgGuiShortcutConfig ) ) );
+   help_about->setShortcut ( QKeySequence ( shared_components->config ()->operator[] ( Base::KeyCfgGuiShortcutAbout ) ) );
    
    return;
 }

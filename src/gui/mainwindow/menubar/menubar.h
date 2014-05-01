@@ -23,6 +23,7 @@
 # include <QtGui/QMenuBar>
 # include <QtGui/QMenu>
 # include <QtGui/QAction>
+# include <QtGui/QKeySequence>
 
 # include "../../../base/base.h"
 
@@ -46,6 +47,7 @@ namespace Gui
          
       public slots:
          void updateText ( void );
+         void updateConfig ( void );
          
       private:
          void buildGui ( void );
