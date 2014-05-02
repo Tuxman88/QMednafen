@@ -20,9 +20,9 @@
 # ifndef MENUBAR_H_
 # define MENUBAR_H_
 
-# include <QtGui/QMenuBar>
-# include <QtGui/QMenu>
-# include <QtGui/QAction>
+# include <QtWidgets/QMenuBar>
+# include <QtWidgets/QMenu>
+# include <QtWidgets/QAction>
 # include <QtGui/QKeySequence>
 
 # include "../../../base/base.h"

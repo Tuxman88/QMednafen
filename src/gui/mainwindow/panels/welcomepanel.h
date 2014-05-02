@@ -20,10 +20,10 @@
 # ifndef WELCOMEPANEL_H_
 # define WELCOMEPANEL_H_
 
-# include <QtGui/QWidget>
-# include <QtGui/QHBoxLayout>
-# include <QtGui/QVBoxLayout>
-# include <QtGui/QLabel>
+# include <QtWidgets/QWidget>
+# include <QtWidgets/QHBoxLayout>
+# include <QtWidgets/QVBoxLayout>
+# include <QtWidgets/QLabel>
 # include <QtGui/QPixmap>
 # include <QtGui/QFont>
 

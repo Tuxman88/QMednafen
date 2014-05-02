@@ -20,10 +20,10 @@
 # ifndef CONTROLSPANEL_H_
 # define CONTROLSPANEL_H_
 
-# include <QtGui/QGroupBox>
-# include <QtGui/QGridLayout>
-# include <QtGui/QPushButton>
-# include <QtGui/QLabel>
+# include <QtWidgets/QGroupBox>
+# include <QtWidgets/QGridLayout>
+# include <QtWidgets/QPushButton>
+# include <QtWidgets/QLabel>
 
 # include "../../../base/base.h"
 

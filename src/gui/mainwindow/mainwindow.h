@@ -20,10 +20,10 @@
 # ifndef MAINWINDOW_H_
 # define MAINWINDOW_H_
 
-# include <QtGui/QMainWindow>
-# include <QtGui/QMenuBar>
-# include <QtGui/QMenu>
-# include <QtGui/QAction>
+# include <QtWidgets/QMainWindow>
+# include <QtWidgets/QMenuBar>
+# include <QtWidgets/QMenu>
+# include <QtWidgets/QAction>
 # include <QtGui/QIcon>
 
 # include "../../base/base.h"

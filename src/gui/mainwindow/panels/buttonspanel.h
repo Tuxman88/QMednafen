@@ -20,9 +20,9 @@
 # ifndef BUTTONSPANEL_H_
 # define BUTTONSPANEL_H_
 
-# include <QtGui/QWidget>
-# include <QtGui/QHBoxLayout>
-# include <QtGui/QPushButton>
+# include <QtWidgets/QWidget>
+# include <QtWidgets/QHBoxLayout>
+# include <QtWidgets/QPushButton>
 
 # include "../../../base/base.h"
 

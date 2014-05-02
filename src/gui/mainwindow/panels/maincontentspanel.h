@@ -20,8 +20,8 @@
 # ifndef MAINCONTENTSPANEL_H_
 # define MAINCONTENTSPANEL_H_
 
-# include <QtGui/QWidget>
-# include <QtGui/QVBoxLayout>
+# include <QtWidgets/QWidget>
+# include <QtWidgets/QVBoxLayout>
 
 # include "../../../base/base.h"
 # include "welcomepanel.h"
