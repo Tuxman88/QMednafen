@@ -46,6 +46,9 @@ Base::Configuration::Configuration ( void )
    
    if ( !settings->contains ( Base::KeyCfgGuiShortcutAbout ) )
       settings->setValue ( Base::KeyCfgGuiShortcutAbout , Base::ValCfgGuiShortcutAbout );
+   
+   if ( !settings->contains ( Base::KeyCfgCorePathsPlugins ) )
+      settings->setValue ( Base::KeyCfgCorePathsPlugins , Base::ValCfgCorePathsPlugins );
 }
 
 Base::Configuration::~Configuration ( void )
@@ -62,6 +65,7 @@ void Base::Configuration::resetValues ( void )
    settings->setValue ( Base::KeyCfgGuiShortcutExit , Base::ValCfgGuiShortcutExit );
    settings->setValue ( Base::KeyCfgGuiShortcutConfig , Base::ValCfgGuiShortcutConfig );
    settings->setValue ( Base::KeyCfgGuiShortcutAbout , Base::ValCfgGuiShortcutAbout );
+   settings->setValue ( Base::KeyCfgCorePathsPlugins , Base::ValCfgCorePathsPlugins );
    
    emit updateValues ();
    

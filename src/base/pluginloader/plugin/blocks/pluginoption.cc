@@ -15,36 +15,32 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+ */ 
 
-# ifndef SHAREDCOMPONENTS_H_
-# define SHAREDCOMPONENTS_H_
+# include "pluginoption.h"
 
-# include <QtCore/QObject>
-
-# include "../configuration/configuration.h"
-# include "../text/text.h"
-# include "../pluginloader/pluginloader.h"
-
-namespace Base
+Base::PluginOption::PluginOption ( void )
+   : QObject ()
 {
-   class SharedComponents : public QObject
-   {
-      Q_OBJECT
-      
-      public:
-         explicit SharedComponents ( void );
-         virtual ~SharedComponents ( void );
-         
-         Base::Configuration* config ( void );
-         Base::Text* text ( void );
-         Base::PluginLoader* plugins ( void );
-         
-      private:
-         Base::Configuration* shared_configuration;
-         Base::Text* shared_text;
-         Base::PluginLoader* shared_plugins;
-   };
+   option_description = "None description";
+   option_type = None;
 }
 
-# endif
+Base::PluginOption::~PluginOption ( void )
+{
+}
+
+QString Base::PluginOption::description ( void )
+{
+   return ( option_description );
+}
+
+Base::PluginOption::OptionType Base::PluginOption::type ( void )
+{
+   return ( option_type );
+}
+
+void Base::PluginOption::reset ( void )
+{
+   return;
+}

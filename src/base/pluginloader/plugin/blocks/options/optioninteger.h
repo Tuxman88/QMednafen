@@ -15,35 +15,42 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+ */ 
 
-# ifndef SHAREDCOMPONENTS_H_
-# define SHAREDCOMPONENTS_H_
+# ifndef OPTIONINTEGER_H_
+# define OPTIONINTEGER_H_
 
 # include <QtCore/QObject>
+# include <QtCore/QString>
+# include <QtCore/QFile>
+# include <QtCore/QDebug>
+# include <QtCore/QStringList>
 
-# include "../configuration/configuration.h"
-# include "../text/text.h"
-# include "../pluginloader/pluginloader.h"
+# include "../pluginoption.h"
 
 namespace Base
 {
-   class SharedComponents : public QObject
+   class OptionInteger : public Base::PluginOption
    {
       Q_OBJECT
       
       public:
-         explicit SharedComponents ( void );
-         virtual ~SharedComponents ( void );
+         explicit OptionInteger ( QString options , QStringList values );
+         virtual ~OptionInteger ( void );
          
-         Base::Configuration* config ( void );
-         Base::Text* text ( void );
-         Base::PluginLoader* plugins ( void );
+         void setCurrentValue ( const long int& new_value );
+         long int currentValue ( void );
+         long int defaultValue ( void );
+         long int maxValue ( void );
+         long int minValue ( void );
+         virtual void reset ( void );
          
-      private:
-         Base::Configuration* shared_configuration;
-         Base::Text* shared_text;
-         Base::PluginLoader* shared_plugins;
+      protected:
+         long int option_current_value;
+         long int option_default_value;
+         long int option_min_value;
+         long int option_max_value;
+         QString option_command;
    };
 }
 

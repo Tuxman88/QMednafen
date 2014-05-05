@@ -15,14 +15,37 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */  
+ */ 
 
-# include "plugin.h"
+# ifndef PLUGINSECTION_H_
+# define PLUGINSECTION_H_
 
-Base::Plugin::Plugin ( void )
+# include <QtCore/QObject>
+# include <QtCore/QString>
+# include <QtCore/QFile>
+# include <QtCore/QDebug>
+
+namespace Base { class PluginSection; }
+
+QFile& operator>> ( QFile& input_file , Base::PluginSection& plugin_section );
+
+namespace Base
 {
+   class PluginSection : public QObject
+   {
+      Q_OBJECT
+      
+      public:
+         explicit PluginSection ( void );
+         virtual ~PluginSection ( void );
+         
+         QString name ( void );
+         
+         friend QFile& (::operator>>) ( QFile& input_file , Base::PluginSection& plugin_section );
+         
+      private:
+         QString section_name;
+   };
 }
 
-Base::Plugin::~Plugin ( void )
-{
-}
+# endif

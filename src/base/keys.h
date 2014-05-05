@@ -49,8 +49,8 @@ namespace Base
    const QString KeyCfgGuiShortcutAbout = "cfg.gui.shortcut.about";
    const QString ValCfgGuiShortcutAbout = "Ctrl+A";
    
-   const QString KeyCfgCorePathPlugins = "cfg.core.plugins.path";
-   const QString ValCfgCorePathPlugins = "~/.qmednafen/plugins/";
+   const QString KeyCfgCorePathsPlugins = "cfg.core.plugins.paths";
+   const QString ValCfgCorePathsPlugins = "";
 
    /*
    * Keys about text. (there are just keys, the values are controlled in other place, in the "Text" class).

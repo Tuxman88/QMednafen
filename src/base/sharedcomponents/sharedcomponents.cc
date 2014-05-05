@@ -24,12 +24,16 @@ Base::SharedComponents::SharedComponents ( void )
 {
    shared_configuration = new Base::Configuration ();
    shared_text = new Base::Text ( shared_configuration );
+   shared_plugins = new Base::PluginLoader ();
+   
+   shared_plugins->load ( shared_configuration->operator[] ( Base::KeyCfgCorePathsPlugins ).split ( ";" ) );
 }
 
 Base::SharedComponents::~SharedComponents ( void )
 {
    delete shared_configuration;
    delete shared_text;
+   delete shared_plugins;
 }
 
 Base::Configuration* Base::SharedComponents::config ( void )
@@ -40,4 +44,9 @@ Base::Configuration* Base::SharedComponents::config ( void )
 Base::Text* Base::SharedComponents::text ( void )
 {
    return ( shared_text );
+}
+
+Base::PluginLoader* Base::SharedComponents::plugins ( void )
+{
+   return ( shared_plugins );
 }

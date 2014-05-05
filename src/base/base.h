@@ -24,6 +24,11 @@
 # include "text/text.h"
 # include "sharedcomponents/sharedcomponents.h"
 # include "pluginloader/pluginloader.h"
-# include "pluginloader/plugin.h"
+# include "pluginloader/plugin/plugin.h"
+# include "pluginloader/plugin/blocks/plugininfo.h"
+# include "pluginloader/plugin/blocks/pluginsection.h"
+# include "pluginloader/plugin/blocks/pluginoption.h"
+# include "pluginloader/plugin/blocks/options/optionboolean.h"
+# include "pluginloader/plugin/blocks/options/optioninteger.h"
 
 # endif

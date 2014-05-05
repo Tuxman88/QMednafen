@@ -15,35 +15,41 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+ */  
 
-# ifndef SHAREDCOMPONENTS_H_
-# define SHAREDCOMPONENTS_H_
+# ifndef PLUGIN_H_
+# define PLUGIN_H_
 
 # include <QtCore/QObject>
+# include <QtCore/QString>
+# include <QtCore/QFile>
+# include <cstdlib>
 
-# include "../configuration/configuration.h"
-# include "../text/text.h"
-# include "../pluginloader/pluginloader.h"
+# include "blocks/plugininfo.h"
+
+namespace Base { class Plugin; };
+
+QFile& operator>> ( QFile& input_file , Base::Plugin& plugin );
 
 namespace Base
 {
-   class SharedComponents : public QObject
+   class Plugin : public QObject
    {
       Q_OBJECT
       
       public:
-         explicit SharedComponents ( void );
-         virtual ~SharedComponents ( void );
+         explicit Plugin ( void );
+         virtual ~Plugin ( void );
          
-         Base::Configuration* config ( void );
-         Base::Text* text ( void );
-         Base::PluginLoader* plugins ( void );
+         Base::PluginInfo* info ( void );
+         void setSavePath ( QString new_save_path );
+         QString savePath ( void );
+         
+         friend QFile& (::operator>>) ( QFile& input_file , Base::Plugin& plugin );
          
       private:
-         Base::Configuration* shared_configuration;
-         Base::Text* shared_text;
-         Base::PluginLoader* shared_plugins;
+         QString save_path;
+         Base::PluginInfo* plugin_info;
    };
 }
 

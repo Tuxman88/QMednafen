@@ -22,8 +22,12 @@
 
 # include <QtCore/QObject>
 # include <QtCore/QString>
+# include <QtCore/QVector>
+# include <QtCore/QDir>
+# include <QtCore/QStringList>
+# include <QtCore/QDebug>
 
-# include "plugin.h"
+# include "plugin/plugin.h"
 
 namespace Base
 {
@@ -41,9 +45,12 @@ namespace Base
       public:
          explicit PluginLoader ( void );
          virtual ~PluginLoader ( void );
-         LoadState load ( QString file_path );
+         
+         LoadState load ( QStringList folder_paths );
+         QVector< Base::Plugin* >* pluginsLoaded ( void );
          
       private:
+         QVector< Base::Plugin* >* plugins_loaded;
    };
 }
 

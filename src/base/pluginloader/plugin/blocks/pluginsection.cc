@@ -15,27 +15,46 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */  
+ */ 
 
-# ifndef PLUGIN_H_
-# define PLUGIN_H_
+# include "pluginsection.h"
 
-# include <QtCore/QObject>
-# include <QtCore/QString>
-
-namespace Base
+Base::PluginSection::PluginSection ( void )
+   : QObject ()
 {
-   class Plugin : public QObject
-   {
-      Q_OBJECT
-      
-      public:
-         explicit Plugin ( void );
-         virtual ~Plugin ( void );
-         
-      private:
-         
-   };
+   section_name = "Section";
 }
 
-# endif
+Base::PluginSection::~PluginSection ( void )
+{
+}
+
+QString Base::PluginSection::name ( void )
+{
+   return ( section_name );
+}
+
+QFile& operator>> ( QFile& input_file , Base::PluginSection& plugin_section )
+{
+   QString line;
+   
+   while ( line != "[/]" )
+   {
+      line = input_file.readLine ();
+      line = line.simplified ();
+      
+      if ( line != "[/]" && line.size () > 0 )
+      {
+         QStringList pieces;
+         
+         pieces = line.split ( "=" );
+         pieces[ 0 ] = pieces[ 0 ].simplified ();
+         pieces[ 0 ] = pieces[ 0 ].toLower ();
+         pieces[ 1 ] = pieces[ 1 ].simplified ();
+         
+         
+      }
+   }
+   
+   return ( input_file );
+}

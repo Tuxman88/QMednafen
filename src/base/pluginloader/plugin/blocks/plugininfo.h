@@ -15,35 +15,44 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+ */ 
 
-# ifndef SHAREDCOMPONENTS_H_
-# define SHAREDCOMPONENTS_H_
+# ifndef PLUGININFO_H_
+# define PLUGININFO_H_
 
 # include <QtCore/QObject>
+# include <QtCore/QString>
+# include <QtCore/QFile>
+# include <QtCore/QDebug>
 
-# include "../configuration/configuration.h"
-# include "../text/text.h"
-# include "../pluginloader/pluginloader.h"
+namespace Base { class PluginInfo; }
+
+QFile& operator>> ( QFile& input_file , Base::PluginInfo& plugin_info );
 
 namespace Base
 {
-   class SharedComponents : public QObject
+   class PluginInfo : public QObject
    {
       Q_OBJECT
       
       public:
-         explicit SharedComponents ( void );
-         virtual ~SharedComponents ( void );
+         explicit PluginInfo ( void );
+         virtual ~PluginInfo ( void );
          
-         Base::Configuration* config ( void );
-         Base::Text* text ( void );
-         Base::PluginLoader* plugins ( void );
+         QString name ( void ) const;
+         QString version ( void ) const;
+         QString console ( void ) const;
+         QString author ( void ) const;
+         QString description ( void ) const;
+         
+         friend QFile& (::operator>>) ( QFile& input_file , Base::PluginInfo& plugin_info );
          
       private:
-         Base::Configuration* shared_configuration;
-         Base::Text* shared_text;
-         Base::PluginLoader* shared_plugins;
+         QString plugin_name;
+         QString plugin_version;
+         QString plugin_console;
+         QString plugin_author;
+         QString plugin_description;
    };
 }
 
