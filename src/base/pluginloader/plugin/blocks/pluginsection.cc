@@ -23,10 +23,19 @@ Base::PluginSection::PluginSection ( void )
    : QObject ()
 {
    section_name = "Section";
+   section_options = new QList< Base::PluginOption* > ();
 }
 
 Base::PluginSection::~PluginSection ( void )
 {
+   for ( int i = 0; i < section_options->size (); i++ )   
+   {
+      delete section_options->operator[] ( i );
+   }
+   
+   section_options->clear ();
+   
+   delete section_options;
 }
 
 QString Base::PluginSection::name ( void )
@@ -34,25 +43,65 @@ QString Base::PluginSection::name ( void )
    return ( section_name );
 }
 
+void Base::PluginSection::setName ( const QString& new_name )
+{
+   section_name = new_name;
+   
+   return;
+}
+
+QList< Base::PluginOption* >* Base::PluginSection::options ( void )
+{
+   return ( section_options );
+}
+
 QFile& operator>> ( QFile& input_file , Base::PluginSection& plugin_section )
 {
    QString line;
    
-   while ( line != "[/]" )
+   while ( line != "endsection" )
    {
       line = input_file.readLine ();
       line = line.simplified ();
       
-      if ( line != "[/]" && line.size () > 0 )
+      if ( line != "endsection" && line.size () > 0 )
       {
          QStringList pieces;
+         QString command_options;
+         QStringList command_info;
          
          pieces = line.split ( "=" );
-         pieces[ 0 ] = pieces[ 0 ].simplified ();
-         pieces[ 0 ] = pieces[ 0 ].toLower ();
-         pieces[ 1 ] = pieces[ 1 ].simplified ();
          
+         command_options = pieces[ 0 ].simplified ();
+         command_options = command_options.toLower ();
          
+         command_info = pieces[ 1 ].split ( "|" );
+         
+         // Check the type of the option
+         Base::PluginOption* new_option;
+         
+         if ( command_info[ 1 ] == "integer" )
+         {
+            new_option = new Base::OptionInteger ( command_options , command_info );
+         }
+         else if ( command_info[ 1 ] == "real" )
+         {
+            new_option = new Base::OptionReal ( command_options , command_info );
+         }
+         else if ( command_info[ 1 ] == "enum" )
+         {
+            new_option = new Base::OptionEnum ( command_options , command_info );
+         }
+         else if ( command_info[ 1 ] == "bi-real" )
+         {
+            new_option = new Base::OptionBiReal ( command_options , command_info );
+         }
+         else if ( command_info[ 1 ] == "bi-integer" )
+         {
+            new_option = new Base::OptionBiInteger ( command_options , command_info );
+         }
+         
+         plugin_section.section_options->append ( new_option );
       }
    }
    

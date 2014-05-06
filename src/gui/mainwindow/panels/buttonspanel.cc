@@ -33,7 +33,7 @@ Gui::ButtonsPanel::~ButtonsPanel ( void )
 {
 }
 
-void Gui::ButtonsPanel::buildGui(void)
+void Gui::ButtonsPanel::buildGui ( void )
 {
    main_layout = new QHBoxLayout ( this );
    setLayout ( main_layout );

@@ -23,9 +23,10 @@
 # include <QtCore/QObject>
 # include <QtCore/QString>
 # include <QtCore/QFile>
-# include <cstdlib>
+# include <QtCore/QList>
 
 # include "blocks/plugininfo.h"
+# include "blocks/pluginsection.h"
 
 namespace Base { class Plugin; };
 
@@ -44,12 +45,18 @@ namespace Base
          Base::PluginInfo* info ( void );
          void setSavePath ( QString new_save_path );
          QString savePath ( void );
+         QList< Base::PluginSection* >* videoOptions ( void );
+         QList< Base::PluginSection* >* audioOptions ( void );
+         QList< Base::PluginSection* >* controlsOptions ( void );
          
          friend QFile& (::operator>>) ( QFile& input_file , Base::Plugin& plugin );
          
       private:
          QString save_path;
          Base::PluginInfo* plugin_info;
+         QList< Base::PluginSection* >* plugin_audio_options;
+         QList< Base::PluginSection* >* plugin_video_options;
+         QList< Base::PluginSection* >* plugin_controls_options;
    };
 }
 

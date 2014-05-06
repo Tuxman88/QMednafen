@@ -17,45 +17,40 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-# ifndef PLUGINSECTION_H_
-# define PLUGINSECTION_H_
+# ifndef OPTIONENUM_H_
+# define OPTIONENUM_H_
 
 # include <QtCore/QObject>
 # include <QtCore/QString>
-# include <QtCore/QFile>
 # include <QtCore/QDebug>
 # include <QtCore/QList>
+# include <QtCore/QStringList>
 
-# include "pluginoption.h"
-# include "options/optioninteger.h"
-# include "options/optionreal.h"
-# include "options/optionenum.h"
-# include "options/optionbiinteger.h"
-# include "options/optionbireal.h"
-
-namespace Base { class PluginSection; }
-
-QFile& operator>> ( QFile& input_file , Base::PluginSection& plugin_section );
+# include "../pluginoption.h"
 
 namespace Base
 {
-   class PluginSection : public QObject
+   class OptionEnum : public Base::PluginOption
    {
       Q_OBJECT
       
       public:
-         explicit PluginSection ( void );
-         virtual ~PluginSection ( void );
+         explicit OptionEnum ( QString options , QStringList values );
+         virtual ~OptionEnum ( void );
          
-         QString name ( void );
-         void setName ( const QString& new_name );
-         QList< Base::PluginOption* >* options ( void );
+         void setCurrentValue ( const QString& new_value );
+         QString currentValue ( void );
+         QString defaultValue ( void );
+         QList< QString > names ( void );
+         QList< QString > values ( void );
+         virtual void reset ( void );
          
-         friend QFile& (::operator>>) ( QFile& input_file , Base::PluginSection& plugin_section );
-         
-      private:
-         QString section_name;
-         QList< Base::PluginOption* >* section_options;
+      protected:
+         QList< QString > option_names;
+         QList< QString > option_values;
+         QString option_current_value;
+         QString option_default_value;
+         QString option_command;
    };
 }
 

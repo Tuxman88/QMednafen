@@ -24,16 +24,20 @@
 
 int main ( int argc , char** argv )
 {
+   // Prepare Qt system
    QApplication app ( argc , argv );
    
+   // Create basic and neede pointers
    Base::SharedComponents* shared_components;
    Core::Kernel* kernel;
    Gui::MainWindow* main_window;
    
+   // Create components
    shared_components = new Base::SharedComponents ();
    kernel = new Core::Kernel ( shared_components );
    main_window = new Gui::MainWindow ( shared_components );
    
+   // Connect signals from the MainWindow
    QObject::connect ( main_window , SIGNAL ( exitNow () )      , kernel , SLOT ( exitNow () ) );
    QObject::connect ( main_window , SIGNAL ( about () )        , kernel , SLOT ( about () ) );
    QObject::connect ( main_window , SIGNAL ( openGameDisc () ) , kernel , SLOT ( openGameDisc () ) );
@@ -41,13 +45,18 @@ int main ( int argc , char** argv )
    QObject::connect ( main_window , SIGNAL ( config () )       , kernel , SLOT ( config () ) );
    QObject::connect ( main_window , SIGNAL ( library () )      , kernel , SLOT ( library () ) );
    
+   // Connect signals from the Kernel
    QObject::connect ( kernel , SIGNAL ( closeMainWindow () ) , main_window , SLOT ( closeMainWindow () ) );
    
+   // Display window
    main_window->show ();
+   // Make the window no resizable
    main_window->setFixedSize ( main_window->size () );
    
+   // Run the application
    app.exec ();
    
+   // Delete needed components
    delete shared_components;
    delete kernel;
    delete main_window;

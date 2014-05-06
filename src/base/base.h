@@ -30,5 +30,8 @@
 # include "pluginloader/plugin/blocks/pluginoption.h"
 # include "pluginloader/plugin/blocks/options/optionboolean.h"
 # include "pluginloader/plugin/blocks/options/optioninteger.h"
+# include "pluginloader/plugin/blocks/options/optionreal.h"
+# include "pluginloader/plugin/blocks/options/optionbiinteger.h"
+# include "pluginloader/plugin/blocks/options/optionbireal.h"
 
 # endif

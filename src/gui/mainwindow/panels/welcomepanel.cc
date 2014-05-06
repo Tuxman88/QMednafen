@@ -25,15 +25,19 @@ Gui::WelcomePanel::WelcomePanel ( Base::SharedComponents* new_shared_components 
 {
    shared_components = new_shared_components;
    
+   // Create and set main layout
    main_layout = new QHBoxLayout ( this );
    setLayout ( main_layout );
    
+   // Prepare and add the main program Icon
    program_icon = new QLabel ();
    program_icon->setPixmap ( QPixmap ( ":/icon-main-128" ) );
    main_layout->addWidget ( program_icon );
    
+   // Create layout for the title and description
    info_layout = new QVBoxLayout ();
    
+   // Create and add the components of the program name and description
    program_name = new QLabel ( "..." );
    program_description = new QLabel ( "..." );
    info_layout->addWidget ( program_name );
@@ -41,8 +45,10 @@ Gui::WelcomePanel::WelcomePanel ( Base::SharedComponents* new_shared_components 
    info_layout->addStretch ();
    main_layout->addLayout ( info_layout );
    
+   // Prepare layout for the version label
    version_layout = new QVBoxLayout ();
    
+   // Create and add the laber with the version of the application
    program_version = new QLabel ( "..." );
    version_layout->addWidget ( program_version );
    version_layout->addStretch ();
@@ -57,12 +63,14 @@ Gui::WelcomePanel::~WelcomePanel ( void )
 
 void Gui::WelcomePanel::updateText ( void )
 {
+   // Set texts
    program_name->setText ( shared_components->text ()->operator[] ( Base::KeyTxtProgramName ) );
    program_description->setText ( shared_components->text ()->operator[] ( Base::KeyTxtGuiMainDescription ) );
    program_version->setText ( shared_components->text ()->operator[] ( Base::KeyTxtGuiMainVersion ) + 
                               QString ( ": " ) +
                               shared_components->text ()->operator[] ( Base::KeyTxtProgramVersion ) );
    
+   // Configure font size
    QFont font;
    font = program_name->font ();
    font.setPointSize ( 22 );

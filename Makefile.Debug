@@ -60,8 +60,12 @@ SOURCES       = src/main.cc \
 		src/base/pluginloader/plugin/blocks/plugininfo.cc \
 		src/base/pluginloader/plugin/blocks/pluginoption.cc \
 		src/base/pluginloader/plugin/blocks/pluginsection.cc \
+		src/base/pluginloader/plugin/blocks/options/optionbiinteger.cc \
+		src/base/pluginloader/plugin/blocks/options/optionbireal.cc \
 		src/base/pluginloader/plugin/blocks/options/optionboolean.cc \
-		src/base/pluginloader/plugin/blocks/options/optioninteger.cc debug/qrc_resources.cpp \
+		src/base/pluginloader/plugin/blocks/options/optionenum.cc \
+		src/base/pluginloader/plugin/blocks/options/optioninteger.cc \
+		src/base/pluginloader/plugin/blocks/options/optionreal.cc debug/qrc_resources.cpp \
 		debug/moc_configuration.cpp \
 		debug/moc_pluginloader.cpp \
 		debug/moc_sharedcomponents.cpp \
@@ -77,8 +81,12 @@ SOURCES       = src/main.cc \
 		debug/moc_plugininfo.cpp \
 		debug/moc_pluginoption.cpp \
 		debug/moc_pluginsection.cpp \
+		debug/moc_optionbiinteger.cpp \
+		debug/moc_optionbireal.cpp \
 		debug/moc_optionboolean.cpp \
-		debug/moc_optioninteger.cpp
+		debug/moc_optionenum.cpp \
+		debug/moc_optioninteger.cpp \
+		debug/moc_optionreal.cpp
 OBJECTS       = debug/main.o \
 		debug/configuration.o \
 		debug/pluginloader.o \
@@ -95,8 +103,12 @@ OBJECTS       = debug/main.o \
 		debug/plugininfo.o \
 		debug/pluginoption.o \
 		debug/pluginsection.o \
+		debug/optionbiinteger.o \
+		debug/optionbireal.o \
 		debug/optionboolean.o \
+		debug/optionenum.o \
 		debug/optioninteger.o \
+		debug/optionreal.o \
 		debug/qrc_resources.o \
 		debug/moc_configuration.o \
 		debug/moc_pluginloader.o \
@@ -113,8 +125,12 @@ OBJECTS       = debug/main.o \
 		debug/moc_plugininfo.o \
 		debug/moc_pluginoption.o \
 		debug/moc_pluginsection.o \
+		debug/moc_optionbiinteger.o \
+		debug/moc_optionbireal.o \
 		debug/moc_optionboolean.o \
-		debug/moc_optioninteger.o
+		debug/moc_optionenum.o \
+		debug/moc_optioninteger.o \
+		debug/moc_optionreal.o
 DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/common/shell-unix.conf \
 		/usr/lib/qt/mkspecs/common/unix.conf \
@@ -263,7 +279,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d debug/qmednafen-0.1.01.0.0 || mkdir -p debug/qmednafen-0.1.01.0.0
-	$(COPY_FILE) --parents $(SOURCES) $(DIST) debug/qmednafen-0.1.01.0.0/ && $(COPY_FILE) --parents resources.qrc debug/qmednafen-0.1.01.0.0/ && $(COPY_FILE) --parents src/base/base.h src/base/keys.h src/core/core.h src/gui/gui.h src/base/configuration/configuration.h src/base/pluginloader/pluginloader.h src/base/sharedcomponents/sharedcomponents.h src/base/text/text.h src/core/kernel/kernel.h src/gui/mainwindow/mainwindow.h src/base/pluginloader/plugin/plugin.h src/gui/mainwindow/menubar/menubar.h src/gui/mainwindow/panels/buttonspanel.h src/gui/mainwindow/panels/controlspanel.h src/gui/mainwindow/panels/maincontentspanel.h src/gui/mainwindow/panels/welcomepanel.h src/base/pluginloader/plugin/blocks/plugininfo.h src/base/pluginloader/plugin/blocks/pluginoption.h src/base/pluginloader/plugin/blocks/pluginsection.h src/base/pluginloader/plugin/blocks/options/optionboolean.h src/base/pluginloader/plugin/blocks/options/optioninteger.h debug/qmednafen-0.1.01.0.0/ && $(COPY_FILE) --parents src/main.cc src/base/configuration/configuration.cc src/base/pluginloader/pluginloader.cc src/base/sharedcomponents/sharedcomponents.cc src/base/text/text.cc src/core/kernel/kernel.cc src/gui/mainwindow/mainwindow.cc src/base/pluginloader/plugin/plugin.cc src/gui/mainwindow/menubar/menubar.cc src/gui/mainwindow/panels/buttonspanel.cc src/gui/mainwindow/panels/controlspanel.cc src/gui/mainwindow/panels/maincontentspanel.cc src/gui/mainwindow/panels/welcomepanel.cc src/base/pluginloader/plugin/blocks/plugininfo.cc src/base/pluginloader/plugin/blocks/pluginoption.cc src/base/pluginloader/plugin/blocks/pluginsection.cc src/base/pluginloader/plugin/blocks/options/optionboolean.cc src/base/pluginloader/plugin/blocks/options/optioninteger.cc debug/qmednafen-0.1.01.0.0/ && (cd `dirname debug/qmednafen-0.1.01.0.0` && $(TAR) qmednafen-0.1.01.0.0.tar qmednafen-0.1.01.0.0 && $(COMPRESS) qmednafen-0.1.01.0.0.tar) && $(MOVE) `dirname debug/qmednafen-0.1.01.0.0`/qmednafen-0.1.01.0.0.tar.gz . && $(DEL_FILE) -r debug/qmednafen-0.1.01.0.0
+	$(COPY_FILE) --parents $(SOURCES) $(DIST) debug/qmednafen-0.1.01.0.0/ && $(COPY_FILE) --parents resources.qrc debug/qmednafen-0.1.01.0.0/ && $(COPY_FILE) --parents src/base/base.h src/base/keys.h src/core/core.h src/gui/gui.h src/base/configuration/configuration.h src/base/pluginloader/pluginloader.h src/base/sharedcomponents/sharedcomponents.h src/base/text/text.h src/core/kernel/kernel.h src/gui/mainwindow/mainwindow.h src/base/pluginloader/plugin/plugin.h src/gui/mainwindow/menubar/menubar.h src/gui/mainwindow/panels/buttonspanel.h src/gui/mainwindow/panels/controlspanel.h src/gui/mainwindow/panels/maincontentspanel.h src/gui/mainwindow/panels/welcomepanel.h src/base/pluginloader/plugin/blocks/plugininfo.h src/base/pluginloader/plugin/blocks/pluginoption.h src/base/pluginloader/plugin/blocks/pluginsection.h src/base/pluginloader/plugin/blocks/options/optionbiinteger.h src/base/pluginloader/plugin/blocks/options/optionbireal.h src/base/pluginloader/plugin/blocks/options/optionboolean.h src/base/pluginloader/plugin/blocks/options/optionenum.h src/base/pluginloader/plugin/blocks/options/optioninteger.h src/base/pluginloader/plugin/blocks/options/optionreal.h debug/qmednafen-0.1.01.0.0/ && $(COPY_FILE) --parents src/main.cc src/base/configuration/configuration.cc src/base/pluginloader/pluginloader.cc src/base/sharedcomponents/sharedcomponents.cc src/base/text/text.cc src/core/kernel/kernel.cc src/gui/mainwindow/mainwindow.cc src/base/pluginloader/plugin/plugin.cc src/gui/mainwindow/menubar/menubar.cc src/gui/mainwindow/panels/buttonspanel.cc src/gui/mainwindow/panels/controlspanel.cc src/gui/mainwindow/panels/maincontentspanel.cc src/gui/mainwindow/panels/welcomepanel.cc src/base/pluginloader/plugin/blocks/plugininfo.cc src/base/pluginloader/plugin/blocks/pluginoption.cc src/base/pluginloader/plugin/blocks/pluginsection.cc src/base/pluginloader/plugin/blocks/options/optionbiinteger.cc src/base/pluginloader/plugin/blocks/options/optionbireal.cc src/base/pluginloader/plugin/blocks/options/optionboolean.cc src/base/pluginloader/plugin/blocks/options/optionenum.cc src/base/pluginloader/plugin/blocks/options/optioninteger.cc src/base/pluginloader/plugin/blocks/options/optionreal.cc debug/qmednafen-0.1.01.0.0/ && (cd `dirname debug/qmednafen-0.1.01.0.0` && $(TAR) qmednafen-0.1.01.0.0.tar qmednafen-0.1.01.0.0 && $(COMPRESS) qmednafen-0.1.01.0.0.tar) && $(MOVE) `dirname debug/qmednafen-0.1.01.0.0`/qmednafen-0.1.01.0.0.tar.gz . && $(DEL_FILE) -r debug/qmednafen-0.1.01.0.0
 
 
 clean:compiler_clean 
@@ -288,19 +304,19 @@ compiler_rcc_make_all: debug/qrc_resources.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) debug/qrc_resources.cpp
 debug/qrc_resources.cpp: resources.qrc \
-		resources/img/icon/main-32x32.png \
-		resources/txt/spanish.lang \
 		resources/img/icon/main-256x256.png \
-		resources/txt/english.lang \
+		resources/img/icon/main-64x64.png \
+		resources/img/icon/main-16x16.png \
 		resources/img/icon/main-512x512.png \
 		resources/img/icon/main-128x128.png \
-		resources/img/icon/main-64x64.png \
-		resources/img/icon/main-16x16.png
+		resources/img/icon/main-32x32.png \
+		resources/txt/spanish.lang \
+		resources/txt/english.lang
 	/usr/lib/qt/bin/rcc -name resources resources.qrc -o debug/qrc_resources.cpp
 
-compiler_moc_header_make_all: debug/moc_configuration.cpp debug/moc_pluginloader.cpp debug/moc_sharedcomponents.cpp debug/moc_text.cpp debug/moc_kernel.cpp debug/moc_mainwindow.cpp debug/moc_plugin.cpp debug/moc_menubar.cpp debug/moc_buttonspanel.cpp debug/moc_controlspanel.cpp debug/moc_maincontentspanel.cpp debug/moc_welcomepanel.cpp debug/moc_plugininfo.cpp debug/moc_pluginoption.cpp debug/moc_pluginsection.cpp debug/moc_optionboolean.cpp debug/moc_optioninteger.cpp
+compiler_moc_header_make_all: debug/moc_configuration.cpp debug/moc_pluginloader.cpp debug/moc_sharedcomponents.cpp debug/moc_text.cpp debug/moc_kernel.cpp debug/moc_mainwindow.cpp debug/moc_plugin.cpp debug/moc_menubar.cpp debug/moc_buttonspanel.cpp debug/moc_controlspanel.cpp debug/moc_maincontentspanel.cpp debug/moc_welcomepanel.cpp debug/moc_plugininfo.cpp debug/moc_pluginoption.cpp debug/moc_pluginsection.cpp debug/moc_optionbiinteger.cpp debug/moc_optionbireal.cpp debug/moc_optionboolean.cpp debug/moc_optionenum.cpp debug/moc_optioninteger.cpp debug/moc_optionreal.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) debug/moc_configuration.cpp debug/moc_pluginloader.cpp debug/moc_sharedcomponents.cpp debug/moc_text.cpp debug/moc_kernel.cpp debug/moc_mainwindow.cpp debug/moc_plugin.cpp debug/moc_menubar.cpp debug/moc_buttonspanel.cpp debug/moc_controlspanel.cpp debug/moc_maincontentspanel.cpp debug/moc_welcomepanel.cpp debug/moc_plugininfo.cpp debug/moc_pluginoption.cpp debug/moc_pluginsection.cpp debug/moc_optionboolean.cpp debug/moc_optioninteger.cpp
+	-$(DEL_FILE) debug/moc_configuration.cpp debug/moc_pluginloader.cpp debug/moc_sharedcomponents.cpp debug/moc_text.cpp debug/moc_kernel.cpp debug/moc_mainwindow.cpp debug/moc_plugin.cpp debug/moc_menubar.cpp debug/moc_buttonspanel.cpp debug/moc_controlspanel.cpp debug/moc_maincontentspanel.cpp debug/moc_welcomepanel.cpp debug/moc_plugininfo.cpp debug/moc_pluginoption.cpp debug/moc_pluginsection.cpp debug/moc_optionbiinteger.cpp debug/moc_optionbireal.cpp debug/moc_optionboolean.cpp debug/moc_optionenum.cpp debug/moc_optioninteger.cpp debug/moc_optionreal.cpp
 debug/moc_configuration.cpp: /usr/include/qt/QtCore/QObject \
 		/usr/include/qt/QtCore/qobject.h \
 		/usr/include/qt/QtCore/qobjectdefs.h \
@@ -467,7 +483,15 @@ debug/moc_pluginloader.cpp: /usr/include/qt/QtCore/QObject \
 		/usr/include/qt/QtCore/qcontiguouscache.h \
 		src/base/pluginloader/plugin/plugin.h \
 		/usr/include/qt/QtCore/QFile \
+		/usr/include/qt/QtCore/QList \
 		src/base/pluginloader/plugin/blocks/plugininfo.h \
+		src/base/pluginloader/plugin/blocks/pluginsection.h \
+		src/base/pluginloader/plugin/blocks/pluginoption.h \
+		src/base/pluginloader/plugin/blocks/options/optioninteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionreal.h \
+		src/base/pluginloader/plugin/blocks/options/optionenum.h \
+		src/base/pluginloader/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionbireal.h \
 		src/base/pluginloader/pluginloader.h
 	/usr/lib/qt/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.2 -I/usr/lib/gcc/include/c++/4.8.2/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.2/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include-fixed -I/usr/include src/base/pluginloader/pluginloader.h -o debug/moc_pluginloader.cpp
 
@@ -563,7 +587,15 @@ debug/moc_sharedcomponents.cpp: /usr/include/qt/QtCore/QObject \
 		/usr/include/qt/QtCore/qdir.h \
 		/usr/include/qt/QtCore/qfileinfo.h \
 		src/base/pluginloader/plugin/plugin.h \
+		/usr/include/qt/QtCore/QList \
 		src/base/pluginloader/plugin/blocks/plugininfo.h \
+		src/base/pluginloader/plugin/blocks/pluginsection.h \
+		src/base/pluginloader/plugin/blocks/pluginoption.h \
+		src/base/pluginloader/plugin/blocks/options/optioninteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionreal.h \
+		src/base/pluginloader/plugin/blocks/options/optionenum.h \
+		src/base/pluginloader/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionbireal.h \
 		src/base/sharedcomponents/sharedcomponents.h
 	/usr/lib/qt/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.2 -I/usr/lib/gcc/include/c++/4.8.2/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.2/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include-fixed -I/usr/include src/base/sharedcomponents/sharedcomponents.h -o debug/moc_sharedcomponents.cpp
 
@@ -749,11 +781,16 @@ debug/moc_kernel.cpp: /usr/include/qt/QtCore/QObject \
 		/usr/include/qt/QtCore/qdir.h \
 		/usr/include/qt/QtCore/qfileinfo.h \
 		src/base/pluginloader/plugin/plugin.h \
+		/usr/include/qt/QtCore/QList \
 		src/base/pluginloader/plugin/blocks/plugininfo.h \
 		src/base/pluginloader/plugin/blocks/pluginsection.h \
 		src/base/pluginloader/plugin/blocks/pluginoption.h \
-		src/base/pluginloader/plugin/blocks/options/optionboolean.h \
 		src/base/pluginloader/plugin/blocks/options/optioninteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionreal.h \
+		src/base/pluginloader/plugin/blocks/options/optionenum.h \
+		src/base/pluginloader/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionbireal.h \
+		src/base/pluginloader/plugin/blocks/options/optionboolean.h \
 		src/core/kernel/kernel.h
 	/usr/lib/qt/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.2 -I/usr/lib/gcc/include/c++/4.8.2/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.2/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include-fixed -I/usr/include src/core/kernel/kernel.h -o debug/moc_kernel.cpp
 
@@ -895,11 +932,16 @@ debug/moc_mainwindow.cpp: /usr/include/qt/QtWidgets/QMainWindow \
 		/usr/include/qt/QtCore/qdir.h \
 		/usr/include/qt/QtCore/qfileinfo.h \
 		src/base/pluginloader/plugin/plugin.h \
+		/usr/include/qt/QtCore/QList \
 		src/base/pluginloader/plugin/blocks/plugininfo.h \
 		src/base/pluginloader/plugin/blocks/pluginsection.h \
 		src/base/pluginloader/plugin/blocks/pluginoption.h \
-		src/base/pluginloader/plugin/blocks/options/optionboolean.h \
 		src/base/pluginloader/plugin/blocks/options/optioninteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionreal.h \
+		src/base/pluginloader/plugin/blocks/options/optionenum.h \
+		src/base/pluginloader/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionbireal.h \
+		src/base/pluginloader/plugin/blocks/options/optionboolean.h \
 		src/gui/mainwindow/menubar/menubar.h \
 		/usr/include/qt/QtGui/QKeySequence \
 		src/gui/mainwindow/panels/maincontentspanel.h \
@@ -989,6 +1031,7 @@ debug/moc_plugin.cpp: /usr/include/qt/QtCore/QObject \
 		/usr/include/qt/QtCore/qfile.h \
 		/usr/include/qt/QtCore/qfiledevice.h \
 		/usr/include/qt/QtCore/qiodevice.h \
+		/usr/include/qt/QtCore/QList \
 		src/base/pluginloader/plugin/blocks/plugininfo.h \
 		/usr/include/qt/QtCore/QDebug \
 		/usr/include/qt/QtCore/qdebug.h \
@@ -1007,6 +1050,14 @@ debug/moc_plugin.cpp: /usr/include/qt/QtCore/QObject \
 		/usr/include/qt/QtCore/qpoint.h \
 		/usr/include/qt/QtCore/qset.h \
 		/usr/include/qt/QtCore/qcontiguouscache.h \
+		src/base/pluginloader/plugin/blocks/pluginsection.h \
+		src/base/pluginloader/plugin/blocks/pluginoption.h \
+		src/base/pluginloader/plugin/blocks/options/optioninteger.h \
+		/usr/include/qt/QtCore/QStringList \
+		src/base/pluginloader/plugin/blocks/options/optionreal.h \
+		src/base/pluginloader/plugin/blocks/options/optionenum.h \
+		src/base/pluginloader/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionbireal.h \
 		src/base/pluginloader/plugin/plugin.h
 	/usr/lib/qt/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.2 -I/usr/lib/gcc/include/c++/4.8.2/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.2/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include-fixed -I/usr/include src/base/pluginloader/plugin/plugin.h -o debug/moc_plugin.cpp
 
@@ -1145,11 +1196,16 @@ debug/moc_menubar.cpp: /usr/include/qt/QtWidgets/QMenuBar \
 		/usr/include/qt/QtCore/qdir.h \
 		/usr/include/qt/QtCore/qfileinfo.h \
 		src/base/pluginloader/plugin/plugin.h \
+		/usr/include/qt/QtCore/QList \
 		src/base/pluginloader/plugin/blocks/plugininfo.h \
 		src/base/pluginloader/plugin/blocks/pluginsection.h \
 		src/base/pluginloader/plugin/blocks/pluginoption.h \
-		src/base/pluginloader/plugin/blocks/options/optionboolean.h \
 		src/base/pluginloader/plugin/blocks/options/optioninteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionreal.h \
+		src/base/pluginloader/plugin/blocks/options/optionenum.h \
+		src/base/pluginloader/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionbireal.h \
+		src/base/pluginloader/plugin/blocks/options/optionboolean.h \
 		src/gui/mainwindow/menubar/menubar.h
 	/usr/lib/qt/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.2 -I/usr/lib/gcc/include/c++/4.8.2/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.2/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include-fixed -I/usr/include src/gui/mainwindow/menubar/menubar.h -o debug/moc_menubar.cpp
 
@@ -1289,11 +1345,16 @@ debug/moc_buttonspanel.cpp: /usr/include/qt/QtWidgets/QWidget \
 		/usr/include/qt/QtCore/qdir.h \
 		/usr/include/qt/QtCore/qfileinfo.h \
 		src/base/pluginloader/plugin/plugin.h \
+		/usr/include/qt/QtCore/QList \
 		src/base/pluginloader/plugin/blocks/plugininfo.h \
 		src/base/pluginloader/plugin/blocks/pluginsection.h \
 		src/base/pluginloader/plugin/blocks/pluginoption.h \
-		src/base/pluginloader/plugin/blocks/options/optionboolean.h \
 		src/base/pluginloader/plugin/blocks/options/optioninteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionreal.h \
+		src/base/pluginloader/plugin/blocks/options/optionenum.h \
+		src/base/pluginloader/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionbireal.h \
+		src/base/pluginloader/plugin/blocks/options/optionboolean.h \
 		src/gui/mainwindow/panels/buttonspanel.h
 	/usr/lib/qt/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.2 -I/usr/lib/gcc/include/c++/4.8.2/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.2/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include-fixed -I/usr/include src/gui/mainwindow/panels/buttonspanel.h -o debug/moc_buttonspanel.cpp
 
@@ -1437,11 +1498,16 @@ debug/moc_controlspanel.cpp: /usr/include/qt/QtWidgets/QGroupBox \
 		/usr/include/qt/QtCore/qdir.h \
 		/usr/include/qt/QtCore/qfileinfo.h \
 		src/base/pluginloader/plugin/plugin.h \
+		/usr/include/qt/QtCore/QList \
 		src/base/pluginloader/plugin/blocks/plugininfo.h \
 		src/base/pluginloader/plugin/blocks/pluginsection.h \
 		src/base/pluginloader/plugin/blocks/pluginoption.h \
-		src/base/pluginloader/plugin/blocks/options/optionboolean.h \
 		src/base/pluginloader/plugin/blocks/options/optioninteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionreal.h \
+		src/base/pluginloader/plugin/blocks/options/optionenum.h \
+		src/base/pluginloader/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionbireal.h \
+		src/base/pluginloader/plugin/blocks/options/optionboolean.h \
 		src/gui/mainwindow/panels/controlspanel.h
 	/usr/lib/qt/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.2 -I/usr/lib/gcc/include/c++/4.8.2/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.2/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include-fixed -I/usr/include src/gui/mainwindow/panels/controlspanel.h -o debug/moc_controlspanel.cpp
 
@@ -1577,11 +1643,16 @@ debug/moc_maincontentspanel.cpp: /usr/include/qt/QtWidgets/QWidget \
 		/usr/include/qt/QtCore/qdir.h \
 		/usr/include/qt/QtCore/qfileinfo.h \
 		src/base/pluginloader/plugin/plugin.h \
+		/usr/include/qt/QtCore/QList \
 		src/base/pluginloader/plugin/blocks/plugininfo.h \
 		src/base/pluginloader/plugin/blocks/pluginsection.h \
 		src/base/pluginloader/plugin/blocks/pluginoption.h \
-		src/base/pluginloader/plugin/blocks/options/optionboolean.h \
 		src/base/pluginloader/plugin/blocks/options/optioninteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionreal.h \
+		src/base/pluginloader/plugin/blocks/options/optionenum.h \
+		src/base/pluginloader/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionbireal.h \
+		src/base/pluginloader/plugin/blocks/options/optionboolean.h \
 		src/gui/mainwindow/panels/welcomepanel.h \
 		/usr/include/qt/QtWidgets/QHBoxLayout \
 		/usr/include/qt/QtWidgets/QLabel \
@@ -1739,11 +1810,16 @@ debug/moc_welcomepanel.cpp: /usr/include/qt/QtWidgets/QWidget \
 		/usr/include/qt/QtCore/qdir.h \
 		/usr/include/qt/QtCore/qfileinfo.h \
 		src/base/pluginloader/plugin/plugin.h \
+		/usr/include/qt/QtCore/QList \
 		src/base/pluginloader/plugin/blocks/plugininfo.h \
 		src/base/pluginloader/plugin/blocks/pluginsection.h \
 		src/base/pluginloader/plugin/blocks/pluginoption.h \
-		src/base/pluginloader/plugin/blocks/options/optionboolean.h \
 		src/base/pluginloader/plugin/blocks/options/optioninteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionreal.h \
+		src/base/pluginloader/plugin/blocks/options/optionenum.h \
+		src/base/pluginloader/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionbireal.h \
+		src/base/pluginloader/plugin/blocks/options/optionboolean.h \
 		src/gui/mainwindow/panels/welcomepanel.h
 	/usr/lib/qt/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.2 -I/usr/lib/gcc/include/c++/4.8.2/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.2/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include-fixed -I/usr/include src/gui/mainwindow/panels/welcomepanel.h -o debug/moc_welcomepanel.cpp
 
@@ -1990,8 +2066,184 @@ debug/moc_pluginsection.cpp: /usr/include/qt/QtCore/QObject \
 		/usr/include/qt/QtCore/qpoint.h \
 		/usr/include/qt/QtCore/qset.h \
 		/usr/include/qt/QtCore/qcontiguouscache.h \
+		/usr/include/qt/QtCore/QList \
+		src/base/pluginloader/plugin/blocks/pluginoption.h \
+		src/base/pluginloader/plugin/blocks/options/optioninteger.h \
+		/usr/include/qt/QtCore/QStringList \
+		src/base/pluginloader/plugin/blocks/options/optionreal.h \
+		src/base/pluginloader/plugin/blocks/options/optionenum.h \
+		src/base/pluginloader/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionbireal.h \
 		src/base/pluginloader/plugin/blocks/pluginsection.h
 	/usr/lib/qt/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.2 -I/usr/lib/gcc/include/c++/4.8.2/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.2/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include-fixed -I/usr/include src/base/pluginloader/plugin/blocks/pluginsection.h -o debug/moc_pluginsection.cpp
+
+debug/moc_optionbiinteger.cpp: /usr/include/qt/QtCore/QObject \
+		/usr/include/qt/QtCore/qobject.h \
+		/usr/include/qt/QtCore/qobjectdefs.h \
+		/usr/include/qt/QtCore/qnamespace.h \
+		/usr/include/qt/QtCore/qglobal.h \
+		/usr/include/qt/QtCore/qconfig.h \
+		/usr/include/qt/QtCore/qfeatures.h \
+		/usr/include/qt/QtCore/qsystemdetection.h \
+		/usr/include/qt/QtCore/qprocessordetection.h \
+		/usr/include/qt/QtCore/qcompilerdetection.h \
+		/usr/include/qt/QtCore/qglobalstatic.h \
+		/usr/include/qt/QtCore/qatomic.h \
+		/usr/include/qt/QtCore/qbasicatomic.h \
+		/usr/include/qt/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt/QtCore/qgenericatomic.h \
+		/usr/include/qt/QtCore/qatomic_msvc.h \
+		/usr/include/qt/QtCore/qatomic_integrity.h \
+		/usr/include/qt/QtCore/qoldbasicatomic.h \
+		/usr/include/qt/QtCore/qatomic_vxworks.h \
+		/usr/include/qt/QtCore/qatomic_power.h \
+		/usr/include/qt/QtCore/qatomic_alpha.h \
+		/usr/include/qt/QtCore/qatomic_armv7.h \
+		/usr/include/qt/QtCore/qatomic_armv6.h \
+		/usr/include/qt/QtCore/qatomic_armv5.h \
+		/usr/include/qt/QtCore/qatomic_bfin.h \
+		/usr/include/qt/QtCore/qatomic_ia64.h \
+		/usr/include/qt/QtCore/qatomic_mips.h \
+		/usr/include/qt/QtCore/qatomic_s390.h \
+		/usr/include/qt/QtCore/qatomic_sh4a.h \
+		/usr/include/qt/QtCore/qatomic_sparc.h \
+		/usr/include/qt/QtCore/qatomic_x86.h \
+		/usr/include/qt/QtCore/qatomic_cxx11.h \
+		/usr/include/qt/QtCore/qatomic_gcc.h \
+		/usr/include/qt/QtCore/qatomic_unix.h \
+		/usr/include/qt/QtCore/qmutex.h \
+		/usr/include/qt/QtCore/qlogging.h \
+		/usr/include/qt/QtCore/qflags.h \
+		/usr/include/qt/QtCore/qtypeinfo.h \
+		/usr/include/qt/QtCore/qtypetraits.h \
+		/usr/include/qt/QtCore/qsysinfo.h \
+		/usr/include/qt/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt/QtCore/qstring.h \
+		/usr/include/qt/QtCore/qchar.h \
+		/usr/include/qt/QtCore/qbytearray.h \
+		/usr/include/qt/QtCore/qrefcount.h \
+		/usr/include/qt/QtCore/qarraydata.h \
+		/usr/include/qt/QtCore/qstringbuilder.h \
+		/usr/include/qt/QtCore/qlist.h \
+		/usr/include/qt/QtCore/qalgorithms.h \
+		/usr/include/qt/QtCore/qiterator.h \
+		/usr/include/qt/QtCore/qcoreevent.h \
+		/usr/include/qt/QtCore/qscopedpointer.h \
+		/usr/include/qt/QtCore/qmetatype.h \
+		/usr/include/qt/QtCore/qvarlengtharray.h \
+		/usr/include/qt/QtCore/qcontainerfwd.h \
+		/usr/include/qt/QtCore/qisenum.h \
+		/usr/include/qt/QtCore/qobject_impl.h \
+		/usr/include/qt/QtCore/QString \
+		/usr/include/qt/QtCore/QFile \
+		/usr/include/qt/QtCore/qfile.h \
+		/usr/include/qt/QtCore/qfiledevice.h \
+		/usr/include/qt/QtCore/qiodevice.h \
+		/usr/include/qt/QtCore/QDebug \
+		/usr/include/qt/QtCore/qdebug.h \
+		/usr/include/qt/QtCore/qhash.h \
+		/usr/include/qt/QtCore/qpair.h \
+		/usr/include/qt/QtCore/qmap.h \
+		/usr/include/qt/QtCore/qtextstream.h \
+		/usr/include/qt/QtCore/qlocale.h \
+		/usr/include/qt/QtCore/qvariant.h \
+		/usr/include/qt/QtCore/qstringlist.h \
+		/usr/include/qt/QtCore/qdatastream.h \
+		/usr/include/qt/QtCore/qregexp.h \
+		/usr/include/qt/QtCore/qstringmatcher.h \
+		/usr/include/qt/QtCore/qshareddata.h \
+		/usr/include/qt/QtCore/qvector.h \
+		/usr/include/qt/QtCore/qpoint.h \
+		/usr/include/qt/QtCore/qset.h \
+		/usr/include/qt/QtCore/qcontiguouscache.h \
+		/usr/include/qt/QtCore/QStringList \
+		src/base/pluginloader/plugin/blocks/pluginoption.h \
+		src/base/pluginloader/plugin/blocks/options/optionbiinteger.h
+	/usr/lib/qt/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.2 -I/usr/lib/gcc/include/c++/4.8.2/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.2/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include-fixed -I/usr/include src/base/pluginloader/plugin/blocks/options/optionbiinteger.h -o debug/moc_optionbiinteger.cpp
+
+debug/moc_optionbireal.cpp: /usr/include/qt/QtCore/QObject \
+		/usr/include/qt/QtCore/qobject.h \
+		/usr/include/qt/QtCore/qobjectdefs.h \
+		/usr/include/qt/QtCore/qnamespace.h \
+		/usr/include/qt/QtCore/qglobal.h \
+		/usr/include/qt/QtCore/qconfig.h \
+		/usr/include/qt/QtCore/qfeatures.h \
+		/usr/include/qt/QtCore/qsystemdetection.h \
+		/usr/include/qt/QtCore/qprocessordetection.h \
+		/usr/include/qt/QtCore/qcompilerdetection.h \
+		/usr/include/qt/QtCore/qglobalstatic.h \
+		/usr/include/qt/QtCore/qatomic.h \
+		/usr/include/qt/QtCore/qbasicatomic.h \
+		/usr/include/qt/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt/QtCore/qgenericatomic.h \
+		/usr/include/qt/QtCore/qatomic_msvc.h \
+		/usr/include/qt/QtCore/qatomic_integrity.h \
+		/usr/include/qt/QtCore/qoldbasicatomic.h \
+		/usr/include/qt/QtCore/qatomic_vxworks.h \
+		/usr/include/qt/QtCore/qatomic_power.h \
+		/usr/include/qt/QtCore/qatomic_alpha.h \
+		/usr/include/qt/QtCore/qatomic_armv7.h \
+		/usr/include/qt/QtCore/qatomic_armv6.h \
+		/usr/include/qt/QtCore/qatomic_armv5.h \
+		/usr/include/qt/QtCore/qatomic_bfin.h \
+		/usr/include/qt/QtCore/qatomic_ia64.h \
+		/usr/include/qt/QtCore/qatomic_mips.h \
+		/usr/include/qt/QtCore/qatomic_s390.h \
+		/usr/include/qt/QtCore/qatomic_sh4a.h \
+		/usr/include/qt/QtCore/qatomic_sparc.h \
+		/usr/include/qt/QtCore/qatomic_x86.h \
+		/usr/include/qt/QtCore/qatomic_cxx11.h \
+		/usr/include/qt/QtCore/qatomic_gcc.h \
+		/usr/include/qt/QtCore/qatomic_unix.h \
+		/usr/include/qt/QtCore/qmutex.h \
+		/usr/include/qt/QtCore/qlogging.h \
+		/usr/include/qt/QtCore/qflags.h \
+		/usr/include/qt/QtCore/qtypeinfo.h \
+		/usr/include/qt/QtCore/qtypetraits.h \
+		/usr/include/qt/QtCore/qsysinfo.h \
+		/usr/include/qt/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt/QtCore/qstring.h \
+		/usr/include/qt/QtCore/qchar.h \
+		/usr/include/qt/QtCore/qbytearray.h \
+		/usr/include/qt/QtCore/qrefcount.h \
+		/usr/include/qt/QtCore/qarraydata.h \
+		/usr/include/qt/QtCore/qstringbuilder.h \
+		/usr/include/qt/QtCore/qlist.h \
+		/usr/include/qt/QtCore/qalgorithms.h \
+		/usr/include/qt/QtCore/qiterator.h \
+		/usr/include/qt/QtCore/qcoreevent.h \
+		/usr/include/qt/QtCore/qscopedpointer.h \
+		/usr/include/qt/QtCore/qmetatype.h \
+		/usr/include/qt/QtCore/qvarlengtharray.h \
+		/usr/include/qt/QtCore/qcontainerfwd.h \
+		/usr/include/qt/QtCore/qisenum.h \
+		/usr/include/qt/QtCore/qobject_impl.h \
+		/usr/include/qt/QtCore/QString \
+		/usr/include/qt/QtCore/QFile \
+		/usr/include/qt/QtCore/qfile.h \
+		/usr/include/qt/QtCore/qfiledevice.h \
+		/usr/include/qt/QtCore/qiodevice.h \
+		/usr/include/qt/QtCore/QDebug \
+		/usr/include/qt/QtCore/qdebug.h \
+		/usr/include/qt/QtCore/qhash.h \
+		/usr/include/qt/QtCore/qpair.h \
+		/usr/include/qt/QtCore/qmap.h \
+		/usr/include/qt/QtCore/qtextstream.h \
+		/usr/include/qt/QtCore/qlocale.h \
+		/usr/include/qt/QtCore/qvariant.h \
+		/usr/include/qt/QtCore/qstringlist.h \
+		/usr/include/qt/QtCore/qdatastream.h \
+		/usr/include/qt/QtCore/qregexp.h \
+		/usr/include/qt/QtCore/qstringmatcher.h \
+		/usr/include/qt/QtCore/qshareddata.h \
+		/usr/include/qt/QtCore/qvector.h \
+		/usr/include/qt/QtCore/qpoint.h \
+		/usr/include/qt/QtCore/qset.h \
+		/usr/include/qt/QtCore/qcontiguouscache.h \
+		/usr/include/qt/QtCore/QStringList \
+		src/base/pluginloader/plugin/blocks/pluginoption.h \
+		src/base/pluginloader/plugin/blocks/options/optionbireal.h
+	/usr/lib/qt/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.2 -I/usr/lib/gcc/include/c++/4.8.2/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.2/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include-fixed -I/usr/include src/base/pluginloader/plugin/blocks/options/optionbireal.h -o debug/moc_optionbireal.cpp
 
 debug/moc_optionboolean.cpp: /usr/include/qt/QtCore/QObject \
 		/usr/include/qt/QtCore/qobject.h \
@@ -2077,6 +2329,91 @@ debug/moc_optionboolean.cpp: /usr/include/qt/QtCore/QObject \
 		src/base/pluginloader/plugin/blocks/options/optionboolean.h
 	/usr/lib/qt/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.2 -I/usr/lib/gcc/include/c++/4.8.2/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.2/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include-fixed -I/usr/include src/base/pluginloader/plugin/blocks/options/optionboolean.h -o debug/moc_optionboolean.cpp
 
+debug/moc_optionenum.cpp: /usr/include/qt/QtCore/QObject \
+		/usr/include/qt/QtCore/qobject.h \
+		/usr/include/qt/QtCore/qobjectdefs.h \
+		/usr/include/qt/QtCore/qnamespace.h \
+		/usr/include/qt/QtCore/qglobal.h \
+		/usr/include/qt/QtCore/qconfig.h \
+		/usr/include/qt/QtCore/qfeatures.h \
+		/usr/include/qt/QtCore/qsystemdetection.h \
+		/usr/include/qt/QtCore/qprocessordetection.h \
+		/usr/include/qt/QtCore/qcompilerdetection.h \
+		/usr/include/qt/QtCore/qglobalstatic.h \
+		/usr/include/qt/QtCore/qatomic.h \
+		/usr/include/qt/QtCore/qbasicatomic.h \
+		/usr/include/qt/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt/QtCore/qgenericatomic.h \
+		/usr/include/qt/QtCore/qatomic_msvc.h \
+		/usr/include/qt/QtCore/qatomic_integrity.h \
+		/usr/include/qt/QtCore/qoldbasicatomic.h \
+		/usr/include/qt/QtCore/qatomic_vxworks.h \
+		/usr/include/qt/QtCore/qatomic_power.h \
+		/usr/include/qt/QtCore/qatomic_alpha.h \
+		/usr/include/qt/QtCore/qatomic_armv7.h \
+		/usr/include/qt/QtCore/qatomic_armv6.h \
+		/usr/include/qt/QtCore/qatomic_armv5.h \
+		/usr/include/qt/QtCore/qatomic_bfin.h \
+		/usr/include/qt/QtCore/qatomic_ia64.h \
+		/usr/include/qt/QtCore/qatomic_mips.h \
+		/usr/include/qt/QtCore/qatomic_s390.h \
+		/usr/include/qt/QtCore/qatomic_sh4a.h \
+		/usr/include/qt/QtCore/qatomic_sparc.h \
+		/usr/include/qt/QtCore/qatomic_x86.h \
+		/usr/include/qt/QtCore/qatomic_cxx11.h \
+		/usr/include/qt/QtCore/qatomic_gcc.h \
+		/usr/include/qt/QtCore/qatomic_unix.h \
+		/usr/include/qt/QtCore/qmutex.h \
+		/usr/include/qt/QtCore/qlogging.h \
+		/usr/include/qt/QtCore/qflags.h \
+		/usr/include/qt/QtCore/qtypeinfo.h \
+		/usr/include/qt/QtCore/qtypetraits.h \
+		/usr/include/qt/QtCore/qsysinfo.h \
+		/usr/include/qt/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt/QtCore/qstring.h \
+		/usr/include/qt/QtCore/qchar.h \
+		/usr/include/qt/QtCore/qbytearray.h \
+		/usr/include/qt/QtCore/qrefcount.h \
+		/usr/include/qt/QtCore/qarraydata.h \
+		/usr/include/qt/QtCore/qstringbuilder.h \
+		/usr/include/qt/QtCore/qlist.h \
+		/usr/include/qt/QtCore/qalgorithms.h \
+		/usr/include/qt/QtCore/qiterator.h \
+		/usr/include/qt/QtCore/qcoreevent.h \
+		/usr/include/qt/QtCore/qscopedpointer.h \
+		/usr/include/qt/QtCore/qmetatype.h \
+		/usr/include/qt/QtCore/qvarlengtharray.h \
+		/usr/include/qt/QtCore/qcontainerfwd.h \
+		/usr/include/qt/QtCore/qisenum.h \
+		/usr/include/qt/QtCore/qobject_impl.h \
+		/usr/include/qt/QtCore/QString \
+		/usr/include/qt/QtCore/QDebug \
+		/usr/include/qt/QtCore/qdebug.h \
+		/usr/include/qt/QtCore/qhash.h \
+		/usr/include/qt/QtCore/qpair.h \
+		/usr/include/qt/QtCore/qmap.h \
+		/usr/include/qt/QtCore/qtextstream.h \
+		/usr/include/qt/QtCore/qiodevice.h \
+		/usr/include/qt/QtCore/qlocale.h \
+		/usr/include/qt/QtCore/qvariant.h \
+		/usr/include/qt/QtCore/qstringlist.h \
+		/usr/include/qt/QtCore/qdatastream.h \
+		/usr/include/qt/QtCore/qregexp.h \
+		/usr/include/qt/QtCore/qstringmatcher.h \
+		/usr/include/qt/QtCore/qshareddata.h \
+		/usr/include/qt/QtCore/qvector.h \
+		/usr/include/qt/QtCore/qpoint.h \
+		/usr/include/qt/QtCore/qset.h \
+		/usr/include/qt/QtCore/qcontiguouscache.h \
+		/usr/include/qt/QtCore/QList \
+		/usr/include/qt/QtCore/QStringList \
+		src/base/pluginloader/plugin/blocks/pluginoption.h \
+		/usr/include/qt/QtCore/QFile \
+		/usr/include/qt/QtCore/qfile.h \
+		/usr/include/qt/QtCore/qfiledevice.h \
+		src/base/pluginloader/plugin/blocks/options/optionenum.h
+	/usr/lib/qt/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.2 -I/usr/lib/gcc/include/c++/4.8.2/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.2/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include-fixed -I/usr/include src/base/pluginloader/plugin/blocks/options/optionenum.h -o debug/moc_optionenum.cpp
+
 debug/moc_optioninteger.cpp: /usr/include/qt/QtCore/QObject \
 		/usr/include/qt/QtCore/qobject.h \
 		/usr/include/qt/QtCore/qobjectdefs.h \
@@ -2160,6 +2497,90 @@ debug/moc_optioninteger.cpp: /usr/include/qt/QtCore/QObject \
 		src/base/pluginloader/plugin/blocks/pluginoption.h \
 		src/base/pluginloader/plugin/blocks/options/optioninteger.h
 	/usr/lib/qt/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.2 -I/usr/lib/gcc/include/c++/4.8.2/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.2/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include-fixed -I/usr/include src/base/pluginloader/plugin/blocks/options/optioninteger.h -o debug/moc_optioninteger.cpp
+
+debug/moc_optionreal.cpp: /usr/include/qt/QtCore/QObject \
+		/usr/include/qt/QtCore/qobject.h \
+		/usr/include/qt/QtCore/qobjectdefs.h \
+		/usr/include/qt/QtCore/qnamespace.h \
+		/usr/include/qt/QtCore/qglobal.h \
+		/usr/include/qt/QtCore/qconfig.h \
+		/usr/include/qt/QtCore/qfeatures.h \
+		/usr/include/qt/QtCore/qsystemdetection.h \
+		/usr/include/qt/QtCore/qprocessordetection.h \
+		/usr/include/qt/QtCore/qcompilerdetection.h \
+		/usr/include/qt/QtCore/qglobalstatic.h \
+		/usr/include/qt/QtCore/qatomic.h \
+		/usr/include/qt/QtCore/qbasicatomic.h \
+		/usr/include/qt/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt/QtCore/qgenericatomic.h \
+		/usr/include/qt/QtCore/qatomic_msvc.h \
+		/usr/include/qt/QtCore/qatomic_integrity.h \
+		/usr/include/qt/QtCore/qoldbasicatomic.h \
+		/usr/include/qt/QtCore/qatomic_vxworks.h \
+		/usr/include/qt/QtCore/qatomic_power.h \
+		/usr/include/qt/QtCore/qatomic_alpha.h \
+		/usr/include/qt/QtCore/qatomic_armv7.h \
+		/usr/include/qt/QtCore/qatomic_armv6.h \
+		/usr/include/qt/QtCore/qatomic_armv5.h \
+		/usr/include/qt/QtCore/qatomic_bfin.h \
+		/usr/include/qt/QtCore/qatomic_ia64.h \
+		/usr/include/qt/QtCore/qatomic_mips.h \
+		/usr/include/qt/QtCore/qatomic_s390.h \
+		/usr/include/qt/QtCore/qatomic_sh4a.h \
+		/usr/include/qt/QtCore/qatomic_sparc.h \
+		/usr/include/qt/QtCore/qatomic_x86.h \
+		/usr/include/qt/QtCore/qatomic_cxx11.h \
+		/usr/include/qt/QtCore/qatomic_gcc.h \
+		/usr/include/qt/QtCore/qatomic_unix.h \
+		/usr/include/qt/QtCore/qmutex.h \
+		/usr/include/qt/QtCore/qlogging.h \
+		/usr/include/qt/QtCore/qflags.h \
+		/usr/include/qt/QtCore/qtypeinfo.h \
+		/usr/include/qt/QtCore/qtypetraits.h \
+		/usr/include/qt/QtCore/qsysinfo.h \
+		/usr/include/qt/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt/QtCore/qstring.h \
+		/usr/include/qt/QtCore/qchar.h \
+		/usr/include/qt/QtCore/qbytearray.h \
+		/usr/include/qt/QtCore/qrefcount.h \
+		/usr/include/qt/QtCore/qarraydata.h \
+		/usr/include/qt/QtCore/qstringbuilder.h \
+		/usr/include/qt/QtCore/qlist.h \
+		/usr/include/qt/QtCore/qalgorithms.h \
+		/usr/include/qt/QtCore/qiterator.h \
+		/usr/include/qt/QtCore/qcoreevent.h \
+		/usr/include/qt/QtCore/qscopedpointer.h \
+		/usr/include/qt/QtCore/qmetatype.h \
+		/usr/include/qt/QtCore/qvarlengtharray.h \
+		/usr/include/qt/QtCore/qcontainerfwd.h \
+		/usr/include/qt/QtCore/qisenum.h \
+		/usr/include/qt/QtCore/qobject_impl.h \
+		/usr/include/qt/QtCore/QString \
+		/usr/include/qt/QtCore/QFile \
+		/usr/include/qt/QtCore/qfile.h \
+		/usr/include/qt/QtCore/qfiledevice.h \
+		/usr/include/qt/QtCore/qiodevice.h \
+		/usr/include/qt/QtCore/QDebug \
+		/usr/include/qt/QtCore/qdebug.h \
+		/usr/include/qt/QtCore/qhash.h \
+		/usr/include/qt/QtCore/qpair.h \
+		/usr/include/qt/QtCore/qmap.h \
+		/usr/include/qt/QtCore/qtextstream.h \
+		/usr/include/qt/QtCore/qlocale.h \
+		/usr/include/qt/QtCore/qvariant.h \
+		/usr/include/qt/QtCore/qstringlist.h \
+		/usr/include/qt/QtCore/qdatastream.h \
+		/usr/include/qt/QtCore/qregexp.h \
+		/usr/include/qt/QtCore/qstringmatcher.h \
+		/usr/include/qt/QtCore/qshareddata.h \
+		/usr/include/qt/QtCore/qvector.h \
+		/usr/include/qt/QtCore/qpoint.h \
+		/usr/include/qt/QtCore/qset.h \
+		/usr/include/qt/QtCore/qcontiguouscache.h \
+		/usr/include/qt/QtCore/QStringList \
+		src/base/pluginloader/plugin/blocks/pluginoption.h \
+		src/base/pluginloader/plugin/blocks/options/optionreal.h
+	/usr/lib/qt/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.2 -I/usr/lib/gcc/include/c++/4.8.2/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.2/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include-fixed -I/usr/include src/base/pluginloader/plugin/blocks/options/optionreal.h -o debug/moc_optionreal.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -2322,11 +2743,16 @@ debug/main.o: src/main.cc /usr/include/qt/QtWidgets/QApplication \
 		/usr/include/qt/QtCore/qdir.h \
 		/usr/include/qt/QtCore/qfileinfo.h \
 		src/base/pluginloader/plugin/plugin.h \
+		/usr/include/qt/QtCore/QList \
 		src/base/pluginloader/plugin/blocks/plugininfo.h \
 		src/base/pluginloader/plugin/blocks/pluginsection.h \
 		src/base/pluginloader/plugin/blocks/pluginoption.h \
-		src/base/pluginloader/plugin/blocks/options/optionboolean.h \
 		src/base/pluginloader/plugin/blocks/options/optioninteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionreal.h \
+		src/base/pluginloader/plugin/blocks/options/optionenum.h \
+		src/base/pluginloader/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionbireal.h \
+		src/base/pluginloader/plugin/blocks/options/optionboolean.h \
 		src/gui/mainwindow/menubar/menubar.h \
 		/usr/include/qt/QtGui/QKeySequence \
 		src/gui/mainwindow/panels/maincontentspanel.h \
@@ -2522,7 +2948,15 @@ debug/pluginloader.o: src/base/pluginloader/pluginloader.cc src/base/pluginloade
 		/usr/include/qt/QtCore/qcontiguouscache.h \
 		src/base/pluginloader/plugin/plugin.h \
 		/usr/include/qt/QtCore/QFile \
-		src/base/pluginloader/plugin/blocks/plugininfo.h
+		/usr/include/qt/QtCore/QList \
+		src/base/pluginloader/plugin/blocks/plugininfo.h \
+		src/base/pluginloader/plugin/blocks/pluginsection.h \
+		src/base/pluginloader/plugin/blocks/pluginoption.h \
+		src/base/pluginloader/plugin/blocks/options/optioninteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionreal.h \
+		src/base/pluginloader/plugin/blocks/options/optionenum.h \
+		src/base/pluginloader/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionbireal.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/pluginloader.o src/base/pluginloader/pluginloader.cc
 
 debug/sharedcomponents.o: src/base/sharedcomponents/sharedcomponents.cc src/base/sharedcomponents/sharedcomponents.h \
@@ -2618,7 +3052,15 @@ debug/sharedcomponents.o: src/base/sharedcomponents/sharedcomponents.cc src/base
 		/usr/include/qt/QtCore/qdir.h \
 		/usr/include/qt/QtCore/qfileinfo.h \
 		src/base/pluginloader/plugin/plugin.h \
-		src/base/pluginloader/plugin/blocks/plugininfo.h
+		/usr/include/qt/QtCore/QList \
+		src/base/pluginloader/plugin/blocks/plugininfo.h \
+		src/base/pluginloader/plugin/blocks/pluginsection.h \
+		src/base/pluginloader/plugin/blocks/pluginoption.h \
+		src/base/pluginloader/plugin/blocks/options/optioninteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionreal.h \
+		src/base/pluginloader/plugin/blocks/options/optionenum.h \
+		src/base/pluginloader/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionbireal.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/sharedcomponents.o src/base/sharedcomponents/sharedcomponents.cc
 
 debug/text.o: src/base/text/text.cc src/base/text/text.h \
@@ -2804,11 +3246,16 @@ debug/kernel.o: src/core/kernel/kernel.cc src/core/kernel/kernel.h \
 		/usr/include/qt/QtCore/qdir.h \
 		/usr/include/qt/QtCore/qfileinfo.h \
 		src/base/pluginloader/plugin/plugin.h \
+		/usr/include/qt/QtCore/QList \
 		src/base/pluginloader/plugin/blocks/plugininfo.h \
 		src/base/pluginloader/plugin/blocks/pluginsection.h \
 		src/base/pluginloader/plugin/blocks/pluginoption.h \
-		src/base/pluginloader/plugin/blocks/options/optionboolean.h \
-		src/base/pluginloader/plugin/blocks/options/optioninteger.h
+		src/base/pluginloader/plugin/blocks/options/optioninteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionreal.h \
+		src/base/pluginloader/plugin/blocks/options/optionenum.h \
+		src/base/pluginloader/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionbireal.h \
+		src/base/pluginloader/plugin/blocks/options/optionboolean.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/kernel.o src/core/kernel/kernel.cc
 
 debug/mainwindow.o: src/gui/mainwindow/mainwindow.cc src/gui/mainwindow/mainwindow.h \
@@ -2950,11 +3397,16 @@ debug/mainwindow.o: src/gui/mainwindow/mainwindow.cc src/gui/mainwindow/mainwind
 		/usr/include/qt/QtCore/qdir.h \
 		/usr/include/qt/QtCore/qfileinfo.h \
 		src/base/pluginloader/plugin/plugin.h \
+		/usr/include/qt/QtCore/QList \
 		src/base/pluginloader/plugin/blocks/plugininfo.h \
 		src/base/pluginloader/plugin/blocks/pluginsection.h \
 		src/base/pluginloader/plugin/blocks/pluginoption.h \
-		src/base/pluginloader/plugin/blocks/options/optionboolean.h \
 		src/base/pluginloader/plugin/blocks/options/optioninteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionreal.h \
+		src/base/pluginloader/plugin/blocks/options/optionenum.h \
+		src/base/pluginloader/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionbireal.h \
+		src/base/pluginloader/plugin/blocks/options/optionboolean.h \
 		src/gui/mainwindow/menubar/menubar.h \
 		/usr/include/qt/QtGui/QKeySequence \
 		src/gui/mainwindow/panels/maincontentspanel.h \
@@ -3044,6 +3496,7 @@ debug/plugin.o: src/base/pluginloader/plugin/plugin.cc src/base/pluginloader/plu
 		/usr/include/qt/QtCore/qfile.h \
 		/usr/include/qt/QtCore/qfiledevice.h \
 		/usr/include/qt/QtCore/qiodevice.h \
+		/usr/include/qt/QtCore/QList \
 		src/base/pluginloader/plugin/blocks/plugininfo.h \
 		/usr/include/qt/QtCore/QDebug \
 		/usr/include/qt/QtCore/qdebug.h \
@@ -3061,7 +3514,15 @@ debug/plugin.o: src/base/pluginloader/plugin/plugin.cc src/base/pluginloader/plu
 		/usr/include/qt/QtCore/qvector.h \
 		/usr/include/qt/QtCore/qpoint.h \
 		/usr/include/qt/QtCore/qset.h \
-		/usr/include/qt/QtCore/qcontiguouscache.h
+		/usr/include/qt/QtCore/qcontiguouscache.h \
+		src/base/pluginloader/plugin/blocks/pluginsection.h \
+		src/base/pluginloader/plugin/blocks/pluginoption.h \
+		src/base/pluginloader/plugin/blocks/options/optioninteger.h \
+		/usr/include/qt/QtCore/QStringList \
+		src/base/pluginloader/plugin/blocks/options/optionreal.h \
+		src/base/pluginloader/plugin/blocks/options/optionenum.h \
+		src/base/pluginloader/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionbireal.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/plugin.o src/base/pluginloader/plugin/plugin.cc
 
 debug/menubar.o: src/gui/mainwindow/menubar/menubar.cc src/gui/mainwindow/menubar/menubar.h \
@@ -3200,11 +3661,16 @@ debug/menubar.o: src/gui/mainwindow/menubar/menubar.cc src/gui/mainwindow/menuba
 		/usr/include/qt/QtCore/qdir.h \
 		/usr/include/qt/QtCore/qfileinfo.h \
 		src/base/pluginloader/plugin/plugin.h \
+		/usr/include/qt/QtCore/QList \
 		src/base/pluginloader/plugin/blocks/plugininfo.h \
 		src/base/pluginloader/plugin/blocks/pluginsection.h \
 		src/base/pluginloader/plugin/blocks/pluginoption.h \
-		src/base/pluginloader/plugin/blocks/options/optionboolean.h \
-		src/base/pluginloader/plugin/blocks/options/optioninteger.h
+		src/base/pluginloader/plugin/blocks/options/optioninteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionreal.h \
+		src/base/pluginloader/plugin/blocks/options/optionenum.h \
+		src/base/pluginloader/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionbireal.h \
+		src/base/pluginloader/plugin/blocks/options/optionboolean.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/menubar.o src/gui/mainwindow/menubar/menubar.cc
 
 debug/buttonspanel.o: src/gui/mainwindow/panels/buttonspanel.cc src/gui/mainwindow/panels/buttonspanel.h \
@@ -3344,11 +3810,16 @@ debug/buttonspanel.o: src/gui/mainwindow/panels/buttonspanel.cc src/gui/mainwind
 		/usr/include/qt/QtCore/qdir.h \
 		/usr/include/qt/QtCore/qfileinfo.h \
 		src/base/pluginloader/plugin/plugin.h \
+		/usr/include/qt/QtCore/QList \
 		src/base/pluginloader/plugin/blocks/plugininfo.h \
 		src/base/pluginloader/plugin/blocks/pluginsection.h \
 		src/base/pluginloader/plugin/blocks/pluginoption.h \
-		src/base/pluginloader/plugin/blocks/options/optionboolean.h \
-		src/base/pluginloader/plugin/blocks/options/optioninteger.h
+		src/base/pluginloader/plugin/blocks/options/optioninteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionreal.h \
+		src/base/pluginloader/plugin/blocks/options/optionenum.h \
+		src/base/pluginloader/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionbireal.h \
+		src/base/pluginloader/plugin/blocks/options/optionboolean.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/buttonspanel.o src/gui/mainwindow/panels/buttonspanel.cc
 
 debug/controlspanel.o: src/gui/mainwindow/panels/controlspanel.cc src/gui/mainwindow/panels/controlspanel.h \
@@ -3492,11 +3963,16 @@ debug/controlspanel.o: src/gui/mainwindow/panels/controlspanel.cc src/gui/mainwi
 		/usr/include/qt/QtCore/qdir.h \
 		/usr/include/qt/QtCore/qfileinfo.h \
 		src/base/pluginloader/plugin/plugin.h \
+		/usr/include/qt/QtCore/QList \
 		src/base/pluginloader/plugin/blocks/plugininfo.h \
 		src/base/pluginloader/plugin/blocks/pluginsection.h \
 		src/base/pluginloader/plugin/blocks/pluginoption.h \
-		src/base/pluginloader/plugin/blocks/options/optionboolean.h \
-		src/base/pluginloader/plugin/blocks/options/optioninteger.h
+		src/base/pluginloader/plugin/blocks/options/optioninteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionreal.h \
+		src/base/pluginloader/plugin/blocks/options/optionenum.h \
+		src/base/pluginloader/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionbireal.h \
+		src/base/pluginloader/plugin/blocks/options/optionboolean.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/controlspanel.o src/gui/mainwindow/panels/controlspanel.cc
 
 debug/maincontentspanel.o: src/gui/mainwindow/panels/maincontentspanel.cc src/gui/mainwindow/panels/maincontentspanel.h \
@@ -3632,11 +4108,16 @@ debug/maincontentspanel.o: src/gui/mainwindow/panels/maincontentspanel.cc src/gu
 		/usr/include/qt/QtCore/qdir.h \
 		/usr/include/qt/QtCore/qfileinfo.h \
 		src/base/pluginloader/plugin/plugin.h \
+		/usr/include/qt/QtCore/QList \
 		src/base/pluginloader/plugin/blocks/plugininfo.h \
 		src/base/pluginloader/plugin/blocks/pluginsection.h \
 		src/base/pluginloader/plugin/blocks/pluginoption.h \
-		src/base/pluginloader/plugin/blocks/options/optionboolean.h \
 		src/base/pluginloader/plugin/blocks/options/optioninteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionreal.h \
+		src/base/pluginloader/plugin/blocks/options/optionenum.h \
+		src/base/pluginloader/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionbireal.h \
+		src/base/pluginloader/plugin/blocks/options/optionboolean.h \
 		src/gui/mainwindow/panels/welcomepanel.h \
 		/usr/include/qt/QtWidgets/QHBoxLayout \
 		/usr/include/qt/QtWidgets/QLabel \
@@ -3794,11 +4275,16 @@ debug/welcomepanel.o: src/gui/mainwindow/panels/welcomepanel.cc src/gui/mainwind
 		/usr/include/qt/QtCore/qdir.h \
 		/usr/include/qt/QtCore/qfileinfo.h \
 		src/base/pluginloader/plugin/plugin.h \
+		/usr/include/qt/QtCore/QList \
 		src/base/pluginloader/plugin/blocks/plugininfo.h \
 		src/base/pluginloader/plugin/blocks/pluginsection.h \
 		src/base/pluginloader/plugin/blocks/pluginoption.h \
-		src/base/pluginloader/plugin/blocks/options/optionboolean.h \
-		src/base/pluginloader/plugin/blocks/options/optioninteger.h
+		src/base/pluginloader/plugin/blocks/options/optioninteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionreal.h \
+		src/base/pluginloader/plugin/blocks/options/optionenum.h \
+		src/base/pluginloader/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionbireal.h \
+		src/base/pluginloader/plugin/blocks/options/optionboolean.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/welcomepanel.o src/gui/mainwindow/panels/welcomepanel.cc
 
 debug/plugininfo.o: src/base/pluginloader/plugin/blocks/plugininfo.cc src/base/pluginloader/plugin/blocks/plugininfo.h \
@@ -4044,8 +4530,184 @@ debug/pluginsection.o: src/base/pluginloader/plugin/blocks/pluginsection.cc src/
 		/usr/include/qt/QtCore/qvector.h \
 		/usr/include/qt/QtCore/qpoint.h \
 		/usr/include/qt/QtCore/qset.h \
-		/usr/include/qt/QtCore/qcontiguouscache.h
+		/usr/include/qt/QtCore/qcontiguouscache.h \
+		/usr/include/qt/QtCore/QList \
+		src/base/pluginloader/plugin/blocks/pluginoption.h \
+		src/base/pluginloader/plugin/blocks/options/optioninteger.h \
+		/usr/include/qt/QtCore/QStringList \
+		src/base/pluginloader/plugin/blocks/options/optionreal.h \
+		src/base/pluginloader/plugin/blocks/options/optionenum.h \
+		src/base/pluginloader/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginloader/plugin/blocks/options/optionbireal.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/pluginsection.o src/base/pluginloader/plugin/blocks/pluginsection.cc
+
+debug/optionbiinteger.o: src/base/pluginloader/plugin/blocks/options/optionbiinteger.cc src/base/pluginloader/plugin/blocks/options/optionbiinteger.h \
+		/usr/include/qt/QtCore/QObject \
+		/usr/include/qt/QtCore/qobject.h \
+		/usr/include/qt/QtCore/qobjectdefs.h \
+		/usr/include/qt/QtCore/qnamespace.h \
+		/usr/include/qt/QtCore/qglobal.h \
+		/usr/include/qt/QtCore/qconfig.h \
+		/usr/include/qt/QtCore/qfeatures.h \
+		/usr/include/qt/QtCore/qsystemdetection.h \
+		/usr/include/qt/QtCore/qprocessordetection.h \
+		/usr/include/qt/QtCore/qcompilerdetection.h \
+		/usr/include/qt/QtCore/qglobalstatic.h \
+		/usr/include/qt/QtCore/qatomic.h \
+		/usr/include/qt/QtCore/qbasicatomic.h \
+		/usr/include/qt/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt/QtCore/qgenericatomic.h \
+		/usr/include/qt/QtCore/qatomic_msvc.h \
+		/usr/include/qt/QtCore/qatomic_integrity.h \
+		/usr/include/qt/QtCore/qoldbasicatomic.h \
+		/usr/include/qt/QtCore/qatomic_vxworks.h \
+		/usr/include/qt/QtCore/qatomic_power.h \
+		/usr/include/qt/QtCore/qatomic_alpha.h \
+		/usr/include/qt/QtCore/qatomic_armv7.h \
+		/usr/include/qt/QtCore/qatomic_armv6.h \
+		/usr/include/qt/QtCore/qatomic_armv5.h \
+		/usr/include/qt/QtCore/qatomic_bfin.h \
+		/usr/include/qt/QtCore/qatomic_ia64.h \
+		/usr/include/qt/QtCore/qatomic_mips.h \
+		/usr/include/qt/QtCore/qatomic_s390.h \
+		/usr/include/qt/QtCore/qatomic_sh4a.h \
+		/usr/include/qt/QtCore/qatomic_sparc.h \
+		/usr/include/qt/QtCore/qatomic_x86.h \
+		/usr/include/qt/QtCore/qatomic_cxx11.h \
+		/usr/include/qt/QtCore/qatomic_gcc.h \
+		/usr/include/qt/QtCore/qatomic_unix.h \
+		/usr/include/qt/QtCore/qmutex.h \
+		/usr/include/qt/QtCore/qlogging.h \
+		/usr/include/qt/QtCore/qflags.h \
+		/usr/include/qt/QtCore/qtypeinfo.h \
+		/usr/include/qt/QtCore/qtypetraits.h \
+		/usr/include/qt/QtCore/qsysinfo.h \
+		/usr/include/qt/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt/QtCore/qstring.h \
+		/usr/include/qt/QtCore/qchar.h \
+		/usr/include/qt/QtCore/qbytearray.h \
+		/usr/include/qt/QtCore/qrefcount.h \
+		/usr/include/qt/QtCore/qarraydata.h \
+		/usr/include/qt/QtCore/qstringbuilder.h \
+		/usr/include/qt/QtCore/qlist.h \
+		/usr/include/qt/QtCore/qalgorithms.h \
+		/usr/include/qt/QtCore/qiterator.h \
+		/usr/include/qt/QtCore/qcoreevent.h \
+		/usr/include/qt/QtCore/qscopedpointer.h \
+		/usr/include/qt/QtCore/qmetatype.h \
+		/usr/include/qt/QtCore/qvarlengtharray.h \
+		/usr/include/qt/QtCore/qcontainerfwd.h \
+		/usr/include/qt/QtCore/qisenum.h \
+		/usr/include/qt/QtCore/qobject_impl.h \
+		/usr/include/qt/QtCore/QString \
+		/usr/include/qt/QtCore/QFile \
+		/usr/include/qt/QtCore/qfile.h \
+		/usr/include/qt/QtCore/qfiledevice.h \
+		/usr/include/qt/QtCore/qiodevice.h \
+		/usr/include/qt/QtCore/QDebug \
+		/usr/include/qt/QtCore/qdebug.h \
+		/usr/include/qt/QtCore/qhash.h \
+		/usr/include/qt/QtCore/qpair.h \
+		/usr/include/qt/QtCore/qmap.h \
+		/usr/include/qt/QtCore/qtextstream.h \
+		/usr/include/qt/QtCore/qlocale.h \
+		/usr/include/qt/QtCore/qvariant.h \
+		/usr/include/qt/QtCore/qstringlist.h \
+		/usr/include/qt/QtCore/qdatastream.h \
+		/usr/include/qt/QtCore/qregexp.h \
+		/usr/include/qt/QtCore/qstringmatcher.h \
+		/usr/include/qt/QtCore/qshareddata.h \
+		/usr/include/qt/QtCore/qvector.h \
+		/usr/include/qt/QtCore/qpoint.h \
+		/usr/include/qt/QtCore/qset.h \
+		/usr/include/qt/QtCore/qcontiguouscache.h \
+		/usr/include/qt/QtCore/QStringList \
+		src/base/pluginloader/plugin/blocks/pluginoption.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/optionbiinteger.o src/base/pluginloader/plugin/blocks/options/optionbiinteger.cc
+
+debug/optionbireal.o: src/base/pluginloader/plugin/blocks/options/optionbireal.cc src/base/pluginloader/plugin/blocks/options/optionbireal.h \
+		/usr/include/qt/QtCore/QObject \
+		/usr/include/qt/QtCore/qobject.h \
+		/usr/include/qt/QtCore/qobjectdefs.h \
+		/usr/include/qt/QtCore/qnamespace.h \
+		/usr/include/qt/QtCore/qglobal.h \
+		/usr/include/qt/QtCore/qconfig.h \
+		/usr/include/qt/QtCore/qfeatures.h \
+		/usr/include/qt/QtCore/qsystemdetection.h \
+		/usr/include/qt/QtCore/qprocessordetection.h \
+		/usr/include/qt/QtCore/qcompilerdetection.h \
+		/usr/include/qt/QtCore/qglobalstatic.h \
+		/usr/include/qt/QtCore/qatomic.h \
+		/usr/include/qt/QtCore/qbasicatomic.h \
+		/usr/include/qt/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt/QtCore/qgenericatomic.h \
+		/usr/include/qt/QtCore/qatomic_msvc.h \
+		/usr/include/qt/QtCore/qatomic_integrity.h \
+		/usr/include/qt/QtCore/qoldbasicatomic.h \
+		/usr/include/qt/QtCore/qatomic_vxworks.h \
+		/usr/include/qt/QtCore/qatomic_power.h \
+		/usr/include/qt/QtCore/qatomic_alpha.h \
+		/usr/include/qt/QtCore/qatomic_armv7.h \
+		/usr/include/qt/QtCore/qatomic_armv6.h \
+		/usr/include/qt/QtCore/qatomic_armv5.h \
+		/usr/include/qt/QtCore/qatomic_bfin.h \
+		/usr/include/qt/QtCore/qatomic_ia64.h \
+		/usr/include/qt/QtCore/qatomic_mips.h \
+		/usr/include/qt/QtCore/qatomic_s390.h \
+		/usr/include/qt/QtCore/qatomic_sh4a.h \
+		/usr/include/qt/QtCore/qatomic_sparc.h \
+		/usr/include/qt/QtCore/qatomic_x86.h \
+		/usr/include/qt/QtCore/qatomic_cxx11.h \
+		/usr/include/qt/QtCore/qatomic_gcc.h \
+		/usr/include/qt/QtCore/qatomic_unix.h \
+		/usr/include/qt/QtCore/qmutex.h \
+		/usr/include/qt/QtCore/qlogging.h \
+		/usr/include/qt/QtCore/qflags.h \
+		/usr/include/qt/QtCore/qtypeinfo.h \
+		/usr/include/qt/QtCore/qtypetraits.h \
+		/usr/include/qt/QtCore/qsysinfo.h \
+		/usr/include/qt/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt/QtCore/qstring.h \
+		/usr/include/qt/QtCore/qchar.h \
+		/usr/include/qt/QtCore/qbytearray.h \
+		/usr/include/qt/QtCore/qrefcount.h \
+		/usr/include/qt/QtCore/qarraydata.h \
+		/usr/include/qt/QtCore/qstringbuilder.h \
+		/usr/include/qt/QtCore/qlist.h \
+		/usr/include/qt/QtCore/qalgorithms.h \
+		/usr/include/qt/QtCore/qiterator.h \
+		/usr/include/qt/QtCore/qcoreevent.h \
+		/usr/include/qt/QtCore/qscopedpointer.h \
+		/usr/include/qt/QtCore/qmetatype.h \
+		/usr/include/qt/QtCore/qvarlengtharray.h \
+		/usr/include/qt/QtCore/qcontainerfwd.h \
+		/usr/include/qt/QtCore/qisenum.h \
+		/usr/include/qt/QtCore/qobject_impl.h \
+		/usr/include/qt/QtCore/QString \
+		/usr/include/qt/QtCore/QFile \
+		/usr/include/qt/QtCore/qfile.h \
+		/usr/include/qt/QtCore/qfiledevice.h \
+		/usr/include/qt/QtCore/qiodevice.h \
+		/usr/include/qt/QtCore/QDebug \
+		/usr/include/qt/QtCore/qdebug.h \
+		/usr/include/qt/QtCore/qhash.h \
+		/usr/include/qt/QtCore/qpair.h \
+		/usr/include/qt/QtCore/qmap.h \
+		/usr/include/qt/QtCore/qtextstream.h \
+		/usr/include/qt/QtCore/qlocale.h \
+		/usr/include/qt/QtCore/qvariant.h \
+		/usr/include/qt/QtCore/qstringlist.h \
+		/usr/include/qt/QtCore/qdatastream.h \
+		/usr/include/qt/QtCore/qregexp.h \
+		/usr/include/qt/QtCore/qstringmatcher.h \
+		/usr/include/qt/QtCore/qshareddata.h \
+		/usr/include/qt/QtCore/qvector.h \
+		/usr/include/qt/QtCore/qpoint.h \
+		/usr/include/qt/QtCore/qset.h \
+		/usr/include/qt/QtCore/qcontiguouscache.h \
+		/usr/include/qt/QtCore/QStringList \
+		src/base/pluginloader/plugin/blocks/pluginoption.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/optionbireal.o src/base/pluginloader/plugin/blocks/options/optionbireal.cc
 
 debug/optionboolean.o: src/base/pluginloader/plugin/blocks/options/optionboolean.cc src/base/pluginloader/plugin/blocks/options/optionboolean.h \
 		/usr/include/qt/QtCore/QObject \
@@ -4131,6 +4793,91 @@ debug/optionboolean.o: src/base/pluginloader/plugin/blocks/options/optionboolean
 		src/base/pluginloader/plugin/blocks/pluginoption.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/optionboolean.o src/base/pluginloader/plugin/blocks/options/optionboolean.cc
 
+debug/optionenum.o: src/base/pluginloader/plugin/blocks/options/optionenum.cc src/base/pluginloader/plugin/blocks/options/optionenum.h \
+		/usr/include/qt/QtCore/QObject \
+		/usr/include/qt/QtCore/qobject.h \
+		/usr/include/qt/QtCore/qobjectdefs.h \
+		/usr/include/qt/QtCore/qnamespace.h \
+		/usr/include/qt/QtCore/qglobal.h \
+		/usr/include/qt/QtCore/qconfig.h \
+		/usr/include/qt/QtCore/qfeatures.h \
+		/usr/include/qt/QtCore/qsystemdetection.h \
+		/usr/include/qt/QtCore/qprocessordetection.h \
+		/usr/include/qt/QtCore/qcompilerdetection.h \
+		/usr/include/qt/QtCore/qglobalstatic.h \
+		/usr/include/qt/QtCore/qatomic.h \
+		/usr/include/qt/QtCore/qbasicatomic.h \
+		/usr/include/qt/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt/QtCore/qgenericatomic.h \
+		/usr/include/qt/QtCore/qatomic_msvc.h \
+		/usr/include/qt/QtCore/qatomic_integrity.h \
+		/usr/include/qt/QtCore/qoldbasicatomic.h \
+		/usr/include/qt/QtCore/qatomic_vxworks.h \
+		/usr/include/qt/QtCore/qatomic_power.h \
+		/usr/include/qt/QtCore/qatomic_alpha.h \
+		/usr/include/qt/QtCore/qatomic_armv7.h \
+		/usr/include/qt/QtCore/qatomic_armv6.h \
+		/usr/include/qt/QtCore/qatomic_armv5.h \
+		/usr/include/qt/QtCore/qatomic_bfin.h \
+		/usr/include/qt/QtCore/qatomic_ia64.h \
+		/usr/include/qt/QtCore/qatomic_mips.h \
+		/usr/include/qt/QtCore/qatomic_s390.h \
+		/usr/include/qt/QtCore/qatomic_sh4a.h \
+		/usr/include/qt/QtCore/qatomic_sparc.h \
+		/usr/include/qt/QtCore/qatomic_x86.h \
+		/usr/include/qt/QtCore/qatomic_cxx11.h \
+		/usr/include/qt/QtCore/qatomic_gcc.h \
+		/usr/include/qt/QtCore/qatomic_unix.h \
+		/usr/include/qt/QtCore/qmutex.h \
+		/usr/include/qt/QtCore/qlogging.h \
+		/usr/include/qt/QtCore/qflags.h \
+		/usr/include/qt/QtCore/qtypeinfo.h \
+		/usr/include/qt/QtCore/qtypetraits.h \
+		/usr/include/qt/QtCore/qsysinfo.h \
+		/usr/include/qt/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt/QtCore/qstring.h \
+		/usr/include/qt/QtCore/qchar.h \
+		/usr/include/qt/QtCore/qbytearray.h \
+		/usr/include/qt/QtCore/qrefcount.h \
+		/usr/include/qt/QtCore/qarraydata.h \
+		/usr/include/qt/QtCore/qstringbuilder.h \
+		/usr/include/qt/QtCore/qlist.h \
+		/usr/include/qt/QtCore/qalgorithms.h \
+		/usr/include/qt/QtCore/qiterator.h \
+		/usr/include/qt/QtCore/qcoreevent.h \
+		/usr/include/qt/QtCore/qscopedpointer.h \
+		/usr/include/qt/QtCore/qmetatype.h \
+		/usr/include/qt/QtCore/qvarlengtharray.h \
+		/usr/include/qt/QtCore/qcontainerfwd.h \
+		/usr/include/qt/QtCore/qisenum.h \
+		/usr/include/qt/QtCore/qobject_impl.h \
+		/usr/include/qt/QtCore/QString \
+		/usr/include/qt/QtCore/QDebug \
+		/usr/include/qt/QtCore/qdebug.h \
+		/usr/include/qt/QtCore/qhash.h \
+		/usr/include/qt/QtCore/qpair.h \
+		/usr/include/qt/QtCore/qmap.h \
+		/usr/include/qt/QtCore/qtextstream.h \
+		/usr/include/qt/QtCore/qiodevice.h \
+		/usr/include/qt/QtCore/qlocale.h \
+		/usr/include/qt/QtCore/qvariant.h \
+		/usr/include/qt/QtCore/qstringlist.h \
+		/usr/include/qt/QtCore/qdatastream.h \
+		/usr/include/qt/QtCore/qregexp.h \
+		/usr/include/qt/QtCore/qstringmatcher.h \
+		/usr/include/qt/QtCore/qshareddata.h \
+		/usr/include/qt/QtCore/qvector.h \
+		/usr/include/qt/QtCore/qpoint.h \
+		/usr/include/qt/QtCore/qset.h \
+		/usr/include/qt/QtCore/qcontiguouscache.h \
+		/usr/include/qt/QtCore/QList \
+		/usr/include/qt/QtCore/QStringList \
+		src/base/pluginloader/plugin/blocks/pluginoption.h \
+		/usr/include/qt/QtCore/QFile \
+		/usr/include/qt/QtCore/qfile.h \
+		/usr/include/qt/QtCore/qfiledevice.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/optionenum.o src/base/pluginloader/plugin/blocks/options/optionenum.cc
+
 debug/optioninteger.o: src/base/pluginloader/plugin/blocks/options/optioninteger.cc src/base/pluginloader/plugin/blocks/options/optioninteger.h \
 		/usr/include/qt/QtCore/QObject \
 		/usr/include/qt/QtCore/qobject.h \
@@ -4215,6 +4962,90 @@ debug/optioninteger.o: src/base/pluginloader/plugin/blocks/options/optioninteger
 		src/base/pluginloader/plugin/blocks/pluginoption.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/optioninteger.o src/base/pluginloader/plugin/blocks/options/optioninteger.cc
 
+debug/optionreal.o: src/base/pluginloader/plugin/blocks/options/optionreal.cc src/base/pluginloader/plugin/blocks/options/optionreal.h \
+		/usr/include/qt/QtCore/QObject \
+		/usr/include/qt/QtCore/qobject.h \
+		/usr/include/qt/QtCore/qobjectdefs.h \
+		/usr/include/qt/QtCore/qnamespace.h \
+		/usr/include/qt/QtCore/qglobal.h \
+		/usr/include/qt/QtCore/qconfig.h \
+		/usr/include/qt/QtCore/qfeatures.h \
+		/usr/include/qt/QtCore/qsystemdetection.h \
+		/usr/include/qt/QtCore/qprocessordetection.h \
+		/usr/include/qt/QtCore/qcompilerdetection.h \
+		/usr/include/qt/QtCore/qglobalstatic.h \
+		/usr/include/qt/QtCore/qatomic.h \
+		/usr/include/qt/QtCore/qbasicatomic.h \
+		/usr/include/qt/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt/QtCore/qgenericatomic.h \
+		/usr/include/qt/QtCore/qatomic_msvc.h \
+		/usr/include/qt/QtCore/qatomic_integrity.h \
+		/usr/include/qt/QtCore/qoldbasicatomic.h \
+		/usr/include/qt/QtCore/qatomic_vxworks.h \
+		/usr/include/qt/QtCore/qatomic_power.h \
+		/usr/include/qt/QtCore/qatomic_alpha.h \
+		/usr/include/qt/QtCore/qatomic_armv7.h \
+		/usr/include/qt/QtCore/qatomic_armv6.h \
+		/usr/include/qt/QtCore/qatomic_armv5.h \
+		/usr/include/qt/QtCore/qatomic_bfin.h \
+		/usr/include/qt/QtCore/qatomic_ia64.h \
+		/usr/include/qt/QtCore/qatomic_mips.h \
+		/usr/include/qt/QtCore/qatomic_s390.h \
+		/usr/include/qt/QtCore/qatomic_sh4a.h \
+		/usr/include/qt/QtCore/qatomic_sparc.h \
+		/usr/include/qt/QtCore/qatomic_x86.h \
+		/usr/include/qt/QtCore/qatomic_cxx11.h \
+		/usr/include/qt/QtCore/qatomic_gcc.h \
+		/usr/include/qt/QtCore/qatomic_unix.h \
+		/usr/include/qt/QtCore/qmutex.h \
+		/usr/include/qt/QtCore/qlogging.h \
+		/usr/include/qt/QtCore/qflags.h \
+		/usr/include/qt/QtCore/qtypeinfo.h \
+		/usr/include/qt/QtCore/qtypetraits.h \
+		/usr/include/qt/QtCore/qsysinfo.h \
+		/usr/include/qt/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt/QtCore/qstring.h \
+		/usr/include/qt/QtCore/qchar.h \
+		/usr/include/qt/QtCore/qbytearray.h \
+		/usr/include/qt/QtCore/qrefcount.h \
+		/usr/include/qt/QtCore/qarraydata.h \
+		/usr/include/qt/QtCore/qstringbuilder.h \
+		/usr/include/qt/QtCore/qlist.h \
+		/usr/include/qt/QtCore/qalgorithms.h \
+		/usr/include/qt/QtCore/qiterator.h \
+		/usr/include/qt/QtCore/qcoreevent.h \
+		/usr/include/qt/QtCore/qscopedpointer.h \
+		/usr/include/qt/QtCore/qmetatype.h \
+		/usr/include/qt/QtCore/qvarlengtharray.h \
+		/usr/include/qt/QtCore/qcontainerfwd.h \
+		/usr/include/qt/QtCore/qisenum.h \
+		/usr/include/qt/QtCore/qobject_impl.h \
+		/usr/include/qt/QtCore/QString \
+		/usr/include/qt/QtCore/QFile \
+		/usr/include/qt/QtCore/qfile.h \
+		/usr/include/qt/QtCore/qfiledevice.h \
+		/usr/include/qt/QtCore/qiodevice.h \
+		/usr/include/qt/QtCore/QDebug \
+		/usr/include/qt/QtCore/qdebug.h \
+		/usr/include/qt/QtCore/qhash.h \
+		/usr/include/qt/QtCore/qpair.h \
+		/usr/include/qt/QtCore/qmap.h \
+		/usr/include/qt/QtCore/qtextstream.h \
+		/usr/include/qt/QtCore/qlocale.h \
+		/usr/include/qt/QtCore/qvariant.h \
+		/usr/include/qt/QtCore/qstringlist.h \
+		/usr/include/qt/QtCore/qdatastream.h \
+		/usr/include/qt/QtCore/qregexp.h \
+		/usr/include/qt/QtCore/qstringmatcher.h \
+		/usr/include/qt/QtCore/qshareddata.h \
+		/usr/include/qt/QtCore/qvector.h \
+		/usr/include/qt/QtCore/qpoint.h \
+		/usr/include/qt/QtCore/qset.h \
+		/usr/include/qt/QtCore/qcontiguouscache.h \
+		/usr/include/qt/QtCore/QStringList \
+		src/base/pluginloader/plugin/blocks/pluginoption.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/optionreal.o src/base/pluginloader/plugin/blocks/options/optionreal.cc
+
 debug/qrc_resources.o: debug/qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/qrc_resources.o debug/qrc_resources.cpp
 
@@ -4263,11 +5094,23 @@ debug/moc_pluginoption.o: debug/moc_pluginoption.cpp
 debug/moc_pluginsection.o: debug/moc_pluginsection.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/moc_pluginsection.o debug/moc_pluginsection.cpp
 
+debug/moc_optionbiinteger.o: debug/moc_optionbiinteger.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/moc_optionbiinteger.o debug/moc_optionbiinteger.cpp
+
+debug/moc_optionbireal.o: debug/moc_optionbireal.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/moc_optionbireal.o debug/moc_optionbireal.cpp
+
 debug/moc_optionboolean.o: debug/moc_optionboolean.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/moc_optionboolean.o debug/moc_optionboolean.cpp
 
+debug/moc_optionenum.o: debug/moc_optionenum.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/moc_optionenum.o debug/moc_optionenum.cpp
+
 debug/moc_optioninteger.o: debug/moc_optioninteger.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/moc_optioninteger.o debug/moc_optioninteger.cpp
+
+debug/moc_optionreal.o: debug/moc_optionreal.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/moc_optionreal.o debug/moc_optionreal.cpp
 
 ####### Install
 

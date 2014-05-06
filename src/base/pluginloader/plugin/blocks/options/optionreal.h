@@ -17,45 +17,40 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-# ifndef PLUGINSECTION_H_
-# define PLUGINSECTION_H_
+# ifndef OPTIONREAL_H_
+# define OPTIONREAL_H_
 
 # include <QtCore/QObject>
 # include <QtCore/QString>
 # include <QtCore/QFile>
 # include <QtCore/QDebug>
-# include <QtCore/QList>
+# include <QtCore/QStringList>
 
-# include "pluginoption.h"
-# include "options/optioninteger.h"
-# include "options/optionreal.h"
-# include "options/optionenum.h"
-# include "options/optionbiinteger.h"
-# include "options/optionbireal.h"
-
-namespace Base { class PluginSection; }
-
-QFile& operator>> ( QFile& input_file , Base::PluginSection& plugin_section );
+# include "../pluginoption.h"
 
 namespace Base
 {
-   class PluginSection : public QObject
+   class OptionReal : public Base::PluginOption
    {
       Q_OBJECT
       
       public:
-         explicit PluginSection ( void );
-         virtual ~PluginSection ( void );
+         explicit OptionReal ( QString options , QStringList values );
+         virtual ~OptionReal ( void );
          
-         QString name ( void );
-         void setName ( const QString& new_name );
-         QList< Base::PluginOption* >* options ( void );
+         void setCurrentValue ( const double& new_value );
+         double currentValue ( void );
+         double defaultValue ( void );
+         double maxValue ( void );
+         double minValue ( void );
+         virtual void reset ( void );
          
-         friend QFile& (::operator>>) ( QFile& input_file , Base::PluginSection& plugin_section );
-         
-      private:
-         QString section_name;
-         QList< Base::PluginOption* >* section_options;
+      protected:
+         double option_current_value;
+         double option_default_value;
+         double option_min_value;
+         double option_max_value;
+         QString option_command;
    };
 }
 

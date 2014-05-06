@@ -31,38 +31,51 @@ Base::PluginLoader::~PluginLoader ( void )
 }
 
 Base::PluginLoader::LoadState Base::PluginLoader::load ( QStringList folder_paths )
-{
-   qDebug () << "Folders: " << folder_paths;    
-   
+{  
+   // Iterate over the list of paths where might be plugins
    for ( int i = 0; i < folder_paths.size (); i++ )
    {
+      qDebug () << "PluginLoader::load: Checking folder " << folder_paths[ i ];
       QDir plugins_folder ( folder_paths[ i ] );
-      qDebug () << "Checking: " << folder_paths[ i ];
       
+      // Such folder exists?
       if ( plugins_folder.exists () )
       {
          QStringList filters;
       
+         // Exists. Create a filter for the plugin extention, so, when retrieving the list of the plugins
+         // contained in such folder, only the .qmp files will be listed.
          filters << "*.qmp";
          plugins_folder.setNameFilters ( filters );
          
+         // Get files list.
          QStringList files;
          files = plugins_folder.entryList ();
          
+         // Iterate over the list of the files.
          for ( int j = 0; j < files.size (); j++ )
          {
-            qDebug () << "From: " << folder_paths[ i ] << " as " << files[ j ];
+            // Create a file for this plugin file.
             Base::Plugin* new_plugin;
+            qDebug () << "PluginLoader::load: Validating file " << ( folder_paths[ i ] + files[ j ] );
             QFile plugin_file ( folder_paths[ i ] + files[ j ] );
             
+            // Try to open the file
             if ( plugin_file.open ( QIODevice::ReadOnly | QIODevice::Text ) )
             {
+               // Validate the plugin file (there is possible to be any other kind of file rather than a plugin)
+               /*PLUGIN VALIDATION*/
+               
+               // Create new plugin
                new_plugin = new Base::Plugin ();
                
-               qDebug () << "Loading plugin";
+               // Load the plugin
+               qDebug () << "PluginLoader::load: Loading file...";
                plugin_file >> (*new_plugin);
+               
+               // Store the plugin
                plugins_loaded->append ( new_plugin );
-            }            
+            }
             else
             {
                qDebug () << "PluginLoader::load: Error: Can't open plugin file " << files[ j ] << " from " << folder_paths[ i ];
