@@ -39,6 +39,7 @@ void Core::Kernel::about ( void )
 void Core::Kernel::config ( void )
 {
    qDebug () << "Kernel: Displaying Config dialog";
+   emit openConfigWindow ();
    
    return;
 }

@@ -24,9 +24,9 @@ Base::SharedComponents::SharedComponents ( void )
 {
    shared_configuration = new Base::Configuration ();
    shared_text = new Base::Text ( shared_configuration );
-   shared_plugins = new Base::PluginLoader ();
+   shared_plugins = new Base::PluginManager ();
    
-   shared_plugins->load ( shared_configuration->operator[] ( Base::KeyCfgCorePathsPlugins ).split ( ";" ) );
+   plugin_load_state = shared_plugins->load ( shared_configuration->operator[] ( Base::KeyCfgCorePathsPlugins ).split ( ";" ) );
 }
 
 Base::SharedComponents::~SharedComponents ( void )
@@ -46,7 +46,12 @@ Base::Text* Base::SharedComponents::text ( void )
    return ( shared_text );
 }
 
-Base::PluginLoader* Base::SharedComponents::plugins ( void )
+Base::PluginManager* Base::SharedComponents::plugins ( void )
 {
    return ( shared_plugins );
+}
+
+Base::PluginManager::LoadState Base::SharedComponents::pluginLoadState ( void )
+{
+   return ( plugin_load_state );
 }

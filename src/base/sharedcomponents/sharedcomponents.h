@@ -24,7 +24,7 @@
 
 # include "../configuration/configuration.h"
 # include "../text/text.h"
-# include "../pluginloader/pluginloader.h"
+# include "../pluginmanager/pluginmanager.h"
 
 namespace Base
 {
@@ -38,12 +38,14 @@ namespace Base
          
          Base::Configuration* config ( void );
          Base::Text* text ( void );
-         Base::PluginLoader* plugins ( void );
+         Base::PluginManager* plugins ( void );
+         Base::PluginManager::LoadState pluginLoadState ( void );
          
       private:
+         Base::PluginManager::LoadState plugin_load_state;
          Base::Configuration* shared_configuration;
          Base::Text* shared_text;
-         Base::PluginLoader* shared_plugins;
+         Base::PluginManager* shared_plugins;
    };
 }
 

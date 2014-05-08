@@ -25,5 +25,6 @@
 # include "mainwindow/panels/maincontentspanel.h"
 # include "mainwindow/panels/controlspanel.h"
 # include "mainwindow/panels/buttonspanel.h"
+# include "configwindow/configwindow.h"
 
 # endif

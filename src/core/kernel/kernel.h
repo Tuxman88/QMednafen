@@ -37,6 +37,7 @@ namespace Core
          
       signals:
          void closeMainWindow ( void );
+         void openConfigWindow ( void );
          
       public slots:
          void openRom ( void );
