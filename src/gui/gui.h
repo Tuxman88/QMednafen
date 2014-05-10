@@ -26,5 +26,15 @@
 # include "mainwindow/panels/controlspanel.h"
 # include "mainwindow/panels/buttonspanel.h"
 # include "configwindow/configwindow.h"
+# include "configwindow/sections/systempanel.h"
+# include "configwindow/sections/pluginpanel.h"
+# include "configwindow/sections/panelsection.h"
+# include "configwindow/sections/panelcategory.h"
+# include "configwindow/sections/options/integeroption.h"
+# include "configwindow/sections/options/realoption.h"
+# include "configwindow/sections/options/booleanoption.h"
+# include "configwindow/sections/options/enumoption.h"
+# include "configwindow/sections/options/biintegeroption.h"
+# include "configwindow/sections/options/birealoption.h"
 
 # endif

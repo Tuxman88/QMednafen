@@ -22,3 +22,7 @@ txt.gui.main.about=Ac&erca de
 txt.gui.main.exit=&Salir
 txt.gui.main.library=&Biblioteca
 txt.gui.main.librarydescription=Biblioteca de juegos
+txt.gui.config.systemconfig=&Sistema
+txt.gui.config.videooptions=Opciones de &video
+txt.gui.config.audiooptions=Opciones de &audio
+txt.gui.config.controloptions=Opciones de &controles

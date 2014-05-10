@@ -47,6 +47,7 @@ void Core::Kernel::config ( void )
 void Core::Kernel::exitNow ( void )
 {
    qDebug () << "Kernel: Closing program now";
+   emit closeConfigWindow ();
    emit closeMainWindow ();
    
    return;

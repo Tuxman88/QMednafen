@@ -78,6 +78,10 @@ void Base::Text::fillDefault ( void )
    current_text[ QString ( "txt.gui.main.exit" ) ] = QString ( "Exit" );
    current_text[ QString ( "txt.gui.main.library" ) ] = QString ( "Library" );
    current_text[ QString ( "txt.gui.main.librarydescription" ) ] = QString ( "Games library" );
+   current_text[ QString ( "txt.gui.config.systemconfig" ) ] = QString ( "&System" );
+   current_text[ QString ( "txt.gui.config.videooptions" ) ] = QString ( "&Video options" );
+   current_text[ QString ( "txt.gui.config.audiooptions" ) ] = QString ( "&Audio options" );
+   current_text[ QString ( "txt.gui.config.controloptions" ) ] = QString ( "&Control options" );
    
    return;
 }

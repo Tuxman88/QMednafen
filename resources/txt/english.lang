@@ -22,3 +22,7 @@ txt.gui.main.about=&About
 txt.gui.main.exit=&Exit
 txt.gui.main.library=&Library
 txt.gui.main.librarydescription=Games library
+txt.gui.config.systemconfig=&System
+txt.gui.config.videooptions=&Video options
+txt.gui.config.audiooptions=&Audio options
+txt.gui.config.controloptions=&Control options

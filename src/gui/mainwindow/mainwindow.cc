@@ -23,6 +23,7 @@ Gui::MainWindow::MainWindow ( Base::SharedComponents* new_shared_components )
    : QMainWindow ()
 {
    shared_components = new_shared_components;
+   ignore_closing = true;
    
    buildGui ();
    connectAll ();
@@ -76,6 +77,14 @@ void Gui::MainWindow::updateText ( void )
 void Gui::MainWindow::closeMainWindow ( void )
 {
    this->close ();
+   
+   return;
+}
+
+void Gui::MainWindow::closeEvent ( QCloseEvent* event )
+{
+   emit exitNow ();
+   event->accept ();
    
    return;
 }

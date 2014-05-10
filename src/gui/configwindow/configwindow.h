@@ -21,8 +21,12 @@
 # define CONFIGWINDOW_H_
 
 # include <QtWidgets/QDialog>
+# include <QtWidgets/QTabWidget>
+# include <QtWidgets/QVBoxLayout>
 
 # include "../../base/base.h"
+# include "sections/systempanel.h"
+# include "sections/pluginpanel.h"
 
 namespace Gui
 {
@@ -36,9 +40,14 @@ namespace Gui
          
       public slots:
          void openConfigWindow ( void );
+         void closeConfigWindow ( void );
          
       private:
          Base::SharedComponents* shared_components;
+         Gui::SystemPanel* system_panel;
+         QTabWidget* tab_panel;
+         QVBoxLayout* main_layout;
+         QVector< Gui::PluginPanel* > plugins_panels;
    };
 }
 

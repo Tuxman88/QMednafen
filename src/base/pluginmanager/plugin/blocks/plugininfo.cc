@@ -24,6 +24,7 @@ Base::PluginInfo::PluginInfo ( void )
 {
    plugin_author = "Unknown";
    plugin_console = "Unknown";
+   plugin_console_description = "Unknown";
    plugin_description = "None";
    plugin_name = "Unknown";
    plugin_version = "Unknown";
@@ -41,6 +42,11 @@ QString Base::PluginInfo::author ( void ) const
 QString Base::PluginInfo::console ( void ) const
 {
    return ( plugin_console );
+}
+
+QString Base::PluginInfo::consoleDescription ( void ) const
+{
+   return ( plugin_console_description );
 }
 
 QString Base::PluginInfo::description ( void ) const
@@ -87,6 +93,10 @@ QFile& operator>> ( QFile& input_file , Base::PluginInfo& plugin_info )
          else if ( pieces[ 0 ] == "plugin.console" )
          {
             plugin_info.plugin_console = pieces[ 1 ];            
+         }
+         else if ( pieces[ 0 ] == "plugin.consoledescription" )
+         {
+            plugin_info.plugin_console_description = pieces[ 1 ];     
          }
          else if ( pieces[ 0 ] == "plugin.author" )
          {

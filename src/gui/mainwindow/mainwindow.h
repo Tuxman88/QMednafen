@@ -24,6 +24,7 @@
 # include <QtWidgets/QMenuBar>
 # include <QtWidgets/QMenu>
 # include <QtWidgets/QAction>
+# include <QtGui/QCloseEvent>
 # include <QtGui/QIcon>
 
 # include "../../base/base.h"
@@ -55,11 +56,13 @@ namespace Gui
       private:
          void buildGui ( void );
          void connectAll ( void );
+         void closeEvent ( QCloseEvent* event );
          
       private:
          Base::SharedComponents* shared_components;
          Gui::MenuBar* menubar;
          Gui::MainContentsPanel* main_contents_panel;
+         bool ignore_closing;
    };
 }
 

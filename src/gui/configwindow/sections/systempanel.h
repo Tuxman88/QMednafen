@@ -15,38 +15,24 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */  
+ */
+ 
+# ifndef SYSTEMPANEL_H_
+# define SYSTEMPANEL_H_
 
-# ifndef KERNEL_H_
-# define KERNEL_H_
+# include <QtWidgets/QWidget>
 
-# include <QtCore/QObject>
-# include <QtCore/QDebug>
+# include "../../../base/base.h"
 
-# include "../../base/base.h"
-
-namespace Core
+namespace Gui
 {
-   class Kernel : public QObject
+   class SystemPanel : public QWidget
    {
       Q_OBJECT
       
       public:
-         explicit Kernel ( Base::SharedComponents* new_shared_components );
-         virtual ~Kernel ( void );
-         
-      signals:
-         void closeMainWindow ( void );
-         void closeConfigWindow ( void );
-         void openConfigWindow ( void );
-         
-      public slots:
-         void openRom ( void );
-         void openGameDisc ( void );
-         void library ( void );
-         void config ( void );
-         void exitNow ( void );
-         void about ( void );
+         explicit SystemPanel ( Base::SharedComponents* new_shared_components );
+         virtual ~SystemPanel ( void );
          
       private:
          Base::SharedComponents* shared_components;

@@ -50,7 +50,10 @@ namespace Base
    const QString ValCfgGuiShortcutAbout = "Ctrl+A";
    
    const QString KeyCfgCorePathsPlugins = "cfg.core.plugins.paths";
-   const QString ValCfgCorePathsPlugins = "";
+   const QString ValCfgCorePathsPlugins = "/";
+   
+   const QString KeyCfgCorePathsMednafen = "cfg.core.mednafen.path";
+   const QString ValCfgCorePathsMednafen = "/usr/bin/mednafen";
 
    /*
    * Keys about text. (there are just keys, the values are controlled in other place, in the "Text" class).
@@ -80,6 +83,10 @@ namespace Base
    const QString KeyTxtGuiMainExit = "txt.gui.main.exit";
    const QString KeyTxtGuiMainLibrary = "txt.gui.main.library";
    const QString KeyTxtGuiMainLibraryDescription = "txt.gui.main.librarydescription";
+   const QString KeyTxtGuiConfigSystemConfig = "txt.gui.config.systemconfig";
+   const QString KeyTxtGuiConfigVideoOptions = "txt.gui.config.videooptions";
+   const QString KeyTxtGuiConfigAudioOptions = "txt.gui.config.audiooptions";
+   const QString KeyTxtGuiConfigControlOptions = "txt.gui.config.controloptions";
 }
 
 # endif

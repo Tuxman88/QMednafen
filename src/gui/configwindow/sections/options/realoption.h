@@ -17,39 +17,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */  
 
-# ifndef KERNEL_H_
-# define KERNEL_H_
+# ifndef REALOPTION_H_
+# define REALOPTION_H_
 
-# include <QtCore/QObject>
-# include <QtCore/QDebug>
+# include <QtWidgets/QWidget>
+# include <QtWidgets/QHBoxLayout>
+# include <QtWidgets/QLabel>
+# include <QtWidgets/QDoubleSpinBox>
 
-# include "../../base/base.h"
+# include "../../../../base/base.h"
 
-namespace Core
+namespace Gui
 {
-   class Kernel : public QObject
+   class RealOption : public QWidget
    {
       Q_OBJECT
       
       public:
-         explicit Kernel ( Base::SharedComponents* new_shared_components );
-         virtual ~Kernel ( void );
-         
-      signals:
-         void closeMainWindow ( void );
-         void closeConfigWindow ( void );
-         void openConfigWindow ( void );
-         
-      public slots:
-         void openRom ( void );
-         void openGameDisc ( void );
-         void library ( void );
-         void config ( void );
-         void exitNow ( void );
-         void about ( void );
+         explicit RealOption ( Base::OptionReal* new_option );
+         virtual ~RealOption ( void );
          
       private:
-         Base::SharedComponents* shared_components;
+         void buildGui ( void );
+         
+      private:
+         Base::OptionReal* option;
+         QHBoxLayout* main_layout;
+         QLabel* title_label;
+         QDoubleSpinBox* value_spin;
    };
 }
 

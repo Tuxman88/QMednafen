@@ -23,6 +23,30 @@ Gui::ConfigWindow::ConfigWindow ( Base::SharedComponents* new_shared_components 
    : QDialog ()
 {
    shared_components = new_shared_components;
+   
+   main_layout = new QVBoxLayout ( this );
+   setLayout ( main_layout );
+   
+   tab_panel = new QTabWidget ();
+   main_layout->addWidget ( tab_panel );
+   
+   system_panel = new Gui::SystemPanel ( shared_components );
+   
+   tab_panel->addTab ( system_panel , shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigSystemConfig ) );
+   
+   QVector< Base::Plugin* >* plugin_list;
+   plugin_list = shared_components->plugins ()->pluginsLoaded ();
+   
+   for ( int i = 0; i < plugin_list->size (); i++ )
+   {
+      Gui::PluginPanel* panel;
+      Base::PluginInfo* info;
+      info = plugin_list->operator[] ( i )->info();
+      panel = new Gui::PluginPanel ( shared_components , plugin_list->operator[] ( i ) );
+      plugins_panels.append ( panel );
+      
+      tab_panel->addTab ( panel , info->consoleDescription () );
+   }
 }
 
 Gui::ConfigWindow::~ConfigWindow ( void )
@@ -32,6 +56,13 @@ Gui::ConfigWindow::~ConfigWindow ( void )
 void Gui::ConfigWindow::openConfigWindow ( void )
 {
    show ();   
+   
+   return;
+}
+
+void Gui::ConfigWindow::closeConfigWindow ( void )
+{
+   this->close ();
    
    return;
 }

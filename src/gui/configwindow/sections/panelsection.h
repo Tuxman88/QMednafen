@@ -15,41 +15,38 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */  
+ */ 
 
-# ifndef KERNEL_H_
-# define KERNEL_H_
+# ifndef PANELSECTION_H_
+# define PANELSECTION_H_
 
-# include <QtCore/QObject>
-# include <QtCore/QDebug>
+# include <QtWidgets/QGroupBox>
+# include <QtWidgets/QVBoxLayout>
 
-# include "../../base/base.h"
+# include "../../../base/base.h"
+# include "options/integeroption.h"
+# include "options/realoption.h"
+# include "options/booleanoption.h"
+# include "options/enumoption.h"
+# include "options/biintegeroption.h"
+# include "options/birealoption.h"
 
-namespace Core
+namespace Gui
 {
-   class Kernel : public QObject
+   class PanelSection : public QGroupBox
    {
       Q_OBJECT
       
       public:
-         explicit Kernel ( Base::SharedComponents* new_shared_components );
-         virtual ~Kernel ( void );
-         
-      signals:
-         void closeMainWindow ( void );
-         void closeConfigWindow ( void );
-         void openConfigWindow ( void );
-         
-      public slots:
-         void openRom ( void );
-         void openGameDisc ( void );
-         void library ( void );
-         void config ( void );
-         void exitNow ( void );
-         void about ( void );
+         explicit PanelSection ( Base::PluginSection* plugin_section );
+         virtual ~PanelSection ( void );
          
       private:
-         Base::SharedComponents* shared_components;
+         void buildGui ( void );
+         
+      private:
+         Base::PluginSection* section_information;
+         QVBoxLayout* main_layout;
    };
 }
 

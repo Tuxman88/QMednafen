@@ -36,16 +36,6 @@ int main ( int argc , char** argv )
    // Create components
    shared_components = new Base::SharedComponents ();
    
-   if ( shared_components->pluginLoadState () == Base::PluginManager::NonePluginLoaded )
-   {
-      /*
-       * ADD ERROR REPORTING
-       */
-      qDebug () << "QMednafen: Error: None plugin loaded.";
-      
-      return ( 1 );
-   }
-   
    shared_components->plugins ()->loadValues ();
    
    kernel = new Core::Kernel ( shared_components );
@@ -61,6 +51,7 @@ int main ( int argc , char** argv )
    QObject::connect ( main_window , SIGNAL ( library () )      , kernel , SLOT ( library () ) );
    
    // Connect signals from the Kernel
+   QObject::connect ( kernel , SIGNAL ( closeConfigWindow () ) , config_window , SLOT ( closeConfigWindow () ) );
    QObject::connect ( kernel , SIGNAL ( closeMainWindow () ) , main_window , SLOT ( closeMainWindow () ) );
    QObject::connect ( kernel , SIGNAL ( openConfigWindow () ) , config_window , SLOT ( openConfigWindow () ) );
    

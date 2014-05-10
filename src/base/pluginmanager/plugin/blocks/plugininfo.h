@@ -42,6 +42,7 @@ namespace Base
          QString name ( void ) const;
          QString version ( void ) const;
          QString console ( void ) const;
+         QString consoleDescription ( void ) const;
          QString author ( void ) const;
          QString description ( void ) const;
          
@@ -51,6 +52,7 @@ namespace Base
          QString plugin_name;
          QString plugin_version;
          QString plugin_console;
+         QString plugin_console_description;
          QString plugin_author;
          QString plugin_description;
    };

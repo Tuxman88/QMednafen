@@ -15,41 +15,40 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */  
+ */ 
 
-# ifndef KERNEL_H_
-# define KERNEL_H_
+# ifndef PLUGINPANEL_H_
+# define PLUGINPANEL_H_
 
-# include <QtCore/QObject>
-# include <QtCore/QDebug>
+# include <QtWidgets/QWidget>
+# include <QtWidgets/QVBoxLayout>
+# include <QtWidgets/QTabWidget>
 
-# include "../../base/base.h"
+# include "../../../base/base.h"
+# include "panelcategory.h"
 
-namespace Core
+namespace Gui
 {
-   class Kernel : public QObject
+   class PluginPanel : public QWidget
    {
       Q_OBJECT
       
       public:
-         explicit Kernel ( Base::SharedComponents* new_shared_components );
-         virtual ~Kernel ( void );
+         explicit PluginPanel ( Base::SharedComponents* new_shared_components , Base::Plugin* new_plugin );
+         virtual ~PluginPanel ( void );
          
-      signals:
-         void closeMainWindow ( void );
-         void closeConfigWindow ( void );
-         void openConfigWindow ( void );
-         
-      public slots:
-         void openRom ( void );
-         void openGameDisc ( void );
-         void library ( void );
-         void config ( void );
-         void exitNow ( void );
-         void about ( void );
+      private:
+         void buildGui ( void );
+         void addVideoOptions ( void );
+         void addAudioOptions ( void );
+         void addControlOptions ( void );
          
       private:
          Base::SharedComponents* shared_components;
+         Base::Plugin* plugin;
+         QVector< Gui::PanelCategory* > plugin_categories;
+         QVBoxLayout* main_layout;
+         QTabWidget* tab_widgets;
    };
 }
 

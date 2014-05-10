@@ -17,39 +17,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */  
 
-# ifndef KERNEL_H_
-# define KERNEL_H_
+# ifndef ENUMOPTION_H_
+# define ENUMOPTION_H_
 
-# include <QtCore/QObject>
-# include <QtCore/QDebug>
+# include <QtWidgets/QWidget>
+# include <QtWidgets/QHBoxLayout>
+# include <QtWidgets/QLabel>
+# include <QtWidgets/QComboBox>
 
-# include "../../base/base.h"
+# include "../../../../base/base.h"
 
-namespace Core
+namespace Gui
 {
-   class Kernel : public QObject
+   class EnumOption : public QWidget
    {
       Q_OBJECT
       
       public:
-         explicit Kernel ( Base::SharedComponents* new_shared_components );
-         virtual ~Kernel ( void );
-         
-      signals:
-         void closeMainWindow ( void );
-         void closeConfigWindow ( void );
-         void openConfigWindow ( void );
-         
-      public slots:
-         void openRom ( void );
-         void openGameDisc ( void );
-         void library ( void );
-         void config ( void );
-         void exitNow ( void );
-         void about ( void );
+         explicit EnumOption ( Base::OptionEnum* new_option );
+         virtual ~EnumOption ( void );
          
       private:
-         Base::SharedComponents* shared_components;
+         void buildGui ( void );
+         
+      private:
+         Base::OptionEnum* option;
+         QHBoxLayout* main_layout;
+         QLabel* title_label;
+         QComboBox* value_combo;
+         QMap< QString , QString > index_name_value;
+         QMap< QString , QString > index_value_name;
    };
 }
 
