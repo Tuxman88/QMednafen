@@ -15,40 +15,28 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */  
+ */ 
 
-# ifndef KERNEL_H_
-# define KERNEL_H_
+# ifndef ABOUTWINDOW_H_
+# define ABOUTWINDOW_H_
 
-# include <QtCore/QObject>
-# include <QtCore/QDebug>
+# include <QtWidgets/QDialog>
 
 # include "../../base/base.h"
 
-namespace Core
+namespace Gui
 {
-   class Kernel : public QObject
+   class AboutWindow : public QDialog
    {
       Q_OBJECT
       
       public:
-         explicit Kernel ( Base::SharedComponents* new_shared_components );
-         virtual ~Kernel ( void );
-         
-      signals:
-         void closeMainWindow ( void );
-         void closeConfigWindow ( void );
-         void closeAboutWindow ( void );
-         void openConfigWindow ( void );
-         void openAboutWindow ( void );
+         explicit AboutWindow ( Base::SharedComponents* new_shared_components );
+         virtual ~AboutWindow ( void );
          
       public slots:
-         void openRom ( void );
-         void openGameDisc ( void );
-         void library ( void );
-         void config ( void );
-         void exitNow ( void );
-         void about ( void );
+         void openAboutWindow ( void );
+         void closeAboutWindow ( void );
          
       private:
          Base::SharedComponents* shared_components;

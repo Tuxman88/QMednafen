@@ -36,5 +36,6 @@
 # include "configwindow/sections/options/enumoption.h"
 # include "configwindow/sections/options/biintegeroption.h"
 # include "configwindow/sections/options/birealoption.h"
+# include "aboutwindow/aboutwindow.h"
 
 # endif

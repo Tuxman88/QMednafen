@@ -55,14 +55,14 @@ Gui::ConfigWindow::~ConfigWindow ( void )
 
 void Gui::ConfigWindow::openConfigWindow ( void )
 {
-   show ();   
+   this->setVisible ( true );
    
    return;
 }
 
 void Gui::ConfigWindow::closeConfigWindow ( void )
 {
-   this->close ();
+   this->setVisible ( false );
    
    return;
 }

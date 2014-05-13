@@ -32,6 +32,7 @@ Core::Kernel::~Kernel ( void )
 void Core::Kernel::about ( void )
 {
    qDebug () << "Kernel: Displaying About dialog";
+   emit openAboutWindow ();
    
    return;
 }
@@ -48,6 +49,7 @@ void Core::Kernel::exitNow ( void )
 {
    qDebug () << "Kernel: Closing program now";
    emit closeConfigWindow ();
+   emit closeAboutWindow ();
    emit closeMainWindow ();
    
    return;

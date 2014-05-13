@@ -32,15 +32,17 @@ int main ( int argc , char** argv )
    Core::Kernel* kernel;
    Gui::MainWindow* main_window;
    Gui::ConfigWindow* config_window;
+   Gui::AboutWindow* about_window;
    
    // Create components
    shared_components = new Base::SharedComponents ();
    
    shared_components->plugins ()->loadValues ();
    
-   kernel = new Core::Kernel ( shared_components );
-   main_window = new Gui::MainWindow ( shared_components );
+   kernel        = new Core::Kernel ( shared_components );
+   main_window   = new Gui::MainWindow ( shared_components );
    config_window = new Gui::ConfigWindow ( shared_components );
+   about_window  = new Gui::AboutWindow ( shared_components );
    
    // Connect signals from the MainWindow
    QObject::connect ( main_window , SIGNAL ( exitNow () )      , kernel , SLOT ( exitNow () ) );
@@ -52,8 +54,10 @@ int main ( int argc , char** argv )
    
    // Connect signals from the Kernel
    QObject::connect ( kernel , SIGNAL ( closeConfigWindow () ) , config_window , SLOT ( closeConfigWindow () ) );
+   QObject::connect ( kernel , SIGNAL ( closeAboutWindow () ) , about_window , SLOT ( closeAboutWindow () ) );
    QObject::connect ( kernel , SIGNAL ( closeMainWindow () ) , main_window , SLOT ( closeMainWindow () ) );
    QObject::connect ( kernel , SIGNAL ( openConfigWindow () ) , config_window , SLOT ( openConfigWindow () ) );
+   QObject::connect ( kernel , SIGNAL ( openAboutWindow () ) , about_window , SLOT ( openAboutWindow () ) );
    
    // Display window
    main_window->show ();
@@ -67,6 +71,8 @@ int main ( int argc , char** argv )
    delete shared_components;
    delete kernel;
    delete main_window;
+   delete config_window;
+   delete about_window;
    
    return ( 0 );
 }
