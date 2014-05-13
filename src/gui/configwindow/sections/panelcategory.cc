@@ -20,7 +20,7 @@
 # include "panelcategory.h"
 
 Gui::PanelCategory::PanelCategory ( QList< Base::PluginSection* >* new_sections )
-   : QWidget ()
+   : QScrollArea ()
 {
    sections = new_sections;
    
@@ -33,14 +33,30 @@ Gui::PanelCategory::~PanelCategory ( void )
 
 void Gui::PanelCategory::buildGui ( void )
 {
-   main_layout = new QVBoxLayout ( this );
-   setLayout ( main_layout );
-   
+   setWidgetResizable ( true );
+   setFrameStyle ( QFrame::NoFrame );
+   setHorizontalScrollBarPolicy ( Qt::ScrollBarAlwaysOff );
+   setVerticalScrollBarPolicy ( Qt::ScrollBarAsNeeded );
+   scroll_area_widget_contents = new QWidget ( this );
+   scroll_area_widget_contents->setSizePolicy ( QSizePolicy::Preferred , QSizePolicy::Preferred );
+   main_layout = new QVBoxLayout ( scroll_area_widget_contents );
+   scroll_area_widget_contents->setLayout ( main_layout );
+   setWidget ( scroll_area_widget_contents );
+   scroll_area_widget_contents->installEventFilter ( this );
    section_panels = new QList< Gui::PanelSection* > ();
-   
    addSections ();
    
    return;
+}
+
+bool Gui::PanelCategory::eventFilter ( QObject *o , QEvent *e )
+{
+   if ( o == scroll_area_widget_contents && e->type() == QEvent::Resize )
+   {
+      setMinimumWidth ( scroll_area_widget_contents->minimumSizeHint ().width () );
+   }
+ 
+   return false;
 }
 
 void Gui::PanelCategory::addSections ( void )

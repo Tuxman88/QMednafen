@@ -21,14 +21,16 @@
 # define PANELCATEGORY_H_
 
 # include <QtWidgets/QWidget>
+# include <QtWidgets/QScrollArea>
 # include <QtWidgets/QVBoxLayout>
+# include <QtCore/QEvent>
 
 # include "../../../base/base.h"
 # include "panelsection.h"
 
 namespace Gui
 {
-   class PanelCategory : public QWidget
+   class PanelCategory : public QScrollArea
    {
       Q_OBJECT
       
@@ -39,11 +41,13 @@ namespace Gui
       private:
          void buildGui ( void );
          void addSections ( void );
+         bool eventFilter ( QObject *o , QEvent *e );
          
       private:
          QList< Base::PluginSection* >* sections;
          QList< Gui::PanelSection* >* section_panels;
          QVBoxLayout* main_layout;
+         QWidget* scroll_area_widget_contents;
    };
 }
 
