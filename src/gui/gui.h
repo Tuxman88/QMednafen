@@ -37,5 +37,8 @@
 # include "configwindow/sections/options/biintegeroption.h"
 # include "configwindow/sections/options/birealoption.h"
 # include "aboutwindow/aboutwindow.h"
+# include "aboutwindow/panels/aboutpanel.h"
+# include "aboutwindow/panels/creditspanel.h"
+# include "aboutwindow/panels/licensepanel.h"
 
 # endif

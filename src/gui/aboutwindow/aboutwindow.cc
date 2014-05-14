@@ -23,10 +23,42 @@ Gui::AboutWindow::AboutWindow ( Base::SharedComponents* new_shared_components )
    : QDialog ()
 {
    shared_components = new_shared_components;
+   
+   buildGui ();
 }
 
 Gui::AboutWindow::~AboutWindow ( void )
 {
+}
+
+void Gui::AboutWindow::buildGui ( void )
+{
+   main_layout = new QVBoxLayout ( this );
+   setLayout ( main_layout );
+   
+   tab_widget = new QTabWidget ();
+   main_layout->addWidget ( tab_widget );
+   
+   about_panel = new Gui::AboutPanel ( shared_components );
+   credits_panel = new Gui::CreditsPanel ( shared_components );
+   license_panel = new Gui::LicensePanel ( shared_components );
+   
+   tab_widget->addTab ( about_panel   , shared_components->text ()->operator[] ( Base::KeyTxtGuiAboutAboutTab ) );
+   tab_widget->addTab ( credits_panel , shared_components->text ()->operator[] ( Base::KeyTxtGuiAboutCreditsTab ) );
+   tab_widget->addTab ( license_panel , shared_components->text ()->operator[] ( Base::KeyTxtGuiAboutLicenseTab ) );
+   
+   buttons_layout = new QHBoxLayout ();
+   main_layout->addLayout ( buttons_layout );
+   buttons_layout->addStretch ();
+   
+   close_button = new QPushButton ( shared_components->text ()->operator[] ( Base::KeyTxtGuiAboutClose ) );
+   buttons_layout->addWidget ( close_button );
+   
+   connect ( close_button , SIGNAL ( clicked ( bool ) ) , this , SLOT ( closeAboutWindow () ) );
+   
+   setWindowTitle ( shared_components->text ()->operator[] ( Base::KeyTxtGuiAboutAboutTitle ) );
+   
+   return;
 }
 
 void Gui::AboutWindow::closeAboutWindow ( void )

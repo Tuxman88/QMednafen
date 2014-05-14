@@ -15,48 +15,28 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */ 
+ */  
 
-# ifndef ABOUTWINDOW_H_
-# define ABOUTWINDOW_H_
+# ifndef LICENSEPANEL_H_
+# define LICENSEPANEL_H_
 
-# include <QtWidgets/QDialog>
+# include <QtWidgets/QWidget>
 # include <QtWidgets/QVBoxLayout>
-# include <QtWidgets/QHBoxLayout>
-# include <QtWidgets/QTabWidget>
-# include <QtWidgets/QPushButton>
 
-# include "../../base/base.h"
-# include "panels/aboutpanel.h"
-# include "panels/creditspanel.h"
-# include "panels/licensepanel.h"
+# include "../../../base/base.h"
 
 namespace Gui
 {
-   class AboutWindow : public QDialog
+   class LicensePanel : public QWidget
    {
       Q_OBJECT
       
       public:
-         explicit AboutWindow ( Base::SharedComponents* new_shared_components );
-         virtual ~AboutWindow ( void );
-         
-      public slots:
-         void openAboutWindow ( void );
-         void closeAboutWindow ( void );
+         explicit LicensePanel ( Base::SharedComponents* new_shared_components );
+         virtual ~LicensePanel ( void );
          
       private:
-         void buildGui ( void );
-         
-      private:
-         QVBoxLayout* main_layout;
-         QTabWidget* tab_widget;
-         QHBoxLayout* buttons_layout;
-         QPushButton* close_button;
          Base::SharedComponents* shared_components;
-         Gui::AboutPanel* about_panel;
-         Gui::CreditsPanel* credits_panel;
-         Gui::LicensePanel* license_panel;
    };
 }
 

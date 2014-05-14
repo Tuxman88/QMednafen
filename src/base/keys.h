@@ -87,6 +87,11 @@ namespace Base
    const QString KeyTxtGuiConfigVideoOptions = "txt.gui.config.videooptions";
    const QString KeyTxtGuiConfigAudioOptions = "txt.gui.config.audiooptions";
    const QString KeyTxtGuiConfigControlOptions = "txt.gui.config.controloptions";
+   const QString KeyTxtGuiAboutAboutTitle = "txt.gui.about.abouttitle";
+   const QString KeyTxtGuiAboutAboutTab = "txt.gui.about.abouttab";
+   const QString KeyTxtGuiAboutCreditsTab = "txt.gui.about.creditstab";
+   const QString KeyTxtGuiAboutLicenseTab = "txt.gui.about.licensetab";
+   const QString KeyTxtGuiAboutClose = "txt.gui.about.close";
 }
 
 # endif

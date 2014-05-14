@@ -82,6 +82,11 @@ void Base::Text::fillDefault ( void )
    current_text[ QString ( "txt.gui.config.videooptions" ) ] = QString ( "&Video options" );
    current_text[ QString ( "txt.gui.config.audiooptions" ) ] = QString ( "&Audio options" );
    current_text[ QString ( "txt.gui.config.controloptions" ) ] = QString ( "&Control options" );
+   current_text[ QString ( "txt.gui.about.abouttitle" ) ] = QString ( "About" );
+   current_text[ QString ( "txt.gui.about.abouttab" ) ] = QString ( "&About" );
+   current_text[ QString ( "txt.gui.about.creditstab" ) ] = QString ( "C&redits" );
+   current_text[ QString ( "txt.gui.about.licensetab" ) ] = QString ( "&License" );
+   current_text[ QString ( "txt.gui.about.close" ) ] = QString ( "&Close" );
    
    return;
 }
