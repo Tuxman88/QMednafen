@@ -42,11 +42,13 @@ namespace Gui
          virtual ~AboutWindow ( void );
          
       public slots:
+         void updateText ( void );
          void openAboutWindow ( void );
          void closeAboutWindow ( void );
          
       private:
          void buildGui ( void );
+         void connectAll ( void );
          
       private:
          QVBoxLayout* main_layout;
@@ -57,6 +59,9 @@ namespace Gui
          Gui::AboutPanel* about_panel;
          Gui::CreditsPanel* credits_panel;
          Gui::LicensePanel* license_panel;
+         int about_tab_index;
+         int credits_tab_index;
+         int license_tab_index;
    };
 }
 

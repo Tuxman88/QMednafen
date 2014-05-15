@@ -40,5 +40,6 @@
 # include "aboutwindow/panels/aboutpanel.h"
 # include "aboutwindow/panels/creditspanel.h"
 # include "aboutwindow/panels/licensepanel.h"
+# include "aboutwindow/panels/authorsection.h"
 
 # endif

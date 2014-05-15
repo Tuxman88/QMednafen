@@ -15,45 +15,41 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+ */   
 
-# ifndef WELCOMEPANEL_H_
-# define WELCOMEPANEL_H_
+# ifndef AUTHORSECTION_H_
+# define AUTHORSECTION_H_
 
 # include <QtWidgets/QWidget>
-# include <QtWidgets/QHBoxLayout>
 # include <QtWidgets/QVBoxLayout>
 # include <QtWidgets/QLabel>
-# include <QtGui/QPixmap>
-# include <QtGui/QFont>
 
 # include "../../../base/base.h"
 
 namespace Gui
 {
-   class WelcomePanel : public QWidget
+   class AuthorSection : public QWidget
    {
       Q_OBJECT
       
       public:
-         explicit WelcomePanel ( Base::SharedComponents* new_shared_components );
-         virtual ~WelcomePanel ( void );
+         explicit AuthorSection ( Base::SharedComponents* new_shared_components , QString new_author_code );
+         virtual ~AuthorSection ( void );
          
       public slots:
          void updateText ( void );
          
       private:
          void buildGui ( void );
+         void connectAll ( void );
          
       private:
          Base::SharedComponents* shared_components;
-         QHBoxLayout* main_layout;
-         QVBoxLayout* info_layout;
-         QVBoxLayout* version_layout;
-         QLabel* program_icon;
-         QLabel* program_name;
-         QLabel* program_description;
-         QLabel* program_version;
+         QVBoxLayout* main_layout;
+         QString author_code;
+         QLabel* author_name;
+         QLabel* author_link;
+         QLabel* author_description;
    };
 }
 

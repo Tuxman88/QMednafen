@@ -22,6 +22,8 @@
 
 # include <QtWidgets/QWidget>
 # include <QtWidgets/QVBoxLayout>
+# include <QtWidgets/QHBoxLayout>
+# include <QtWidgets/QLabel>
 
 # include "../../../base/base.h"
 
@@ -35,8 +37,21 @@ namespace Gui
          explicit AboutPanel ( Base::SharedComponents* new_shared_components );
          virtual ~AboutPanel ( void );
          
+      private slots:
+         void updateText ( void );
+         
+      private:
+         void buildGui ( void );
+         void connectAll ( void );
+         
       private:
          Base::SharedComponents* shared_components;
+         QPixmap* pixmap;
+         QVBoxLayout* main_layout;
+         QHBoxLayout* program_icon_layout;
+         QHBoxLayout* program_info_layout;
+         QLabel* program_icon;
+         QLabel* program_info;
    };
 }
 

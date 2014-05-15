@@ -26,10 +26,27 @@ Gui::PluginPanel::PluginPanel ( Base::SharedComponents* new_shared_components , 
    plugin = new_plugin;
    
    buildGui ();
+   connectAll ();
 }
 
 Gui::PluginPanel::~PluginPanel ( void )
 {
+}
+
+void Gui::PluginPanel::connectAll ( void )
+{
+   connect ( shared_components->text () , SIGNAL ( updateText () ) , this , SLOT ( updateText () ) );
+   
+   return;
+}
+
+void Gui::PluginPanel::updateText ( void )
+{
+   tab_widgets->setTabText ( audio_tab_index    , shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigAudioOptions ) );
+   tab_widgets->setTabText ( controls_tab_index , shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigControlOptions ) );
+   tab_widgets->setTabText ( video_tab_index    , shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigVideoOptions ) );
+   
+   return;
 }
 
 void Gui::PluginPanel::buildGui ( void )
@@ -62,8 +79,7 @@ void Gui::PluginPanel::addVideoOptions ( void )
 {
    Gui::PanelCategory* category;
    category = new Gui::PanelCategory ( plugin->videoOptions () );
-   tab_widgets->addTab ( category , shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigVideoOptions ) );
-   plugin_categories.append ( category );
+   video_tab_index = tab_widgets->addTab ( category , shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigVideoOptions ) );
    
    return;
 }
@@ -72,8 +88,7 @@ void Gui::PluginPanel::addAudioOptions ( void )
 {
    Gui::PanelCategory* category;
    category = new Gui::PanelCategory ( plugin->audioOptions () );
-   tab_widgets->addTab ( category , shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigAudioOptions ) );
-   plugin_categories.append ( category );
+   audio_tab_index = tab_widgets->addTab ( category , shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigAudioOptions ) );
    
    return;
 }
@@ -82,8 +97,7 @@ void Gui::PluginPanel::addControlOptions ( void )
 {
    Gui::PanelCategory* category;
    category = new Gui::PanelCategory ( plugin->controlsOptions () );
-   tab_widgets->addTab ( category , shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigControlOptions ) );
-   plugin_categories.append ( category );
+   controls_tab_index = tab_widgets->addTab ( category , shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigControlOptions ) );
    
    return;
 }

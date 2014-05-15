@@ -23,8 +23,29 @@ Gui::SystemPanel::SystemPanel ( Base::SharedComponents* new_shared_components )
    : QWidget ()
 {
    shared_components = new_shared_components;
+   
+   buildGui ();
+   updateText ();
+   connectAll ();
 }
 
 Gui::SystemPanel::~SystemPanel ( void )
 {
+}
+
+void Gui::SystemPanel::buildGui ( void )
+{
+   return;
+}
+
+void Gui::SystemPanel::connectAll ( void )
+{
+   connect ( shared_components->text () , SIGNAL ( updateText () ) , this , SLOT ( updateText () ) );
+   
+   return;
+}
+
+void Gui::SystemPanel::updateText ( void )
+{
+   return;
 }

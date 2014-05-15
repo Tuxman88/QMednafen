@@ -92,6 +92,10 @@ namespace Base
    const QString KeyTxtGuiAboutCreditsTab = "txt.gui.about.creditstab";
    const QString KeyTxtGuiAboutLicenseTab = "txt.gui.about.licensetab";
    const QString KeyTxtGuiAboutClose = "txt.gui.about.close";
+   const QString KeyTxtGuiAboutProgramDescription = "txt.gui.about.programdescription";
+   const QString KeyTxtGuiAboutAuthorName = "txt.gui.about.%1.name";
+   const QString KeyTxtGuiAboutAuthorLink = "txt.gui.about.%1.link";
+   const QString KeyTxtGuiAboutAuthorDescription = "txt.gui.about.%1.thanks";
 }
 
 # endif

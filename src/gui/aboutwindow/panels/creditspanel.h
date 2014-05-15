@@ -24,6 +24,7 @@
 # include <QtWidgets/QVBoxLayout>
 
 # include "../../../base/base.h"
+# include "authorsection.h"
 
 namespace Gui
 {
@@ -36,7 +37,15 @@ namespace Gui
          virtual ~CreditsPanel ( void );
          
       private:
+         void buildGui ( void );
+         void connectAll ( void );
+         
+      private:
+         QVBoxLayout* main_layout;
          Base::SharedComponents* shared_components;
+         Gui::AuthorSection* author_alexander;
+         Gui::AuthorSection* author_doctorg;
+         Gui::AuthorSection* author_blueamnesiac;
    };
 }
 

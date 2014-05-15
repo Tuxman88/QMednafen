@@ -23,7 +23,16 @@ Gui::ConfigWindow::ConfigWindow ( Base::SharedComponents* new_shared_components 
    : QDialog ()
 {
    shared_components = new_shared_components;
-   
+   buildGui ();
+   updateText ();
+}
+
+Gui::ConfigWindow::~ConfigWindow ( void )
+{
+}
+
+void Gui::ConfigWindow::buildGui ( void )
+{
    main_layout = new QVBoxLayout ( this );
    setLayout ( main_layout );
    
@@ -32,7 +41,7 @@ Gui::ConfigWindow::ConfigWindow ( Base::SharedComponents* new_shared_components 
    
    system_panel = new Gui::SystemPanel ( shared_components );
    
-   tab_panel->addTab ( system_panel , shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigSystemConfig ) );
+   system_tab_index = tab_panel->addTab ( system_panel , shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigSystemConfig ) );
    
    QVector< Base::Plugin* >* plugin_list;
    plugin_list = shared_components->plugins ()->pluginsLoaded ();
@@ -47,10 +56,15 @@ Gui::ConfigWindow::ConfigWindow ( Base::SharedComponents* new_shared_components 
       
       tab_panel->addTab ( panel , info->consoleDescription () );
    }
+   
+   return;
 }
 
-Gui::ConfigWindow::~ConfigWindow ( void )
+void Gui::ConfigWindow::updateText ( void )
 {
+   tab_panel->setTabText ( system_tab_index , shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigSystemConfig ) );
+   
+   return;
 }
 
 void Gui::ConfigWindow::openConfigWindow ( void )

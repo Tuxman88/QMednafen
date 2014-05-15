@@ -23,8 +23,53 @@ Gui::AboutPanel::AboutPanel ( Base::SharedComponents* new_shared_components )
    : QWidget ()
 {
    shared_components = new_shared_components;
+   
+   buildGui ();
+   updateText ();
+   connectAll ();
 }
 
 Gui::AboutPanel::~AboutPanel ( void )
 {
+   delete pixmap;
+}
+
+void Gui::AboutPanel::buildGui ( void )
+{
+   main_layout = new QVBoxLayout ( this );
+   setLayout ( main_layout );
+   
+   program_icon_layout = new QHBoxLayout ();
+   main_layout->addLayout ( program_icon_layout );
+   
+   program_icon = new QLabel ();
+   pixmap = new QPixmap ( ":/icon-main-256" );
+   program_icon->setPixmap ( *pixmap );
+   
+   program_icon_layout->addStretch ();
+   program_icon_layout->addWidget ( program_icon );
+   program_icon_layout->addStretch ();
+   
+   program_info_layout = new QHBoxLayout ();
+   main_layout->addLayout ( program_info_layout );
+   
+   program_info = new QLabel ();
+   program_info_layout->addWidget ( program_info );
+   
+   return;
+}
+
+void Gui::AboutPanel::updateText ( void )
+{
+   program_info->setWordWrap ( true );
+   program_info->setText ( shared_components->text ()->operator[] ( Base::KeyTxtGuiAboutProgramDescription ) );
+   
+   return;
+}
+
+void Gui::AboutPanel::connectAll ( void )
+{
+   connect ( shared_components->text () , SIGNAL ( updateText () ) , this , SLOT ( updateText () ) );
+   
+   return;
 }

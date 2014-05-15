@@ -28,3 +28,21 @@ Gui::LicensePanel::LicensePanel ( Base::SharedComponents* new_shared_components 
 Gui::LicensePanel::~LicensePanel ( void )
 {
 }
+
+void Gui::LicensePanel::buildGui(void)
+{
+   return;
+}
+
+
+void Gui::LicensePanel::connectAll ( void )
+{
+   connect ( shared_components->text () , SIGNAL ( updateText () ) , this , SLOT ( updateText () ) );
+   
+   return;
+}
+
+void Gui::LicensePanel::updateText ( void )
+{
+   return;
+}

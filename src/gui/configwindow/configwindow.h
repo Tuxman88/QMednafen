@@ -41,6 +41,10 @@ namespace Gui
       public slots:
          void openConfigWindow ( void );
          void closeConfigWindow ( void );
+         void updateText ( void );
+         
+      private:
+         void buildGui ( void );
          
       private:
          Base::SharedComponents* shared_components;
@@ -48,6 +52,7 @@ namespace Gui
          QTabWidget* tab_panel;
          QVBoxLayout* main_layout;
          QVector< Gui::PluginPanel* > plugins_panels;
+         int system_tab_index;
    };
 }
 

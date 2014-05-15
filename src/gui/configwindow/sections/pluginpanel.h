@@ -37,8 +37,12 @@ namespace Gui
          explicit PluginPanel ( Base::SharedComponents* new_shared_components , Base::Plugin* new_plugin );
          virtual ~PluginPanel ( void );
          
+      public slots:
+         void updateText ( void );
+         
       private:
          void buildGui ( void );
+         void connectAll ( void );
          void addVideoOptions ( void );
          void addAudioOptions ( void );
          void addControlOptions ( void );
@@ -49,6 +53,9 @@ namespace Gui
          QVector< Gui::PanelCategory* > plugin_categories;
          QVBoxLayout* main_layout;
          QTabWidget* tab_widgets;
+         int video_tab_index;
+         int audio_tab_index;
+         int controls_tab_index;
    };
 }
 

@@ -23,8 +23,37 @@ Gui::CreditsPanel::CreditsPanel ( Base::SharedComponents* new_shared_components 
    : QWidget ()
 {
    shared_components = new_shared_components;
+   
+   buildGui ();
+   connectAll ();
 }
 
 Gui::CreditsPanel::~CreditsPanel ( void )
 {
+}
+
+void Gui::CreditsPanel::buildGui ( void )
+{
+   main_layout = new QVBoxLayout ( this );
+   setLayout ( main_layout );
+   
+   author_alexander = new Gui::AuthorSection ( shared_components , "alexander" );
+   author_doctorg = new Gui::AuthorSection ( shared_components , "doctorg" );
+   author_blueamnesiac = new Gui::AuthorSection ( shared_components , "blueamnesiac" );
+   
+   main_layout->addWidget ( author_alexander );
+   main_layout->addWidget ( author_doctorg );
+   main_layout->addWidget ( author_blueamnesiac );
+   
+   return;
+}
+
+
+void Gui::CreditsPanel::connectAll ( void )
+{
+   connect ( shared_components->text () , SIGNAL ( updateText () ) , author_alexander    , SLOT ( updateText () ) );
+   connect ( shared_components->text () , SIGNAL ( updateText () ) , author_doctorg      , SLOT ( updateText () ) );
+   connect ( shared_components->text () , SIGNAL ( updateText () ) , author_blueamnesiac , SLOT ( updateText () ) );
+   
+   return;
 }

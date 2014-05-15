@@ -34,6 +34,13 @@ namespace Gui
          explicit SystemPanel ( Base::SharedComponents* new_shared_components );
          virtual ~SystemPanel ( void );
          
+      public slots:
+         void updateText ( void );
+         
+      private:
+         void buildGui ( void );
+         void connectAll ( void );
+         
       private:
          Base::SharedComponents* shared_components;
    };

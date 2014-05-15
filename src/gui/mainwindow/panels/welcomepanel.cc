@@ -25,6 +25,16 @@ Gui::WelcomePanel::WelcomePanel ( Base::SharedComponents* new_shared_components 
 {
    shared_components = new_shared_components;
    
+   buildGui ();   
+   updateText ();
+}
+
+Gui::WelcomePanel::~WelcomePanel ( void )
+{
+}
+
+void Gui::WelcomePanel::buildGui ( void )
+{
    // Create and set main layout
    main_layout = new QHBoxLayout ( this );
    setLayout ( main_layout );
@@ -54,11 +64,7 @@ Gui::WelcomePanel::WelcomePanel ( Base::SharedComponents* new_shared_components 
    version_layout->addStretch ();
    main_layout->addLayout ( version_layout );
    
-   updateText ();
-}
-
-Gui::WelcomePanel::~WelcomePanel ( void )
-{
+   return;
 }
 
 void Gui::WelcomePanel::updateText ( void )

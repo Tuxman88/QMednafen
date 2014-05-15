@@ -87,6 +87,16 @@ void Base::Text::fillDefault ( void )
    current_text[ QString ( "txt.gui.about.creditstab" ) ] = QString ( "C&redits" );
    current_text[ QString ( "txt.gui.about.licensetab" ) ] = QString ( "&License" );
    current_text[ QString ( "txt.gui.about.close" ) ] = QString ( "&Close" );
+   current_text[ QString ( "txt.gui.about.programdescription" ) ] = QString ( "This program is an open-source project.\\nIt is intented to provide an easy-to-use\\ngraphical interface for the multi-platform\\nemulator Mednafen.\\n\\nThis software was programmed using Qt 5.2.1." );
+   current_text[ QString ( "txt.gui.about.alexander.name" ) ] = QString ( "Alexander Gee" );
+   current_text[ QString ( "txt.gui.about.alexander.link" ) ] = QString ( "https://plus.google.com/+AlexanderGee" );
+   current_text[ QString ( "txt.gui.about.alexander.thanks" ) ] = QString ( "Author of the original Bandai WonderSwan image." );
+   current_text[ QString ( "txt.gui.about.doctorg.name" ) ] = QString ( "Doctor-G" );
+   current_text[ QString ( "txt.gui.about.doctorg.link" ) ] = QString ( "http://doctor-g.deviantart.com" );
+   current_text[ QString ( "txt.gui.about.doctorg.thanks" ) ] = QString ( "Author of the original Sega Genesis image." );
+   current_text[ QString ( "txt.gui.about.blueamnesiac.name" ) ] = QString ( "BLUEamnesiac" );
+   current_text[ QString ( "txt.gui.about.blueamnesiac.link" ) ] = QString ( "blueamnesiac.deviantart.com" );
+   current_text[ QString ( "txt.gui.about.blueamnesiac.thanks" ) ] = QString ( "Author of the original Sega Game Gear, Sega Master System, Nintendo Game Boy, Nintendo Game Boy Advance, SNK Neo Geo Pocket and Atari Lynx images." );
    
    return;
 }

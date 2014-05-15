@@ -25,10 +25,31 @@ Gui::AboutWindow::AboutWindow ( Base::SharedComponents* new_shared_components )
    shared_components = new_shared_components;
    
    buildGui ();
+   updateText ();
+   connectAll ();
 }
 
 Gui::AboutWindow::~AboutWindow ( void )
 {
+}
+
+void Gui::AboutWindow::connectAll ( void )
+{
+   connect ( shared_components->text () , SIGNAL ( updateText () ) , this , SLOT ( updateText () ) );
+   
+   return;
+}
+
+void Gui::AboutWindow::updateText ( void )
+{
+   tab_widget->setTabText ( about_tab_index   , shared_components->text ()->operator[] ( Base::KeyTxtGuiAboutAboutTab ) );
+   tab_widget->setTabText ( credits_tab_index , shared_components->text ()->operator[] ( Base::KeyTxtGuiAboutCreditsTab ) );
+   tab_widget->setTabText ( license_tab_index , shared_components->text ()->operator[] ( Base::KeyTxtGuiAboutLicenseTab ) );
+   
+   close_button->setText ( shared_components->text ()->operator[] ( Base::KeyTxtGuiAboutClose ) );
+   setWindowTitle ( shared_components->text ()->operator[] ( Base::KeyTxtGuiAboutAboutTitle ) );
+   
+   return;
 }
 
 void Gui::AboutWindow::buildGui ( void )
@@ -39,13 +60,13 @@ void Gui::AboutWindow::buildGui ( void )
    tab_widget = new QTabWidget ();
    main_layout->addWidget ( tab_widget );
    
-   about_panel = new Gui::AboutPanel ( shared_components );
+   about_panel   = new Gui::AboutPanel ( shared_components );
    credits_panel = new Gui::CreditsPanel ( shared_components );
    license_panel = new Gui::LicensePanel ( shared_components );
    
-   tab_widget->addTab ( about_panel   , shared_components->text ()->operator[] ( Base::KeyTxtGuiAboutAboutTab ) );
-   tab_widget->addTab ( credits_panel , shared_components->text ()->operator[] ( Base::KeyTxtGuiAboutCreditsTab ) );
-   tab_widget->addTab ( license_panel , shared_components->text ()->operator[] ( Base::KeyTxtGuiAboutLicenseTab ) );
+   about_tab_index   = tab_widget->addTab ( about_panel   , shared_components->text ()->operator[] ( Base::KeyTxtGuiAboutAboutTab ) );
+   credits_tab_index = tab_widget->addTab ( credits_panel , shared_components->text ()->operator[] ( Base::KeyTxtGuiAboutCreditsTab ) );
+   license_tab_index = tab_widget->addTab ( license_panel , shared_components->text ()->operator[] ( Base::KeyTxtGuiAboutLicenseTab ) );
    
    buttons_layout = new QHBoxLayout ();
    main_layout->addLayout ( buttons_layout );
@@ -56,7 +77,7 @@ void Gui::AboutWindow::buildGui ( void )
    
    connect ( close_button , SIGNAL ( clicked ( bool ) ) , this , SLOT ( closeAboutWindow () ) );
    
-   setWindowTitle ( shared_components->text ()->operator[] ( Base::KeyTxtGuiAboutAboutTitle ) );
+   setWindowIcon ( QPixmap ( ":/icon-main-16" ) );
    
    return;
 }
