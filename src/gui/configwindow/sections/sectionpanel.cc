@@ -17,9 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-# include "panelsection.h"
+# include "sectionpanel.h"
 
-Gui::PanelSection::PanelSection ( Base::PluginSection* plugin_section )
+Gui::SectionPanel::SectionPanel ( Base::PluginSection* plugin_section )
    : QGroupBox ()
 {
    section_information = plugin_section;
@@ -27,11 +27,11 @@ Gui::PanelSection::PanelSection ( Base::PluginSection* plugin_section )
    buildGui ();
 }
 
-Gui::PanelSection::~PanelSection ( void )
+Gui::SectionPanel::~SectionPanel ( void )
 {
 }
 
-void Gui::PanelSection::buildGui ( void )
+void Gui::SectionPanel::buildGui ( void )
 {
    setTitle ( section_information->name () );
    

@@ -17,47 +17,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-# ifndef PLUGINPANEL_H_
-# define PLUGINPANEL_H_
+# ifndef PANELSECTION_H_
+# define PANELSECTION_H_
 
-# include <QtWidgets/QWidget>
+# include <QtWidgets/QGroupBox>
 # include <QtWidgets/QVBoxLayout>
-# include <QtWidgets/QTabWidget>
 
 # include "../../../base/base.h"
-# include "categorypanel.h"
-# include "consoleinfopanel.h"
+# include "options/integeroption.h"
+# include "options/realoption.h"
+# include "options/booleanoption.h"
+# include "options/enumoption.h"
+# include "options/biintegeroption.h"
+# include "options/birealoption.h"
 
 namespace Gui
 {
-   class PluginPanel : public QWidget
+   class SectionPanel : public QGroupBox
    {
       Q_OBJECT
       
       public:
-         explicit PluginPanel ( Base::SharedComponents* new_shared_components , Base::Plugin* new_plugin );
-         virtual ~PluginPanel ( void );
-         
-      public slots:
-         void updateText ( void );
+         explicit SectionPanel ( Base::PluginSection* plugin_section );
+         virtual ~SectionPanel ( void );
          
       private:
          void buildGui ( void );
-         void connectAll ( void );
-         void addVideoOptions ( void );
-         void addAudioOptions ( void );
-         void addControlOptions ( void );
          
       private:
-         Base::SharedComponents* shared_components;
-         Base::Plugin* plugin;
-         QVector< Gui::CategoryPanel* > plugin_categories;
+         Base::PluginSection* section_information;
          QVBoxLayout* main_layout;
-         QTabWidget* tab_widgets;
-         Gui::ConsoleInfoPanel* console_info;
-         int video_tab_index;
-         int audio_tab_index;
-         int controls_tab_index;
    };
 }
 

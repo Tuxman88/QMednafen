@@ -54,6 +54,9 @@ void Gui::PluginPanel::buildGui ( void )
    main_layout = new QVBoxLayout ( this );
    setLayout ( main_layout );
    
+   console_info = new Gui::ConsoleInfoPanel ( shared_components , plugin->info () );
+   main_layout->addWidget ( console_info );
+   
    tab_widgets = new QTabWidget ();
    main_layout->addWidget ( tab_widgets );
    
@@ -77,8 +80,8 @@ void Gui::PluginPanel::buildGui ( void )
 
 void Gui::PluginPanel::addVideoOptions ( void )
 {
-   Gui::PanelCategory* category;
-   category = new Gui::PanelCategory ( plugin->videoOptions () );
+   Gui::CategoryPanel* category;
+   category = new Gui::CategoryPanel ( plugin->videoOptions () );
    video_tab_index = tab_widgets->addTab ( category , shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigVideoOptions ) );
    
    return;
@@ -86,8 +89,8 @@ void Gui::PluginPanel::addVideoOptions ( void )
 
 void Gui::PluginPanel::addAudioOptions ( void )
 {
-   Gui::PanelCategory* category;
-   category = new Gui::PanelCategory ( plugin->audioOptions () );
+   Gui::CategoryPanel* category;
+   category = new Gui::CategoryPanel ( plugin->audioOptions () );
    audio_tab_index = tab_widgets->addTab ( category , shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigAudioOptions ) );
    
    return;
@@ -95,8 +98,8 @@ void Gui::PluginPanel::addAudioOptions ( void )
 
 void Gui::PluginPanel::addControlOptions ( void )
 {
-   Gui::PanelCategory* category;
-   category = new Gui::PanelCategory ( plugin->controlsOptions () );
+   Gui::CategoryPanel* category;
+   category = new Gui::CategoryPanel ( plugin->controlsOptions () );
    controls_tab_index = tab_widgets->addTab ( category , shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigControlOptions ) );
    
    return;

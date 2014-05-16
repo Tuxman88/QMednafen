@@ -87,6 +87,12 @@ namespace Base
    const QString KeyTxtGuiConfigVideoOptions = "txt.gui.config.videooptions";
    const QString KeyTxtGuiConfigAudioOptions = "txt.gui.config.audiooptions";
    const QString KeyTxtGuiConfigControlOptions = "txt.gui.config.controloptions";
+   const QString KeyTxtGuiConfigConsoleName = "txt.gui.config.console.%1";
+   const QString KeyTxtGuiConfigConsoleAuthor = "txt.gui.config.console.author";
+   const QString KeyTxtGuiConfigTitle = "txt.gui.config.title";
+   const QString KeyTxtGuiConfigSave = "txt.gui.config.save";
+   const QString KeyTxtGuiConfigReload = "txt.gui.config.reload";
+   const QString KeyTxtGuiConfigReset = "txt.gui.config.reset";
    const QString KeyTxtGuiAboutAboutTitle = "txt.gui.about.abouttitle";
    const QString KeyTxtGuiAboutAboutTab = "txt.gui.about.abouttab";
    const QString KeyTxtGuiAboutCreditsTab = "txt.gui.about.creditstab";
@@ -96,6 +102,7 @@ namespace Base
    const QString KeyTxtGuiAboutAuthorName = "txt.gui.about.%1.name";
    const QString KeyTxtGuiAboutAuthorLink = "txt.gui.about.%1.link";
    const QString KeyTxtGuiAboutAuthorDescription = "txt.gui.about.%1.thanks";
+   const QString KeyTxtGuiConfigConsolePluginVersion = "txt.gui.config.console.pluginversion";
 }
 
 # endif

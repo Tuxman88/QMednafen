@@ -26,17 +26,17 @@
 # include <QtCore/QEvent>
 
 # include "../../../base/base.h"
-# include "panelsection.h"
+# include "sectionpanel.h"
 
 namespace Gui
 {
-   class PanelCategory : public QScrollArea
+   class CategoryPanel : public QScrollArea
    {
       Q_OBJECT
       
       public:
-         explicit PanelCategory ( QList< Base::PluginSection* >* new_sections );
-         virtual ~PanelCategory ( void );
+         explicit CategoryPanel ( QList< Base::PluginSection* >* new_sections );
+         virtual ~CategoryPanel ( void );
          
       private:
          void buildGui ( void );
@@ -45,7 +45,7 @@ namespace Gui
          
       private:
          QList< Base::PluginSection* >* sections;
-         QList< Gui::PanelSection* >* section_panels;
+         QList< Gui::SectionPanel* >* section_panels;
          QVBoxLayout* main_layout;
          QWidget* scroll_area_widget_contents;
    };

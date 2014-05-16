@@ -17,9 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-# include "panelcategory.h"
+# include "categorypanel.h"
 
-Gui::PanelCategory::PanelCategory ( QList< Base::PluginSection* >* new_sections )
+Gui::CategoryPanel::CategoryPanel ( QList< Base::PluginSection* >* new_sections )
    : QScrollArea ()
 {
    sections = new_sections;
@@ -27,11 +27,11 @@ Gui::PanelCategory::PanelCategory ( QList< Base::PluginSection* >* new_sections 
    buildGui ();
 }
 
-Gui::PanelCategory::~PanelCategory ( void )
+Gui::CategoryPanel::~CategoryPanel ( void )
 {
 }
 
-void Gui::PanelCategory::buildGui ( void )
+void Gui::CategoryPanel::buildGui ( void )
 {
    setWidgetResizable ( true );
    setFrameStyle ( QFrame::NoFrame );
@@ -43,13 +43,13 @@ void Gui::PanelCategory::buildGui ( void )
    scroll_area_widget_contents->setLayout ( main_layout );
    setWidget ( scroll_area_widget_contents );
    scroll_area_widget_contents->installEventFilter ( this );
-   section_panels = new QList< Gui::PanelSection* > ();
+   section_panels = new QList< Gui::SectionPanel* > ();
    addSections ();
    
    return;
 }
 
-bool Gui::PanelCategory::eventFilter ( QObject *o , QEvent *e )
+bool Gui::CategoryPanel::eventFilter ( QObject *o , QEvent *e )
 {
    if ( o == scroll_area_widget_contents && e->type() == QEvent::Resize )
    {
@@ -59,12 +59,12 @@ bool Gui::PanelCategory::eventFilter ( QObject *o , QEvent *e )
    return false;
 }
 
-void Gui::PanelCategory::addSections ( void )
+void Gui::CategoryPanel::addSections ( void )
 {
    for ( int i = 0; i < sections->size (); i++ )
    {
-      Gui::PanelSection* new_section;
-      new_section = new Gui::PanelSection ( sections->operator[] ( i ) );
+      Gui::SectionPanel* new_section;
+      new_section = new Gui::SectionPanel ( sections->operator[] ( i ) );
       section_panels->append ( new_section );
       main_layout->addWidget ( new_section );
    }

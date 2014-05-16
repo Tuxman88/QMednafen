@@ -17,36 +17,46 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-# ifndef PANELSECTION_H_
-# define PANELSECTION_H_
+# ifndef CONSOLEINFOPANEL_H_
+# define CONSOLEINFOPANEL_H_
 
-# include <QtWidgets/QGroupBox>
+# include <QtWidgets/QWidget>
+# include <QtWidgets/QHBoxLayout>
 # include <QtWidgets/QVBoxLayout>
+# include <QtWidgets/QLabel>
 
 # include "../../../base/base.h"
-# include "options/integeroption.h"
-# include "options/realoption.h"
-# include "options/booleanoption.h"
-# include "options/enumoption.h"
-# include "options/biintegeroption.h"
-# include "options/birealoption.h"
 
 namespace Gui
 {
-   class PanelSection : public QGroupBox
+   class ConsoleInfoPanel : public QWidget
    {
       Q_OBJECT
       
       public:
-         explicit PanelSection ( Base::PluginSection* plugin_section );
-         virtual ~PanelSection ( void );
+         explicit ConsoleInfoPanel ( Base::SharedComponents* new_shared_components , Base::PluginInfo* new_plugin_info );
+         virtual ~ConsoleInfoPanel ( void );
+         
+      public slots:
+         void updateText ( void );
          
       private:
          void buildGui ( void );
+         QString getConsoleName ( QString console_code );
+         void connectAll ( void );
          
       private:
-         Base::PluginSection* section_information;
-         QVBoxLayout* main_layout;
+         Base::SharedComponents* shared_components;
+         Base::PluginInfo* plugin_info;
+         QHBoxLayout* main_layout;
+         QVBoxLayout* icon_layout;
+         QVBoxLayout* info_layout;
+         QLabel* console_icon;
+         QLabel* console_name;
+         QLabel* plugin_name;
+         QLabel* plugin_author;
+         QLabel* plugin_description;
+         QLabel* plugin_version;
    };
 }
 

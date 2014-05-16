@@ -23,6 +23,8 @@
 # include <QtWidgets/QDialog>
 # include <QtWidgets/QTabWidget>
 # include <QtWidgets/QVBoxLayout>
+# include <QtWidgets/QHBoxLayout>
+# include <QtWidgets/QPushButton>
 
 # include "../../base/base.h"
 # include "sections/systempanel.h"
@@ -38,6 +40,11 @@ namespace Gui
          explicit ConfigWindow ( Base::SharedComponents* new_shared_components );
          virtual ~ConfigWindow ( void );
          
+      signals:
+         void saveOptions ( void );
+         void reloadOptions ( void );
+         void resetOptions ( void );
+         
       public slots:
          void openConfigWindow ( void );
          void closeConfigWindow ( void );
@@ -45,12 +52,17 @@ namespace Gui
          
       private:
          void buildGui ( void );
+         void connectAll ( void );
          
       private:
          Base::SharedComponents* shared_components;
          Gui::SystemPanel* system_panel;
          QTabWidget* tab_panel;
          QVBoxLayout* main_layout;
+         QHBoxLayout* buttons_layout;
+         QPushButton* save_button;
+         QPushButton* reload_button;
+         QPushButton* reset_button;
          QVector< Gui::PluginPanel* > plugins_panels;
          int system_tab_index;
    };

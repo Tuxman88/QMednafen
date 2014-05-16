@@ -25,6 +25,7 @@ Gui::ConfigWindow::ConfigWindow ( Base::SharedComponents* new_shared_components 
    shared_components = new_shared_components;
    buildGui ();
    updateText ();
+   connectAll ();
 }
 
 Gui::ConfigWindow::~ConfigWindow ( void )
@@ -57,12 +58,40 @@ void Gui::ConfigWindow::buildGui ( void )
       tab_panel->addTab ( panel , info->consoleDescription () );
    }
    
+   buttons_layout = new QHBoxLayout ();
+   main_layout->addLayout ( buttons_layout );
+   
+   save_button = new QPushButton ( "..." );
+   reload_button = new QPushButton ( "..." );
+   reset_button = new QPushButton ( "..." );
+   buttons_layout->addWidget ( reset_button );
+   buttons_layout->addStretch ();
+   buttons_layout->addWidget ( reload_button );
+   buttons_layout->addWidget ( save_button );
+   
+   QPixmap program_icon ( ":/icon-main-16" );
+   setWindowIcon ( QIcon ( program_icon ) );
+   setWindowTitle ( shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigTitle ) );
+   
+   return;
+}
+
+void Gui::ConfigWindow::connectAll ( void )
+{
+   connect ( save_button                , SIGNAL ( clicked ( bool ) ) , this , SIGNAL ( saveOptions () ) );
+   connect ( reload_button              , SIGNAL ( clicked ( bool ) ) , this , SIGNAL ( reloadOptions () ) );
+   connect ( reset_button               , SIGNAL ( clicked ( bool ) ) , this , SIGNAL ( resetOptions () ) );
+   connect ( shared_components->text () , SIGNAL ( updateText () )    , this , SLOT ( updateText () ) );
+   
    return;
 }
 
 void Gui::ConfigWindow::updateText ( void )
 {
-   tab_panel->setTabText ( system_tab_index , shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigSystemConfig ) );
+   tab_panel->setTabText  ( system_tab_index , shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigSystemConfig ) );
+   save_button->setText   ( shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigSave ) );
+   reload_button->setText ( shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigReload ) );
+   reset_button->setText  ( shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigReset ) );
    
    return;
 }
@@ -70,6 +99,7 @@ void Gui::ConfigWindow::updateText ( void )
 void Gui::ConfigWindow::openConfigWindow ( void )
 {
    this->setVisible ( true );
+   setFixedSize ( size () );
    
    return;
 }

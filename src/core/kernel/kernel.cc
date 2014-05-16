@@ -75,3 +75,24 @@ void Core::Kernel::openRom ( void )
    
    return;
 }
+
+void Core::Kernel::reloadOptions ( void )
+{
+   qDebug () << "Kernel: Reloading options";
+   
+   return;
+}
+
+void Core::Kernel::resetOptions ( void )
+{
+   qDebug () << "Kernel: Reseting options";
+   
+   return;
+}
+
+void Core::Kernel::saveOptions ( void )
+{
+   qDebug () << "Kernel: Saving options";
+   
+   return;
+}

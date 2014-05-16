@@ -49,6 +49,9 @@ namespace Core
          void config ( void );
          void exitNow ( void );
          void about ( void );
+         void saveOptions ( void );
+         void reloadOptions ( void );
+         void resetOptions ( void );
          
       private:
          Base::SharedComponents* shared_components;

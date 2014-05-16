@@ -52,6 +52,11 @@ int main ( int argc , char** argv )
    QObject::connect ( main_window , SIGNAL ( config () )       , kernel , SLOT ( config () ) );
    QObject::connect ( main_window , SIGNAL ( library () )      , kernel , SLOT ( library () ) );
    
+   // Connect signals from the ConfigWindow
+   QObject::connect ( config_window , SIGNAL ( saveOptions () )   , kernel , SLOT ( saveOptions () ) );
+   QObject::connect ( config_window , SIGNAL ( reloadOptions () ) , kernel , SLOT ( reloadOptions () ) );
+   QObject::connect ( config_window , SIGNAL ( resetOptions () )  , kernel , SLOT ( resetOptions () ) );
+   
    // Connect signals from the Kernel
    QObject::connect ( kernel , SIGNAL ( closeConfigWindow () ) , config_window , SLOT ( closeConfigWindow () ) );
    QObject::connect ( kernel , SIGNAL ( closeAboutWindow () )  , about_window  , SLOT ( closeAboutWindow () ) );
@@ -61,7 +66,8 @@ int main ( int argc , char** argv )
    
    // Display window
    main_window->show ();
-   // Make the window no resizable
+   
+   // Make the windows no resizable
    main_window->setFixedSize ( main_window->size () );
    
    // Run the application

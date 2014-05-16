@@ -58,9 +58,10 @@ SOURCES       = src/main.cc \
 		src/gui/aboutwindow/panels/authorsection.cc \
 		src/gui/aboutwindow/panels/creditspanel.cc \
 		src/gui/aboutwindow/panels/licensepanel.cc \
-		src/gui/configwindow/sections/panelcategory.cc \
-		src/gui/configwindow/sections/panelsection.cc \
+		src/gui/configwindow/sections/categorypanel.cc \
+		src/gui/configwindow/sections/consoleinfopanel.cc \
 		src/gui/configwindow/sections/pluginpanel.cc \
+		src/gui/configwindow/sections/sectionpanel.cc \
 		src/gui/configwindow/sections/systempanel.cc \
 		src/gui/mainwindow/menubar/menubar.cc \
 		src/gui/mainwindow/panels/buttonspanel.cc \
@@ -95,9 +96,10 @@ SOURCES       = src/main.cc \
 		release/moc_authorsection.cpp \
 		release/moc_creditspanel.cpp \
 		release/moc_licensepanel.cpp \
-		release/moc_panelcategory.cpp \
-		release/moc_panelsection.cpp \
+		release/moc_categorypanel.cpp \
+		release/moc_consoleinfopanel.cpp \
 		release/moc_pluginpanel.cpp \
+		release/moc_sectionpanel.cpp \
 		release/moc_systempanel.cpp \
 		release/moc_menubar.cpp \
 		release/moc_buttonspanel.cpp \
@@ -133,9 +135,10 @@ OBJECTS       = release/main.o \
 		release/authorsection.o \
 		release/creditspanel.o \
 		release/licensepanel.o \
-		release/panelcategory.o \
-		release/panelsection.o \
+		release/categorypanel.o \
+		release/consoleinfopanel.o \
 		release/pluginpanel.o \
+		release/sectionpanel.o \
 		release/systempanel.o \
 		release/menubar.o \
 		release/buttonspanel.o \
@@ -171,9 +174,10 @@ OBJECTS       = release/main.o \
 		release/moc_authorsection.o \
 		release/moc_creditspanel.o \
 		release/moc_licensepanel.o \
-		release/moc_panelcategory.o \
-		release/moc_panelsection.o \
+		release/moc_categorypanel.o \
+		release/moc_consoleinfopanel.o \
 		release/moc_pluginpanel.o \
+		release/moc_sectionpanel.o \
 		release/moc_systempanel.o \
 		release/moc_menubar.o \
 		release/moc_buttonspanel.o \
@@ -342,7 +346,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d release/qmednafen-0.1.01.0.0 || mkdir -p release/qmednafen-0.1.01.0.0
-	$(COPY_FILE) --parents $(SOURCES) $(DIST) release/qmednafen-0.1.01.0.0/ && $(COPY_FILE) --parents resources.qrc release/qmednafen-0.1.01.0.0/ && $(COPY_FILE) --parents src/base/base.h src/base/keys.h src/core/core.h src/gui/gui.h src/base/configuration/configuration.h src/base/pluginmanager/pluginmanager.h src/base/sharedcomponents/sharedcomponents.h src/base/text/text.h src/core/kernel/kernel.h src/gui/aboutwindow/aboutwindow.h src/gui/configwindow/configwindow.h src/gui/mainwindow/mainwindow.h src/base/pluginmanager/plugin/plugin.h src/gui/aboutwindow/panels/aboutpanel.h src/gui/aboutwindow/panels/authorsection.h src/gui/aboutwindow/panels/creditspanel.h src/gui/aboutwindow/panels/licensepanel.h src/gui/configwindow/sections/panelcategory.h src/gui/configwindow/sections/panelsection.h src/gui/configwindow/sections/pluginpanel.h src/gui/configwindow/sections/systempanel.h src/gui/mainwindow/menubar/menubar.h src/gui/mainwindow/panels/buttonspanel.h src/gui/mainwindow/panels/controlspanel.h src/gui/mainwindow/panels/maincontentspanel.h src/gui/mainwindow/panels/welcomepanel.h src/base/pluginmanager/plugin/blocks/plugininfo.h src/base/pluginmanager/plugin/blocks/pluginoption.h src/base/pluginmanager/plugin/blocks/pluginsection.h src/gui/configwindow/sections/options/biintegeroption.h src/gui/configwindow/sections/options/birealoption.h src/gui/configwindow/sections/options/booleanoption.h src/gui/configwindow/sections/options/enumoption.h src/gui/configwindow/sections/options/integeroption.h src/gui/configwindow/sections/options/realoption.h src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h src/base/pluginmanager/plugin/blocks/options/optionbireal.h src/base/pluginmanager/plugin/blocks/options/optionboolean.h src/base/pluginmanager/plugin/blocks/options/optionenum.h src/base/pluginmanager/plugin/blocks/options/optioninteger.h src/base/pluginmanager/plugin/blocks/options/optionreal.h release/qmednafen-0.1.01.0.0/ && $(COPY_FILE) --parents src/main.cc src/base/configuration/configuration.cc src/base/pluginmanager/pluginmanager.cc src/base/sharedcomponents/sharedcomponents.cc src/base/text/text.cc src/core/kernel/kernel.cc src/gui/aboutwindow/aboutwindow.cc src/gui/configwindow/configwindow.cc src/gui/mainwindow/mainwindow.cc src/base/pluginmanager/plugin/plugin.cc src/gui/aboutwindow/panels/aboutpanel.cc src/gui/aboutwindow/panels/authorsection.cc src/gui/aboutwindow/panels/creditspanel.cc src/gui/aboutwindow/panels/licensepanel.cc src/gui/configwindow/sections/panelcategory.cc src/gui/configwindow/sections/panelsection.cc src/gui/configwindow/sections/pluginpanel.cc src/gui/configwindow/sections/systempanel.cc src/gui/mainwindow/menubar/menubar.cc src/gui/mainwindow/panels/buttonspanel.cc src/gui/mainwindow/panels/controlspanel.cc src/gui/mainwindow/panels/maincontentspanel.cc src/gui/mainwindow/panels/welcomepanel.cc src/base/pluginmanager/plugin/blocks/plugininfo.cc src/base/pluginmanager/plugin/blocks/pluginoption.cc src/base/pluginmanager/plugin/blocks/pluginsection.cc src/gui/configwindow/sections/options/biintegeroption.cc src/gui/configwindow/sections/options/birealoption.cc src/gui/configwindow/sections/options/booleanoption.cc src/gui/configwindow/sections/options/enumoption.cc src/gui/configwindow/sections/options/integeroption.cc src/gui/configwindow/sections/options/realoption.cc src/base/pluginmanager/plugin/blocks/options/optionbiinteger.cc src/base/pluginmanager/plugin/blocks/options/optionbireal.cc src/base/pluginmanager/plugin/blocks/options/optionboolean.cc src/base/pluginmanager/plugin/blocks/options/optionenum.cc src/base/pluginmanager/plugin/blocks/options/optioninteger.cc src/base/pluginmanager/plugin/blocks/options/optionreal.cc release/qmednafen-0.1.01.0.0/ && (cd `dirname release/qmednafen-0.1.01.0.0` && $(TAR) qmednafen-0.1.01.0.0.tar qmednafen-0.1.01.0.0 && $(COMPRESS) qmednafen-0.1.01.0.0.tar) && $(MOVE) `dirname release/qmednafen-0.1.01.0.0`/qmednafen-0.1.01.0.0.tar.gz . && $(DEL_FILE) -r release/qmednafen-0.1.01.0.0
+	$(COPY_FILE) --parents $(SOURCES) $(DIST) release/qmednafen-0.1.01.0.0/ && $(COPY_FILE) --parents resources.qrc release/qmednafen-0.1.01.0.0/ && $(COPY_FILE) --parents src/base/base.h src/base/keys.h src/core/core.h src/gui/gui.h src/base/configuration/configuration.h src/base/pluginmanager/pluginmanager.h src/base/sharedcomponents/sharedcomponents.h src/base/text/text.h src/core/kernel/kernel.h src/gui/aboutwindow/aboutwindow.h src/gui/configwindow/configwindow.h src/gui/mainwindow/mainwindow.h src/base/pluginmanager/plugin/plugin.h src/gui/aboutwindow/panels/aboutpanel.h src/gui/aboutwindow/panels/authorsection.h src/gui/aboutwindow/panels/creditspanel.h src/gui/aboutwindow/panels/licensepanel.h src/gui/configwindow/sections/categorypanel.h src/gui/configwindow/sections/consoleinfopanel.h src/gui/configwindow/sections/pluginpanel.h src/gui/configwindow/sections/sectionpanel.h src/gui/configwindow/sections/systempanel.h src/gui/mainwindow/menubar/menubar.h src/gui/mainwindow/panels/buttonspanel.h src/gui/mainwindow/panels/controlspanel.h src/gui/mainwindow/panels/maincontentspanel.h src/gui/mainwindow/panels/welcomepanel.h src/base/pluginmanager/plugin/blocks/plugininfo.h src/base/pluginmanager/plugin/blocks/pluginoption.h src/base/pluginmanager/plugin/blocks/pluginsection.h src/gui/configwindow/sections/options/biintegeroption.h src/gui/configwindow/sections/options/birealoption.h src/gui/configwindow/sections/options/booleanoption.h src/gui/configwindow/sections/options/enumoption.h src/gui/configwindow/sections/options/integeroption.h src/gui/configwindow/sections/options/realoption.h src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h src/base/pluginmanager/plugin/blocks/options/optionbireal.h src/base/pluginmanager/plugin/blocks/options/optionboolean.h src/base/pluginmanager/plugin/blocks/options/optionenum.h src/base/pluginmanager/plugin/blocks/options/optioninteger.h src/base/pluginmanager/plugin/blocks/options/optionreal.h release/qmednafen-0.1.01.0.0/ && $(COPY_FILE) --parents src/main.cc src/base/configuration/configuration.cc src/base/pluginmanager/pluginmanager.cc src/base/sharedcomponents/sharedcomponents.cc src/base/text/text.cc src/core/kernel/kernel.cc src/gui/aboutwindow/aboutwindow.cc src/gui/configwindow/configwindow.cc src/gui/mainwindow/mainwindow.cc src/base/pluginmanager/plugin/plugin.cc src/gui/aboutwindow/panels/aboutpanel.cc src/gui/aboutwindow/panels/authorsection.cc src/gui/aboutwindow/panels/creditspanel.cc src/gui/aboutwindow/panels/licensepanel.cc src/gui/configwindow/sections/categorypanel.cc src/gui/configwindow/sections/consoleinfopanel.cc src/gui/configwindow/sections/pluginpanel.cc src/gui/configwindow/sections/sectionpanel.cc src/gui/configwindow/sections/systempanel.cc src/gui/mainwindow/menubar/menubar.cc src/gui/mainwindow/panels/buttonspanel.cc src/gui/mainwindow/panels/controlspanel.cc src/gui/mainwindow/panels/maincontentspanel.cc src/gui/mainwindow/panels/welcomepanel.cc src/base/pluginmanager/plugin/blocks/plugininfo.cc src/base/pluginmanager/plugin/blocks/pluginoption.cc src/base/pluginmanager/plugin/blocks/pluginsection.cc src/gui/configwindow/sections/options/biintegeroption.cc src/gui/configwindow/sections/options/birealoption.cc src/gui/configwindow/sections/options/booleanoption.cc src/gui/configwindow/sections/options/enumoption.cc src/gui/configwindow/sections/options/integeroption.cc src/gui/configwindow/sections/options/realoption.cc src/base/pluginmanager/plugin/blocks/options/optionbiinteger.cc src/base/pluginmanager/plugin/blocks/options/optionbireal.cc src/base/pluginmanager/plugin/blocks/options/optionboolean.cc src/base/pluginmanager/plugin/blocks/options/optionenum.cc src/base/pluginmanager/plugin/blocks/options/optioninteger.cc src/base/pluginmanager/plugin/blocks/options/optionreal.cc release/qmednafen-0.1.01.0.0/ && (cd `dirname release/qmednafen-0.1.01.0.0` && $(TAR) qmednafen-0.1.01.0.0.tar qmednafen-0.1.01.0.0 && $(COMPRESS) qmednafen-0.1.01.0.0.tar) && $(MOVE) `dirname release/qmednafen-0.1.01.0.0`/qmednafen-0.1.01.0.0.tar.gz . && $(DEL_FILE) -r release/qmednafen-0.1.01.0.0
 
 
 clean:compiler_clean 
@@ -367,35 +371,35 @@ compiler_rcc_make_all: release/qrc_resources.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) release/qrc_resources.cpp
 release/qrc_resources.cpp: resources.qrc \
+		resources/img/icon/unit-vb-256x256.png \
+		resources/txt/spanish.lang \
+		resources/img/icon/unit-nes-256x256.png \
+		resources/img/icon/unit-lynx-256x256.png \
+		resources/txt/english.lang \
+		resources/img/icon/main-256x256.png \
+		resources/img/icon/unit-wswan-256x256.png \
+		resources/img/icon/main-16x16.png \
+		resources/img/icon/main-64x64.png \
+		resources/img/icon/unit-sms-256x256.png \
+		resources/img/icon/unit-gb-256x256.png \
+		resources/img/icon/unit-pce_fast-256x256.png \
+		resources/img/icon/unit-md-256x256.png \
+		resources/img/icon/unit-gg-256x256.png \
+		resources/img/icon/unit-gba-256x256.png \
+		resources/img/icon/main-512x512.png \
+		resources/img/icon/unit-ngp-256x256.png \
+		resources/img/icon/unit-pcfx-256x256.png \
 		resources/img/icon/main-128x128.png \
 		resources/img/icon/unit-snes-256x256.png \
-		resources/img/icon/unit-ngp-256x256.png \
 		resources/img/icon/main-32x32.png \
 		resources/img/icon/unit-psx-256x256.png \
 		resources/img/icon/unit-pce-256x256.png \
-		resources/img/icon/unit-gb-256x256.png \
-		resources/img/icon/unit-wswan-256x256.png \
-		resources/txt/spanish.lang \
-		resources/img/icon/unit-md-256x256.png \
-		resources/img/icon/unit-lynx-256x256.png \
-		resources/img/icon/unit-gg-256x256.png \
-		resources/txt/english.lang \
-		resources/img/icon/main-256x256.png \
-		resources/img/icon/unit-nes-256x256.png \
-		resources/img/icon/main-16x16.png \
-		resources/img/icon/unit-unknown-256x256.png \
-		resources/img/icon/main-64x64.png \
-		resources/img/icon/unit-vb-256x256.png \
-		resources/img/icon/main-512x512.png \
-		resources/img/icon/unit-pce_fast-256x256.png \
-		resources/img/icon/unit-gba-256x256.png \
-		resources/img/icon/unit-sms-256x256.png \
-		resources/img/icon/unit-pcfx-256x256.png
+		resources/img/icon/unit-unknown-256x256.png
 	/usr/lib/qt/bin/rcc -name resources resources.qrc -o release/qrc_resources.cpp
 
-compiler_moc_header_make_all: release/moc_configuration.cpp release/moc_pluginmanager.cpp release/moc_sharedcomponents.cpp release/moc_text.cpp release/moc_kernel.cpp release/moc_aboutwindow.cpp release/moc_configwindow.cpp release/moc_mainwindow.cpp release/moc_plugin.cpp release/moc_aboutpanel.cpp release/moc_authorsection.cpp release/moc_creditspanel.cpp release/moc_licensepanel.cpp release/moc_panelcategory.cpp release/moc_panelsection.cpp release/moc_pluginpanel.cpp release/moc_systempanel.cpp release/moc_menubar.cpp release/moc_buttonspanel.cpp release/moc_controlspanel.cpp release/moc_maincontentspanel.cpp release/moc_welcomepanel.cpp release/moc_plugininfo.cpp release/moc_pluginoption.cpp release/moc_pluginsection.cpp release/moc_biintegeroption.cpp release/moc_birealoption.cpp release/moc_booleanoption.cpp release/moc_enumoption.cpp release/moc_integeroption.cpp release/moc_realoption.cpp release/moc_optionbiinteger.cpp release/moc_optionbireal.cpp release/moc_optionboolean.cpp release/moc_optionenum.cpp release/moc_optioninteger.cpp release/moc_optionreal.cpp
+compiler_moc_header_make_all: release/moc_configuration.cpp release/moc_pluginmanager.cpp release/moc_sharedcomponents.cpp release/moc_text.cpp release/moc_kernel.cpp release/moc_aboutwindow.cpp release/moc_configwindow.cpp release/moc_mainwindow.cpp release/moc_plugin.cpp release/moc_aboutpanel.cpp release/moc_authorsection.cpp release/moc_creditspanel.cpp release/moc_licensepanel.cpp release/moc_categorypanel.cpp release/moc_consoleinfopanel.cpp release/moc_pluginpanel.cpp release/moc_sectionpanel.cpp release/moc_systempanel.cpp release/moc_menubar.cpp release/moc_buttonspanel.cpp release/moc_controlspanel.cpp release/moc_maincontentspanel.cpp release/moc_welcomepanel.cpp release/moc_plugininfo.cpp release/moc_pluginoption.cpp release/moc_pluginsection.cpp release/moc_biintegeroption.cpp release/moc_birealoption.cpp release/moc_booleanoption.cpp release/moc_enumoption.cpp release/moc_integeroption.cpp release/moc_realoption.cpp release/moc_optionbiinteger.cpp release/moc_optionbireal.cpp release/moc_optionboolean.cpp release/moc_optionenum.cpp release/moc_optioninteger.cpp release/moc_optionreal.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) release/moc_configuration.cpp release/moc_pluginmanager.cpp release/moc_sharedcomponents.cpp release/moc_text.cpp release/moc_kernel.cpp release/moc_aboutwindow.cpp release/moc_configwindow.cpp release/moc_mainwindow.cpp release/moc_plugin.cpp release/moc_aboutpanel.cpp release/moc_authorsection.cpp release/moc_creditspanel.cpp release/moc_licensepanel.cpp release/moc_panelcategory.cpp release/moc_panelsection.cpp release/moc_pluginpanel.cpp release/moc_systempanel.cpp release/moc_menubar.cpp release/moc_buttonspanel.cpp release/moc_controlspanel.cpp release/moc_maincontentspanel.cpp release/moc_welcomepanel.cpp release/moc_plugininfo.cpp release/moc_pluginoption.cpp release/moc_pluginsection.cpp release/moc_biintegeroption.cpp release/moc_birealoption.cpp release/moc_booleanoption.cpp release/moc_enumoption.cpp release/moc_integeroption.cpp release/moc_realoption.cpp release/moc_optionbiinteger.cpp release/moc_optionbireal.cpp release/moc_optionboolean.cpp release/moc_optionenum.cpp release/moc_optioninteger.cpp release/moc_optionreal.cpp
+	-$(DEL_FILE) release/moc_configuration.cpp release/moc_pluginmanager.cpp release/moc_sharedcomponents.cpp release/moc_text.cpp release/moc_kernel.cpp release/moc_aboutwindow.cpp release/moc_configwindow.cpp release/moc_mainwindow.cpp release/moc_plugin.cpp release/moc_aboutpanel.cpp release/moc_authorsection.cpp release/moc_creditspanel.cpp release/moc_licensepanel.cpp release/moc_categorypanel.cpp release/moc_consoleinfopanel.cpp release/moc_pluginpanel.cpp release/moc_sectionpanel.cpp release/moc_systempanel.cpp release/moc_menubar.cpp release/moc_buttonspanel.cpp release/moc_controlspanel.cpp release/moc_maincontentspanel.cpp release/moc_welcomepanel.cpp release/moc_plugininfo.cpp release/moc_pluginoption.cpp release/moc_pluginsection.cpp release/moc_biintegeroption.cpp release/moc_birealoption.cpp release/moc_booleanoption.cpp release/moc_enumoption.cpp release/moc_integeroption.cpp release/moc_realoption.cpp release/moc_optionbiinteger.cpp release/moc_optionbireal.cpp release/moc_optionboolean.cpp release/moc_optionenum.cpp release/moc_optioninteger.cpp release/moc_optionreal.cpp
 release/moc_configuration.cpp: /usr/include/qt/QtCore/QObject \
 		/usr/include/qt/QtCore/qobject.h \
 		/usr/include/qt/QtCore/qobjectdefs.h \
@@ -1186,13 +1190,13 @@ release/moc_configwindow.cpp: /usr/include/qt/QtWidgets/QDialog \
 		src/gui/configwindow/sections/systempanel.h \
 		/usr/include/qt/QtWidgets/QWidget \
 		src/gui/configwindow/sections/pluginpanel.h \
-		src/gui/configwindow/sections/panelcategory.h \
+		src/gui/configwindow/sections/categorypanel.h \
 		/usr/include/qt/QtWidgets/QScrollArea \
 		/usr/include/qt/QtWidgets/qscrollarea.h \
 		/usr/include/qt/QtWidgets/qabstractscrollarea.h \
 		/usr/include/qt/QtWidgets/qframe.h \
 		/usr/include/qt/QtCore/QEvent \
-		src/gui/configwindow/sections/panelsection.h \
+		src/gui/configwindow/sections/sectionpanel.h \
 		/usr/include/qt/QtWidgets/QGroupBox \
 		/usr/include/qt/QtWidgets/qgroupbox.h \
 		src/gui/configwindow/sections/options/integeroption.h \
@@ -1223,6 +1227,7 @@ release/moc_configwindow.cpp: /usr/include/qt/QtWidgets/QDialog \
 		/usr/include/qt/QtCore/qabstractitemmodel.h \
 		src/gui/configwindow/sections/options/biintegeroption.h \
 		src/gui/configwindow/sections/options/birealoption.h \
+		src/gui/configwindow/sections/consoleinfopanel.h \
 		src/gui/configwindow/configwindow.h
 	/usr/lib/qt/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.2 -I/usr/lib/gcc/include/c++/4.8.2/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.2/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include-fixed -I/usr/include src/gui/configwindow/configwindow.h -o release/moc_configwindow.cpp
 
@@ -2087,7 +2092,7 @@ release/moc_licensepanel.cpp: /usr/include/qt/QtWidgets/QWidget \
 		src/gui/aboutwindow/panels/licensepanel.h
 	/usr/lib/qt/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.2 -I/usr/lib/gcc/include/c++/4.8.2/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.2/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include-fixed -I/usr/include src/gui/aboutwindow/panels/licensepanel.h -o release/moc_licensepanel.cpp
 
-release/moc_panelcategory.cpp: /usr/include/qt/QtWidgets/QWidget \
+release/moc_categorypanel.cpp: /usr/include/qt/QtWidgets/QWidget \
 		/usr/include/qt/QtWidgets/qwidget.h \
 		/usr/include/qt/QtGui/qwindowdefs.h \
 		/usr/include/qt/QtCore/qglobal.h \
@@ -2234,7 +2239,7 @@ release/moc_panelcategory.cpp: /usr/include/qt/QtWidgets/QWidget \
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
-		src/gui/configwindow/sections/panelsection.h \
+		src/gui/configwindow/sections/sectionpanel.h \
 		/usr/include/qt/QtWidgets/QGroupBox \
 		/usr/include/qt/QtWidgets/qgroupbox.h \
 		src/gui/configwindow/sections/options/integeroption.h \
@@ -2267,10 +2272,345 @@ release/moc_panelcategory.cpp: /usr/include/qt/QtWidgets/QWidget \
 		/usr/include/qt/QtCore/qabstractitemmodel.h \
 		src/gui/configwindow/sections/options/biintegeroption.h \
 		src/gui/configwindow/sections/options/birealoption.h \
-		src/gui/configwindow/sections/panelcategory.h
-	/usr/lib/qt/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.2 -I/usr/lib/gcc/include/c++/4.8.2/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.2/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include-fixed -I/usr/include src/gui/configwindow/sections/panelcategory.h -o release/moc_panelcategory.cpp
+		src/gui/configwindow/sections/categorypanel.h
+	/usr/lib/qt/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.2 -I/usr/lib/gcc/include/c++/4.8.2/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.2/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include-fixed -I/usr/include src/gui/configwindow/sections/categorypanel.h -o release/moc_categorypanel.cpp
 
-release/moc_panelsection.cpp: /usr/include/qt/QtWidgets/QGroupBox \
+release/moc_consoleinfopanel.cpp: /usr/include/qt/QtWidgets/QWidget \
+		/usr/include/qt/QtWidgets/qwidget.h \
+		/usr/include/qt/QtGui/qwindowdefs.h \
+		/usr/include/qt/QtCore/qglobal.h \
+		/usr/include/qt/QtCore/qconfig.h \
+		/usr/include/qt/QtCore/qfeatures.h \
+		/usr/include/qt/QtCore/qsystemdetection.h \
+		/usr/include/qt/QtCore/qprocessordetection.h \
+		/usr/include/qt/QtCore/qcompilerdetection.h \
+		/usr/include/qt/QtCore/qglobalstatic.h \
+		/usr/include/qt/QtCore/qatomic.h \
+		/usr/include/qt/QtCore/qbasicatomic.h \
+		/usr/include/qt/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt/QtCore/qgenericatomic.h \
+		/usr/include/qt/QtCore/qatomic_msvc.h \
+		/usr/include/qt/QtCore/qatomic_integrity.h \
+		/usr/include/qt/QtCore/qoldbasicatomic.h \
+		/usr/include/qt/QtCore/qatomic_vxworks.h \
+		/usr/include/qt/QtCore/qatomic_power.h \
+		/usr/include/qt/QtCore/qatomic_alpha.h \
+		/usr/include/qt/QtCore/qatomic_armv7.h \
+		/usr/include/qt/QtCore/qatomic_armv6.h \
+		/usr/include/qt/QtCore/qatomic_armv5.h \
+		/usr/include/qt/QtCore/qatomic_bfin.h \
+		/usr/include/qt/QtCore/qatomic_ia64.h \
+		/usr/include/qt/QtCore/qatomic_mips.h \
+		/usr/include/qt/QtCore/qatomic_s390.h \
+		/usr/include/qt/QtCore/qatomic_sh4a.h \
+		/usr/include/qt/QtCore/qatomic_sparc.h \
+		/usr/include/qt/QtCore/qatomic_x86.h \
+		/usr/include/qt/QtCore/qatomic_cxx11.h \
+		/usr/include/qt/QtCore/qatomic_gcc.h \
+		/usr/include/qt/QtCore/qatomic_unix.h \
+		/usr/include/qt/QtCore/qmutex.h \
+		/usr/include/qt/QtCore/qlogging.h \
+		/usr/include/qt/QtCore/qflags.h \
+		/usr/include/qt/QtCore/qtypeinfo.h \
+		/usr/include/qt/QtCore/qtypetraits.h \
+		/usr/include/qt/QtCore/qsysinfo.h \
+		/usr/include/qt/QtCore/qobjectdefs.h \
+		/usr/include/qt/QtCore/qnamespace.h \
+		/usr/include/qt/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt/QtGui/qwindowdefs_win.h \
+		/usr/include/qt/QtCore/qobject.h \
+		/usr/include/qt/QtCore/qstring.h \
+		/usr/include/qt/QtCore/qchar.h \
+		/usr/include/qt/QtCore/qbytearray.h \
+		/usr/include/qt/QtCore/qrefcount.h \
+		/usr/include/qt/QtCore/qarraydata.h \
+		/usr/include/qt/QtCore/qstringbuilder.h \
+		/usr/include/qt/QtCore/qlist.h \
+		/usr/include/qt/QtCore/qalgorithms.h \
+		/usr/include/qt/QtCore/qiterator.h \
+		/usr/include/qt/QtCore/qcoreevent.h \
+		/usr/include/qt/QtCore/qscopedpointer.h \
+		/usr/include/qt/QtCore/qmetatype.h \
+		/usr/include/qt/QtCore/qvarlengtharray.h \
+		/usr/include/qt/QtCore/qcontainerfwd.h \
+		/usr/include/qt/QtCore/qisenum.h \
+		/usr/include/qt/QtCore/qobject_impl.h \
+		/usr/include/qt/QtCore/qmargins.h \
+		/usr/include/qt/QtCore/qrect.h \
+		/usr/include/qt/QtCore/qsize.h \
+		/usr/include/qt/QtCore/qpoint.h \
+		/usr/include/qt/QtGui/qpaintdevice.h \
+		/usr/include/qt/QtGui/qpalette.h \
+		/usr/include/qt/QtGui/qcolor.h \
+		/usr/include/qt/QtGui/qrgb.h \
+		/usr/include/qt/QtCore/qstringlist.h \
+		/usr/include/qt/QtCore/qdatastream.h \
+		/usr/include/qt/QtCore/qiodevice.h \
+		/usr/include/qt/QtCore/qpair.h \
+		/usr/include/qt/QtCore/qregexp.h \
+		/usr/include/qt/QtCore/qstringmatcher.h \
+		/usr/include/qt/QtGui/qbrush.h \
+		/usr/include/qt/QtCore/qvector.h \
+		/usr/include/qt/QtGui/qmatrix.h \
+		/usr/include/qt/QtGui/qpolygon.h \
+		/usr/include/qt/QtGui/qregion.h \
+		/usr/include/qt/QtCore/qline.h \
+		/usr/include/qt/QtGui/qtransform.h \
+		/usr/include/qt/QtGui/qpainterpath.h \
+		/usr/include/qt/QtGui/qimage.h \
+		/usr/include/qt/QtGui/qpixmap.h \
+		/usr/include/qt/QtCore/qsharedpointer.h \
+		/usr/include/qt/QtCore/qshareddata.h \
+		/usr/include/qt/QtCore/qsharedpointer_impl.h \
+		/usr/include/qt/QtCore/qhash.h \
+		/usr/include/qt/QtGui/qfont.h \
+		/usr/include/qt/QtGui/qfontmetrics.h \
+		/usr/include/qt/QtGui/qfontinfo.h \
+		/usr/include/qt/QtWidgets/qsizepolicy.h \
+		/usr/include/qt/QtGui/qcursor.h \
+		/usr/include/qt/QtGui/qkeysequence.h \
+		/usr/include/qt/QtGui/qevent.h \
+		/usr/include/qt/QtCore/qvariant.h \
+		/usr/include/qt/QtCore/qmap.h \
+		/usr/include/qt/QtCore/qdebug.h \
+		/usr/include/qt/QtCore/qtextstream.h \
+		/usr/include/qt/QtCore/qlocale.h \
+		/usr/include/qt/QtCore/qset.h \
+		/usr/include/qt/QtCore/qcontiguouscache.h \
+		/usr/include/qt/QtCore/qurl.h \
+		/usr/include/qt/QtCore/qurlquery.h \
+		/usr/include/qt/QtCore/qfile.h \
+		/usr/include/qt/QtCore/qfiledevice.h \
+		/usr/include/qt/QtGui/qvector2d.h \
+		/usr/include/qt/QtGui/qtouchdevice.h \
+		/usr/include/qt/QtWidgets/QHBoxLayout \
+		/usr/include/qt/QtWidgets/qboxlayout.h \
+		/usr/include/qt/QtWidgets/qlayout.h \
+		/usr/include/qt/QtWidgets/qlayoutitem.h \
+		/usr/include/qt/QtWidgets/qgridlayout.h \
+		/usr/include/qt/QtWidgets/QVBoxLayout \
+		/usr/include/qt/QtWidgets/QLabel \
+		/usr/include/qt/QtWidgets/qlabel.h \
+		/usr/include/qt/QtWidgets/qframe.h \
+		src/base/base.h \
+		src/base/configuration/configuration.h \
+		/usr/include/qt/QtCore/QObject \
+		/usr/include/qt/QtCore/QSettings \
+		/usr/include/qt/QtCore/qsettings.h \
+		/usr/include/qt/QtCore/QString \
+		src/base/keys.h \
+		src/base/text/text.h \
+		/usr/include/qt/QtCore/QMap \
+		/usr/include/qt/QtCore/QFile \
+		/usr/include/qt/QtCore/QStringList \
+		/usr/include/qt/QtCore/QDebug \
+		src/base/sharedcomponents/sharedcomponents.h \
+		src/base/pluginmanager/pluginmanager.h \
+		/usr/include/qt/QtCore/QVector \
+		/usr/include/qt/QtCore/QDir \
+		/usr/include/qt/QtCore/qdir.h \
+		/usr/include/qt/QtCore/qfileinfo.h \
+		src/base/pluginmanager/plugin/plugin.h \
+		/usr/include/qt/QtCore/QList \
+		src/base/pluginmanager/plugin/blocks/plugininfo.h \
+		src/base/pluginmanager/plugin/blocks/pluginsection.h \
+		src/base/pluginmanager/plugin/blocks/pluginoption.h \
+		src/base/pluginmanager/plugin/blocks/options/optioninteger.h \
+		src/base/pluginmanager/plugin/blocks/options/optionreal.h \
+		src/base/pluginmanager/plugin/blocks/options/optionenum.h \
+		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
+		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
+		src/gui/configwindow/sections/consoleinfopanel.h
+	/usr/lib/qt/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.2 -I/usr/lib/gcc/include/c++/4.8.2/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.2/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include-fixed -I/usr/include src/gui/configwindow/sections/consoleinfopanel.h -o release/moc_consoleinfopanel.cpp
+
+release/moc_pluginpanel.cpp: /usr/include/qt/QtWidgets/QWidget \
+		/usr/include/qt/QtWidgets/qwidget.h \
+		/usr/include/qt/QtGui/qwindowdefs.h \
+		/usr/include/qt/QtCore/qglobal.h \
+		/usr/include/qt/QtCore/qconfig.h \
+		/usr/include/qt/QtCore/qfeatures.h \
+		/usr/include/qt/QtCore/qsystemdetection.h \
+		/usr/include/qt/QtCore/qprocessordetection.h \
+		/usr/include/qt/QtCore/qcompilerdetection.h \
+		/usr/include/qt/QtCore/qglobalstatic.h \
+		/usr/include/qt/QtCore/qatomic.h \
+		/usr/include/qt/QtCore/qbasicatomic.h \
+		/usr/include/qt/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt/QtCore/qgenericatomic.h \
+		/usr/include/qt/QtCore/qatomic_msvc.h \
+		/usr/include/qt/QtCore/qatomic_integrity.h \
+		/usr/include/qt/QtCore/qoldbasicatomic.h \
+		/usr/include/qt/QtCore/qatomic_vxworks.h \
+		/usr/include/qt/QtCore/qatomic_power.h \
+		/usr/include/qt/QtCore/qatomic_alpha.h \
+		/usr/include/qt/QtCore/qatomic_armv7.h \
+		/usr/include/qt/QtCore/qatomic_armv6.h \
+		/usr/include/qt/QtCore/qatomic_armv5.h \
+		/usr/include/qt/QtCore/qatomic_bfin.h \
+		/usr/include/qt/QtCore/qatomic_ia64.h \
+		/usr/include/qt/QtCore/qatomic_mips.h \
+		/usr/include/qt/QtCore/qatomic_s390.h \
+		/usr/include/qt/QtCore/qatomic_sh4a.h \
+		/usr/include/qt/QtCore/qatomic_sparc.h \
+		/usr/include/qt/QtCore/qatomic_x86.h \
+		/usr/include/qt/QtCore/qatomic_cxx11.h \
+		/usr/include/qt/QtCore/qatomic_gcc.h \
+		/usr/include/qt/QtCore/qatomic_unix.h \
+		/usr/include/qt/QtCore/qmutex.h \
+		/usr/include/qt/QtCore/qlogging.h \
+		/usr/include/qt/QtCore/qflags.h \
+		/usr/include/qt/QtCore/qtypeinfo.h \
+		/usr/include/qt/QtCore/qtypetraits.h \
+		/usr/include/qt/QtCore/qsysinfo.h \
+		/usr/include/qt/QtCore/qobjectdefs.h \
+		/usr/include/qt/QtCore/qnamespace.h \
+		/usr/include/qt/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt/QtGui/qwindowdefs_win.h \
+		/usr/include/qt/QtCore/qobject.h \
+		/usr/include/qt/QtCore/qstring.h \
+		/usr/include/qt/QtCore/qchar.h \
+		/usr/include/qt/QtCore/qbytearray.h \
+		/usr/include/qt/QtCore/qrefcount.h \
+		/usr/include/qt/QtCore/qarraydata.h \
+		/usr/include/qt/QtCore/qstringbuilder.h \
+		/usr/include/qt/QtCore/qlist.h \
+		/usr/include/qt/QtCore/qalgorithms.h \
+		/usr/include/qt/QtCore/qiterator.h \
+		/usr/include/qt/QtCore/qcoreevent.h \
+		/usr/include/qt/QtCore/qscopedpointer.h \
+		/usr/include/qt/QtCore/qmetatype.h \
+		/usr/include/qt/QtCore/qvarlengtharray.h \
+		/usr/include/qt/QtCore/qcontainerfwd.h \
+		/usr/include/qt/QtCore/qisenum.h \
+		/usr/include/qt/QtCore/qobject_impl.h \
+		/usr/include/qt/QtCore/qmargins.h \
+		/usr/include/qt/QtCore/qrect.h \
+		/usr/include/qt/QtCore/qsize.h \
+		/usr/include/qt/QtCore/qpoint.h \
+		/usr/include/qt/QtGui/qpaintdevice.h \
+		/usr/include/qt/QtGui/qpalette.h \
+		/usr/include/qt/QtGui/qcolor.h \
+		/usr/include/qt/QtGui/qrgb.h \
+		/usr/include/qt/QtCore/qstringlist.h \
+		/usr/include/qt/QtCore/qdatastream.h \
+		/usr/include/qt/QtCore/qiodevice.h \
+		/usr/include/qt/QtCore/qpair.h \
+		/usr/include/qt/QtCore/qregexp.h \
+		/usr/include/qt/QtCore/qstringmatcher.h \
+		/usr/include/qt/QtGui/qbrush.h \
+		/usr/include/qt/QtCore/qvector.h \
+		/usr/include/qt/QtGui/qmatrix.h \
+		/usr/include/qt/QtGui/qpolygon.h \
+		/usr/include/qt/QtGui/qregion.h \
+		/usr/include/qt/QtCore/qline.h \
+		/usr/include/qt/QtGui/qtransform.h \
+		/usr/include/qt/QtGui/qpainterpath.h \
+		/usr/include/qt/QtGui/qimage.h \
+		/usr/include/qt/QtGui/qpixmap.h \
+		/usr/include/qt/QtCore/qsharedpointer.h \
+		/usr/include/qt/QtCore/qshareddata.h \
+		/usr/include/qt/QtCore/qsharedpointer_impl.h \
+		/usr/include/qt/QtCore/qhash.h \
+		/usr/include/qt/QtGui/qfont.h \
+		/usr/include/qt/QtGui/qfontmetrics.h \
+		/usr/include/qt/QtGui/qfontinfo.h \
+		/usr/include/qt/QtWidgets/qsizepolicy.h \
+		/usr/include/qt/QtGui/qcursor.h \
+		/usr/include/qt/QtGui/qkeysequence.h \
+		/usr/include/qt/QtGui/qevent.h \
+		/usr/include/qt/QtCore/qvariant.h \
+		/usr/include/qt/QtCore/qmap.h \
+		/usr/include/qt/QtCore/qdebug.h \
+		/usr/include/qt/QtCore/qtextstream.h \
+		/usr/include/qt/QtCore/qlocale.h \
+		/usr/include/qt/QtCore/qset.h \
+		/usr/include/qt/QtCore/qcontiguouscache.h \
+		/usr/include/qt/QtCore/qurl.h \
+		/usr/include/qt/QtCore/qurlquery.h \
+		/usr/include/qt/QtCore/qfile.h \
+		/usr/include/qt/QtCore/qfiledevice.h \
+		/usr/include/qt/QtGui/qvector2d.h \
+		/usr/include/qt/QtGui/qtouchdevice.h \
+		/usr/include/qt/QtWidgets/QVBoxLayout \
+		/usr/include/qt/QtWidgets/qboxlayout.h \
+		/usr/include/qt/QtWidgets/qlayout.h \
+		/usr/include/qt/QtWidgets/qlayoutitem.h \
+		/usr/include/qt/QtWidgets/qgridlayout.h \
+		/usr/include/qt/QtWidgets/QTabWidget \
+		/usr/include/qt/QtWidgets/qtabwidget.h \
+		/usr/include/qt/QtGui/qicon.h \
+		src/base/base.h \
+		src/base/configuration/configuration.h \
+		/usr/include/qt/QtCore/QObject \
+		/usr/include/qt/QtCore/QSettings \
+		/usr/include/qt/QtCore/qsettings.h \
+		/usr/include/qt/QtCore/QString \
+		src/base/keys.h \
+		src/base/text/text.h \
+		/usr/include/qt/QtCore/QMap \
+		/usr/include/qt/QtCore/QFile \
+		/usr/include/qt/QtCore/QStringList \
+		/usr/include/qt/QtCore/QDebug \
+		src/base/sharedcomponents/sharedcomponents.h \
+		src/base/pluginmanager/pluginmanager.h \
+		/usr/include/qt/QtCore/QVector \
+		/usr/include/qt/QtCore/QDir \
+		/usr/include/qt/QtCore/qdir.h \
+		/usr/include/qt/QtCore/qfileinfo.h \
+		src/base/pluginmanager/plugin/plugin.h \
+		/usr/include/qt/QtCore/QList \
+		src/base/pluginmanager/plugin/blocks/plugininfo.h \
+		src/base/pluginmanager/plugin/blocks/pluginsection.h \
+		src/base/pluginmanager/plugin/blocks/pluginoption.h \
+		src/base/pluginmanager/plugin/blocks/options/optioninteger.h \
+		src/base/pluginmanager/plugin/blocks/options/optionreal.h \
+		src/base/pluginmanager/plugin/blocks/options/optionenum.h \
+		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
+		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
+		src/gui/configwindow/sections/categorypanel.h \
+		/usr/include/qt/QtWidgets/QScrollArea \
+		/usr/include/qt/QtWidgets/qscrollarea.h \
+		/usr/include/qt/QtWidgets/qabstractscrollarea.h \
+		/usr/include/qt/QtWidgets/qframe.h \
+		/usr/include/qt/QtCore/QEvent \
+		src/gui/configwindow/sections/sectionpanel.h \
+		/usr/include/qt/QtWidgets/QGroupBox \
+		/usr/include/qt/QtWidgets/qgroupbox.h \
+		src/gui/configwindow/sections/options/integeroption.h \
+		/usr/include/qt/QtWidgets/QHBoxLayout \
+		/usr/include/qt/QtWidgets/QLabel \
+		/usr/include/qt/QtWidgets/qlabel.h \
+		/usr/include/qt/QtWidgets/QSpinBox \
+		/usr/include/qt/QtWidgets/qspinbox.h \
+		/usr/include/qt/QtWidgets/qabstractspinbox.h \
+		/usr/include/qt/QtGui/qvalidator.h \
+		/usr/include/qt/QtCore/qregularexpression.h \
+		src/gui/configwindow/sections/options/realoption.h \
+		/usr/include/qt/QtWidgets/QDoubleSpinBox \
+		src/gui/configwindow/sections/options/booleanoption.h \
+		/usr/include/qt/QtWidgets/QCheckBox \
+		/usr/include/qt/QtWidgets/qcheckbox.h \
+		/usr/include/qt/QtWidgets/qabstractbutton.h \
+		src/gui/configwindow/sections/options/enumoption.h \
+		/usr/include/qt/QtWidgets/QComboBox \
+		/usr/include/qt/QtWidgets/qcombobox.h \
+		/usr/include/qt/QtWidgets/qabstractitemdelegate.h \
+		/usr/include/qt/QtWidgets/qstyleoption.h \
+		/usr/include/qt/QtWidgets/qslider.h \
+		/usr/include/qt/QtWidgets/qabstractslider.h \
+		/usr/include/qt/QtWidgets/qstyle.h \
+		/usr/include/qt/QtWidgets/qtabbar.h \
+		/usr/include/qt/QtWidgets/qrubberband.h \
+		/usr/include/qt/QtCore/qabstractitemmodel.h \
+		src/gui/configwindow/sections/options/biintegeroption.h \
+		src/gui/configwindow/sections/options/birealoption.h \
+		src/gui/configwindow/sections/consoleinfopanel.h \
+		src/gui/configwindow/sections/pluginpanel.h
+	/usr/lib/qt/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.2 -I/usr/lib/gcc/include/c++/4.8.2/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.2/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include-fixed -I/usr/include src/gui/configwindow/sections/pluginpanel.h -o release/moc_pluginpanel.cpp
+
+release/moc_sectionpanel.cpp: /usr/include/qt/QtWidgets/QGroupBox \
 		/usr/include/qt/QtWidgets/qgroupbox.h \
 		/usr/include/qt/QtWidgets/qframe.h \
 		/usr/include/qt/QtWidgets/qwidget.h \
@@ -2445,193 +2785,8 @@ release/moc_panelsection.cpp: /usr/include/qt/QtWidgets/QGroupBox \
 		/usr/include/qt/QtCore/qabstractitemmodel.h \
 		src/gui/configwindow/sections/options/biintegeroption.h \
 		src/gui/configwindow/sections/options/birealoption.h \
-		src/gui/configwindow/sections/panelsection.h
-	/usr/lib/qt/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.2 -I/usr/lib/gcc/include/c++/4.8.2/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.2/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include-fixed -I/usr/include src/gui/configwindow/sections/panelsection.h -o release/moc_panelsection.cpp
-
-release/moc_pluginpanel.cpp: /usr/include/qt/QtWidgets/QWidget \
-		/usr/include/qt/QtWidgets/qwidget.h \
-		/usr/include/qt/QtGui/qwindowdefs.h \
-		/usr/include/qt/QtCore/qglobal.h \
-		/usr/include/qt/QtCore/qconfig.h \
-		/usr/include/qt/QtCore/qfeatures.h \
-		/usr/include/qt/QtCore/qsystemdetection.h \
-		/usr/include/qt/QtCore/qprocessordetection.h \
-		/usr/include/qt/QtCore/qcompilerdetection.h \
-		/usr/include/qt/QtCore/qglobalstatic.h \
-		/usr/include/qt/QtCore/qatomic.h \
-		/usr/include/qt/QtCore/qbasicatomic.h \
-		/usr/include/qt/QtCore/qatomic_bootstrap.h \
-		/usr/include/qt/QtCore/qgenericatomic.h \
-		/usr/include/qt/QtCore/qatomic_msvc.h \
-		/usr/include/qt/QtCore/qatomic_integrity.h \
-		/usr/include/qt/QtCore/qoldbasicatomic.h \
-		/usr/include/qt/QtCore/qatomic_vxworks.h \
-		/usr/include/qt/QtCore/qatomic_power.h \
-		/usr/include/qt/QtCore/qatomic_alpha.h \
-		/usr/include/qt/QtCore/qatomic_armv7.h \
-		/usr/include/qt/QtCore/qatomic_armv6.h \
-		/usr/include/qt/QtCore/qatomic_armv5.h \
-		/usr/include/qt/QtCore/qatomic_bfin.h \
-		/usr/include/qt/QtCore/qatomic_ia64.h \
-		/usr/include/qt/QtCore/qatomic_mips.h \
-		/usr/include/qt/QtCore/qatomic_s390.h \
-		/usr/include/qt/QtCore/qatomic_sh4a.h \
-		/usr/include/qt/QtCore/qatomic_sparc.h \
-		/usr/include/qt/QtCore/qatomic_x86.h \
-		/usr/include/qt/QtCore/qatomic_cxx11.h \
-		/usr/include/qt/QtCore/qatomic_gcc.h \
-		/usr/include/qt/QtCore/qatomic_unix.h \
-		/usr/include/qt/QtCore/qmutex.h \
-		/usr/include/qt/QtCore/qlogging.h \
-		/usr/include/qt/QtCore/qflags.h \
-		/usr/include/qt/QtCore/qtypeinfo.h \
-		/usr/include/qt/QtCore/qtypetraits.h \
-		/usr/include/qt/QtCore/qsysinfo.h \
-		/usr/include/qt/QtCore/qobjectdefs.h \
-		/usr/include/qt/QtCore/qnamespace.h \
-		/usr/include/qt/QtCore/qobjectdefs_impl.h \
-		/usr/include/qt/QtGui/qwindowdefs_win.h \
-		/usr/include/qt/QtCore/qobject.h \
-		/usr/include/qt/QtCore/qstring.h \
-		/usr/include/qt/QtCore/qchar.h \
-		/usr/include/qt/QtCore/qbytearray.h \
-		/usr/include/qt/QtCore/qrefcount.h \
-		/usr/include/qt/QtCore/qarraydata.h \
-		/usr/include/qt/QtCore/qstringbuilder.h \
-		/usr/include/qt/QtCore/qlist.h \
-		/usr/include/qt/QtCore/qalgorithms.h \
-		/usr/include/qt/QtCore/qiterator.h \
-		/usr/include/qt/QtCore/qcoreevent.h \
-		/usr/include/qt/QtCore/qscopedpointer.h \
-		/usr/include/qt/QtCore/qmetatype.h \
-		/usr/include/qt/QtCore/qvarlengtharray.h \
-		/usr/include/qt/QtCore/qcontainerfwd.h \
-		/usr/include/qt/QtCore/qisenum.h \
-		/usr/include/qt/QtCore/qobject_impl.h \
-		/usr/include/qt/QtCore/qmargins.h \
-		/usr/include/qt/QtCore/qrect.h \
-		/usr/include/qt/QtCore/qsize.h \
-		/usr/include/qt/QtCore/qpoint.h \
-		/usr/include/qt/QtGui/qpaintdevice.h \
-		/usr/include/qt/QtGui/qpalette.h \
-		/usr/include/qt/QtGui/qcolor.h \
-		/usr/include/qt/QtGui/qrgb.h \
-		/usr/include/qt/QtCore/qstringlist.h \
-		/usr/include/qt/QtCore/qdatastream.h \
-		/usr/include/qt/QtCore/qiodevice.h \
-		/usr/include/qt/QtCore/qpair.h \
-		/usr/include/qt/QtCore/qregexp.h \
-		/usr/include/qt/QtCore/qstringmatcher.h \
-		/usr/include/qt/QtGui/qbrush.h \
-		/usr/include/qt/QtCore/qvector.h \
-		/usr/include/qt/QtGui/qmatrix.h \
-		/usr/include/qt/QtGui/qpolygon.h \
-		/usr/include/qt/QtGui/qregion.h \
-		/usr/include/qt/QtCore/qline.h \
-		/usr/include/qt/QtGui/qtransform.h \
-		/usr/include/qt/QtGui/qpainterpath.h \
-		/usr/include/qt/QtGui/qimage.h \
-		/usr/include/qt/QtGui/qpixmap.h \
-		/usr/include/qt/QtCore/qsharedpointer.h \
-		/usr/include/qt/QtCore/qshareddata.h \
-		/usr/include/qt/QtCore/qsharedpointer_impl.h \
-		/usr/include/qt/QtCore/qhash.h \
-		/usr/include/qt/QtGui/qfont.h \
-		/usr/include/qt/QtGui/qfontmetrics.h \
-		/usr/include/qt/QtGui/qfontinfo.h \
-		/usr/include/qt/QtWidgets/qsizepolicy.h \
-		/usr/include/qt/QtGui/qcursor.h \
-		/usr/include/qt/QtGui/qkeysequence.h \
-		/usr/include/qt/QtGui/qevent.h \
-		/usr/include/qt/QtCore/qvariant.h \
-		/usr/include/qt/QtCore/qmap.h \
-		/usr/include/qt/QtCore/qdebug.h \
-		/usr/include/qt/QtCore/qtextstream.h \
-		/usr/include/qt/QtCore/qlocale.h \
-		/usr/include/qt/QtCore/qset.h \
-		/usr/include/qt/QtCore/qcontiguouscache.h \
-		/usr/include/qt/QtCore/qurl.h \
-		/usr/include/qt/QtCore/qurlquery.h \
-		/usr/include/qt/QtCore/qfile.h \
-		/usr/include/qt/QtCore/qfiledevice.h \
-		/usr/include/qt/QtGui/qvector2d.h \
-		/usr/include/qt/QtGui/qtouchdevice.h \
-		/usr/include/qt/QtWidgets/QVBoxLayout \
-		/usr/include/qt/QtWidgets/qboxlayout.h \
-		/usr/include/qt/QtWidgets/qlayout.h \
-		/usr/include/qt/QtWidgets/qlayoutitem.h \
-		/usr/include/qt/QtWidgets/qgridlayout.h \
-		/usr/include/qt/QtWidgets/QTabWidget \
-		/usr/include/qt/QtWidgets/qtabwidget.h \
-		/usr/include/qt/QtGui/qicon.h \
-		src/base/base.h \
-		src/base/configuration/configuration.h \
-		/usr/include/qt/QtCore/QObject \
-		/usr/include/qt/QtCore/QSettings \
-		/usr/include/qt/QtCore/qsettings.h \
-		/usr/include/qt/QtCore/QString \
-		src/base/keys.h \
-		src/base/text/text.h \
-		/usr/include/qt/QtCore/QMap \
-		/usr/include/qt/QtCore/QFile \
-		/usr/include/qt/QtCore/QStringList \
-		/usr/include/qt/QtCore/QDebug \
-		src/base/sharedcomponents/sharedcomponents.h \
-		src/base/pluginmanager/pluginmanager.h \
-		/usr/include/qt/QtCore/QVector \
-		/usr/include/qt/QtCore/QDir \
-		/usr/include/qt/QtCore/qdir.h \
-		/usr/include/qt/QtCore/qfileinfo.h \
-		src/base/pluginmanager/plugin/plugin.h \
-		/usr/include/qt/QtCore/QList \
-		src/base/pluginmanager/plugin/blocks/plugininfo.h \
-		src/base/pluginmanager/plugin/blocks/pluginsection.h \
-		src/base/pluginmanager/plugin/blocks/pluginoption.h \
-		src/base/pluginmanager/plugin/blocks/options/optioninteger.h \
-		src/base/pluginmanager/plugin/blocks/options/optionreal.h \
-		src/base/pluginmanager/plugin/blocks/options/optionenum.h \
-		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
-		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
-		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
-		src/gui/configwindow/sections/panelcategory.h \
-		/usr/include/qt/QtWidgets/QScrollArea \
-		/usr/include/qt/QtWidgets/qscrollarea.h \
-		/usr/include/qt/QtWidgets/qabstractscrollarea.h \
-		/usr/include/qt/QtWidgets/qframe.h \
-		/usr/include/qt/QtCore/QEvent \
-		src/gui/configwindow/sections/panelsection.h \
-		/usr/include/qt/QtWidgets/QGroupBox \
-		/usr/include/qt/QtWidgets/qgroupbox.h \
-		src/gui/configwindow/sections/options/integeroption.h \
-		/usr/include/qt/QtWidgets/QHBoxLayout \
-		/usr/include/qt/QtWidgets/QLabel \
-		/usr/include/qt/QtWidgets/qlabel.h \
-		/usr/include/qt/QtWidgets/QSpinBox \
-		/usr/include/qt/QtWidgets/qspinbox.h \
-		/usr/include/qt/QtWidgets/qabstractspinbox.h \
-		/usr/include/qt/QtGui/qvalidator.h \
-		/usr/include/qt/QtCore/qregularexpression.h \
-		src/gui/configwindow/sections/options/realoption.h \
-		/usr/include/qt/QtWidgets/QDoubleSpinBox \
-		src/gui/configwindow/sections/options/booleanoption.h \
-		/usr/include/qt/QtWidgets/QCheckBox \
-		/usr/include/qt/QtWidgets/qcheckbox.h \
-		/usr/include/qt/QtWidgets/qabstractbutton.h \
-		src/gui/configwindow/sections/options/enumoption.h \
-		/usr/include/qt/QtWidgets/QComboBox \
-		/usr/include/qt/QtWidgets/qcombobox.h \
-		/usr/include/qt/QtWidgets/qabstractitemdelegate.h \
-		/usr/include/qt/QtWidgets/qstyleoption.h \
-		/usr/include/qt/QtWidgets/qslider.h \
-		/usr/include/qt/QtWidgets/qabstractslider.h \
-		/usr/include/qt/QtWidgets/qstyle.h \
-		/usr/include/qt/QtWidgets/qtabbar.h \
-		/usr/include/qt/QtWidgets/qrubberband.h \
-		/usr/include/qt/QtCore/qabstractitemmodel.h \
-		src/gui/configwindow/sections/options/biintegeroption.h \
-		src/gui/configwindow/sections/options/birealoption.h \
-		src/gui/configwindow/sections/pluginpanel.h
-	/usr/lib/qt/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.2 -I/usr/lib/gcc/include/c++/4.8.2/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.2/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include-fixed -I/usr/include src/gui/configwindow/sections/pluginpanel.h -o release/moc_pluginpanel.cpp
+		src/gui/configwindow/sections/sectionpanel.h
+	/usr/lib/qt/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.2 -I/usr/lib/gcc/include/c++/4.8.2/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.2/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.2/include-fixed -I/usr/include src/gui/configwindow/sections/sectionpanel.h -o release/moc_sectionpanel.cpp
 
 release/moc_systempanel.cpp: /usr/include/qt/QtWidgets/QWidget \
 		/usr/include/qt/QtWidgets/qwidget.h \
@@ -5432,12 +5587,12 @@ release/main.o: src/main.cc /usr/include/qt/QtWidgets/QApplication \
 		/usr/include/qt/QtWidgets/QTabWidget \
 		src/gui/configwindow/sections/systempanel.h \
 		src/gui/configwindow/sections/pluginpanel.h \
-		src/gui/configwindow/sections/panelcategory.h \
+		src/gui/configwindow/sections/categorypanel.h \
 		/usr/include/qt/QtWidgets/QScrollArea \
 		/usr/include/qt/QtWidgets/qscrollarea.h \
 		/usr/include/qt/QtWidgets/qabstractscrollarea.h \
 		/usr/include/qt/QtCore/QEvent \
-		src/gui/configwindow/sections/panelsection.h \
+		src/gui/configwindow/sections/sectionpanel.h \
 		src/gui/configwindow/sections/options/integeroption.h \
 		/usr/include/qt/QtWidgets/QSpinBox \
 		/usr/include/qt/QtWidgets/qspinbox.h \
@@ -5462,6 +5617,7 @@ release/main.o: src/main.cc /usr/include/qt/QtWidgets/QApplication \
 		/usr/include/qt/QtCore/qabstractitemmodel.h \
 		src/gui/configwindow/sections/options/biintegeroption.h \
 		src/gui/configwindow/sections/options/birealoption.h \
+		src/gui/configwindow/sections/consoleinfopanel.h \
 		src/gui/aboutwindow/aboutwindow.h \
 		src/gui/aboutwindow/panels/aboutpanel.h \
 		src/gui/aboutwindow/panels/creditspanel.h \
@@ -6262,13 +6418,13 @@ release/configwindow.o: src/gui/configwindow/configwindow.cc src/gui/configwindo
 		src/gui/configwindow/sections/systempanel.h \
 		/usr/include/qt/QtWidgets/QWidget \
 		src/gui/configwindow/sections/pluginpanel.h \
-		src/gui/configwindow/sections/panelcategory.h \
+		src/gui/configwindow/sections/categorypanel.h \
 		/usr/include/qt/QtWidgets/QScrollArea \
 		/usr/include/qt/QtWidgets/qscrollarea.h \
 		/usr/include/qt/QtWidgets/qabstractscrollarea.h \
 		/usr/include/qt/QtWidgets/qframe.h \
 		/usr/include/qt/QtCore/QEvent \
-		src/gui/configwindow/sections/panelsection.h \
+		src/gui/configwindow/sections/sectionpanel.h \
 		/usr/include/qt/QtWidgets/QGroupBox \
 		/usr/include/qt/QtWidgets/qgroupbox.h \
 		src/gui/configwindow/sections/options/integeroption.h \
@@ -6298,7 +6454,8 @@ release/configwindow.o: src/gui/configwindow/configwindow.cc src/gui/configwindo
 		/usr/include/qt/QtWidgets/qrubberband.h \
 		/usr/include/qt/QtCore/qabstractitemmodel.h \
 		src/gui/configwindow/sections/options/biintegeroption.h \
-		src/gui/configwindow/sections/options/birealoption.h
+		src/gui/configwindow/sections/options/birealoption.h \
+		src/gui/configwindow/sections/consoleinfopanel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/configwindow.o src/gui/configwindow/configwindow.cc
 
 release/mainwindow.o: src/gui/mainwindow/mainwindow.cc src/gui/mainwindow/mainwindow.h \
@@ -7162,7 +7319,7 @@ release/licensepanel.o: src/gui/aboutwindow/panels/licensepanel.cc src/gui/about
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/licensepanel.o src/gui/aboutwindow/panels/licensepanel.cc
 
-release/panelcategory.o: src/gui/configwindow/sections/panelcategory.cc src/gui/configwindow/sections/panelcategory.h \
+release/categorypanel.o: src/gui/configwindow/sections/categorypanel.cc src/gui/configwindow/sections/categorypanel.h \
 		/usr/include/qt/QtWidgets/QWidget \
 		/usr/include/qt/QtWidgets/qwidget.h \
 		/usr/include/qt/QtGui/qwindowdefs.h \
@@ -7310,7 +7467,7 @@ release/panelcategory.o: src/gui/configwindow/sections/panelcategory.cc src/gui/
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
-		src/gui/configwindow/sections/panelsection.h \
+		src/gui/configwindow/sections/sectionpanel.h \
 		/usr/include/qt/QtWidgets/QGroupBox \
 		/usr/include/qt/QtWidgets/qgroupbox.h \
 		src/gui/configwindow/sections/options/integeroption.h \
@@ -7343,12 +7500,10 @@ release/panelcategory.o: src/gui/configwindow/sections/panelcategory.cc src/gui/
 		/usr/include/qt/QtCore/qabstractitemmodel.h \
 		src/gui/configwindow/sections/options/biintegeroption.h \
 		src/gui/configwindow/sections/options/birealoption.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/panelcategory.o src/gui/configwindow/sections/panelcategory.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/categorypanel.o src/gui/configwindow/sections/categorypanel.cc
 
-release/panelsection.o: src/gui/configwindow/sections/panelsection.cc src/gui/configwindow/sections/panelsection.h \
-		/usr/include/qt/QtWidgets/QGroupBox \
-		/usr/include/qt/QtWidgets/qgroupbox.h \
-		/usr/include/qt/QtWidgets/qframe.h \
+release/consoleinfopanel.o: src/gui/configwindow/sections/consoleinfopanel.cc src/gui/configwindow/sections/consoleinfopanel.h \
+		/usr/include/qt/QtWidgets/QWidget \
 		/usr/include/qt/QtWidgets/qwidget.h \
 		/usr/include/qt/QtGui/qwindowdefs.h \
 		/usr/include/qt/QtCore/qglobal.h \
@@ -7456,11 +7611,15 @@ release/panelsection.o: src/gui/configwindow/sections/panelsection.cc src/gui/co
 		/usr/include/qt/QtCore/qfiledevice.h \
 		/usr/include/qt/QtGui/qvector2d.h \
 		/usr/include/qt/QtGui/qtouchdevice.h \
-		/usr/include/qt/QtWidgets/QVBoxLayout \
+		/usr/include/qt/QtWidgets/QHBoxLayout \
 		/usr/include/qt/QtWidgets/qboxlayout.h \
 		/usr/include/qt/QtWidgets/qlayout.h \
 		/usr/include/qt/QtWidgets/qlayoutitem.h \
 		/usr/include/qt/QtWidgets/qgridlayout.h \
+		/usr/include/qt/QtWidgets/QVBoxLayout \
+		/usr/include/qt/QtWidgets/QLabel \
+		/usr/include/qt/QtWidgets/qlabel.h \
+		/usr/include/qt/QtWidgets/qframe.h \
 		src/base/base.h \
 		src/base/configuration/configuration.h \
 		/usr/include/qt/QtCore/QObject \
@@ -7489,39 +7648,8 @@ release/panelsection.o: src/gui/configwindow/sections/panelsection.cc src/gui/co
 		src/base/pluginmanager/plugin/blocks/options/optionenum.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
-		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
-		src/gui/configwindow/sections/options/integeroption.h \
-		/usr/include/qt/QtWidgets/QWidget \
-		/usr/include/qt/QtWidgets/QHBoxLayout \
-		/usr/include/qt/QtWidgets/QLabel \
-		/usr/include/qt/QtWidgets/qlabel.h \
-		/usr/include/qt/QtWidgets/QSpinBox \
-		/usr/include/qt/QtWidgets/qspinbox.h \
-		/usr/include/qt/QtWidgets/qabstractspinbox.h \
-		/usr/include/qt/QtGui/qvalidator.h \
-		/usr/include/qt/QtCore/qregularexpression.h \
-		src/gui/configwindow/sections/options/realoption.h \
-		/usr/include/qt/QtWidgets/QDoubleSpinBox \
-		src/gui/configwindow/sections/options/booleanoption.h \
-		/usr/include/qt/QtWidgets/QCheckBox \
-		/usr/include/qt/QtWidgets/qcheckbox.h \
-		/usr/include/qt/QtWidgets/qabstractbutton.h \
-		/usr/include/qt/QtGui/qicon.h \
-		src/gui/configwindow/sections/options/enumoption.h \
-		/usr/include/qt/QtWidgets/QComboBox \
-		/usr/include/qt/QtWidgets/qcombobox.h \
-		/usr/include/qt/QtWidgets/qabstractitemdelegate.h \
-		/usr/include/qt/QtWidgets/qstyleoption.h \
-		/usr/include/qt/QtWidgets/qslider.h \
-		/usr/include/qt/QtWidgets/qabstractslider.h \
-		/usr/include/qt/QtWidgets/qstyle.h \
-		/usr/include/qt/QtWidgets/qtabbar.h \
-		/usr/include/qt/QtWidgets/qtabwidget.h \
-		/usr/include/qt/QtWidgets/qrubberband.h \
-		/usr/include/qt/QtCore/qabstractitemmodel.h \
-		src/gui/configwindow/sections/options/biintegeroption.h \
-		src/gui/configwindow/sections/options/birealoption.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/panelsection.o src/gui/configwindow/sections/panelsection.cc
+		src/base/pluginmanager/plugin/blocks/options/optionboolean.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/consoleinfopanel.o src/gui/configwindow/sections/consoleinfopanel.cc
 
 release/pluginpanel.o: src/gui/configwindow/sections/pluginpanel.cc src/gui/configwindow/sections/pluginpanel.h \
 		/usr/include/qt/QtWidgets/QWidget \
@@ -7669,13 +7797,13 @@ release/pluginpanel.o: src/gui/configwindow/sections/pluginpanel.cc src/gui/conf
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
-		src/gui/configwindow/sections/panelcategory.h \
+		src/gui/configwindow/sections/categorypanel.h \
 		/usr/include/qt/QtWidgets/QScrollArea \
 		/usr/include/qt/QtWidgets/qscrollarea.h \
 		/usr/include/qt/QtWidgets/qabstractscrollarea.h \
 		/usr/include/qt/QtWidgets/qframe.h \
 		/usr/include/qt/QtCore/QEvent \
-		src/gui/configwindow/sections/panelsection.h \
+		src/gui/configwindow/sections/sectionpanel.h \
 		/usr/include/qt/QtWidgets/QGroupBox \
 		/usr/include/qt/QtWidgets/qgroupbox.h \
 		src/gui/configwindow/sections/options/integeroption.h \
@@ -7705,8 +7833,187 @@ release/pluginpanel.o: src/gui/configwindow/sections/pluginpanel.cc src/gui/conf
 		/usr/include/qt/QtWidgets/qrubberband.h \
 		/usr/include/qt/QtCore/qabstractitemmodel.h \
 		src/gui/configwindow/sections/options/biintegeroption.h \
-		src/gui/configwindow/sections/options/birealoption.h
+		src/gui/configwindow/sections/options/birealoption.h \
+		src/gui/configwindow/sections/consoleinfopanel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/pluginpanel.o src/gui/configwindow/sections/pluginpanel.cc
+
+release/sectionpanel.o: src/gui/configwindow/sections/sectionpanel.cc src/gui/configwindow/sections/sectionpanel.h \
+		/usr/include/qt/QtWidgets/QGroupBox \
+		/usr/include/qt/QtWidgets/qgroupbox.h \
+		/usr/include/qt/QtWidgets/qframe.h \
+		/usr/include/qt/QtWidgets/qwidget.h \
+		/usr/include/qt/QtGui/qwindowdefs.h \
+		/usr/include/qt/QtCore/qglobal.h \
+		/usr/include/qt/QtCore/qconfig.h \
+		/usr/include/qt/QtCore/qfeatures.h \
+		/usr/include/qt/QtCore/qsystemdetection.h \
+		/usr/include/qt/QtCore/qprocessordetection.h \
+		/usr/include/qt/QtCore/qcompilerdetection.h \
+		/usr/include/qt/QtCore/qglobalstatic.h \
+		/usr/include/qt/QtCore/qatomic.h \
+		/usr/include/qt/QtCore/qbasicatomic.h \
+		/usr/include/qt/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt/QtCore/qgenericatomic.h \
+		/usr/include/qt/QtCore/qatomic_msvc.h \
+		/usr/include/qt/QtCore/qatomic_integrity.h \
+		/usr/include/qt/QtCore/qoldbasicatomic.h \
+		/usr/include/qt/QtCore/qatomic_vxworks.h \
+		/usr/include/qt/QtCore/qatomic_power.h \
+		/usr/include/qt/QtCore/qatomic_alpha.h \
+		/usr/include/qt/QtCore/qatomic_armv7.h \
+		/usr/include/qt/QtCore/qatomic_armv6.h \
+		/usr/include/qt/QtCore/qatomic_armv5.h \
+		/usr/include/qt/QtCore/qatomic_bfin.h \
+		/usr/include/qt/QtCore/qatomic_ia64.h \
+		/usr/include/qt/QtCore/qatomic_mips.h \
+		/usr/include/qt/QtCore/qatomic_s390.h \
+		/usr/include/qt/QtCore/qatomic_sh4a.h \
+		/usr/include/qt/QtCore/qatomic_sparc.h \
+		/usr/include/qt/QtCore/qatomic_x86.h \
+		/usr/include/qt/QtCore/qatomic_cxx11.h \
+		/usr/include/qt/QtCore/qatomic_gcc.h \
+		/usr/include/qt/QtCore/qatomic_unix.h \
+		/usr/include/qt/QtCore/qmutex.h \
+		/usr/include/qt/QtCore/qlogging.h \
+		/usr/include/qt/QtCore/qflags.h \
+		/usr/include/qt/QtCore/qtypeinfo.h \
+		/usr/include/qt/QtCore/qtypetraits.h \
+		/usr/include/qt/QtCore/qsysinfo.h \
+		/usr/include/qt/QtCore/qobjectdefs.h \
+		/usr/include/qt/QtCore/qnamespace.h \
+		/usr/include/qt/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt/QtGui/qwindowdefs_win.h \
+		/usr/include/qt/QtCore/qobject.h \
+		/usr/include/qt/QtCore/qstring.h \
+		/usr/include/qt/QtCore/qchar.h \
+		/usr/include/qt/QtCore/qbytearray.h \
+		/usr/include/qt/QtCore/qrefcount.h \
+		/usr/include/qt/QtCore/qarraydata.h \
+		/usr/include/qt/QtCore/qstringbuilder.h \
+		/usr/include/qt/QtCore/qlist.h \
+		/usr/include/qt/QtCore/qalgorithms.h \
+		/usr/include/qt/QtCore/qiterator.h \
+		/usr/include/qt/QtCore/qcoreevent.h \
+		/usr/include/qt/QtCore/qscopedpointer.h \
+		/usr/include/qt/QtCore/qmetatype.h \
+		/usr/include/qt/QtCore/qvarlengtharray.h \
+		/usr/include/qt/QtCore/qcontainerfwd.h \
+		/usr/include/qt/QtCore/qisenum.h \
+		/usr/include/qt/QtCore/qobject_impl.h \
+		/usr/include/qt/QtCore/qmargins.h \
+		/usr/include/qt/QtCore/qrect.h \
+		/usr/include/qt/QtCore/qsize.h \
+		/usr/include/qt/QtCore/qpoint.h \
+		/usr/include/qt/QtGui/qpaintdevice.h \
+		/usr/include/qt/QtGui/qpalette.h \
+		/usr/include/qt/QtGui/qcolor.h \
+		/usr/include/qt/QtGui/qrgb.h \
+		/usr/include/qt/QtCore/qstringlist.h \
+		/usr/include/qt/QtCore/qdatastream.h \
+		/usr/include/qt/QtCore/qiodevice.h \
+		/usr/include/qt/QtCore/qpair.h \
+		/usr/include/qt/QtCore/qregexp.h \
+		/usr/include/qt/QtCore/qstringmatcher.h \
+		/usr/include/qt/QtGui/qbrush.h \
+		/usr/include/qt/QtCore/qvector.h \
+		/usr/include/qt/QtGui/qmatrix.h \
+		/usr/include/qt/QtGui/qpolygon.h \
+		/usr/include/qt/QtGui/qregion.h \
+		/usr/include/qt/QtCore/qline.h \
+		/usr/include/qt/QtGui/qtransform.h \
+		/usr/include/qt/QtGui/qpainterpath.h \
+		/usr/include/qt/QtGui/qimage.h \
+		/usr/include/qt/QtGui/qpixmap.h \
+		/usr/include/qt/QtCore/qsharedpointer.h \
+		/usr/include/qt/QtCore/qshareddata.h \
+		/usr/include/qt/QtCore/qsharedpointer_impl.h \
+		/usr/include/qt/QtCore/qhash.h \
+		/usr/include/qt/QtGui/qfont.h \
+		/usr/include/qt/QtGui/qfontmetrics.h \
+		/usr/include/qt/QtGui/qfontinfo.h \
+		/usr/include/qt/QtWidgets/qsizepolicy.h \
+		/usr/include/qt/QtGui/qcursor.h \
+		/usr/include/qt/QtGui/qkeysequence.h \
+		/usr/include/qt/QtGui/qevent.h \
+		/usr/include/qt/QtCore/qvariant.h \
+		/usr/include/qt/QtCore/qmap.h \
+		/usr/include/qt/QtCore/qdebug.h \
+		/usr/include/qt/QtCore/qtextstream.h \
+		/usr/include/qt/QtCore/qlocale.h \
+		/usr/include/qt/QtCore/qset.h \
+		/usr/include/qt/QtCore/qcontiguouscache.h \
+		/usr/include/qt/QtCore/qurl.h \
+		/usr/include/qt/QtCore/qurlquery.h \
+		/usr/include/qt/QtCore/qfile.h \
+		/usr/include/qt/QtCore/qfiledevice.h \
+		/usr/include/qt/QtGui/qvector2d.h \
+		/usr/include/qt/QtGui/qtouchdevice.h \
+		/usr/include/qt/QtWidgets/QVBoxLayout \
+		/usr/include/qt/QtWidgets/qboxlayout.h \
+		/usr/include/qt/QtWidgets/qlayout.h \
+		/usr/include/qt/QtWidgets/qlayoutitem.h \
+		/usr/include/qt/QtWidgets/qgridlayout.h \
+		src/base/base.h \
+		src/base/configuration/configuration.h \
+		/usr/include/qt/QtCore/QObject \
+		/usr/include/qt/QtCore/QSettings \
+		/usr/include/qt/QtCore/qsettings.h \
+		/usr/include/qt/QtCore/QString \
+		src/base/keys.h \
+		src/base/text/text.h \
+		/usr/include/qt/QtCore/QMap \
+		/usr/include/qt/QtCore/QFile \
+		/usr/include/qt/QtCore/QStringList \
+		/usr/include/qt/QtCore/QDebug \
+		src/base/sharedcomponents/sharedcomponents.h \
+		src/base/pluginmanager/pluginmanager.h \
+		/usr/include/qt/QtCore/QVector \
+		/usr/include/qt/QtCore/QDir \
+		/usr/include/qt/QtCore/qdir.h \
+		/usr/include/qt/QtCore/qfileinfo.h \
+		src/base/pluginmanager/plugin/plugin.h \
+		/usr/include/qt/QtCore/QList \
+		src/base/pluginmanager/plugin/blocks/plugininfo.h \
+		src/base/pluginmanager/plugin/blocks/pluginsection.h \
+		src/base/pluginmanager/plugin/blocks/pluginoption.h \
+		src/base/pluginmanager/plugin/blocks/options/optioninteger.h \
+		src/base/pluginmanager/plugin/blocks/options/optionreal.h \
+		src/base/pluginmanager/plugin/blocks/options/optionenum.h \
+		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
+		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
+		src/gui/configwindow/sections/options/integeroption.h \
+		/usr/include/qt/QtWidgets/QWidget \
+		/usr/include/qt/QtWidgets/QHBoxLayout \
+		/usr/include/qt/QtWidgets/QLabel \
+		/usr/include/qt/QtWidgets/qlabel.h \
+		/usr/include/qt/QtWidgets/QSpinBox \
+		/usr/include/qt/QtWidgets/qspinbox.h \
+		/usr/include/qt/QtWidgets/qabstractspinbox.h \
+		/usr/include/qt/QtGui/qvalidator.h \
+		/usr/include/qt/QtCore/qregularexpression.h \
+		src/gui/configwindow/sections/options/realoption.h \
+		/usr/include/qt/QtWidgets/QDoubleSpinBox \
+		src/gui/configwindow/sections/options/booleanoption.h \
+		/usr/include/qt/QtWidgets/QCheckBox \
+		/usr/include/qt/QtWidgets/qcheckbox.h \
+		/usr/include/qt/QtWidgets/qabstractbutton.h \
+		/usr/include/qt/QtGui/qicon.h \
+		src/gui/configwindow/sections/options/enumoption.h \
+		/usr/include/qt/QtWidgets/QComboBox \
+		/usr/include/qt/QtWidgets/qcombobox.h \
+		/usr/include/qt/QtWidgets/qabstractitemdelegate.h \
+		/usr/include/qt/QtWidgets/qstyleoption.h \
+		/usr/include/qt/QtWidgets/qslider.h \
+		/usr/include/qt/QtWidgets/qabstractslider.h \
+		/usr/include/qt/QtWidgets/qstyle.h \
+		/usr/include/qt/QtWidgets/qtabbar.h \
+		/usr/include/qt/QtWidgets/qtabwidget.h \
+		/usr/include/qt/QtWidgets/qrubberband.h \
+		/usr/include/qt/QtCore/qabstractitemmodel.h \
+		src/gui/configwindow/sections/options/biintegeroption.h \
+		src/gui/configwindow/sections/options/birealoption.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/sectionpanel.o src/gui/configwindow/sections/sectionpanel.cc
 
 release/systempanel.o: src/gui/configwindow/sections/systempanel.cc src/gui/configwindow/sections/systempanel.h \
 		/usr/include/qt/QtWidgets/QWidget \
@@ -10347,14 +10654,17 @@ release/moc_creditspanel.o: release/moc_creditspanel.cpp
 release/moc_licensepanel.o: release/moc_licensepanel.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/moc_licensepanel.o release/moc_licensepanel.cpp
 
-release/moc_panelcategory.o: release/moc_panelcategory.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/moc_panelcategory.o release/moc_panelcategory.cpp
+release/moc_categorypanel.o: release/moc_categorypanel.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/moc_categorypanel.o release/moc_categorypanel.cpp
 
-release/moc_panelsection.o: release/moc_panelsection.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/moc_panelsection.o release/moc_panelsection.cpp
+release/moc_consoleinfopanel.o: release/moc_consoleinfopanel.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/moc_consoleinfopanel.o release/moc_consoleinfopanel.cpp
 
 release/moc_pluginpanel.o: release/moc_pluginpanel.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/moc_pluginpanel.o release/moc_pluginpanel.cpp
+
+release/moc_sectionpanel.o: release/moc_sectionpanel.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/moc_sectionpanel.o release/moc_sectionpanel.cpp
 
 release/moc_systempanel.o: release/moc_systempanel.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/moc_systempanel.o release/moc_systempanel.cpp
