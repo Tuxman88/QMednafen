@@ -30,6 +30,13 @@ Base::PluginOption::~PluginOption ( void )
 {
 }
 
+QString Base::PluginOption::toString ( void )
+{
+   QString option;
+   
+   return ( option );
+}
+
 void Base::PluginOption::autoLoad ( QMap< QString , QString >& values )
 {
    values.size ();

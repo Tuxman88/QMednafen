@@ -112,3 +112,18 @@ QVector< Base::Plugin* >* Base::PluginManager::pluginsLoaded ( void )
 {
    return ( plugins_loaded );
 }
+
+QStringList Base::PluginManager::getOptions ( const QString& file_extention )
+{
+   QStringList options;
+   
+   for ( int i = 0; i < plugins_loaded->size (); i++ )
+   {
+      if ( plugins_loaded->operator[] ( i )->info()->hasExtention ( file_extention ) )
+      {
+         options << plugins_loaded->operator[] ( i )->getOptions ();
+      }
+   }
+   
+   return ( options );
+}

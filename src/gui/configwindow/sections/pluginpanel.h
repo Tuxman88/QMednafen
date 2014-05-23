@@ -47,6 +47,7 @@ namespace Gui
          void addVideoOptions ( void );
          void addAudioOptions ( void );
          void addControlOptions ( void );
+         void addInGameOptions ( void );
          
       private:
          Base::SharedComponents* shared_components;
@@ -58,6 +59,7 @@ namespace Gui
          int video_tab_index;
          int audio_tab_index;
          int controls_tab_index;
+         int ingame_tab_index;
    };
 }
 

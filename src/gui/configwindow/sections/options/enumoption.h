@@ -37,8 +37,12 @@ namespace Gui
          explicit EnumOption ( Base::OptionEnum* new_option );
          virtual ~EnumOption ( void );
          
+      private slots:
+         void updateValue ( const QString& value );
+         
       private:
          void buildGui ( void );
+         void connectAll ( void );
          
       private:
          Base::OptionEnum* option;

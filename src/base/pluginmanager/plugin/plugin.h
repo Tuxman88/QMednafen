@@ -49,6 +49,8 @@ namespace Base
          QList< Base::PluginSection* >* videoOptions ( void );
          QList< Base::PluginSection* >* audioOptions ( void );
          QList< Base::PluginSection* >* controlsOptions ( void );
+         QList< Base::PluginSection* >* inGameOptions ( void );
+         QStringList getOptions ( void );
          
          friend QFile& (::operator>>) ( QFile& input_file , Base::Plugin& plugin );
          
@@ -62,6 +64,7 @@ namespace Base
          QList< Base::PluginSection* >* plugin_audio_options;
          QList< Base::PluginSection* >* plugin_video_options;
          QList< Base::PluginSection* >* plugin_controls_options;
+         QList< Base::PluginSection* >* plugin_ingame_options;
    };
 }
 

@@ -56,6 +56,7 @@ namespace Base
          virtual QString description ( void );
          virtual void autoLoad ( QMap< QString , QString >& values );
          virtual void reset ( void );
+         virtual QString toString ( void );
          
          friend QTextStream& (::operator<<) ( QTextStream& output_file , Base::PluginOption* plugin_option );
          

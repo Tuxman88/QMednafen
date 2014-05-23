@@ -20,6 +20,7 @@
 # ifndef KERNEL_H_
 # define KERNEL_H_
 
+# include <QtWidgets/QFileDialog>
 # include <QtCore/QObject>
 # include <QtCore/QDebug>
 
@@ -52,6 +53,9 @@ namespace Core
          void saveOptions ( void );
          void reloadOptions ( void );
          void resetOptions ( void );
+         
+      private:
+         QString extractExtention ( const QString& name );
          
       private:
          Base::SharedComponents* shared_components;

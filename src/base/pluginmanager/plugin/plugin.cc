@@ -25,6 +25,7 @@ Base::Plugin::Plugin ( void )
    plugin_audio_options = new QList< Base::PluginSection* > ();
    plugin_video_options = new QList< Base::PluginSection* > ();
    plugin_controls_options = new QList< Base::PluginSection* > ();
+   plugin_ingame_options = new QList< Base::PluginSection* > ();
 }
 
 Base::Plugin::~Plugin ( void )
@@ -46,13 +47,47 @@ Base::Plugin::~Plugin ( void )
       delete plugin_controls_options->operator[] ( i );
    }
    
+   for ( int i = 0; i < plugin_ingame_options->size (); i++ )
+   {
+      delete plugin_ingame_options->operator[] ( i );
+   }
+   
    plugin_audio_options->clear ();
    plugin_video_options->clear ();
    plugin_controls_options->clear ();
+   plugin_ingame_options->clear ();
    
    delete plugin_audio_options;
    delete plugin_video_options;
    delete plugin_controls_options;
+   delete plugin_ingame_options;
+}
+
+QStringList Base::Plugin::getOptions ( void )
+{
+   QStringList options;
+   
+   for ( int i = 0; i < plugin_audio_options->size (); i++ )
+   {
+      options << plugin_audio_options->operator[] ( i )->getOptions ();
+   }
+   
+   for ( int i = 0; i < plugin_video_options->size (); i++ )
+   {
+      options << plugin_video_options->operator[] ( i )->getOptions ();;
+   }
+   
+   for ( int i = 0; i < plugin_controls_options->size (); i++ )
+   {
+      options << plugin_controls_options->operator[] ( i )->getOptions ();;
+   }
+   
+   for ( int i = 0; i < plugin_ingame_options->size (); i++ )
+   {
+      options << plugin_ingame_options->operator[] ( i )->getOptions ();;
+   }
+   
+   return ( options );
 }
 
 void Base::Plugin::loadOptions ( void )
@@ -113,6 +148,11 @@ void Base::Plugin::loadOptions ( void )
       {
          plugin_controls_options->operator[] ( i )->autoLoad ( values );
       }
+      
+      for ( int i = 0; i < plugin_ingame_options->size (); i++ )
+      {
+         plugin_ingame_options->operator[] ( i )->autoLoad ( values );
+      }
    }
    
    return;
@@ -144,6 +184,11 @@ void Base::Plugin::saveOptions ( void )
    for ( int i = 0; i < plugin_controls_options->size (); i++ )
    {
       output_file << plugin_controls_options->operator[] ( i );
+   }
+   
+   for ( int i = 0; i < plugin_ingame_options->size (); i++ )
+   {
+      output_file << plugin_ingame_options->operator[] ( i );
    }
    
    return;
@@ -179,6 +224,11 @@ QList< Base::PluginSection* >* Base::Plugin::controlsOptions ( void )
 QList< Base::PluginSection* >* Base::Plugin::videoOptions ( void )
 {
    return ( plugin_video_options );
+}
+
+QList< Base::PluginSection* >* Base::Plugin::inGameOptions ( void )
+{
+   return ( plugin_ingame_options );
 }
 
 QFile& operator>> ( QFile& input_file , Base::Plugin& plugin )
@@ -241,6 +291,8 @@ QFile& operator>> ( QFile& input_file , Base::Plugin& plugin )
                   plugin.plugin_audio_options->append ( new_section );
                else if ( section == "[CONTROLS]" )
                   plugin.plugin_controls_options->append ( new_section );
+               else if ( section == "[INGAME]" )
+                  plugin.plugin_ingame_options->append ( new_section );
                
                // Find the next non-empty line, that is the name of the next section or
                // the [/] signal.

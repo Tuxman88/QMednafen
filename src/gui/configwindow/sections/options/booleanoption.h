@@ -37,8 +37,12 @@ namespace Gui
          explicit BooleanOption ( Base::OptionBoolean* new_option );
          virtual ~BooleanOption ( void );
          
+      private slots:
+         void updateValue ( const int& value );
+         
       private:
          void buildGui ( void );
+         void connectAll ( void );
          
       private:
          Base::OptionBoolean* option;

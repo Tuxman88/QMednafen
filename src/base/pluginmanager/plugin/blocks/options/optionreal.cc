@@ -37,6 +37,15 @@ Base::OptionReal::~OptionReal ( void )
 {
 }
 
+QString Base::OptionReal::toString ( void )
+{
+   QString string_form;
+   
+   string_form = QString ( "-%1 %2" ).arg ( option_command ).arg ( option_current_value );
+   
+   return ( string_form );
+}
+
 void Base::OptionReal::autoLoad ( QMap< QString, QString >& values )
 {
    if ( values.contains ( option_command ) )

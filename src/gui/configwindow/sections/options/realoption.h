@@ -37,8 +37,12 @@ namespace Gui
          explicit RealOption ( Base::OptionReal* new_option );
          virtual ~RealOption ( void );
          
+      private slots:
+         void updateValue ( const double& value );
+         
       private:
          void buildGui ( void );
+         void connectAll ( void );
          
       private:
          Base::OptionReal* option;

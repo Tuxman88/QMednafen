@@ -43,6 +43,7 @@ namespace Base
          bool defaultValue ( void );
          virtual void reset ( void );
          virtual void autoLoad ( QMap< QString , QString >& values );
+         virtual QString toString ( void );
          
       protected:
          virtual void saveOption ( QTextStream& output_file );

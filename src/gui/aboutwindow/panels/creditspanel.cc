@@ -40,10 +40,12 @@ void Gui::CreditsPanel::buildGui ( void )
    author_alexander = new Gui::AuthorSection ( shared_components , "alexander" );
    author_doctorg = new Gui::AuthorSection ( shared_components , "doctorg" );
    author_blueamnesiac = new Gui::AuthorSection ( shared_components , "blueamnesiac" );
+   author_psychotic = new Gui::AuthorSection ( shared_components , "psychotic" );
    
    main_layout->addWidget ( author_alexander );
    main_layout->addWidget ( author_doctorg );
    main_layout->addWidget ( author_blueamnesiac );
+   main_layout->addWidget ( author_psychotic );
    
    return;
 }

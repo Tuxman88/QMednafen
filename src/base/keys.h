@@ -59,50 +59,55 @@ namespace Base
    * Keys about text. (there are just keys, the values are controlled in other place, in the "Text" class).
    */
 
-   const QString KeyTxtProgramName = "txt.program.name";
+   const QString KeyTxtProgramName    = "txt.program.name";
    const QString KeyTxtProgramVersion = "txt.program.version";
-   const QString KeyTxtGuiMenuFile = "txt.gui.menu.file";
-   const QString KeyTxtGuiMenuFileOpenRom = "txt.gui.menu.file.openrom";
+   
+   const QString KeyTxtGuiMenuFile             = "txt.gui.menu.file";
+   const QString KeyTxtGuiMenuFileOpenRom      = "txt.gui.menu.file.openrom";
    const QString KeyTxtGuiMenuFileOpenGameDisc = "txt.gui.menu.file.opengamedisc";
-   const QString KeyTxtGuiMenuFileLibrary = "txt.gui.menu.file.library";
-   const QString KeyTxtGuiMenuFileExit = "txt.gui.menu.file.exit";
-   const QString KeyTxtGuiMenuConfig = "txt.gui.menu.config";
-   const QString KeyTxtGuiMenuConfigConfig = "txt.gui.menu.config.config";
-   const QString KeyTxtGuiMenuHelp = "txt.gui.menu.help";
-   const QString KeyTxtGuiMenuHelpAbout = "txt.gui.menu.help.about";
-   const QString KeyTxtGuiMainVersion = "txt.gui.main.version";
-   const QString KeyTxtGuiMainDescription = "txt.gui.main.description";
-   const QString KeyTxtGuiMainGroupName = "txt.gui.main.groupname";
-   const QString KeyTxtGuiMainOpenRom = "txt.gui.main.openrom";
-   const QString KeyTxtGuiMainOpenGameDisc = "txt.gui.main.opengamedisc";
-   const QString KeyTxtGuiMainConfig = "txt.gui.main.config";
-   const QString KeyTxtGuiMainOpenRomDescription = "txt.gui.main.openromdescription";
+   const QString KeyTxtGuiMenuFileLibrary      = "txt.gui.menu.file.library";
+   const QString KeyTxtGuiMenuFileExit         = "txt.gui.menu.file.exit";
+   const QString KeyTxtGuiMenuConfig           = "txt.gui.menu.config";
+   const QString KeyTxtGuiMenuConfigConfig     = "txt.gui.menu.config.config";
+   const QString KeyTxtGuiMenuHelp             = "txt.gui.menu.help";
+   const QString KeyTxtGuiMenuHelpAbout        = "txt.gui.menu.help.about";
+   
+   const QString KeyTxtGuiMainVersion                 = "txt.gui.main.version";
+   const QString KeyTxtGuiMainDescription             = "txt.gui.main.description";
+   const QString KeyTxtGuiMainGroupName               = "txt.gui.main.groupname";
+   const QString KeyTxtGuiMainOpenRom                 = "txt.gui.main.openrom";
+   const QString KeyTxtGuiMainOpenGameDisc            = "txt.gui.main.opengamedisc";
+   const QString KeyTxtGuiMainConfig                  = "txt.gui.main.config";
+   const QString KeyTxtGuiMainOpenRomDescription      = "txt.gui.main.openromdescription";
    const QString KeyTxtGuiMainOpenGameDiscDescription = "txt.gui.main.opengamediscdescription";
-   const QString KeyTxtGuiMainConfigDescription = "txt.gui.main.configdescription";
-   const QString KeyTxtGuiMainAbout = "txt.gui.main.about";
-   const QString KeyTxtGuiMainExit = "txt.gui.main.exit";
-   const QString KeyTxtGuiMainLibrary = "txt.gui.main.library";
-   const QString KeyTxtGuiMainLibraryDescription = "txt.gui.main.librarydescription";
-   const QString KeyTxtGuiConfigSystemConfig = "txt.gui.config.systemconfig";
-   const QString KeyTxtGuiConfigVideoOptions = "txt.gui.config.videooptions";
-   const QString KeyTxtGuiConfigAudioOptions = "txt.gui.config.audiooptions";
-   const QString KeyTxtGuiConfigControlOptions = "txt.gui.config.controloptions";
-   const QString KeyTxtGuiConfigConsoleName = "txt.gui.config.console.%1";
-   const QString KeyTxtGuiConfigConsoleAuthor = "txt.gui.config.console.author";
-   const QString KeyTxtGuiConfigTitle = "txt.gui.config.title";
-   const QString KeyTxtGuiConfigSave = "txt.gui.config.save";
-   const QString KeyTxtGuiConfigReload = "txt.gui.config.reload";
-   const QString KeyTxtGuiConfigReset = "txt.gui.config.reset";
-   const QString KeyTxtGuiAboutAboutTitle = "txt.gui.about.abouttitle";
-   const QString KeyTxtGuiAboutAboutTab = "txt.gui.about.abouttab";
-   const QString KeyTxtGuiAboutCreditsTab = "txt.gui.about.creditstab";
-   const QString KeyTxtGuiAboutLicenseTab = "txt.gui.about.licensetab";
-   const QString KeyTxtGuiAboutClose = "txt.gui.about.close";
+   const QString KeyTxtGuiMainConfigDescription       = "txt.gui.main.configdescription";
+   const QString KeyTxtGuiMainAbout                   = "txt.gui.main.about";
+   const QString KeyTxtGuiMainExit                    = "txt.gui.main.exit";
+   const QString KeyTxtGuiMainLibrary                 = "txt.gui.main.library";
+   const QString KeyTxtGuiMainLibraryDescription      = "txt.gui.main.librarydescription";
+   
+   const QString KeyTxtGuiConfigSystemConfig          = "txt.gui.config.systemconfig";
+   const QString KeyTxtGuiConfigVideoOptions          = "txt.gui.config.videooptions";
+   const QString KeyTxtGuiConfigAudioOptions          = "txt.gui.config.audiooptions";
+   const QString KeyTxtGuiConfigControlOptions        = "txt.gui.config.controloptions";
+   const QString KeyTxtGuiConfigInGameOptions         = "txt.gui.config.ingameoptions";
+   const QString KeyTxtGuiConfigConsoleName           = "txt.gui.config.console.%1";
+   const QString KeyTxtGuiConfigConsoleAuthor         = "txt.gui.config.console.author";
+   const QString KeyTxtGuiConfigTitle                 = "txt.gui.config.title";
+   const QString KeyTxtGuiConfigSave                  = "txt.gui.config.save";
+   const QString KeyTxtGuiConfigReload                = "txt.gui.config.reload";
+   const QString KeyTxtGuiConfigReset                 = "txt.gui.config.reset";
+   const QString KeyTxtGuiConfigConsolePluginVersion  = "txt.gui.config.console.pluginversion";
+   
+   const QString KeyTxtGuiAboutAboutTitle         = "txt.gui.about.abouttitle";
+   const QString KeyTxtGuiAboutAboutTab           = "txt.gui.about.abouttab";
+   const QString KeyTxtGuiAboutCreditsTab         = "txt.gui.about.creditstab";
+   const QString KeyTxtGuiAboutLicenseTab         = "txt.gui.about.licensetab";
+   const QString KeyTxtGuiAboutClose              = "txt.gui.about.close";
    const QString KeyTxtGuiAboutProgramDescription = "txt.gui.about.programdescription";
-   const QString KeyTxtGuiAboutAuthorName = "txt.gui.about.%1.name";
-   const QString KeyTxtGuiAboutAuthorLink = "txt.gui.about.%1.link";
-   const QString KeyTxtGuiAboutAuthorDescription = "txt.gui.about.%1.thanks";
-   const QString KeyTxtGuiConfigConsolePluginVersion = "txt.gui.config.console.pluginversion";
+   const QString KeyTxtGuiAboutAuthorName         = "txt.gui.about.%1.name";
+   const QString KeyTxtGuiAboutAuthorLink         = "txt.gui.about.%1.link";
+   const QString KeyTxtGuiAboutAuthorDescription  = "txt.gui.about.%1.thanks";
 }
 
 # endif

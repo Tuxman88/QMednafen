@@ -37,6 +37,15 @@ Base::OptionInteger::~OptionInteger ( void )
 {
 }
 
+QString Base::OptionInteger::toString ( void )
+{
+   QString string_form;
+   
+   string_form = QString ( "-%1 %2" ).arg ( option_command ).arg ( option_current_value );
+   
+   return ( string_form );
+}
+
 void Base::OptionInteger::autoLoad ( QMap< QString, QString >& values )
 {
    if ( values.contains ( option_command ) )

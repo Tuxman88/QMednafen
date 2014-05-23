@@ -25,6 +25,7 @@ Gui::RealOption::RealOption ( Base::OptionReal* new_option )
    option = new_option;
    
    buildGui ();
+   connectAll ();
 }
 
 Gui::RealOption::~RealOption ( void )
@@ -46,6 +47,20 @@ void Gui::RealOption::buildGui ( void )
    main_layout->addWidget ( title_label );
    main_layout->addStretch ();
    main_layout->addWidget ( value_spin );
+   
+   return;
+}
+
+void Gui::RealOption::connectAll ( void )
+{
+   connect ( value_spin , SIGNAL ( valueChanged ( double ) ) , this , SLOT ( updateValue ( double ) ) );
+   
+   return;
+}
+
+void Gui::RealOption::updateValue ( const double& value )
+{
+   option->setCurrentValue ( value );
    
    return;
 }

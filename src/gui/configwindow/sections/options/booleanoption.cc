@@ -25,6 +25,7 @@ Gui::BooleanOption::BooleanOption ( Base::OptionBoolean* new_option )
    option = new_option;
    
    buildGui ();
+   connectAll ();
 }
 
 Gui::BooleanOption::~BooleanOption ( void )
@@ -44,6 +45,20 @@ void Gui::BooleanOption::buildGui ( void )
    main_layout->addWidget ( title_label );
    main_layout->addStretch ();
    main_layout->addWidget ( value_check );
+   
+   return;
+}
+
+void Gui::BooleanOption::connectAll ( void )
+{
+   connect ( value_check , SIGNAL ( stateChanged ( int ) ) , this , SLOT ( updateValue ( int ) ) );
+   
+   return;
+}
+
+void Gui::BooleanOption::updateValue ( const int& value )
+{
+   option->setCurrentValue ( value == Qt::Checked );
    
    return;
 }

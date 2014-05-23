@@ -49,6 +49,7 @@ namespace Base
          LoadState load ( QStringList folder_paths );
          void loadValues ( void );
          QVector< Base::Plugin* >* pluginsLoaded ( void );
+         QStringList getOptions ( const QString& file_extention );
          
       private:
          QVector< Base::Plugin* >* plugins_loaded;

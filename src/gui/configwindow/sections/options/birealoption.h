@@ -37,8 +37,13 @@ namespace Gui
          explicit BiRealOption ( Base::OptionBiReal* new_option );
          virtual ~BiRealOption ( void );
          
+      private slots:
+         void updateValueA ( const double& value );
+         void updateValueB ( const double& value );
+         
       private:
          void buildGui ( void );
+         void connectAll ( void );
          
       private:
          Base::OptionBiReal* option;

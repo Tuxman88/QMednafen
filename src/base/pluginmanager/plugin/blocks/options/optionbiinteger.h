@@ -47,6 +47,7 @@ namespace Base
          long int minValue ( void );
          virtual void reset ( void );
          virtual void autoLoadValue ( QMap< QString , QString >& values );
+         virtual QString toString ( void );
          
       protected:
          virtual void saveOption ( QTextStream& output_file );

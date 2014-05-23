@@ -46,6 +46,7 @@ namespace Gui
          Gui::AuthorSection* author_alexander;
          Gui::AuthorSection* author_doctorg;
          Gui::AuthorSection* author_blueamnesiac;
+         Gui::AuthorSection* author_psychotic;
    };
 }
 

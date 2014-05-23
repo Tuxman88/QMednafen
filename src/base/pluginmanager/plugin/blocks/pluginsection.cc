@@ -38,6 +38,18 @@ Base::PluginSection::~PluginSection ( void )
    delete section_options;
 }
 
+QStringList Base::PluginSection::getOptions ( void )
+{
+   QStringList options;
+   
+   for ( int i = 0; i < section_options->size (); i++ )
+   {
+      options << section_options->operator[] ( i )->toString ();
+   }
+   
+   return ( options );
+}
+
 QString Base::PluginSection::name ( void )
 {
    return ( section_name );

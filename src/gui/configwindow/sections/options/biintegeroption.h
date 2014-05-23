@@ -24,6 +24,7 @@
 # include <QtWidgets/QHBoxLayout>
 # include <QtWidgets/QLabel>
 # include <QtWidgets/QSpinBox>
+# include <QtCore/QString>
 
 # include "../../../../base/base.h"
 
@@ -37,8 +38,13 @@ namespace Gui
          explicit BiIntegerOption ( Base::OptionBiInteger* new_option );
          virtual ~BiIntegerOption ( void );
          
+      private slots:
+         void updateValueA ( const int& value );
+         void updateValueB ( const int& value );
+         
       private:
          void buildGui ( void );
+         void connectAll ( void );
          
       private:
          Base::OptionBiInteger* option;

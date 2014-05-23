@@ -120,7 +120,8 @@ QString Gui::ConsoleInfoPanel::getConsoleName ( QString console_code )
         << "psx"
         << "snes"
         << "vb"
-        << "wswan";
+        << "wswan"
+        << "common";
         
    console_code = console_code.toLower ();
    

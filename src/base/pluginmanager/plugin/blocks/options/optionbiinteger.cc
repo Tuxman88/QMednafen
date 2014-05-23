@@ -42,6 +42,18 @@ Base::OptionBiInteger::~OptionBiInteger ( void )
 {
 }
 
+QString Base::OptionBiInteger::toString ( void )
+{
+   QString string_form;
+   
+   string_form = QString ( "-%1 %2 -%3 %4 " ).arg ( option_command_a )
+                                           .arg ( option_current_value_a )
+                                           .arg ( option_command_b )
+                                           .arg ( option_current_value_b );
+   
+   return ( string_form );
+}
+
 void Base::OptionBiInteger::autoLoadValue ( QMap< QString , QString >& values )
 {
    if ( values.contains ( option_command_a ) )

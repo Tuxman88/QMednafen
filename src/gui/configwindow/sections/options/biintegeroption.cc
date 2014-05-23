@@ -25,6 +25,7 @@ Gui::BiIntegerOption::BiIntegerOption ( Base::OptionBiInteger* new_option )
    option = new_option;
    
    buildGui ();
+   connectAll ();
 }
 
 Gui::BiIntegerOption::~BiIntegerOption ( void )
@@ -51,6 +52,28 @@ void Gui::BiIntegerOption::buildGui ( void )
    main_layout->addWidget ( value_spin_a );
    main_layout->addWidget ( separator_label );
    main_layout->addWidget ( value_spin_b );
+   
+   return;
+}
+
+void Gui::BiIntegerOption::connectAll ( void )
+{
+   connect ( value_spin_a , SIGNAL ( valueChanged ( const int& ) ) , this , SLOT ( updateValueA ( const int& ) ) );
+   connect ( value_spin_b , SIGNAL ( valueChanged ( const int& ) ) , this , SLOT ( updateValueB ( const int& ) ) );
+   
+   return;
+}
+
+void Gui::BiIntegerOption::updateValueA ( const int& value )
+{
+   option->setCurrentValues ( value , option->currentValueB () );
+   
+   return;
+}
+
+void Gui::BiIntegerOption::updateValueB ( const int& value )
+{
+   option->setCurrentValues ( option->currentValueA () , value );
    
    return;
 }

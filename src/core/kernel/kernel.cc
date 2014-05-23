@@ -73,6 +73,14 @@ void Core::Kernel::openRom ( void )
 {
    qDebug () << "Kernel: Opening ROM";
    
+   QString selected_file = QFileDialog::getOpenFileName ( 0 , "Prueba1" , "" );
+   
+   qDebug () << "Kernel: File to open: " << selected_file;
+   
+   QStringList emulator_options = shared_components->plugins ()->getOptions ( extractExtention ( selected_file ) );
+   
+   qDebug () << "Kernel: Emulator options: " << emulator_options;
+   
    return;
 }
 
@@ -96,3 +104,15 @@ void Core::Kernel::saveOptions ( void )
    
    return;
 }
+
+QString Core::Kernel::extractExtention ( const QString& name )
+{
+   QString extention;
+   QStringList pieces;
+   
+   pieces = name.split ( "." );
+   extention = pieces[ pieces.size () - 1 ];
+   
+   return ( extention );
+}
+

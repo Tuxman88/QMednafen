@@ -25,6 +25,7 @@ Gui::BiRealOption::BiRealOption ( Base::OptionBiReal* new_option )
    option = new_option;
    
    buildGui ();
+   connectAll ();
 }
 
 Gui::BiRealOption::~BiRealOption ( void )
@@ -53,6 +54,28 @@ void Gui::BiRealOption::buildGui ( void )
    main_layout->addWidget ( value_spin_a );
    main_layout->addWidget ( separator_label );
    main_layout->addWidget ( value_spin_b );
+   
+   return;
+}
+
+void Gui::BiRealOption::connectAll ( void )
+{
+   connect ( value_spin_a , SIGNAL ( valueChanged ( double ) ) , this , SLOT ( updateValueA ( const double& ) ) );
+   connect ( value_spin_b , SIGNAL ( valueChanged ( double ) ) , this , SLOT ( updateValueB ( const double& ) ) );
+   
+   return;
+}
+
+void Gui::BiRealOption::updateValueA ( const double& value )
+{
+   option->setCurrentValues ( value , option->currentValueB () );
+   
+   return;
+}
+
+void Gui::BiRealOption::updateValueB ( const double& value )
+{
+   option->setCurrentValues ( option->currentValueA () , value );
    
    return;
 }

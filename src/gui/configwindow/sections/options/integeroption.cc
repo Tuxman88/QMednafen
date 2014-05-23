@@ -25,6 +25,7 @@ Gui::IntegerOption::IntegerOption ( Base::OptionInteger* new_option )
    option = new_option;
    
    buildGui ();
+   connectAll ();
 }
 
 Gui::IntegerOption::~IntegerOption ( void )
@@ -45,6 +46,20 @@ void Gui::IntegerOption::buildGui ( void )
    main_layout->addWidget ( title_label );
    main_layout->addStretch ();
    main_layout->addWidget ( value_spin );
+   
+   return;
+}
+
+void Gui::IntegerOption::connectAll ( void )
+{
+   connect ( value_spin , SIGNAL ( valueChanged ( int ) ) , this , SLOT ( updateValue ( int ) ) );
+   
+   return;
+}
+
+void Gui::IntegerOption::updateValue ( const int& value )
+{
+   option->setCurrentValue ( value );
    
    return;
 }

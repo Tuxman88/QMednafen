@@ -45,6 +45,7 @@ void Gui::PluginPanel::updateText ( void )
    tab_widgets->setTabText ( audio_tab_index    , shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigAudioOptions ) );
    tab_widgets->setTabText ( controls_tab_index , shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigControlOptions ) );
    tab_widgets->setTabText ( video_tab_index    , shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigVideoOptions ) );
+   tab_widgets->setTabText ( ingame_tab_index   , shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigInGameOptions ) );
    
    return;
 }
@@ -75,6 +76,11 @@ void Gui::PluginPanel::buildGui ( void )
       addControlOptions ();
    }
    
+   if ( plugin->inGameOptions ()->size () > 0 )
+   {
+      addInGameOptions ();
+   }
+   
    return;
 }
 
@@ -101,6 +107,15 @@ void Gui::PluginPanel::addControlOptions ( void )
    Gui::CategoryPanel* category;
    category = new Gui::CategoryPanel ( plugin->controlsOptions () );
    controls_tab_index = tab_widgets->addTab ( category , shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigControlOptions ) );
+   
+   return;
+}
+
+void Gui::PluginPanel::addInGameOptions ( void )
+{
+   Gui::CategoryPanel* category;
+   category = new Gui::CategoryPanel ( plugin->inGameOptions () );
+   ingame_tab_index = tab_widgets->addTab ( category , shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigInGameOptions ) );
    
    return;
 }

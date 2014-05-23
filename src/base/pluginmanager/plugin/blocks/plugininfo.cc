@@ -34,6 +34,11 @@ Base::PluginInfo::~PluginInfo(void)
 {
 }
 
+QStringList Base::PluginInfo::extentions ( void ) const
+{
+   return ( plugin_extentions );
+}
+
 QString Base::PluginInfo::author ( void ) const
 {
    return ( plugin_author );
@@ -64,6 +69,11 @@ QString Base::PluginInfo::version ( void ) const
    return ( plugin_version );
 }
 
+bool Base::PluginInfo::hasExtention ( const QString& extention )
+{
+   return ( plugin_extentions.contains ( extention.toLower () ) || ( plugin_console == "common" ) );
+}
+
 QFile& operator>> ( QFile& input_file , Base::PluginInfo& plugin_info )
 {
    QString line;
@@ -92,7 +102,7 @@ QFile& operator>> ( QFile& input_file , Base::PluginInfo& plugin_info )
          }
          else if ( pieces[ 0 ] == "plugin.console" )
          {
-            plugin_info.plugin_console = pieces[ 1 ];            
+            plugin_info.plugin_console = pieces[ 1 ].toLower ();            
          }
          else if ( pieces[ 0 ] == "plugin.consoledescription" )
          {
@@ -105,6 +115,10 @@ QFile& operator>> ( QFile& input_file , Base::PluginInfo& plugin_info )
          else if ( pieces[ 0 ] == "plugin.description" )
          {
             plugin_info.plugin_description = pieces[ 1 ];            
+         }
+         else if ( pieces[ 0 ] == "plugin.extentions" )
+         {
+            plugin_info.plugin_extentions = pieces[ 1 ].toLower ().split ( "," );
          }
       }
    }

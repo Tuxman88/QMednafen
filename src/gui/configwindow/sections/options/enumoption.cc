@@ -25,6 +25,7 @@ Gui::EnumOption::EnumOption ( Base::OptionEnum* new_option )
    option = new_option;
    
    buildGui ();
+   connectAll ();
 }
 
 Gui::EnumOption::~EnumOption ( void )
@@ -54,6 +55,20 @@ void Gui::EnumOption::buildGui ( void )
    main_layout->addWidget ( title_label );
    main_layout->addStretch ();
    main_layout->addWidget ( value_combo );
+   
+   return;
+}
+
+void Gui::EnumOption::connectAll ( void )
+{
+   connect ( value_combo , SIGNAL ( currentTextChanged ( QString ) ) , this , SLOT ( updateValue ( QString ) ) );
+   
+   return;
+}
+
+void Gui::EnumOption::updateValue ( const QString& value )
+{
+   option->setCurrentValue ( index_name_value[ value ] );
    
    return;
 }

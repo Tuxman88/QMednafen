@@ -82,6 +82,7 @@ void Base::Text::fillDefault ( void )
    current_text[ QString ( "txt.gui.config.videooptions" ) ]          = QString ( "&Video options" );
    current_text[ QString ( "txt.gui.config.audiooptions" ) ]          = QString ( "&Audio options" );
    current_text[ QString ( "txt.gui.config.controloptions" ) ]        = QString ( "&Control options" );
+   current_text[ QString ( "txt.gui.config.ingameoptions" ) ]         = QString ( "&In-Game options" );
    current_text[ QString ( "txt.gui.config.title" ) ]                 = QString ( "Configuration" );
    current_text[ QString ( "txt.gui.about.abouttitle" ) ]             = QString ( "About" );
    current_text[ QString ( "txt.gui.about.abouttab" ) ]               = QString ( "&About" );
@@ -95,6 +96,9 @@ void Base::Text::fillDefault ( void )
    current_text[ QString ( "txt.gui.about.doctorg.name" ) ]           = QString ( "Doctor-G" );
    current_text[ QString ( "txt.gui.about.doctorg.link" ) ]           = QString ( "http://doctor-g.deviantart.com" );
    current_text[ QString ( "txt.gui.about.doctorg.thanks" ) ]         = QString ( "Author of the original Sega Genesis image." );
+   current_text[ QString ( "txt.gui.about.psychotic.name" ) ]         = QString ( "Psychotic-Carp" );
+   current_text[ QString ( "txt.gui.about.psychotic.link" ) ]         = QString ( "http://psychotic-carp.deviantart.com" );
+   current_text[ QString ( "txt.gui.about.psychotic.thanks" ) ]       = QString ( "Author of the original NEC PCE Engine/TurboGrafx 16/SuperGrafx image." );
    current_text[ QString ( "txt.gui.about.blueamnesiac.name" ) ]      = QString ( "BLUEamnesiac" );
    current_text[ QString ( "txt.gui.about.blueamnesiac.link" ) ]      = QString ( "blueamnesiac.deviantart.com" );
    current_text[ QString ( "txt.gui.about.blueamnesiac.thanks" ) ]    = QString ( "Author of the original Sega Game Gear, Sega Master System, Nintendo Game Boy, Nintendo Game Boy Advance, SNK Neo Geo Pocket and Atari Lynx images." );
@@ -113,7 +117,8 @@ void Base::Text::fillDefault ( void )
    current_text[ QString ( "txt.gui.config.console.snes" ) ]          = QString ( "Super Nintendo Entertainment System (SNES)" );
    current_text[ QString ( "txt.gui.config.console.vb" ) ]            = QString ( "Nintendo Virtual Boy (VB)" );
    current_text[ QString ( "txt.gui.config.console.wswan" ) ]         = QString ( "Bandai WonderSwan (WSWAN)" );
-   current_text[ QString ( "txt.gui.config.console.unknown" ) ]       = QString ( "Consola desconocida (%1)" );
+   current_text[ QString ( "txt.gui.config.console.unknown" ) ]       = QString ( "Unknown console (%1)" );
+   current_text[ QString ( "txt.gui.config.console.common" ) ]        = QString ( "All consoles (Common options)" );
    current_text[ QString ( "txt.gui.config.console.author" ) ]        = QString ( "Author: %1" );
    current_text[ QString ( "txt.gui.config.console.pluginversion" ) ] = QString ( "Plugin version: %1" );
    current_text[ QString ( "txt.gui.config.save" ) ]                  = QString ( "&Save" );

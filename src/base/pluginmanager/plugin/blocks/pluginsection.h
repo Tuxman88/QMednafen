@@ -55,6 +55,7 @@ namespace Base
          void setName ( const QString& new_name );
          QList< Base::PluginOption* >* options ( void );
          void autoLoad ( QMap< QString , QString >& values );
+         QStringList getOptions ( void );
          
          friend QFile& (::operator>>) ( QFile& input_file , Base::PluginSection& plugin_section );
          friend QTextStream& (::operator<<) ( QTextStream& output_file , Base::PluginSection* plugin_section );

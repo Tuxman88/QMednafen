@@ -37,8 +37,12 @@ namespace Gui
          explicit IntegerOption ( Base::OptionInteger* new_option );
          virtual ~IntegerOption ( void );
          
+      private slots:
+         void updateValue ( const int& value );
+         
       private:
          void buildGui ( void );
+         void connectAll ( void );
          
       private:
          Base::OptionInteger* option;
