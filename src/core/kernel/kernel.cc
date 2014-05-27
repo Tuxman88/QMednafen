@@ -75,6 +75,11 @@ void Core::Kernel::openRom ( void )
 {
    QString selected_file = QFileDialog::getOpenFileName ( 0 , shared_components->text ()->operator[] ( Base::KeyTxtGuiOpenROMSelectFile ) );
    
+   if ( selected_file == "" )
+   {
+      return;
+   }
+   
    qDebug () << "Kernel: File to open: " << selected_file;
    qDebug () << "Kernel: Requesting options for file.";
    
