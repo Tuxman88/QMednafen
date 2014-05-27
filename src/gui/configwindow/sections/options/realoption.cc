@@ -51,9 +51,17 @@ void Gui::RealOption::buildGui ( void )
    return;
 }
 
+void Gui::RealOption::valuesUpdated ( void )
+{
+   value_spin->setValue ( option->currentValue () );
+   
+   return;
+}
+
 void Gui::RealOption::connectAll ( void )
 {
    connect ( value_spin , SIGNAL ( valueChanged ( double ) ) , this , SLOT ( updateValue ( double ) ) );
+   connect ( option , SIGNAL ( valuesUpdated () ) , this , SLOT ( valuesUpdated () ) );
    
    return;
 }

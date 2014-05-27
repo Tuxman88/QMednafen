@@ -142,7 +142,6 @@ Makefile: qmednafen-0.1.0.pro /usr/lib/qt5/mkspecs/linux-g++/qmake.conf /usr/lib
 		/usr/lib/qt5/mkspecs/modules/qt_lib_xml_private.pri \
 		/usr/lib/qt5/mkspecs/modules/qt_lib_xmlpatterns.pri \
 		/usr/lib/qt5/mkspecs/modules/qt_lib_xmlpatterns_private.pri \
-		/usr/lib/qt5/mkspecs/modules/qt_phonon4qt5.pri \
 		/usr/lib/qt5/mkspecs/features/qt_functions.prf \
 		/usr/lib/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/qt5/mkspecs/linux-g++/qmake.conf \
@@ -252,7 +251,6 @@ Makefile: qmednafen-0.1.0.pro /usr/lib/qt5/mkspecs/linux-g++/qmake.conf /usr/lib
 /usr/lib/qt5/mkspecs/modules/qt_lib_xml_private.pri:
 /usr/lib/qt5/mkspecs/modules/qt_lib_xmlpatterns.pri:
 /usr/lib/qt5/mkspecs/modules/qt_lib_xmlpatterns_private.pri:
-/usr/lib/qt5/mkspecs/modules/qt_phonon4qt5.pri:
 /usr/lib/qt5/mkspecs/features/qt_functions.prf:
 /usr/lib/qt5/mkspecs/features/qt_config.prf:
 /usr/lib/qt5/mkspecs/linux-g++/qmake.conf:

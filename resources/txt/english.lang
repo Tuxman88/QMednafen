@@ -50,6 +50,7 @@ txt.gui.config.console.pluginversion=Plugin version: %1
 txt.gui.config.save=&Save
 txt.gui.config.reload=&Reload
 txt.gui.config.reset=Rese&t
+txt.gui.openrom.selectfile=Select the ROM file to use
 txt.gui.about.abouttitle=About
 txt.gui.about.abouttab=&About
 txt.gui.about.creditstab=C&redits

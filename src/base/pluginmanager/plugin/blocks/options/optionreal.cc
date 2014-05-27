@@ -53,6 +53,8 @@ void Base::OptionReal::autoLoad ( QMap< QString, QString >& values )
       option_current_value = values[ option_command ].toDouble ();
    }
    
+   emit valuesUpdated ();
+   
    return;
 }
 
@@ -76,6 +78,8 @@ double Base::OptionReal::defaultValue ( void )
 void Base::OptionReal::reset ( void )
 {
    option_current_value = option_default_value;
+   
+   emit valuesUpdated ();
    
    return;
 }

@@ -46,7 +46,7 @@ namespace Base
          long int maxValue ( void );
          long int minValue ( void );
          virtual void reset ( void );
-         virtual void autoLoadValue ( QMap< QString , QString >& values );
+         virtual void autoLoad ( QMap< QString , QString >& values );
          virtual QString toString ( void );
          
       protected:

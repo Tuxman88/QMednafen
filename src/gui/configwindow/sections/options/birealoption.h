@@ -40,6 +40,7 @@ namespace Gui
       private slots:
          void updateValueA ( const double& value );
          void updateValueB ( const double& value );
+         void valuesUpdated ( void );
          
       private:
          void buildGui ( void );

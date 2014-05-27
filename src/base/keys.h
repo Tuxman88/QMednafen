@@ -108,6 +108,8 @@ namespace Base
    const QString KeyTxtGuiAboutAuthorName         = "txt.gui.about.%1.name";
    const QString KeyTxtGuiAboutAuthorLink         = "txt.gui.about.%1.link";
    const QString KeyTxtGuiAboutAuthorDescription  = "txt.gui.about.%1.thanks";
+   
+   const QString KeyTxtGuiOpenROMSelectFile = "txt.gui.openrom.selectfile";
 }
 
 # endif

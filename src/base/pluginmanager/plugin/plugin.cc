@@ -96,10 +96,13 @@ void Base::Plugin::loadOptions ( void )
    // If it exists, open and load. If doesn't exists, call the save member function,
    // so a new config file will be created.
       
+   qDebug () << "Plugin: Loading options from " << save_path;
+   
    QFile file ( save_path );
    
    if ( !file.exists () )
    {
+      qDebug () << "Plugin: Options not found, creating.";
       saveOptions ();
    }
    else
@@ -112,7 +115,7 @@ void Base::Plugin::loadOptions ( void )
       
       if ( !file.open ( QIODevice::ReadOnly | QIODevice::Text ) )
       {
-         qDebug () << "Plugin::loadOptions: Warning: Can't open config file " << save_path;
+         qDebug () << "Plugin: Warning: Can't open config file " << save_path;
          
          return;
       }
@@ -161,11 +164,12 @@ void Base::Plugin::loadOptions ( void )
 void Base::Plugin::saveOptions ( void )
 {
    // Try to open the file in write-mode and try to save all the configurations.
+   qDebug () << "Plugin: Saving options to " << save_path;
    QFile file ( save_path );
    
    if ( !file.open ( QIODevice::WriteOnly | QIODevice::Text ) )
    {
-      qDebug () << "Plugin::saveOptions: Warning: Can't open config file " << save_path;
+      qDebug () << "Plugin: Warning: Can't open config file " << save_path;
       return;
    }
    
@@ -189,6 +193,31 @@ void Base::Plugin::saveOptions ( void )
    for ( int i = 0; i < plugin_ingame_options->size (); i++ )
    {
       output_file << plugin_ingame_options->operator[] ( i );
+   }
+   
+   return;
+}
+
+void Base::Plugin::resetOptions ( void )
+{
+   for ( int i = 0; i < plugin_video_options->size (); i++ )
+   {
+      plugin_video_options->operator[] ( i )->resetValues ();
+   }
+   
+   for ( int i = 0; i < plugin_audio_options->size (); i++ )
+   {
+      plugin_audio_options->operator[] ( i )->resetValues ();
+   }
+   
+   for ( int i = 0; i < plugin_controls_options->size (); i++ )
+   {
+      plugin_controls_options->operator[] ( i )->resetValues ();
+   }
+   
+   for ( int i = 0; i < plugin_ingame_options->size (); i++ )
+   {
+      plugin_ingame_options->operator[] ( i )->resetValues ();
    }
    
    return;
@@ -236,6 +265,7 @@ QFile& operator>> ( QFile& input_file , Base::Plugin& plugin )
    QString line;
    
    // While there is no found the EOF signal
+   qDebug () << "Plugin: Loading " << input_file.fileName ();
    
    while ( line != "[EOF]" && !input_file.atEnd () )
    {

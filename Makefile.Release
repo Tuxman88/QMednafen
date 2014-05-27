@@ -14,7 +14,7 @@ CXX           = g++
 DEFINES       = -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -march=x86-64 -mtune=generic -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -Wall -W -D_REENTRANT -fPIE $(DEFINES)
 CXXFLAGS      = -pipe -march=x86-64 -mtune=generic -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -Wall -W -D_REENTRANT -fPIE $(DEFINES)
-INCPATH       = -I/usr/lib/qt5/mkspecs/linux-g++ -I. -I. -Isrc/gui -Isrc/gui/mainwindow -Isrc/base -Isrc/base/configuration -Isrc/base/text -Isrc/base/sharedcomponents -Isrc/base/pluginmanager -Isrc/base/pluginmanager/plugin -Isrc/base/pluginmanager/plugin/blocks -Isrc/base/pluginmanager/plugin/blocks/options -Isrc/gui/mainwindow/menubar -Isrc/gui/mainwindow/panels -Isrc/gui/configwindow -Isrc/gui/configwindow/sections -Isrc/gui/configwindow/sections/options -Isrc/gui/aboutwindow -Isrc/gui/aboutwindow/panels -Isrc/core -Isrc/core/kernel -I/usr/include/qt5 -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtCore -Irelease
+INCPATH       = -I/usr/lib/qt5/mkspecs/linux-g++ -I. -I. -Isrc/gui -Isrc/gui/mainwindow -Isrc/base -Isrc/base/configuration -Isrc/base/text -Isrc/base/sharedcomponents -Isrc/base/pluginmanager -Isrc/base/pluginmanager/plugin -Isrc/base/pluginmanager/plugin/blocks -Isrc/base/pluginmanager/plugin/blocks/options -Isrc/gui/mainwindow/menubar -Isrc/gui/mainwindow/panels -Isrc/gui/configwindow -Isrc/gui/configwindow/sections -Isrc/gui/configwindow/sections/options -Isrc/gui/aboutwindow -Isrc/gui/aboutwindow/panels -Isrc/core -Isrc/core/kernel -Isrc/core/emulatormanager -I/usr/include/qt5 -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtCore -Irelease
 LINK          = g++
 LFLAGS        = -Wl,-O1,--sort-common,--as-needed,-z,relro -Wl,-O1
 LIBS          = $(SUBLIBS) -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
@@ -49,6 +49,7 @@ SOURCES       = src/main.cc \
 		src/base/pluginmanager/pluginmanager.cc \
 		src/base/sharedcomponents/sharedcomponents.cc \
 		src/base/text/text.cc \
+		src/core/emulatormanager/emulatormanager.cc \
 		src/core/kernel/kernel.cc \
 		src/gui/aboutwindow/aboutwindow.cc \
 		src/gui/configwindow/configwindow.cc \
@@ -87,6 +88,7 @@ SOURCES       = src/main.cc \
 		release/moc_pluginmanager.cpp \
 		release/moc_sharedcomponents.cpp \
 		release/moc_text.cpp \
+		release/moc_emulatormanager.cpp \
 		release/moc_kernel.cpp \
 		release/moc_aboutwindow.cpp \
 		release/moc_configwindow.cpp \
@@ -126,6 +128,7 @@ OBJECTS       = release/main.o \
 		release/pluginmanager.o \
 		release/sharedcomponents.o \
 		release/text.o \
+		release/emulatormanager.o \
 		release/kernel.o \
 		release/aboutwindow.o \
 		release/configwindow.o \
@@ -165,6 +168,7 @@ OBJECTS       = release/main.o \
 		release/moc_pluginmanager.o \
 		release/moc_sharedcomponents.o \
 		release/moc_text.o \
+		release/moc_emulatormanager.o \
 		release/moc_kernel.o \
 		release/moc_aboutwindow.o \
 		release/moc_configwindow.o \
@@ -282,7 +286,6 @@ DIST          = /usr/lib/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt5/mkspecs/modules/qt_lib_xml_private.pri \
 		/usr/lib/qt5/mkspecs/modules/qt_lib_xmlpatterns.pri \
 		/usr/lib/qt5/mkspecs/modules/qt_lib_xmlpatterns_private.pri \
-		/usr/lib/qt5/mkspecs/modules/qt_phonon4qt5.pri \
 		/usr/lib/qt5/mkspecs/features/qt_functions.prf \
 		/usr/lib/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/qt5/mkspecs/linux-g++/qmake.conf \
@@ -347,7 +350,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d release/qmednafen-0.1.01.0.0 || mkdir -p release/qmednafen-0.1.01.0.0
-	$(COPY_FILE) --parents $(SOURCES) $(DIST) release/qmednafen-0.1.01.0.0/ && $(COPY_FILE) --parents resources.qrc release/qmednafen-0.1.01.0.0/ && $(COPY_FILE) --parents src/base/base.h src/base/keys.h src/core/core.h src/gui/gui.h src/base/configuration/configuration.h src/base/pluginmanager/pluginmanager.h src/base/sharedcomponents/sharedcomponents.h src/base/text/text.h src/core/kernel/kernel.h src/gui/aboutwindow/aboutwindow.h src/gui/configwindow/configwindow.h src/gui/mainwindow/mainwindow.h src/base/pluginmanager/plugin/plugin.h src/gui/aboutwindow/panels/aboutpanel.h src/gui/aboutwindow/panels/authorsection.h src/gui/aboutwindow/panels/creditspanel.h src/gui/aboutwindow/panels/licensepanel.h src/gui/configwindow/sections/categorypanel.h src/gui/configwindow/sections/consoleinfopanel.h src/gui/configwindow/sections/pluginpanel.h src/gui/configwindow/sections/sectionpanel.h src/gui/configwindow/sections/systempanel.h src/gui/mainwindow/menubar/menubar.h src/gui/mainwindow/panels/buttonspanel.h src/gui/mainwindow/panels/controlspanel.h src/gui/mainwindow/panels/maincontentspanel.h src/gui/mainwindow/panels/welcomepanel.h src/base/pluginmanager/plugin/blocks/plugininfo.h src/base/pluginmanager/plugin/blocks/pluginoption.h src/base/pluginmanager/plugin/blocks/pluginsection.h src/gui/configwindow/sections/options/biintegeroption.h src/gui/configwindow/sections/options/birealoption.h src/gui/configwindow/sections/options/booleanoption.h src/gui/configwindow/sections/options/enumoption.h src/gui/configwindow/sections/options/integeroption.h src/gui/configwindow/sections/options/realoption.h src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h src/base/pluginmanager/plugin/blocks/options/optionbireal.h src/base/pluginmanager/plugin/blocks/options/optionboolean.h src/base/pluginmanager/plugin/blocks/options/optionenum.h src/base/pluginmanager/plugin/blocks/options/optioninteger.h src/base/pluginmanager/plugin/blocks/options/optionreal.h release/qmednafen-0.1.01.0.0/ && $(COPY_FILE) --parents src/main.cc src/base/configuration/configuration.cc src/base/pluginmanager/pluginmanager.cc src/base/sharedcomponents/sharedcomponents.cc src/base/text/text.cc src/core/kernel/kernel.cc src/gui/aboutwindow/aboutwindow.cc src/gui/configwindow/configwindow.cc src/gui/mainwindow/mainwindow.cc src/base/pluginmanager/plugin/plugin.cc src/gui/aboutwindow/panels/aboutpanel.cc src/gui/aboutwindow/panels/authorsection.cc src/gui/aboutwindow/panels/creditspanel.cc src/gui/aboutwindow/panels/licensepanel.cc src/gui/configwindow/sections/categorypanel.cc src/gui/configwindow/sections/consoleinfopanel.cc src/gui/configwindow/sections/pluginpanel.cc src/gui/configwindow/sections/sectionpanel.cc src/gui/configwindow/sections/systempanel.cc src/gui/mainwindow/menubar/menubar.cc src/gui/mainwindow/panels/buttonspanel.cc src/gui/mainwindow/panels/controlspanel.cc src/gui/mainwindow/panels/maincontentspanel.cc src/gui/mainwindow/panels/welcomepanel.cc src/base/pluginmanager/plugin/blocks/plugininfo.cc src/base/pluginmanager/plugin/blocks/pluginoption.cc src/base/pluginmanager/plugin/blocks/pluginsection.cc src/gui/configwindow/sections/options/biintegeroption.cc src/gui/configwindow/sections/options/birealoption.cc src/gui/configwindow/sections/options/booleanoption.cc src/gui/configwindow/sections/options/enumoption.cc src/gui/configwindow/sections/options/integeroption.cc src/gui/configwindow/sections/options/realoption.cc src/base/pluginmanager/plugin/blocks/options/optionbiinteger.cc src/base/pluginmanager/plugin/blocks/options/optionbireal.cc src/base/pluginmanager/plugin/blocks/options/optionboolean.cc src/base/pluginmanager/plugin/blocks/options/optionenum.cc src/base/pluginmanager/plugin/blocks/options/optioninteger.cc src/base/pluginmanager/plugin/blocks/options/optionreal.cc release/qmednafen-0.1.01.0.0/ && (cd `dirname release/qmednafen-0.1.01.0.0` && $(TAR) qmednafen-0.1.01.0.0.tar qmednafen-0.1.01.0.0 && $(COMPRESS) qmednafen-0.1.01.0.0.tar) && $(MOVE) `dirname release/qmednafen-0.1.01.0.0`/qmednafen-0.1.01.0.0.tar.gz . && $(DEL_FILE) -r release/qmednafen-0.1.01.0.0
+	$(COPY_FILE) --parents $(SOURCES) $(DIST) release/qmednafen-0.1.01.0.0/ && $(COPY_FILE) --parents resources.qrc release/qmednafen-0.1.01.0.0/ && $(COPY_FILE) --parents src/base/base.h src/base/keys.h src/core/core.h src/gui/gui.h src/base/configuration/configuration.h src/base/pluginmanager/pluginmanager.h src/base/sharedcomponents/sharedcomponents.h src/base/text/text.h src/core/emulatormanager/emulatormanager.h src/core/kernel/kernel.h src/gui/aboutwindow/aboutwindow.h src/gui/configwindow/configwindow.h src/gui/mainwindow/mainwindow.h src/base/pluginmanager/plugin/plugin.h src/gui/aboutwindow/panels/aboutpanel.h src/gui/aboutwindow/panels/authorsection.h src/gui/aboutwindow/panels/creditspanel.h src/gui/aboutwindow/panels/licensepanel.h src/gui/configwindow/sections/categorypanel.h src/gui/configwindow/sections/consoleinfopanel.h src/gui/configwindow/sections/pluginpanel.h src/gui/configwindow/sections/sectionpanel.h src/gui/configwindow/sections/systempanel.h src/gui/mainwindow/menubar/menubar.h src/gui/mainwindow/panels/buttonspanel.h src/gui/mainwindow/panels/controlspanel.h src/gui/mainwindow/panels/maincontentspanel.h src/gui/mainwindow/panels/welcomepanel.h src/base/pluginmanager/plugin/blocks/plugininfo.h src/base/pluginmanager/plugin/blocks/pluginoption.h src/base/pluginmanager/plugin/blocks/pluginsection.h src/gui/configwindow/sections/options/biintegeroption.h src/gui/configwindow/sections/options/birealoption.h src/gui/configwindow/sections/options/booleanoption.h src/gui/configwindow/sections/options/enumoption.h src/gui/configwindow/sections/options/integeroption.h src/gui/configwindow/sections/options/realoption.h src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h src/base/pluginmanager/plugin/blocks/options/optionbireal.h src/base/pluginmanager/plugin/blocks/options/optionboolean.h src/base/pluginmanager/plugin/blocks/options/optionenum.h src/base/pluginmanager/plugin/blocks/options/optioninteger.h src/base/pluginmanager/plugin/blocks/options/optionreal.h release/qmednafen-0.1.01.0.0/ && $(COPY_FILE) --parents src/main.cc src/base/configuration/configuration.cc src/base/pluginmanager/pluginmanager.cc src/base/sharedcomponents/sharedcomponents.cc src/base/text/text.cc src/core/emulatormanager/emulatormanager.cc src/core/kernel/kernel.cc src/gui/aboutwindow/aboutwindow.cc src/gui/configwindow/configwindow.cc src/gui/mainwindow/mainwindow.cc src/base/pluginmanager/plugin/plugin.cc src/gui/aboutwindow/panels/aboutpanel.cc src/gui/aboutwindow/panels/authorsection.cc src/gui/aboutwindow/panels/creditspanel.cc src/gui/aboutwindow/panels/licensepanel.cc src/gui/configwindow/sections/categorypanel.cc src/gui/configwindow/sections/consoleinfopanel.cc src/gui/configwindow/sections/pluginpanel.cc src/gui/configwindow/sections/sectionpanel.cc src/gui/configwindow/sections/systempanel.cc src/gui/mainwindow/menubar/menubar.cc src/gui/mainwindow/panels/buttonspanel.cc src/gui/mainwindow/panels/controlspanel.cc src/gui/mainwindow/panels/maincontentspanel.cc src/gui/mainwindow/panels/welcomepanel.cc src/base/pluginmanager/plugin/blocks/plugininfo.cc src/base/pluginmanager/plugin/blocks/pluginoption.cc src/base/pluginmanager/plugin/blocks/pluginsection.cc src/gui/configwindow/sections/options/biintegeroption.cc src/gui/configwindow/sections/options/birealoption.cc src/gui/configwindow/sections/options/booleanoption.cc src/gui/configwindow/sections/options/enumoption.cc src/gui/configwindow/sections/options/integeroption.cc src/gui/configwindow/sections/options/realoption.cc src/base/pluginmanager/plugin/blocks/options/optionbiinteger.cc src/base/pluginmanager/plugin/blocks/options/optionbireal.cc src/base/pluginmanager/plugin/blocks/options/optionboolean.cc src/base/pluginmanager/plugin/blocks/options/optionenum.cc src/base/pluginmanager/plugin/blocks/options/optioninteger.cc src/base/pluginmanager/plugin/blocks/options/optionreal.cc release/qmednafen-0.1.01.0.0/ && (cd `dirname release/qmednafen-0.1.01.0.0` && $(TAR) qmednafen-0.1.01.0.0.tar qmednafen-0.1.01.0.0 && $(COMPRESS) qmednafen-0.1.01.0.0.tar) && $(MOVE) `dirname release/qmednafen-0.1.01.0.0`/qmednafen-0.1.01.0.0.tar.gz . && $(DEL_FILE) -r release/qmednafen-0.1.01.0.0
 
 
 clean:compiler_clean 
@@ -372,35 +375,35 @@ compiler_rcc_make_all: release/qrc_resources.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) release/qrc_resources.cpp
 release/qrc_resources.cpp: resources.qrc \
-		resources/img/icon/unit-lynx-256x256.png \
-		resources/img/icon/unit-ngp-256x256.png \
-		resources/img/icon/unit-psx-256x256.png \
-		resources/img/icon/main-256x256.png \
 		resources/img/icon/unit-gb-256x256.png \
-		resources/img/icon/unit-pce-256x256.png \
 		resources/img/icon/unit-md-256x256.png \
-		resources/txt/spanish.lang \
-		resources/img/icon/main-32x32.png \
-		resources/img/icon/unit-gg-256x256.png \
-		resources/img/icon/unit-wswan-256x256.png \
-		resources/txt/english.lang \
-		resources/img/icon/unit-nes-256x256.png \
-		resources/img/icon/unit-pcfx-256x256.png \
-		resources/img/icon/main-512x512.png \
-		resources/img/icon/unit-pce_fast-256x256.png \
-		resources/img/icon/main-128x128.png \
-		resources/img/icon/main-16x16.png \
-		resources/img/icon/unit-snes-256x256.png \
-		resources/img/icon/unit-vb-256x256.png \
-		resources/img/icon/unit-unknown-256x256.png \
-		resources/img/icon/main-64x64.png \
 		resources/img/icon/unit-gba-256x256.png \
+		resources/img/icon/unit-gg-256x256.png \
+		resources/img/icon/unit-ngp-256x256.png \
+		resources/img/icon/main-512x512.png \
+		resources/img/icon/unit-pcfx-256x256.png \
+		resources/img/icon/main-128x128.png \
+		resources/img/icon/unit-snes-256x256.png \
+		resources/img/icon/main-32x32.png \
+		resources/img/icon/unit-psx-256x256.png \
+		resources/img/icon/unit-pce-256x256.png \
+		resources/txt/english.lang \
+		resources/img/icon/unit-unknown-256x256.png \
+		resources/txt/spanish.lang \
+		resources/img/icon/unit-nes-256x256.png \
+		resources/img/icon/unit-vb-256x256.png \
+		resources/img/icon/unit-lynx-256x256.png \
+		resources/img/icon/unit-wswan-256x256.png \
+		resources/img/icon/unit-pce_fast-256x256.png \
+		resources/img/icon/main-256x256.png \
+		resources/img/icon/main-16x16.png \
+		resources/img/icon/main-64x64.png \
 		resources/img/icon/unit-sms-256x256.png
 	/usr/lib/qt5/bin/rcc -name resources resources.qrc -o release/qrc_resources.cpp
 
-compiler_moc_header_make_all: release/moc_configuration.cpp release/moc_pluginmanager.cpp release/moc_sharedcomponents.cpp release/moc_text.cpp release/moc_kernel.cpp release/moc_aboutwindow.cpp release/moc_configwindow.cpp release/moc_mainwindow.cpp release/moc_plugin.cpp release/moc_aboutpanel.cpp release/moc_authorsection.cpp release/moc_creditspanel.cpp release/moc_licensepanel.cpp release/moc_categorypanel.cpp release/moc_consoleinfopanel.cpp release/moc_pluginpanel.cpp release/moc_sectionpanel.cpp release/moc_systempanel.cpp release/moc_menubar.cpp release/moc_buttonspanel.cpp release/moc_controlspanel.cpp release/moc_maincontentspanel.cpp release/moc_welcomepanel.cpp release/moc_plugininfo.cpp release/moc_pluginoption.cpp release/moc_pluginsection.cpp release/moc_biintegeroption.cpp release/moc_birealoption.cpp release/moc_booleanoption.cpp release/moc_enumoption.cpp release/moc_integeroption.cpp release/moc_realoption.cpp release/moc_optionbiinteger.cpp release/moc_optionbireal.cpp release/moc_optionboolean.cpp release/moc_optionenum.cpp release/moc_optioninteger.cpp release/moc_optionreal.cpp
+compiler_moc_header_make_all: release/moc_configuration.cpp release/moc_pluginmanager.cpp release/moc_sharedcomponents.cpp release/moc_text.cpp release/moc_emulatormanager.cpp release/moc_kernel.cpp release/moc_aboutwindow.cpp release/moc_configwindow.cpp release/moc_mainwindow.cpp release/moc_plugin.cpp release/moc_aboutpanel.cpp release/moc_authorsection.cpp release/moc_creditspanel.cpp release/moc_licensepanel.cpp release/moc_categorypanel.cpp release/moc_consoleinfopanel.cpp release/moc_pluginpanel.cpp release/moc_sectionpanel.cpp release/moc_systempanel.cpp release/moc_menubar.cpp release/moc_buttonspanel.cpp release/moc_controlspanel.cpp release/moc_maincontentspanel.cpp release/moc_welcomepanel.cpp release/moc_plugininfo.cpp release/moc_pluginoption.cpp release/moc_pluginsection.cpp release/moc_biintegeroption.cpp release/moc_birealoption.cpp release/moc_booleanoption.cpp release/moc_enumoption.cpp release/moc_integeroption.cpp release/moc_realoption.cpp release/moc_optionbiinteger.cpp release/moc_optionbireal.cpp release/moc_optionboolean.cpp release/moc_optionenum.cpp release/moc_optioninteger.cpp release/moc_optionreal.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) release/moc_configuration.cpp release/moc_pluginmanager.cpp release/moc_sharedcomponents.cpp release/moc_text.cpp release/moc_kernel.cpp release/moc_aboutwindow.cpp release/moc_configwindow.cpp release/moc_mainwindow.cpp release/moc_plugin.cpp release/moc_aboutpanel.cpp release/moc_authorsection.cpp release/moc_creditspanel.cpp release/moc_licensepanel.cpp release/moc_categorypanel.cpp release/moc_consoleinfopanel.cpp release/moc_pluginpanel.cpp release/moc_sectionpanel.cpp release/moc_systempanel.cpp release/moc_menubar.cpp release/moc_buttonspanel.cpp release/moc_controlspanel.cpp release/moc_maincontentspanel.cpp release/moc_welcomepanel.cpp release/moc_plugininfo.cpp release/moc_pluginoption.cpp release/moc_pluginsection.cpp release/moc_biintegeroption.cpp release/moc_birealoption.cpp release/moc_booleanoption.cpp release/moc_enumoption.cpp release/moc_integeroption.cpp release/moc_realoption.cpp release/moc_optionbiinteger.cpp release/moc_optionbireal.cpp release/moc_optionboolean.cpp release/moc_optionenum.cpp release/moc_optioninteger.cpp release/moc_optionreal.cpp
+	-$(DEL_FILE) release/moc_configuration.cpp release/moc_pluginmanager.cpp release/moc_sharedcomponents.cpp release/moc_text.cpp release/moc_emulatormanager.cpp release/moc_kernel.cpp release/moc_aboutwindow.cpp release/moc_configwindow.cpp release/moc_mainwindow.cpp release/moc_plugin.cpp release/moc_aboutpanel.cpp release/moc_authorsection.cpp release/moc_creditspanel.cpp release/moc_licensepanel.cpp release/moc_categorypanel.cpp release/moc_consoleinfopanel.cpp release/moc_pluginpanel.cpp release/moc_sectionpanel.cpp release/moc_systempanel.cpp release/moc_menubar.cpp release/moc_buttonspanel.cpp release/moc_controlspanel.cpp release/moc_maincontentspanel.cpp release/moc_welcomepanel.cpp release/moc_plugininfo.cpp release/moc_pluginoption.cpp release/moc_pluginsection.cpp release/moc_biintegeroption.cpp release/moc_birealoption.cpp release/moc_booleanoption.cpp release/moc_enumoption.cpp release/moc_integeroption.cpp release/moc_realoption.cpp release/moc_optionbiinteger.cpp release/moc_optionbireal.cpp release/moc_optionboolean.cpp release/moc_optionenum.cpp release/moc_optioninteger.cpp release/moc_optionreal.cpp
 release/moc_configuration.cpp: /usr/include/qt5/QtCore/QObject \
 		/usr/include/qt5/QtCore/qobject.h \
 		/usr/include/qt5/QtCore/qobjectdefs.h \
@@ -774,6 +777,113 @@ release/moc_text.cpp: /usr/include/qt5/QtCore/QObject \
 		src/base/text/text.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/base/text/text.h -o release/moc_text.cpp
 
+release/moc_emulatormanager.cpp: /usr/include/qt5/QtCore/QObject \
+		/usr/include/qt5/QtCore/qobject.h \
+		/usr/include/qt5/QtCore/qobjectdefs.h \
+		/usr/include/qt5/QtCore/qnamespace.h \
+		/usr/include/qt5/QtCore/qglobal.h \
+		/usr/include/qt5/QtCore/qconfig.h \
+		/usr/include/qt5/QtCore/qfeatures.h \
+		/usr/include/qt5/QtCore/qsystemdetection.h \
+		/usr/include/qt5/QtCore/qprocessordetection.h \
+		/usr/include/qt5/QtCore/qcompilerdetection.h \
+		/usr/include/qt5/QtCore/qglobalstatic.h \
+		/usr/include/qt5/QtCore/qatomic.h \
+		/usr/include/qt5/QtCore/qbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt5/QtCore/qgenericatomic.h \
+		/usr/include/qt5/QtCore/qatomic_msvc.h \
+		/usr/include/qt5/QtCore/qatomic_integrity.h \
+		/usr/include/qt5/QtCore/qoldbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_vxworks.h \
+		/usr/include/qt5/QtCore/qatomic_power.h \
+		/usr/include/qt5/QtCore/qatomic_alpha.h \
+		/usr/include/qt5/QtCore/qatomic_armv7.h \
+		/usr/include/qt5/QtCore/qatomic_armv6.h \
+		/usr/include/qt5/QtCore/qatomic_armv5.h \
+		/usr/include/qt5/QtCore/qatomic_bfin.h \
+		/usr/include/qt5/QtCore/qatomic_ia64.h \
+		/usr/include/qt5/QtCore/qatomic_mips.h \
+		/usr/include/qt5/QtCore/qatomic_s390.h \
+		/usr/include/qt5/QtCore/qatomic_sh4a.h \
+		/usr/include/qt5/QtCore/qatomic_sparc.h \
+		/usr/include/qt5/QtCore/qatomic_x86.h \
+		/usr/include/qt5/QtCore/qatomic_cxx11.h \
+		/usr/include/qt5/QtCore/qatomic_gcc.h \
+		/usr/include/qt5/QtCore/qatomic_unix.h \
+		/usr/include/qt5/QtCore/qmutex.h \
+		/usr/include/qt5/QtCore/qlogging.h \
+		/usr/include/qt5/QtCore/qflags.h \
+		/usr/include/qt5/QtCore/qtypeinfo.h \
+		/usr/include/qt5/QtCore/qtypetraits.h \
+		/usr/include/qt5/QtCore/qsysinfo.h \
+		/usr/include/qt5/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt5/QtCore/qstring.h \
+		/usr/include/qt5/QtCore/qchar.h \
+		/usr/include/qt5/QtCore/qbytearray.h \
+		/usr/include/qt5/QtCore/qrefcount.h \
+		/usr/include/qt5/QtCore/qarraydata.h \
+		/usr/include/qt5/QtCore/qstringbuilder.h \
+		/usr/include/qt5/QtCore/qlist.h \
+		/usr/include/qt5/QtCore/qalgorithms.h \
+		/usr/include/qt5/QtCore/qiterator.h \
+		/usr/include/qt5/QtCore/qcoreevent.h \
+		/usr/include/qt5/QtCore/qscopedpointer.h \
+		/usr/include/qt5/QtCore/qmetatype.h \
+		/usr/include/qt5/QtCore/qvarlengtharray.h \
+		/usr/include/qt5/QtCore/qcontainerfwd.h \
+		/usr/include/qt5/QtCore/qisenum.h \
+		/usr/include/qt5/QtCore/qobject_impl.h \
+		/usr/include/qt5/QtCore/QDebug \
+		/usr/include/qt5/QtCore/qdebug.h \
+		/usr/include/qt5/QtCore/qhash.h \
+		/usr/include/qt5/QtCore/qpair.h \
+		/usr/include/qt5/QtCore/qmap.h \
+		/usr/include/qt5/QtCore/qtextstream.h \
+		/usr/include/qt5/QtCore/qiodevice.h \
+		/usr/include/qt5/QtCore/qlocale.h \
+		/usr/include/qt5/QtCore/qvariant.h \
+		/usr/include/qt5/QtCore/qstringlist.h \
+		/usr/include/qt5/QtCore/qdatastream.h \
+		/usr/include/qt5/QtCore/qregexp.h \
+		/usr/include/qt5/QtCore/qstringmatcher.h \
+		/usr/include/qt5/QtCore/qshareddata.h \
+		/usr/include/qt5/QtCore/qvector.h \
+		/usr/include/qt5/QtCore/qpoint.h \
+		/usr/include/qt5/QtCore/qset.h \
+		/usr/include/qt5/QtCore/qcontiguouscache.h \
+		/usr/include/qt5/QtCore/QStringList \
+		src/base/base.h \
+		src/base/configuration/configuration.h \
+		/usr/include/qt5/QtCore/QSettings \
+		/usr/include/qt5/QtCore/qsettings.h \
+		/usr/include/qt5/QtCore/QString \
+		src/base/keys.h \
+		src/base/text/text.h \
+		/usr/include/qt5/QtCore/QMap \
+		/usr/include/qt5/QtCore/QFile \
+		/usr/include/qt5/QtCore/qfile.h \
+		/usr/include/qt5/QtCore/qfiledevice.h \
+		src/base/sharedcomponents/sharedcomponents.h \
+		src/base/pluginmanager/pluginmanager.h \
+		/usr/include/qt5/QtCore/QVector \
+		/usr/include/qt5/QtCore/QDir \
+		/usr/include/qt5/QtCore/qdir.h \
+		/usr/include/qt5/QtCore/qfileinfo.h \
+		src/base/pluginmanager/plugin/plugin.h \
+		/usr/include/qt5/QtCore/QList \
+		src/base/pluginmanager/plugin/blocks/plugininfo.h \
+		src/base/pluginmanager/plugin/blocks/pluginsection.h \
+		src/base/pluginmanager/plugin/blocks/pluginoption.h \
+		src/base/pluginmanager/plugin/blocks/options/optioninteger.h \
+		src/base/pluginmanager/plugin/blocks/options/optionreal.h \
+		src/base/pluginmanager/plugin/blocks/options/optionenum.h \
+		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
+		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
+		src/core/emulatormanager/emulatormanager.h
+	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/core/emulatormanager/emulatormanager.h -o release/moc_emulatormanager.cpp
+
 release/moc_kernel.cpp: /usr/include/qt5/QtWidgets/QFileDialog \
 		/usr/include/qt5/QtWidgets/qfiledialog.h \
 		/usr/include/qt5/QtCore/qdir.h \
@@ -913,6 +1023,7 @@ release/moc_kernel.cpp: /usr/include/qt5/QtWidgets/QFileDialog \
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
+		src/core/emulatormanager/emulatormanager.h \
 		src/core/kernel/kernel.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/core/kernel/kernel.h -o release/moc_kernel.cpp
 
@@ -5664,7 +5775,8 @@ release/main.o: src/main.cc /usr/include/qt5/QtWidgets/QApplication \
 		src/core/core.h \
 		src/core/kernel/kernel.h \
 		/usr/include/qt5/QtWidgets/QFileDialog \
-		/usr/include/qt5/QtWidgets/qfiledialog.h
+		/usr/include/qt5/QtWidgets/qfiledialog.h \
+		src/core/emulatormanager/emulatormanager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/main.o src/main.cc
 
 release/configuration.o: src/base/configuration/configuration.cc src/base/configuration/configuration.h \
@@ -6040,6 +6152,113 @@ release/text.o: src/base/text/text.cc src/base/text/text.h \
 		src/base/keys.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/text.o src/base/text/text.cc
 
+release/emulatormanager.o: src/core/emulatormanager/emulatormanager.cc src/core/emulatormanager/emulatormanager.h \
+		/usr/include/qt5/QtCore/QObject \
+		/usr/include/qt5/QtCore/qobject.h \
+		/usr/include/qt5/QtCore/qobjectdefs.h \
+		/usr/include/qt5/QtCore/qnamespace.h \
+		/usr/include/qt5/QtCore/qglobal.h \
+		/usr/include/qt5/QtCore/qconfig.h \
+		/usr/include/qt5/QtCore/qfeatures.h \
+		/usr/include/qt5/QtCore/qsystemdetection.h \
+		/usr/include/qt5/QtCore/qprocessordetection.h \
+		/usr/include/qt5/QtCore/qcompilerdetection.h \
+		/usr/include/qt5/QtCore/qglobalstatic.h \
+		/usr/include/qt5/QtCore/qatomic.h \
+		/usr/include/qt5/QtCore/qbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt5/QtCore/qgenericatomic.h \
+		/usr/include/qt5/QtCore/qatomic_msvc.h \
+		/usr/include/qt5/QtCore/qatomic_integrity.h \
+		/usr/include/qt5/QtCore/qoldbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_vxworks.h \
+		/usr/include/qt5/QtCore/qatomic_power.h \
+		/usr/include/qt5/QtCore/qatomic_alpha.h \
+		/usr/include/qt5/QtCore/qatomic_armv7.h \
+		/usr/include/qt5/QtCore/qatomic_armv6.h \
+		/usr/include/qt5/QtCore/qatomic_armv5.h \
+		/usr/include/qt5/QtCore/qatomic_bfin.h \
+		/usr/include/qt5/QtCore/qatomic_ia64.h \
+		/usr/include/qt5/QtCore/qatomic_mips.h \
+		/usr/include/qt5/QtCore/qatomic_s390.h \
+		/usr/include/qt5/QtCore/qatomic_sh4a.h \
+		/usr/include/qt5/QtCore/qatomic_sparc.h \
+		/usr/include/qt5/QtCore/qatomic_x86.h \
+		/usr/include/qt5/QtCore/qatomic_cxx11.h \
+		/usr/include/qt5/QtCore/qatomic_gcc.h \
+		/usr/include/qt5/QtCore/qatomic_unix.h \
+		/usr/include/qt5/QtCore/qmutex.h \
+		/usr/include/qt5/QtCore/qlogging.h \
+		/usr/include/qt5/QtCore/qflags.h \
+		/usr/include/qt5/QtCore/qtypeinfo.h \
+		/usr/include/qt5/QtCore/qtypetraits.h \
+		/usr/include/qt5/QtCore/qsysinfo.h \
+		/usr/include/qt5/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt5/QtCore/qstring.h \
+		/usr/include/qt5/QtCore/qchar.h \
+		/usr/include/qt5/QtCore/qbytearray.h \
+		/usr/include/qt5/QtCore/qrefcount.h \
+		/usr/include/qt5/QtCore/qarraydata.h \
+		/usr/include/qt5/QtCore/qstringbuilder.h \
+		/usr/include/qt5/QtCore/qlist.h \
+		/usr/include/qt5/QtCore/qalgorithms.h \
+		/usr/include/qt5/QtCore/qiterator.h \
+		/usr/include/qt5/QtCore/qcoreevent.h \
+		/usr/include/qt5/QtCore/qscopedpointer.h \
+		/usr/include/qt5/QtCore/qmetatype.h \
+		/usr/include/qt5/QtCore/qvarlengtharray.h \
+		/usr/include/qt5/QtCore/qcontainerfwd.h \
+		/usr/include/qt5/QtCore/qisenum.h \
+		/usr/include/qt5/QtCore/qobject_impl.h \
+		/usr/include/qt5/QtCore/QDebug \
+		/usr/include/qt5/QtCore/qdebug.h \
+		/usr/include/qt5/QtCore/qhash.h \
+		/usr/include/qt5/QtCore/qpair.h \
+		/usr/include/qt5/QtCore/qmap.h \
+		/usr/include/qt5/QtCore/qtextstream.h \
+		/usr/include/qt5/QtCore/qiodevice.h \
+		/usr/include/qt5/QtCore/qlocale.h \
+		/usr/include/qt5/QtCore/qvariant.h \
+		/usr/include/qt5/QtCore/qstringlist.h \
+		/usr/include/qt5/QtCore/qdatastream.h \
+		/usr/include/qt5/QtCore/qregexp.h \
+		/usr/include/qt5/QtCore/qstringmatcher.h \
+		/usr/include/qt5/QtCore/qshareddata.h \
+		/usr/include/qt5/QtCore/qvector.h \
+		/usr/include/qt5/QtCore/qpoint.h \
+		/usr/include/qt5/QtCore/qset.h \
+		/usr/include/qt5/QtCore/qcontiguouscache.h \
+		/usr/include/qt5/QtCore/QStringList \
+		src/base/base.h \
+		src/base/configuration/configuration.h \
+		/usr/include/qt5/QtCore/QSettings \
+		/usr/include/qt5/QtCore/qsettings.h \
+		/usr/include/qt5/QtCore/QString \
+		src/base/keys.h \
+		src/base/text/text.h \
+		/usr/include/qt5/QtCore/QMap \
+		/usr/include/qt5/QtCore/QFile \
+		/usr/include/qt5/QtCore/qfile.h \
+		/usr/include/qt5/QtCore/qfiledevice.h \
+		src/base/sharedcomponents/sharedcomponents.h \
+		src/base/pluginmanager/pluginmanager.h \
+		/usr/include/qt5/QtCore/QVector \
+		/usr/include/qt5/QtCore/QDir \
+		/usr/include/qt5/QtCore/qdir.h \
+		/usr/include/qt5/QtCore/qfileinfo.h \
+		src/base/pluginmanager/plugin/plugin.h \
+		/usr/include/qt5/QtCore/QList \
+		src/base/pluginmanager/plugin/blocks/plugininfo.h \
+		src/base/pluginmanager/plugin/blocks/pluginsection.h \
+		src/base/pluginmanager/plugin/blocks/pluginoption.h \
+		src/base/pluginmanager/plugin/blocks/options/optioninteger.h \
+		src/base/pluginmanager/plugin/blocks/options/optionreal.h \
+		src/base/pluginmanager/plugin/blocks/options/optionenum.h \
+		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
+		src/base/pluginmanager/plugin/blocks/options/optionboolean.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/emulatormanager.o src/core/emulatormanager/emulatormanager.cc
+
 release/kernel.o: src/core/kernel/kernel.cc src/core/kernel/kernel.h \
 		/usr/include/qt5/QtWidgets/QFileDialog \
 		/usr/include/qt5/QtWidgets/qfiledialog.h \
@@ -6179,7 +6398,8 @@ release/kernel.o: src/core/kernel/kernel.cc src/core/kernel/kernel.h \
 		src/base/pluginmanager/plugin/blocks/options/optionenum.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
-		src/base/pluginmanager/plugin/blocks/options/optionboolean.h
+		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
+		src/core/emulatormanager/emulatormanager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/kernel.o src/core/kernel/kernel.cc
 
 release/aboutwindow.o: src/gui/aboutwindow/aboutwindow.cc src/gui/aboutwindow/aboutwindow.h \
@@ -10703,6 +10923,9 @@ release/moc_sharedcomponents.o: release/moc_sharedcomponents.cpp
 
 release/moc_text.o: release/moc_text.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/moc_text.o release/moc_text.cpp
+
+release/moc_emulatormanager.o: release/moc_emulatormanager.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/moc_emulatormanager.o release/moc_emulatormanager.cpp
 
 release/moc_kernel.o: release/moc_kernel.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/moc_kernel.o release/moc_kernel.cpp

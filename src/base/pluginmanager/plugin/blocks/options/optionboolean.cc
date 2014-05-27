@@ -51,6 +51,8 @@ void Base::OptionBoolean::autoLoad ( QMap< QString, QString >& values )
       option_current_value = ( values[ option_command ] == "1" );
    }
    
+   emit valuesUpdated ();
+   
    return;
 }
 
@@ -74,6 +76,8 @@ bool Base::OptionBoolean::defaultValue ( void )
 void Base::OptionBoolean::reset ( void )
 {
    option_current_value = option_default_value;
+   
+   emit valuesUpdated ();
    
    return;
 }

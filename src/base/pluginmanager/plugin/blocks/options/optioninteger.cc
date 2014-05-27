@@ -53,6 +53,8 @@ void Base::OptionInteger::autoLoad ( QMap< QString, QString >& values )
       option_current_value = values[ option_command ].toLong ();
    }
    
+   emit valuesUpdated ();
+   
    return;
 }
 
@@ -76,6 +78,8 @@ long int Base::OptionInteger::defaultValue ( void )
 void Base::OptionInteger::reset ( void )
 {
    option_current_value = option_default_value;
+   
+   emit valuesUpdated ();
    
    return;
 }

@@ -54,7 +54,7 @@ QString Base::OptionBiInteger::toString ( void )
    return ( string_form );
 }
 
-void Base::OptionBiInteger::autoLoadValue ( QMap< QString , QString >& values )
+void Base::OptionBiInteger::autoLoad ( QMap< QString , QString >& values )
 {
    if ( values.contains ( option_command_a ) )
    {
@@ -65,6 +65,8 @@ void Base::OptionBiInteger::autoLoadValue ( QMap< QString , QString >& values )
    {
       option_current_value_b = values[ option_command_b ].toLong ();
    }
+   
+   emit valuesUpdated ();
    
    return;
 }
@@ -101,6 +103,8 @@ void Base::OptionBiInteger::reset ( void )
 {
    option_current_value_a = option_default_value_a;
    option_current_value_b = option_default_value_b;
+   
+   emit valuesUpdated ();
    
    return;
 }

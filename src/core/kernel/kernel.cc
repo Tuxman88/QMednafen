@@ -23,6 +23,8 @@ Core::Kernel::Kernel ( Base::SharedComponents* new_shared_components ) :
    QObject ()
 {
    shared_components = new_shared_components;
+   
+   emulator_manager = new Core::EmulatorManager ( shared_components );
 }
 
 Core::Kernel::~Kernel ( void )
@@ -71,15 +73,16 @@ void Core::Kernel::openGameDisc ( void )
 
 void Core::Kernel::openRom ( void )
 {
-   qDebug () << "Kernel: Opening ROM";
-   
-   QString selected_file = QFileDialog::getOpenFileName ( 0 , "Prueba1" , "" );
+   QString selected_file = QFileDialog::getOpenFileName ( 0 , shared_components->text ()->operator[] ( Base::KeyTxtGuiOpenROMSelectFile ) );
    
    qDebug () << "Kernel: File to open: " << selected_file;
+   qDebug () << "Kernel: Requesting options for file.";
    
    QStringList emulator_options = shared_components->plugins ()->getOptions ( extractExtention ( selected_file ) );
    
-   qDebug () << "Kernel: Emulator options: " << emulator_options;
+   qDebug () << "Kernel: Requesting instance creation.";
+   
+   emulator_manager->addInstance ( selected_file , Core::EmulatorManager::Auto , emulator_options );
    
    return;
 }
@@ -88,6 +91,8 @@ void Core::Kernel::reloadOptions ( void )
 {
    qDebug () << "Kernel: Reloading options";
    
+   shared_components->plugins ()->loadValues ();
+   
    return;
 }
 
@@ -95,12 +100,16 @@ void Core::Kernel::resetOptions ( void )
 {
    qDebug () << "Kernel: Reseting options";
    
+   shared_components->plugins ()->resetValues ();
+   
    return;
 }
 
 void Core::Kernel::saveOptions ( void )
 {
    qDebug () << "Kernel: Saving options";
+   
+   shared_components->plugins ()->saveValues ();
    
    return;
 }

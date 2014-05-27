@@ -36,13 +36,12 @@ int main ( int argc , char** argv )
    
    // Create components
    shared_components = new Base::SharedComponents ();
-   
    shared_components->plugins ()->loadValues ();
    
-   kernel        = new Core::Kernel      ( shared_components );
-   main_window   = new Gui::MainWindow   ( shared_components );
-   config_window = new Gui::ConfigWindow ( shared_components );
-   about_window  = new Gui::AboutWindow  ( shared_components );
+   kernel           = new Core::Kernel      ( shared_components );
+   main_window      = new Gui::MainWindow   ( shared_components );
+   config_window    = new Gui::ConfigWindow ( shared_components );
+   about_window     = new Gui::AboutWindow  ( shared_components );
    
    // Connect signals from the MainWindow
    QObject::connect ( main_window , SIGNAL ( exitNow () )      , kernel , SLOT ( exitNow () ) );

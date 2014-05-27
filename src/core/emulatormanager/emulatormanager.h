@@ -15,46 +15,55 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */ 
+ */  
 
-# ifndef PLUGINMANAGER_H_
-# define PLUGINMANAGER_H_
+# ifndef EMULATORMANAGER_H_
+# define EMULATORMANAGER_H_
 
 # include <QtCore/QObject>
-# include <QtCore/QString>
-# include <QtCore/QVector>
-# include <QtCore/QDir>
-# include <QtCore/QStringList>
 # include <QtCore/QDebug>
+# include <QtCore/QStringList>
 
-# include "plugin/plugin.h"
+# include "../../base/base.h"
 
-namespace Base
+namespace Core
 {
-   class PluginManager : public QObject
+   class EmulatorManager : public QObject
    {
       Q_OBJECT
       
       public:
-         enum LoadState
+         enum DetectionType
          {
-            AllOk = 0 ,
-            NonePluginLoaded
+            Auto = 0 ,
+            Lynx ,
+            GB ,
+            GBA ,
+            NeoGeoPocket ,
+            NES ,
+            PCE ,
+            PCE_FAST ,
+            PCFX ,
+            GG ,
+            MD ,
+            SMS ,
+            PSX ,
+            SNES ,
+            VB ,
+            WSWAN
          };
       
       public:
-         explicit PluginManager ( void );
-         virtual ~PluginManager ( void );
+         explicit EmulatorManager ( Base::SharedComponents* new_shared_components );
+         virtual ~EmulatorManager ( void );
          
-         LoadState load ( QStringList folder_paths );
-         void loadValues ( void );
-         void saveValues ( void );
-         void resetValues ( void );
-         QVector< Base::Plugin* >* pluginsLoaded ( void );
-         QStringList getOptions ( const QString& file_extention );
+         void addInstance ( const QString& file_path , const DetectionType& file_type , const QStringList& options );
          
       private:
-         QVector< Base::Plugin* >* plugins_loaded;
+         QString detectionTypeString ( const DetectionType& file_type );
+         
+      private:
+         Base::SharedComponents* shared_components;
    };
 }
 

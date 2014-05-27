@@ -57,6 +57,7 @@ namespace Base
       public slots:
          void loadOptions ( void );
          void saveOptions ( void );
+         void resetOptions ( void );
          
       private:
          QString save_path;

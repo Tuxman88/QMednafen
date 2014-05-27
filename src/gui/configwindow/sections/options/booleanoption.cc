@@ -49,9 +49,17 @@ void Gui::BooleanOption::buildGui ( void )
    return;
 }
 
+void Gui::BooleanOption::valuesUpdated ( void )
+{
+   value_check->setChecked ( option->currentValue () );
+   
+   return;
+}
+
 void Gui::BooleanOption::connectAll ( void )
 {
    connect ( value_check , SIGNAL ( stateChanged ( int ) ) , this , SLOT ( updateValue ( int ) ) );
+   connect ( option , SIGNAL ( valuesUpdated () ) , this , SLOT ( valuesUpdated () ) );
    
    return;
 }

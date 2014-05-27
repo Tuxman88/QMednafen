@@ -38,6 +38,16 @@ Base::PluginSection::~PluginSection ( void )
    delete section_options;
 }
 
+void Base::PluginSection::resetValues ( void )
+{
+   for ( int i = 0; i < section_options->size (); i++ )
+   {
+      section_options->operator[] ( i )->reset ();
+   }
+   
+   return;
+}
+
 QStringList Base::PluginSection::getOptions ( void )
 {
    QStringList options;

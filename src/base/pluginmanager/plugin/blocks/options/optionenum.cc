@@ -63,6 +63,8 @@ void Base::OptionEnum::autoLoad ( QMap< QString, QString >& values )
       option_current_value = values[ option_command ];
    }
    
+   emit valuesUpdated ();
+   
    return;
 }
 
@@ -86,6 +88,8 @@ QString Base::OptionEnum::defaultValue ( void )
 void Base::OptionEnum::reset ( void )
 {
    option_current_value = option_default_value;
+      
+   emit valuesUpdated ();
    
    return;
 }

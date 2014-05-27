@@ -25,6 +25,7 @@
 # include <QtCore/QDebug>
 
 # include "../../base/base.h"
+# include "../emulatormanager/emulatormanager.h"
 
 namespace Core
 {
@@ -42,6 +43,7 @@ namespace Core
          void closeAboutWindow ( void );
          void openConfigWindow ( void );
          void openAboutWindow ( void );
+         void addInstance ( const QString& file_path , const Core::EmulatorManager::DetectionType& file_type , const QStringList& options );
          
       public slots:
          void openRom ( void );
@@ -59,6 +61,7 @@ namespace Core
          
       private:
          Base::SharedComponents* shared_components;
+         Core::EmulatorManager* emulator_manager;
    };
 }
 

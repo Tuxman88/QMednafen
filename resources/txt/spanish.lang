@@ -50,6 +50,7 @@ txt.gui.config.console.pluginversion=Version del plugin: %1
 txt.gui.config.save=&Guardar
 txt.gui.config.reload=&Recargar
 txt.gui.config.reset=Reini&ciar
+txt.gui.openrom.selectfile=Seleccione el ROM a usar
 txt.gui.about.abouttitle=Acerca de
 txt.gui.about.abouttab=&Acerca de
 txt.gui.about.creditstab=Ag&radecimientos

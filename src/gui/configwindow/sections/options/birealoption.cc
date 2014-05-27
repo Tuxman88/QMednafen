@@ -58,10 +58,19 @@ void Gui::BiRealOption::buildGui ( void )
    return;
 }
 
+void Gui::BiRealOption::valuesUpdated ( void )
+{
+   value_spin_a->setValue ( option->currentValueA () );
+   value_spin_b->setValue ( option->currentValueB () );
+   
+   return;
+}
+
 void Gui::BiRealOption::connectAll ( void )
 {
    connect ( value_spin_a , SIGNAL ( valueChanged ( double ) ) , this , SLOT ( updateValueA ( const double& ) ) );
    connect ( value_spin_b , SIGNAL ( valueChanged ( double ) ) , this , SLOT ( updateValueB ( const double& ) ) );
+   connect ( option , SIGNAL ( valuesUpdated () ) , this , SLOT ( valuesUpdated () ) );   
    
    return;
 }

@@ -84,6 +84,7 @@ void Base::Text::fillDefault ( void )
    current_text[ QString ( "txt.gui.config.controloptions" ) ]        = QString ( "&Control options" );
    current_text[ QString ( "txt.gui.config.ingameoptions" ) ]         = QString ( "&In-Game options" );
    current_text[ QString ( "txt.gui.config.title" ) ]                 = QString ( "Configuration" );
+   current_text[ QString ( "txt.gui.openrom.selectfile" ) ]           = QString ( "Select the ROM file to use" );
    current_text[ QString ( "txt.gui.about.abouttitle" ) ]             = QString ( "About" );
    current_text[ QString ( "txt.gui.about.abouttab" ) ]               = QString ( "&About" );
    current_text[ QString ( "txt.gui.about.creditstab" ) ]             = QString ( "C&redits" );

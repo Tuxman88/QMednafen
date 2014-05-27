@@ -59,9 +59,17 @@ void Gui::EnumOption::buildGui ( void )
    return;
 }
 
+void Gui::EnumOption::valuesUpdated ( void )
+{
+   value_combo->setCurrentText ( index_value_name[ option->currentValue () ] );
+   
+   return;
+}
+
 void Gui::EnumOption::connectAll ( void )
 {
    connect ( value_combo , SIGNAL ( currentTextChanged ( QString ) ) , this , SLOT ( updateValue ( QString ) ) );
+   connect ( option , SIGNAL ( valuesUpdated () ) , this , SLOT ( valuesUpdated () ) );
    
    return;
 }

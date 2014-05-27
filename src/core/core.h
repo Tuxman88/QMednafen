@@ -21,5 +21,6 @@
 # define CORE_H_
 
 # include "kernel/kernel.h"
+# include "emulatormanager/emulatormanager.h"
 
 # endif

@@ -56,10 +56,19 @@ void Gui::BiIntegerOption::buildGui ( void )
    return;
 }
 
+void Gui::BiIntegerOption::valuesUpdated ( void )
+{
+   value_spin_a->setValue ( option->currentValueA () );
+   value_spin_b->setValue ( option->currentValueB () );
+   
+   return;
+}
+
 void Gui::BiIntegerOption::connectAll ( void )
 {
    connect ( value_spin_a , SIGNAL ( valueChanged ( const int& ) ) , this , SLOT ( updateValueA ( const int& ) ) );
    connect ( value_spin_b , SIGNAL ( valueChanged ( const int& ) ) , this , SLOT ( updateValueB ( const int& ) ) );
+   connect ( option , SIGNAL ( valuesUpdated () ) , this , SLOT ( valuesUpdated () ) );
    
    return;
 }

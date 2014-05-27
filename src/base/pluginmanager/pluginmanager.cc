@@ -32,10 +32,38 @@ Base::PluginManager::~PluginManager ( void )
 
 void Base::PluginManager::loadValues ( void )
 {
+   qDebug () << "PluginManager: Requesting plugins to auto-load configuration values.";
+   
    // Iterate over the plugins and ask them to create/load their config values.
    for ( int i = 0; i < plugins_loaded->size (); i++ )
    {
       plugins_loaded->operator[] ( i )->loadOptions ();
+   }
+   
+   return;
+}
+
+void Base::PluginManager::saveValues ( void )
+{
+   qDebug () << "PluginManager: Requesting plugins to auto-save configuration values.";
+   
+   // Iterate over the plugins and ask them to create/save their config values.
+   for ( int i = 0; i < plugins_loaded->size (); i++ )
+   {
+      plugins_loaded->operator[] ( i )->saveOptions ();
+   }
+   
+   return;
+}
+
+void Base::PluginManager::resetValues ( void )
+{
+   qDebug () << "PluginManager: Requesting plugins to auto-reset configuration values.";
+   
+   // Iterate over the plugins and ask them to create/save their config values.
+   for ( int i = 0; i < plugins_loaded->size (); i++ )
+   {
+      plugins_loaded->operator[] ( i )->resetOptions ();
    }
    
    return;
@@ -46,7 +74,7 @@ Base::PluginManager::LoadState Base::PluginManager::load ( QStringList folder_pa
    // Iterate over the list of paths where might be plugins
    for ( int i = 0; i < folder_paths.size (); i++ )
    {
-      qDebug () << "PluginManager::load: Checking folder " << folder_paths[ i ];
+      qDebug () << "PluginManager: Looking for plugins on folder " << folder_paths[ i ];
       QDir plugins_folder ( folder_paths[ i ] );
       
       // Such folder exists?
@@ -68,8 +96,7 @@ Base::PluginManager::LoadState Base::PluginManager::load ( QStringList folder_pa
          {
             // Create a file for this plugin file.
             Base::Plugin* new_plugin;
-            qDebug () << "PluginManager::load: Validating file " << ( folder_paths[ i ] + files[ j ] );
-            QFile plugin_file ( folder_paths[ i ] + files[ j ] );
+            QFile plugin_file ( folder_paths[ i ] + ( ( folder_paths[ i ].endsWith ( QDir::separator () ) ) ? QString ( "" ) : QDir::separator () ) + files[ j ] );
             
             // Try to open the file
             if ( plugin_file.open ( QIODevice::ReadOnly | QIODevice::Text ) )
@@ -78,7 +105,7 @@ Base::PluginManager::LoadState Base::PluginManager::load ( QStringList folder_pa
                /*PLUGIN VALIDATION*/
                
                // Create new plugin
-               QString new_save_path = folder_paths[ i ] + files[ j ];
+               QString new_save_path = folder_paths[ i ] + ( ( folder_paths[ i ].endsWith ( QDir::separator () ) ) ? QString ( "" ) : QDir::separator () ) + files[ j ];
                
                new_save_path.replace ( new_save_path.size () - 3 , 3 , "cfg" );
                
@@ -86,7 +113,6 @@ Base::PluginManager::LoadState Base::PluginManager::load ( QStringList folder_pa
                new_plugin->setSavePath ( new_save_path );
                
                // Load the plugin
-               qDebug () << "PluginManager::load: Loading file...";
                plugin_file >> (*new_plugin);
                
                // Store the plugin
@@ -94,7 +120,7 @@ Base::PluginManager::LoadState Base::PluginManager::load ( QStringList folder_pa
             }
             else
             {
-               qDebug () << "PluginManager::load: Error: Can't open plugin file " << files[ j ] << " from " << folder_paths[ i ];
+               qDebug () << "PluginManager: Error: Can't open plugin file " << files[ j ] << " from " << folder_paths[ i ];
             }
          }
       }
@@ -115,6 +141,7 @@ QVector< Base::Plugin* >* Base::PluginManager::pluginsLoaded ( void )
 
 QStringList Base::PluginManager::getOptions ( const QString& file_extention )
 {
+   qDebug () << "PluginManager: Requesting plugins options for file extention " << file_extention;
    QStringList options;
    
    for ( int i = 0; i < plugins_loaded->size (); i++ )

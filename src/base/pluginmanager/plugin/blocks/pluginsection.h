@@ -55,6 +55,7 @@ namespace Base
          void setName ( const QString& new_name );
          QList< Base::PluginOption* >* options ( void );
          void autoLoad ( QMap< QString , QString >& values );
+         void resetValues ( void );
          QStringList getOptions ( void );
          
          friend QFile& (::operator>>) ( QFile& input_file , Base::PluginSection& plugin_section );

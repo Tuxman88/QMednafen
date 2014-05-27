@@ -66,6 +66,8 @@ void Base::OptionBiReal::autoLoad ( QMap< QString , QString >& values )
       option_current_value_b = values[ option_command_b ].toDouble ();
    }
    
+   emit valuesUpdated ();
+   
    return;
 }
 
@@ -101,6 +103,8 @@ void Base::OptionBiReal::reset ( void )
 {
    option_current_value_a = option_default_value_a;
    option_current_value_b = option_default_value_b;
+   
+   emit valuesUpdated ();
    
    return;
 }

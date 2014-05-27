@@ -60,6 +60,9 @@ namespace Base
          
          friend QTextStream& (::operator<<) ( QTextStream& output_file , Base::PluginOption* plugin_option );
          
+      signals:
+         void valuesUpdated ( void );
+         
       protected:
          virtual void saveOption ( QTextStream& output_file );
          

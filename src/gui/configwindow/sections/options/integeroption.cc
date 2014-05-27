@@ -50,9 +50,17 @@ void Gui::IntegerOption::buildGui ( void )
    return;
 }
 
+void Gui::IntegerOption::valuesUpdated ( void )
+{
+   value_spin->setValue ( option->currentValue () );
+   
+   return;
+}
+
 void Gui::IntegerOption::connectAll ( void )
 {
    connect ( value_spin , SIGNAL ( valueChanged ( int ) ) , this , SLOT ( updateValue ( int ) ) );
+   connect ( option , SIGNAL ( valuesUpdated () ) , this , SLOT ( valuesUpdated () ) );
    
    return;
 }
