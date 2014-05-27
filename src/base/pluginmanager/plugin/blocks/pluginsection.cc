@@ -107,6 +107,7 @@ QFile& operator>> ( QFile& input_file , Base::PluginSection& plugin_section )
       line = input_file.readLine ();
       line = line.simplified ();
       
+      
       if ( line != "endsection" && line.size () > 0 )
       {
          QStringList pieces;
