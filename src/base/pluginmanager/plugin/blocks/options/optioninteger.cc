@@ -37,11 +37,12 @@ Base::OptionInteger::~OptionInteger ( void )
 {
 }
 
-QString Base::OptionInteger::toString ( void )
+QStringList Base::OptionInteger::toString ( void )
 {
-   QString string_form;
+   QStringList string_form;
    
-   string_form = QString ( "-%1 %2" ).arg ( option_command ).arg ( option_current_value );
+   string_form << QString ( "-%1" ).arg ( option_command );
+   string_form << QString ( "%1" ).arg ( option_current_value );
    
    return ( string_form );
 }

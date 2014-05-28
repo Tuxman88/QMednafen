@@ -29,6 +29,7 @@ Core::Kernel::Kernel ( Base::SharedComponents* new_shared_components ) :
 
 Core::Kernel::~Kernel ( void )
 {
+   delete emulator_manager;
 }
 
 void Core::Kernel::about ( void )

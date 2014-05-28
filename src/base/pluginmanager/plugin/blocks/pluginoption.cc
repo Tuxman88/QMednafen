@@ -30,9 +30,9 @@ Base::PluginOption::~PluginOption ( void )
 {
 }
 
-QString Base::PluginOption::toString ( void )
+QStringList Base::PluginOption::toString ( void )
 {
-   QString option;
+   QStringList option;
    
    return ( option );
 }

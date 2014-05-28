@@ -73,11 +73,11 @@ int main ( int argc , char** argv )
    app.exec ();
    
    // Delete needed components
-   delete shared_components;
    delete kernel;
    delete main_window;
    delete config_window;
    delete about_window;
+   delete shared_components;
    
    return ( 0 );
 }

@@ -22,5 +22,6 @@
 
 # include "kernel/kernel.h"
 # include "emulatormanager/emulatormanager.h"
+# include "emulatormanager/emulatorinstance.h"
 
 # endif

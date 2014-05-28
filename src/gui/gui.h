@@ -37,6 +37,7 @@
 # include "configwindow/sections/options/enumoption.h"
 # include "configwindow/sections/options/biintegeroption.h"
 # include "configwindow/sections/options/birealoption.h"
+# include "configwindow/sections/options/stringoption.h"
 # include "aboutwindow/aboutwindow.h"
 # include "aboutwindow/panels/aboutpanel.h"
 # include "aboutwindow/panels/creditspanel.h"

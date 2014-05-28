@@ -35,6 +35,7 @@
 # include "options/optionbireal.h"
 # include "options/optionboolean.h"
 # include "options/optionenum.h"
+# include "options/optionstring.h"
 
 namespace Base { class PluginSection; }
 

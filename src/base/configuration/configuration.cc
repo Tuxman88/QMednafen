@@ -53,6 +53,9 @@ Base::Configuration::Configuration ( void )
    if ( !settings->contains ( Base::KeyCfgCorePathsMednafen ) )
       settings->setValue ( Base::KeyCfgCorePathsMednafen , Base::ValCfgCorePathsMednafen );
    
+   if ( !settings->contains ( Base::KeyCfgCoreCommandOrder ) )
+      settings->setValue ( Base::KeyCfgCoreCommandOrder , Base::ValCfgCoreCommandOrder );
+   
    settings->sync ();
 }
 
@@ -72,6 +75,7 @@ void Base::Configuration::resetValues ( void )
    settings->setValue ( Base::KeyCfgGuiShortcutAbout , Base::ValCfgGuiShortcutAbout );
    settings->setValue ( Base::KeyCfgCorePathsPlugins , Base::ValCfgCorePathsPlugins );
    settings->setValue ( Base::KeyCfgCorePathsMednafen , Base::ValCfgCorePathsMednafen );
+   settings->setValue ( Base::KeyCfgCoreCommandOrder , Base::ValCfgCoreCommandOrder );
    
    emit updateValues ();
    

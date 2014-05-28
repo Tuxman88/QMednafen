@@ -17,39 +17,39 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-# include "optionboolean.h"
+# include "optionstring.h"
 
-Base::OptionBoolean::OptionBoolean ( QString options , QStringList values )
+Base::OptionString::OptionString ( QString options , QStringList values )
    : PluginOption ()
 {
-   option_type = Boolean;
+   option_type = String;
    
-   // The bool values only correspond to one comman option
+   // The QString values only correspond to one comman option
    option_command = options;
    option_description = values[ 0 ];
-   option_default_value = values[ 2 ] == "1";
+   option_default_value = values[ 2 ];
    reset ();
 }
 
-Base::OptionBoolean::~OptionBoolean ( void )
+Base::OptionString::~OptionString ( void )
 {
 }
 
-QStringList Base::OptionBoolean::toString ( void )
+QStringList Base::OptionString::toString ( void )
 {
    QStringList string_form;
    
    string_form << QString ( "-%1" ).arg ( option_command );
-   string_form << QString ( "%1" ).arg ( option_current_value );
+   string_form << QString ( "\"%1\"" ).arg ( option_current_value );
    
    return ( string_form );
 }
 
-void Base::OptionBoolean::autoLoad ( QMap< QString, QString >& values )
+void Base::OptionString::autoLoad ( QMap< QString, QString >& values )
 {
    if ( values.contains ( option_command ) )
    {
-      option_current_value = ( values[ option_command ] == "1" );
+      option_current_value = ( values[ option_command ] );
    }
    
    emit valuesUpdated ();
@@ -57,24 +57,24 @@ void Base::OptionBoolean::autoLoad ( QMap< QString, QString >& values )
    return;
 }
 
-void Base::OptionBoolean::saveOption ( QTextStream& output_file )
+void Base::OptionString::saveOption ( QTextStream& output_file )
 {
    output_file << option_command << "=" << option_current_value << "\n";
    
    return;
 }
 
-bool Base::OptionBoolean::currentValue ( void )
+QString Base::OptionString::currentValue ( void )
 {
    return ( option_current_value );
 }
 
-bool Base::OptionBoolean::defaultValue ( void )
+QString Base::OptionString::defaultValue ( void )
 {
    return ( option_default_value );
 }
 
-void Base::OptionBoolean::reset ( void )
+void Base::OptionString::reset ( void )
 {
    option_current_value = option_default_value;
    
@@ -83,7 +83,7 @@ void Base::OptionBoolean::reset ( void )
    return;
 }
 
-void Base::OptionBoolean::setCurrentValue ( const bool& new_value )
+void Base::OptionString::setCurrentValue ( const QString& new_value )
 {
    option_current_value = new_value;
    

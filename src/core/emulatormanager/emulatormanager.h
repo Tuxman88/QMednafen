@@ -23,8 +23,10 @@
 # include <QtCore/QObject>
 # include <QtCore/QDebug>
 # include <QtCore/QStringList>
+# include <QtCore/QMapIterator>
 
 # include "../../base/base.h"
+# include "emulatorinstance.h"
 
 namespace Core
 {
@@ -59,11 +61,15 @@ namespace Core
          
          void addInstance ( const QString& file_path , const DetectionType& file_type , const QStringList& options );
          
+      private slots:
+         void closeEmulatorInstance ( Core::EmulatorInstance* instance );
+         
       private:
          QString detectionTypeString ( const DetectionType& file_type );
          
       private:
          Base::SharedComponents* shared_components;
+         QMap< Core::EmulatorInstance* , Core::EmulatorInstance* > game_instances;
    };
 }
 

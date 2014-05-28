@@ -93,6 +93,14 @@ void Gui::SectionPanel::buildGui ( void )
          }
             break;
             
+         case Base::PluginOption::String:
+         {
+            Gui::StringOption* string_option;
+            string_option = new Gui::StringOption ( dynamic_cast< Base::OptionString* > ( option ) );
+            main_layout->addWidget ( string_option );
+         }
+            break;
+            
          case Base::PluginOption::None:
             break;
       }

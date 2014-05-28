@@ -15,43 +15,46 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */ 
+ */   
 
-# ifndef OPTIONBOOLEAN_H_
-# define OPTIONBOOLEAN_H_
+# ifndef EMULATORINSTANCE_H_
+# define EMULATORINSTANCE_H_
 
 # include <QtCore/QObject>
 # include <QtCore/QString>
-# include <QtCore/QFile>
-# include <QtCore/QDebug>
 # include <QtCore/QStringList>
+# include <QtCore/QProcess>
+# include <cstdlib>
 
-# include "../pluginoption.h"
+# include "../../base/base.h"
 
-namespace Base
+namespace Core
 {
-   class OptionBoolean : public Base::PluginOption
+   class EmulatorInstance : public QObject
    {
       Q_OBJECT
-      
+                  
       public:
-         explicit OptionBoolean ( QString options , QStringList values );
-         virtual ~OptionBoolean ( void );
+         explicit EmulatorInstance ( Base::SharedComponents* new_shared_components );
+         virtual ~EmulatorInstance ( void );
          
-         void setCurrentValue ( const bool& new_value );
-         bool currentValue ( void );
-         bool defaultValue ( void );
-         virtual void reset ( void );
-         virtual void autoLoad ( QMap< QString , QString >& values );
-         virtual QStringList toString ( void );
+         void setGame ( const QString& new_file_name , const QStringList& new_game_options , const int& new_game_type );
+         void run ( void );
          
-      protected:
-         virtual void saveOption ( QTextStream& output_file );
+      signals:
+         void closeEmulatorInstance ( Core::EmulatorInstance* pointer );
          
-      protected:
-         bool option_current_value;
-         bool option_default_value;
-         QString option_command;
+      private slots:
+         void commandError ( void );
+         void commandFinished ( void );
+         
+      private:
+         Base::SharedComponents* shared_components;
+         QString file_path;
+         QStringList game_options;
+         int game_type;
+         QProcess emulator_process;
+         bool stop_signals;
    };
 }
 

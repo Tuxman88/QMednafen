@@ -27,6 +27,26 @@ Core::EmulatorManager::EmulatorManager ( Base::SharedComponents* new_shared_comp
 
 Core::EmulatorManager::~EmulatorManager ( void )
 {
+   qDebug () << "EmulatorManager: Closing game instances if any.";
+   QMapIterator< Core::EmulatorInstance* , Core::EmulatorInstance* > iterator ( game_instances );
+   QList< Core::EmulatorInstance* > pointers;
+   
+   while ( iterator.hasNext () )
+   {
+      iterator.next ();
+      pointers.append ( iterator.key () );
+   }
+   
+   for ( int i = 0; i < pointers.size (); i++ )
+   {
+      game_instances[ pointers[ i ] ] = 0;
+      Core::EmulatorInstance* instance;
+      instance = pointers[ i ];
+      pointers[ i ] = 0;
+      delete instance;
+   }
+   
+   pointers.clear ();
 }
 
 void Core::EmulatorManager::addInstance ( const QString& file_path , const Core::EmulatorManager::DetectionType& file_type , const QStringList& options )
@@ -34,7 +54,24 @@ void Core::EmulatorManager::addInstance ( const QString& file_path , const Core:
    qDebug () << "EmulatorManager: Receiving request to add game instance.";
    qDebug () << "                 File: " << file_path;
    qDebug () << "                 Detection type: " << file_type << " (" << detectionTypeString ( file_type ) << ")";
-   qDebug () << "                 Game options: " << options;
+   qDebug () << "                 Game options: " << options.size ();
+   
+   Core::EmulatorInstance* instance;
+   instance = new Core::EmulatorInstance ( shared_components );
+   instance->setGame ( file_path , options , (int)file_type );
+   
+   game_instances[ instance ] = instance;
+   connect ( instance , SIGNAL ( closeEmulatorInstance ( Core::EmulatorInstance* ) ) , this , SLOT ( closeEmulatorInstance ( Core::EmulatorInstance* ) ) );
+   
+   instance->run ();
+   
+   return;
+}
+
+void Core::EmulatorManager::closeEmulatorInstance ( Core::EmulatorInstance* instance )
+{
+   delete instance;
+   game_instances.remove ( instance );
    
    return;
 }

@@ -15,39 +15,41 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */ 
+ */  
 
-# ifndef PANELSECTION_H_
-# define PANELSECTION_H_
+# ifndef STRINGOPTION_H_
+# define STRINGOPTION_H_
 
-# include <QtWidgets/QGroupBox>
-# include <QtWidgets/QVBoxLayout>
+# include <QtWidgets/QWidget>
+# include <QtWidgets/QHBoxLayout>
+# include <QtWidgets/QLabel>
+# include <QtWidgets/QLineEdit>
 
-# include "../../../base/base.h"
-# include "options/integeroption.h"
-# include "options/realoption.h"
-# include "options/booleanoption.h"
-# include "options/enumoption.h"
-# include "options/biintegeroption.h"
-# include "options/birealoption.h"
-# include "options/stringoption.h"
+# include "../../../../base/base.h"
 
 namespace Gui
 {
-   class SectionPanel : public QGroupBox
+   class StringOption : public QWidget
    {
       Q_OBJECT
       
       public:
-         explicit SectionPanel ( Base::PluginSection* plugin_section );
-         virtual ~SectionPanel ( void );
+         explicit StringOption ( Base::OptionString* new_option );
+         virtual ~StringOption ( void );
+         
+      private slots:
+         void updateValue ( const QString& value );
+         void valuesUpdated ( void );
          
       private:
          void buildGui ( void );
+         void connectAll ( void );
          
       private:
-         Base::PluginSection* section_information;
-         QVBoxLayout* main_layout;
+         Base::OptionString* option;
+         QHBoxLayout* main_layout;
+         QLabel* title_label;
+         QLineEdit* value_line;
    };
 }
 

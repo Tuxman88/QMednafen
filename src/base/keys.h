@@ -53,7 +53,10 @@ namespace Base
    const QString ValCfgCorePathsPlugins = "/";
    
    const QString KeyCfgCorePathsMednafen = "cfg.core.mednafen.path";
-   const QString ValCfgCorePathsMednafen = "/usr/bin/mednafen";
+   const QString ValCfgCorePathsMednafen = "mednafen";
+   
+   const QString KeyCfgCoreCommandOrder = "cfg.core.commandorder";
+   const QString ValCfgCoreCommandOrder = "rom_options";
 
    /*
    * Keys about text. (there are just keys, the values are controlled in other place, in the "Text" class).

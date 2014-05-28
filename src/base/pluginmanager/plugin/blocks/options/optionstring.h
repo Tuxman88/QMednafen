@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-# ifndef OPTIONINTEGER_H_
-# define OPTIONINTEGER_H_
+# ifndef OPTIONSTRING_H_
+# define OPTIONSTRING_H_
 
 # include <QtCore/QObject>
 # include <QtCore/QString>
@@ -30,19 +30,17 @@
 
 namespace Base
 {
-   class OptionInteger : public Base::PluginOption
+   class OptionString : public Base::PluginOption
    {
       Q_OBJECT
       
       public:
-         explicit OptionInteger ( QString options , QStringList values );
-         virtual ~OptionInteger ( void );
+         explicit OptionString ( QString options , QStringList values );
+         virtual ~OptionString ( void );
          
-         void setCurrentValue ( const long int& new_value );
-         long int currentValue ( void );
-         long int defaultValue ( void );
-         long int maxValue ( void );
-         long int minValue ( void );
+         void setCurrentValue ( const QString& new_value );
+         QString currentValue ( void );
+         QString defaultValue ( void );
          virtual void reset ( void );
          virtual void autoLoad ( QMap< QString , QString >& values );
          virtual QStringList toString ( void );
@@ -51,10 +49,8 @@ namespace Base
          virtual void saveOption ( QTextStream& output_file );
          
       protected:
-         long int option_current_value;
-         long int option_default_value;
-         long int option_min_value;
-         long int option_max_value;
+         QString option_current_value;
+         QString option_default_value;
          QString option_command;
    };
 }
