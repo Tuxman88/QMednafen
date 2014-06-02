@@ -15,55 +15,49 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */ 
+ */  
 
-# ifndef MAINWINDOW_H_
-# define MAINWINDOW_H_
+# ifndef INSTANCECONTROL_H_
+# define INSTANCECONTROL_H_
 
-# include <QtWidgets/QMainWindow>
-# include <QtWidgets/QMenuBar>
-# include <QtWidgets/QMenu>
-# include <QtWidgets/QAction>
-# include <QtGui/QCloseEvent>
-# include <QtGui/QIcon>
+# include <QtWidgets/QWidget>
+# include <QtWidgets/QHBoxLayout>
+# include <QtWidgets/QLabel>
+# include <QtWidgets/QPushButton>
 
 # include "../../base/base.h"
-# include "menubar/menubar.h"
-# include "panels/maincontentspanel.h"
+# include "../../core/core.h"
 
 namespace Gui
 {
-   class MainWindow : public QMainWindow
+   class InstanceControl : public QWidget
    {
       Q_OBJECT
       
       public:
-         explicit MainWindow ( Base::SharedComponents* new_shared_components );
-         virtual ~MainWindow ( void );
+         explicit InstanceControl ( Base::SharedComponents* new_shared_components );
+         virtual ~InstanceControl ( void );
+         
+         void setGameInstance ( Core::EmulatorInstance* new_game_instance );
          
       signals:
-         void openRom ( void );
-         void openGameDisc ( void );
-         void library ( void );
-         void instanceManager ( void );
-         void config ( void );
-         void exitNow ( void );
-         void about ( void );
-      
-      public slots:
+         void closeGameInstance ( Core::EmulatorInstance* game_instance );
+         
+      private slots:
          void updateText ( void );
-         void closeMainWindow ( void );
+         void closeGame ( void );
          
       private:
          void buildGui ( void );
          void connectAll ( void );
-         void closeEvent ( QCloseEvent* event );
          
       private:
          Base::SharedComponents* shared_components;
-         Gui::MenuBar* menubar;
-         Gui::MainContentsPanel* main_contents_panel;
-         bool ignore_closing;
+         Core::EmulatorInstance* game_instance;
+         QHBoxLayout* main_layout;
+         QLabel* console_icon;
+         QLabel* game_name;
+         QPushButton* close_game;
    };
 }
 

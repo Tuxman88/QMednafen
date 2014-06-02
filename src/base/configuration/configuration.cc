@@ -44,6 +44,9 @@ Base::Configuration::Configuration ( void )
    if ( !settings->contains ( Base::KeyCfgGuiShortcutConfig ) )
       settings->setValue ( Base::KeyCfgGuiShortcutConfig , Base::ValCfgGuiShortcutConfig );
    
+   if ( !settings->contains ( Base::KeyCfgGuiShortcutInstanceManager ) )
+      settings->setValue ( Base::KeyCfgGuiShortcutInstanceManager , Base::ValCfgGuiShortcutInstanceManager );
+   
    if ( !settings->contains ( Base::KeyCfgGuiShortcutAbout ) )
       settings->setValue ( Base::KeyCfgGuiShortcutAbout , Base::ValCfgGuiShortcutAbout );
    
@@ -56,6 +59,9 @@ Base::Configuration::Configuration ( void )
    if ( !settings->contains ( Base::KeyCfgCoreCommandOrder ) )
       settings->setValue ( Base::KeyCfgCoreCommandOrder , Base::ValCfgCoreCommandOrder );
    
+   if ( !settings->contains ( Base::KeyCfgCoreRunVersion ) )
+      settings->setValue ( Base::KeyCfgCoreRunVersion , Base::ValCfgCoreRunVersion );
+   
    settings->sync ();
 }
 
@@ -66,16 +72,18 @@ Base::Configuration::~Configuration ( void )
 
 void Base::Configuration::resetValues ( void )
 {
-   settings->setValue ( Base::KeyCfgGuiLanguage , Base::ValCfgGuiLanguage );
-   settings->setValue ( Base::KeyCfgGuiShortcutOpenRom , Base::ValCfgGuiShortcutOpenRom );
-   settings->setValue ( Base::KeyCfgGuiShortcutOpenGameDisc , Base::ValCfgGuiShortcutOpenGameDisc );
-   settings->setValue ( Base::KeyCfgGuiShortcutLibrary , Base::ValCfgGuiShortcutLibrary );
-   settings->setValue ( Base::KeyCfgGuiShortcutExit , Base::ValCfgGuiShortcutExit );
-   settings->setValue ( Base::KeyCfgGuiShortcutConfig , Base::ValCfgGuiShortcutConfig );
-   settings->setValue ( Base::KeyCfgGuiShortcutAbout , Base::ValCfgGuiShortcutAbout );
-   settings->setValue ( Base::KeyCfgCorePathsPlugins , Base::ValCfgCorePathsPlugins );
-   settings->setValue ( Base::KeyCfgCorePathsMednafen , Base::ValCfgCorePathsMednafen );
-   settings->setValue ( Base::KeyCfgCoreCommandOrder , Base::ValCfgCoreCommandOrder );
+   settings->setValue ( Base::KeyCfgGuiLanguage                , Base::ValCfgGuiLanguage );
+   settings->setValue ( Base::KeyCfgGuiShortcutOpenRom         , Base::ValCfgGuiShortcutOpenRom );
+   settings->setValue ( Base::KeyCfgGuiShortcutOpenGameDisc    , Base::ValCfgGuiShortcutOpenGameDisc );
+   settings->setValue ( Base::KeyCfgGuiShortcutLibrary         , Base::ValCfgGuiShortcutLibrary );
+   settings->setValue ( Base::KeyCfgGuiShortcutInstanceManager , Base::ValCfgGuiShortcutInstanceManager );
+   settings->setValue ( Base::KeyCfgGuiShortcutExit            , Base::ValCfgGuiShortcutExit );
+   settings->setValue ( Base::KeyCfgGuiShortcutConfig          , Base::ValCfgGuiShortcutConfig );
+   settings->setValue ( Base::KeyCfgGuiShortcutAbout           , Base::ValCfgGuiShortcutAbout );
+   settings->setValue ( Base::KeyCfgCorePathsPlugins           , Base::ValCfgCorePathsPlugins );
+   settings->setValue ( Base::KeyCfgCorePathsMednafen          , Base::ValCfgCorePathsMednafen );
+   settings->setValue ( Base::KeyCfgCoreCommandOrder           , Base::ValCfgCoreCommandOrder );
+   settings->setValue ( Base::KeyCfgCoreRunVersion             , Base::ValCfgCoreRunVersion );
    
    emit updateValues ();
    

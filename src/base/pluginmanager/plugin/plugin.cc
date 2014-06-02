@@ -63,6 +63,21 @@ Base::Plugin::~Plugin ( void )
    delete plugin_ingame_options;
 }
 
+bool Base::Plugin::isSupported ( const QString& running_version )
+{
+   if ( running_version == "any" )
+   {
+      return ( true );
+   }
+   
+   if ( plugin_info->supportedVersions ().contains ( "any" ) )
+   {
+      return ( true );
+   }
+   
+   return ( plugin_info->supportedVersions ().contains ( running_version ) );
+}
+
 QStringList Base::Plugin::getOptions ( void )
 {
    QStringList options;

@@ -24,7 +24,7 @@ Base::SharedComponents::SharedComponents ( void )
 {
    shared_configuration = new Base::Configuration ();
    shared_text = new Base::Text ( shared_configuration );
-   shared_plugins = new Base::PluginManager ();
+   shared_plugins = new Base::PluginManager ( shared_configuration );
    
    plugin_load_state = shared_plugins->load ( shared_configuration->operator[] ( Base::KeyCfgCorePathsPlugins ).split ( ";" ) );
 }

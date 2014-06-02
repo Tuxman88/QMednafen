@@ -38,10 +38,13 @@
 # include "configwindow/sections/options/biintegeroption.h"
 # include "configwindow/sections/options/birealoption.h"
 # include "configwindow/sections/options/stringoption.h"
+# include "configwindow/sections/options/pathoption.h"
 # include "aboutwindow/aboutwindow.h"
 # include "aboutwindow/panels/aboutpanel.h"
 # include "aboutwindow/panels/creditspanel.h"
 # include "aboutwindow/panels/licensepanel.h"
 # include "aboutwindow/panels/authorsection.h"
+# include "instancemanager/instancemanager.h"
+# include "instancemanager/instancecontrol.h"
 
 # endif

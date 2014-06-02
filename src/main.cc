@@ -33,23 +33,26 @@ int main ( int argc , char** argv )
    Gui::MainWindow* main_window;
    Gui::ConfigWindow* config_window;
    Gui::AboutWindow* about_window;
+   Gui::InstanceManager* instance_manager;
    
    // Create components
    shared_components = new Base::SharedComponents ();
    shared_components->plugins ()->loadValues ();
    
-   kernel           = new Core::Kernel      ( shared_components );
-   main_window      = new Gui::MainWindow   ( shared_components );
-   config_window    = new Gui::ConfigWindow ( shared_components );
-   about_window     = new Gui::AboutWindow  ( shared_components );
+   kernel           = new Core::Kernel         ( shared_components );
+   main_window      = new Gui::MainWindow      ( shared_components );
+   config_window    = new Gui::ConfigWindow    ( shared_components );
+   about_window     = new Gui::AboutWindow     ( shared_components );
+   instance_manager = new Gui::InstanceManager ( shared_components );
    
    // Connect signals from the MainWindow
-   QObject::connect ( main_window , SIGNAL ( exitNow () )      , kernel , SLOT ( exitNow () ) );
-   QObject::connect ( main_window , SIGNAL ( about () )        , kernel , SLOT ( about () ) );
-   QObject::connect ( main_window , SIGNAL ( openGameDisc () ) , kernel , SLOT ( openGameDisc () ) );
-   QObject::connect ( main_window , SIGNAL ( openRom () )      , kernel , SLOT ( openRom () ) );
-   QObject::connect ( main_window , SIGNAL ( config () )       , kernel , SLOT ( config () ) );
-   QObject::connect ( main_window , SIGNAL ( library () )      , kernel , SLOT ( library () ) );
+   QObject::connect ( main_window , SIGNAL ( exitNow () )         , kernel , SLOT ( exitNow () ) );
+   QObject::connect ( main_window , SIGNAL ( about () )           , kernel , SLOT ( about () ) );
+   QObject::connect ( main_window , SIGNAL ( openGameDisc () )    , kernel , SLOT ( openGameDisc () ) );
+   QObject::connect ( main_window , SIGNAL ( openRom () )         , kernel , SLOT ( openRom () ) );
+   QObject::connect ( main_window , SIGNAL ( config () )          , kernel , SLOT ( config () ) );
+   QObject::connect ( main_window , SIGNAL ( library () )         , kernel , SLOT ( library () ) );
+   QObject::connect ( main_window , SIGNAL ( instanceManager () ) , kernel , SLOT ( instanceManager () ) );
    
    // Connect signals from the ConfigWindow
    QObject::connect ( config_window , SIGNAL ( saveOptions () )   , kernel , SLOT ( saveOptions () ) );
@@ -57,11 +60,13 @@ int main ( int argc , char** argv )
    QObject::connect ( config_window , SIGNAL ( resetOptions () )  , kernel , SLOT ( resetOptions () ) );
    
    // Connect signals from the Kernel
-   QObject::connect ( kernel , SIGNAL ( closeConfigWindow () ) , config_window , SLOT ( closeConfigWindow () ) );
-   QObject::connect ( kernel , SIGNAL ( closeAboutWindow () )  , about_window  , SLOT ( closeAboutWindow () ) );
-   QObject::connect ( kernel , SIGNAL ( closeMainWindow () )   , main_window   , SLOT ( closeMainWindow () ) );
-   QObject::connect ( kernel , SIGNAL ( openConfigWindow () )  , config_window , SLOT ( openConfigWindow () ) );
-   QObject::connect ( kernel , SIGNAL ( openAboutWindow () )   , about_window  , SLOT ( openAboutWindow () ) );
+   QObject::connect ( kernel , SIGNAL ( closeConfigWindow () )                           , config_window    , SLOT ( closeConfigWindow () ) );
+   QObject::connect ( kernel , SIGNAL ( closeAboutWindow () )                            , about_window     , SLOT ( closeAboutWindow () ) );
+   QObject::connect ( kernel , SIGNAL ( closeMainWindow () )                             , main_window      , SLOT ( closeMainWindow () ) );
+   QObject::connect ( kernel , SIGNAL ( closeInstanceManager () )                        , instance_manager , SLOT ( closeInstanceManager () ) );
+   QObject::connect ( kernel , SIGNAL ( openConfigWindow () )                            , config_window    , SLOT ( openConfigWindow () ) );
+   QObject::connect ( kernel , SIGNAL ( openAboutWindow () )                             , about_window     , SLOT ( openAboutWindow () ) );
+   QObject::connect ( kernel , SIGNAL ( openInstanceManager ( Core::EmulatorManager* ) ) , instance_manager , SLOT ( openInstanceManager ( Core::EmulatorManager* ) ) );
    
    // Display window
    main_window->show ();

@@ -19,9 +19,10 @@
 
 # include "pluginmanager.h"
 
-Base::PluginManager::PluginManager ( void )
+Base::PluginManager::PluginManager ( Base::Configuration* new_shared_configuration )
    : QObject ()
 {
+   shared_configuration = new_shared_configuration;
    plugins_loaded = new QVector< Base::Plugin* > ();
 }
 
@@ -115,8 +116,32 @@ Base::PluginManager::LoadState Base::PluginManager::load ( QStringList folder_pa
                // Load the plugin
                plugin_file >> (*new_plugin);
                
-               // Store the plugin
-               plugins_loaded->append ( new_plugin );
+               // Store the plugin if it has options to offer
+               if ( ( new_plugin->audioOptions ()->size () > 0 ) ||
+                    ( new_plugin->controlsOptions ()->size () > 0 ) ||
+                    ( new_plugin->videoOptions ()->size () > 0 ) ||
+                    ( new_plugin->inGameOptions ()->size () > 0 )
+                  )
+               {
+                  // The plugin is not empty... is supported?
+                  if ( new_plugin->isSupported ( shared_configuration->operator[] ( Base::KeyCfgCoreRunVersion ) ) )
+                  {
+                     plugins_loaded->append ( new_plugin );
+                  }
+                  else
+                  {
+                     qDebug () << "PluginManager: Can't use plugin.";
+                     qDebug () << "               File: " << plugin_file.fileName ();
+                     qDebug () << "               Running version: " << shared_configuration->operator[] ( Base::KeyCfgCoreRunVersion );
+                     qDebug () << "               Plugin supported versions: " << new_plugin->info ()->supportedVersions ();
+                     
+                     delete new_plugin;
+                  }
+               }
+               else
+               {
+                  delete new_plugin;
+               }
             }
             else
             {

@@ -46,6 +46,7 @@ namespace Base
          QString author ( void ) const;
          QString description ( void ) const;
          QStringList extentions ( void ) const;
+         QStringList supportedVersions ( void ) const;
          bool hasExtention ( const QString& extention );
          
          friend QFile& (::operator>>) ( QFile& input_file , Base::PluginInfo& plugin_info );
@@ -58,6 +59,7 @@ namespace Base
          QString plugin_author;
          QString plugin_description;
          QStringList plugin_extentions;
+         QStringList plugin_supported_versions;
    };
 }
 

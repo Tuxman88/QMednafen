@@ -41,6 +41,7 @@ namespace Gui
          void openRom ( void );
          void openGameDisc ( void );
          void library ( void );
+         void instanceManager ( void );
          void config ( void );
          void exitNow ( void );
          void about ( void );
@@ -57,14 +58,15 @@ namespace Gui
          Base::SharedComponents* shared_components;
          QMenu* menu_file;
          QMenu* menu_config;
+         QMenu* menu_tools;
          QMenu* menu_help;
          QAction* file_openrom;
          QAction* file_opengamedisc;
          QAction* file_separator1;
-         QAction* file_library;
-         QAction* file_separator2;
          QAction* file_exit;
          QAction* config_config;
+         QAction* tools_instancemanager;
+         QAction* tools_library;
          QAction* help_about;
    };
 }

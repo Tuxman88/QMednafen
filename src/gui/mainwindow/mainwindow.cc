@@ -48,19 +48,20 @@ void Gui::MainWindow::buildGui ( void )
 
 void Gui::MainWindow::connectAll ( void )
 {
-   connect ( shared_components->text () , SIGNAL ( updateText () )   , this , SLOT   ( updateText () ) );
-   connect ( menubar                    , SIGNAL ( openRom () )      , this , SIGNAL ( openRom () ) );   
-   connect ( menubar                    , SIGNAL ( openGameDisc () ) , this , SIGNAL ( openGameDisc () ) );
-   connect ( menubar                    , SIGNAL ( library () )      , this , SIGNAL ( library () ) );
-   connect ( menubar                    , SIGNAL ( config () )       , this , SIGNAL ( config () ) );
-   connect ( menubar                    , SIGNAL ( exitNow () )      , this , SIGNAL ( exitNow () ) );
-   connect ( menubar                    , SIGNAL ( about () )        , this , SIGNAL ( about () ) );
-   connect ( main_contents_panel        , SIGNAL ( openRom () )      , this , SIGNAL ( openRom () ) );   
-   connect ( main_contents_panel        , SIGNAL ( openGameDisc () ) , this , SIGNAL ( openGameDisc () ) );
-   connect ( main_contents_panel        , SIGNAL ( library () )      , this , SIGNAL ( library () ) );
-   connect ( main_contents_panel        , SIGNAL ( config () )       , this , SIGNAL ( config () ) );
-   connect ( main_contents_panel        , SIGNAL ( exitNow () )      , this , SIGNAL ( exitNow () ) );
-   connect ( main_contents_panel        , SIGNAL ( about () )        , this , SIGNAL ( about () ) );
+   connect ( shared_components->text () , SIGNAL ( updateText () )      , this , SLOT   ( updateText () ) );
+   connect ( menubar                    , SIGNAL ( openRom () )         , this , SIGNAL ( openRom () ) );   
+   connect ( menubar                    , SIGNAL ( openGameDisc () )    , this , SIGNAL ( openGameDisc () ) );
+   connect ( menubar                    , SIGNAL ( library () )         , this , SIGNAL ( library () ) );
+   connect ( menubar                    , SIGNAL ( instanceManager () ) , this , SIGNAL ( instanceManager () ) );
+   connect ( menubar                    , SIGNAL ( config () )          , this , SIGNAL ( config () ) );
+   connect ( menubar                    , SIGNAL ( exitNow () )         , this , SIGNAL ( exitNow () ) );
+   connect ( menubar                    , SIGNAL ( about () )           , this , SIGNAL ( about () ) );
+   connect ( main_contents_panel        , SIGNAL ( openRom () )         , this , SIGNAL ( openRom () ) );   
+   connect ( main_contents_panel        , SIGNAL ( openGameDisc () )    , this , SIGNAL ( openGameDisc () ) );
+   connect ( main_contents_panel        , SIGNAL ( library () )         , this , SIGNAL ( library () ) );
+   connect ( main_contents_panel        , SIGNAL ( config () )          , this , SIGNAL ( config () ) );
+   connect ( main_contents_panel        , SIGNAL ( exitNow () )         , this , SIGNAL ( exitNow () ) );
+   connect ( main_contents_panel        , SIGNAL ( about () )           , this , SIGNAL ( about () ) );
    
    return;
 }

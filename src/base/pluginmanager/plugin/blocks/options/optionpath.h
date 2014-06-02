@@ -17,46 +17,41 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-# ifndef PLUGINMANAGER_H_
-# define PLUGINMANAGER_H_
+# ifndef OPTIONPATH_H_
+# define OPTIONPATH_H_
 
 # include <QtCore/QObject>
 # include <QtCore/QString>
-# include <QtCore/QVector>
-# include <QtCore/QDir>
-# include <QtCore/QStringList>
+# include <QtCore/QFile>
 # include <QtCore/QDebug>
+# include <QtCore/QStringList>
 
-# include "plugin/plugin.h"
-# include "../../base/configuration/configuration.h"
+# include "../pluginoption.h"
 
 namespace Base
 {
-   class PluginManager : public QObject
+   class OptionPath : public Base::PluginOption
    {
       Q_OBJECT
       
       public:
-         enum LoadState
-         {
-            AllOk = 0 ,
-            NonePluginLoaded
-         };
-      
-      public:
-         explicit PluginManager ( Base::Configuration* new_shared_configuration );
-         virtual ~PluginManager ( void );
+         explicit OptionPath ( QString options , QStringList values );
+         virtual ~OptionPath ( void );
          
-         LoadState load ( QStringList folder_paths );
-         void loadValues ( void );
-         void saveValues ( void );
-         void resetValues ( void );
-         QVector< Base::Plugin* >* pluginsLoaded ( void );
-         QStringList getOptions ( const QString& file_extention );
+         void setCurrentValue ( const QString& new_value );
+         QString currentValue ( void );
+         QString defaultValue ( void );
+         virtual void reset ( void );
+         virtual void autoLoad ( QMap< QString , QString >& values );
+         virtual QStringList toString ( void );
          
-      private:
-         Base::Configuration* shared_configuration;
-         QVector< Base::Plugin* >* plugins_loaded;
+      protected:
+         virtual void saveOption ( QTextStream& output_file );
+         
+      protected:
+         QString option_current_value;
+         QString option_default_value;
+         QString option_command;
    };
 }
 

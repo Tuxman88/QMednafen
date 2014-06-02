@@ -14,7 +14,7 @@ CXX           = g++
 DEFINES       = -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIE $(DEFINES)
 CXXFLAGS      = -pipe -g -Wall -W -D_REENTRANT -fPIE $(DEFINES)
-INCPATH       = -I/usr/lib/qt5/mkspecs/linux-g++ -I. -I. -Isrc/gui -Isrc/gui/mainwindow -Isrc/base -Isrc/base/configuration -Isrc/base/text -Isrc/base/sharedcomponents -Isrc/base/pluginmanager -Isrc/base/pluginmanager/plugin -Isrc/base/pluginmanager/plugin/blocks -Isrc/base/pluginmanager/plugin/blocks/options -Isrc/gui/mainwindow/menubar -Isrc/gui/mainwindow/panels -Isrc/gui/configwindow -Isrc/gui/configwindow/sections -Isrc/gui/configwindow/sections/options -Isrc/gui/aboutwindow -Isrc/gui/aboutwindow/panels -Isrc/core -Isrc/core/kernel -Isrc/core/emulatormanager -I/usr/include/qt5 -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtCore -Idebug
+INCPATH       = -I/usr/lib/qt5/mkspecs/linux-g++ -I. -I. -Isrc/gui -Isrc/gui/mainwindow -Isrc/base -Isrc/base/configuration -Isrc/base/text -Isrc/base/sharedcomponents -Isrc/base/pluginmanager -Isrc/base/pluginmanager/plugin -Isrc/base/pluginmanager/plugin/blocks -Isrc/base/pluginmanager/plugin/blocks/options -Isrc/gui/mainwindow/menubar -Isrc/gui/mainwindow/panels -Isrc/gui/configwindow -Isrc/gui/configwindow/sections -Isrc/gui/configwindow/sections/options -Isrc/gui/aboutwindow -Isrc/gui/aboutwindow/panels -Isrc/gui/instancemanager -Isrc/core -Isrc/core/kernel -Isrc/core/emulatormanager -I/usr/include/qt5 -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtCore -Idebug
 LINK          = g++
 LFLAGS        = -Wl,-O1,--sort-common,--as-needed,-z,relro
 LIBS          = $(SUBLIBS) -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
@@ -54,6 +54,8 @@ SOURCES       = src/main.cc \
 		src/core/kernel/kernel.cc \
 		src/gui/aboutwindow/aboutwindow.cc \
 		src/gui/configwindow/configwindow.cc \
+		src/gui/instancemanager/instancecontrol.cc \
+		src/gui/instancemanager/instancemanager.cc \
 		src/gui/mainwindow/mainwindow.cc \
 		src/base/pluginmanager/plugin/plugin.cc \
 		src/gui/aboutwindow/panels/aboutpanel.cc \
@@ -78,6 +80,7 @@ SOURCES       = src/main.cc \
 		src/gui/configwindow/sections/options/booleanoption.cc \
 		src/gui/configwindow/sections/options/enumoption.cc \
 		src/gui/configwindow/sections/options/integeroption.cc \
+		src/gui/configwindow/sections/options/pathoption.cc \
 		src/gui/configwindow/sections/options/realoption.cc \
 		src/gui/configwindow/sections/options/stringoption.cc \
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.cc \
@@ -85,6 +88,7 @@ SOURCES       = src/main.cc \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.cc \
 		src/base/pluginmanager/plugin/blocks/options/optionenum.cc \
 		src/base/pluginmanager/plugin/blocks/options/optioninteger.cc \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.cc \
 		src/base/pluginmanager/plugin/blocks/options/optionreal.cc \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.cc debug/qrc_resources.cpp \
 		debug/moc_configuration.cpp \
@@ -96,6 +100,8 @@ SOURCES       = src/main.cc \
 		debug/moc_kernel.cpp \
 		debug/moc_aboutwindow.cpp \
 		debug/moc_configwindow.cpp \
+		debug/moc_instancecontrol.cpp \
+		debug/moc_instancemanager.cpp \
 		debug/moc_mainwindow.cpp \
 		debug/moc_plugin.cpp \
 		debug/moc_aboutpanel.cpp \
@@ -120,6 +126,7 @@ SOURCES       = src/main.cc \
 		debug/moc_booleanoption.cpp \
 		debug/moc_enumoption.cpp \
 		debug/moc_integeroption.cpp \
+		debug/moc_pathoption.cpp \
 		debug/moc_realoption.cpp \
 		debug/moc_stringoption.cpp \
 		debug/moc_optionbiinteger.cpp \
@@ -127,6 +134,7 @@ SOURCES       = src/main.cc \
 		debug/moc_optionboolean.cpp \
 		debug/moc_optionenum.cpp \
 		debug/moc_optioninteger.cpp \
+		debug/moc_optionpath.cpp \
 		debug/moc_optionreal.cpp \
 		debug/moc_optionstring.cpp
 OBJECTS       = debug/main.o \
@@ -139,6 +147,8 @@ OBJECTS       = debug/main.o \
 		debug/kernel.o \
 		debug/aboutwindow.o \
 		debug/configwindow.o \
+		debug/instancecontrol.o \
+		debug/instancemanager.o \
 		debug/mainwindow.o \
 		debug/plugin.o \
 		debug/aboutpanel.o \
@@ -163,6 +173,7 @@ OBJECTS       = debug/main.o \
 		debug/booleanoption.o \
 		debug/enumoption.o \
 		debug/integeroption.o \
+		debug/pathoption.o \
 		debug/realoption.o \
 		debug/stringoption.o \
 		debug/optionbiinteger.o \
@@ -170,6 +181,7 @@ OBJECTS       = debug/main.o \
 		debug/optionboolean.o \
 		debug/optionenum.o \
 		debug/optioninteger.o \
+		debug/optionpath.o \
 		debug/optionreal.o \
 		debug/optionstring.o \
 		debug/qrc_resources.o \
@@ -182,6 +194,8 @@ OBJECTS       = debug/main.o \
 		debug/moc_kernel.o \
 		debug/moc_aboutwindow.o \
 		debug/moc_configwindow.o \
+		debug/moc_instancecontrol.o \
+		debug/moc_instancemanager.o \
 		debug/moc_mainwindow.o \
 		debug/moc_plugin.o \
 		debug/moc_aboutpanel.o \
@@ -206,6 +220,7 @@ OBJECTS       = debug/main.o \
 		debug/moc_booleanoption.o \
 		debug/moc_enumoption.o \
 		debug/moc_integeroption.o \
+		debug/moc_pathoption.o \
 		debug/moc_realoption.o \
 		debug/moc_stringoption.o \
 		debug/moc_optionbiinteger.o \
@@ -213,6 +228,7 @@ OBJECTS       = debug/main.o \
 		debug/moc_optionboolean.o \
 		debug/moc_optionenum.o \
 		debug/moc_optioninteger.o \
+		debug/moc_optionpath.o \
 		debug/moc_optionreal.o \
 		debug/moc_optionstring.o
 DIST          = /usr/lib/qt5/mkspecs/features/spec_pre.prf \
@@ -363,7 +379,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d debug/qmednafen-0.1.01.0.0 || mkdir -p debug/qmednafen-0.1.01.0.0
-	$(COPY_FILE) --parents $(SOURCES) $(DIST) debug/qmednafen-0.1.01.0.0/ && $(COPY_FILE) --parents resources.qrc debug/qmednafen-0.1.01.0.0/ && $(COPY_FILE) --parents src/base/base.h src/base/keys.h src/core/core.h src/gui/gui.h src/base/configuration/configuration.h src/base/pluginmanager/pluginmanager.h src/base/sharedcomponents/sharedcomponents.h src/base/text/text.h src/core/emulatormanager/emulatorinstance.h src/core/emulatormanager/emulatormanager.h src/core/kernel/kernel.h src/gui/aboutwindow/aboutwindow.h src/gui/configwindow/configwindow.h src/gui/mainwindow/mainwindow.h src/base/pluginmanager/plugin/plugin.h src/gui/aboutwindow/panels/aboutpanel.h src/gui/aboutwindow/panels/authorsection.h src/gui/aboutwindow/panels/creditspanel.h src/gui/aboutwindow/panels/licensepanel.h src/gui/configwindow/sections/categorypanel.h src/gui/configwindow/sections/consoleinfopanel.h src/gui/configwindow/sections/pluginpanel.h src/gui/configwindow/sections/sectionpanel.h src/gui/configwindow/sections/systempanel.h src/gui/mainwindow/menubar/menubar.h src/gui/mainwindow/panels/buttonspanel.h src/gui/mainwindow/panels/controlspanel.h src/gui/mainwindow/panels/maincontentspanel.h src/gui/mainwindow/panels/welcomepanel.h src/base/pluginmanager/plugin/blocks/plugininfo.h src/base/pluginmanager/plugin/blocks/pluginoption.h src/base/pluginmanager/plugin/blocks/pluginsection.h src/gui/configwindow/sections/options/biintegeroption.h src/gui/configwindow/sections/options/birealoption.h src/gui/configwindow/sections/options/booleanoption.h src/gui/configwindow/sections/options/enumoption.h src/gui/configwindow/sections/options/integeroption.h src/gui/configwindow/sections/options/realoption.h src/gui/configwindow/sections/options/stringoption.h src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h src/base/pluginmanager/plugin/blocks/options/optionbireal.h src/base/pluginmanager/plugin/blocks/options/optionboolean.h src/base/pluginmanager/plugin/blocks/options/optionenum.h src/base/pluginmanager/plugin/blocks/options/optioninteger.h src/base/pluginmanager/plugin/blocks/options/optionreal.h src/base/pluginmanager/plugin/blocks/options/optionstring.h debug/qmednafen-0.1.01.0.0/ && $(COPY_FILE) --parents src/main.cc src/base/configuration/configuration.cc src/base/pluginmanager/pluginmanager.cc src/base/sharedcomponents/sharedcomponents.cc src/base/text/text.cc src/core/emulatormanager/emulatorinstance.cc src/core/emulatormanager/emulatormanager.cc src/core/kernel/kernel.cc src/gui/aboutwindow/aboutwindow.cc src/gui/configwindow/configwindow.cc src/gui/mainwindow/mainwindow.cc src/base/pluginmanager/plugin/plugin.cc src/gui/aboutwindow/panels/aboutpanel.cc src/gui/aboutwindow/panels/authorsection.cc src/gui/aboutwindow/panels/creditspanel.cc src/gui/aboutwindow/panels/licensepanel.cc src/gui/configwindow/sections/categorypanel.cc src/gui/configwindow/sections/consoleinfopanel.cc src/gui/configwindow/sections/pluginpanel.cc src/gui/configwindow/sections/sectionpanel.cc src/gui/configwindow/sections/systempanel.cc src/gui/mainwindow/menubar/menubar.cc src/gui/mainwindow/panels/buttonspanel.cc src/gui/mainwindow/panels/controlspanel.cc src/gui/mainwindow/panels/maincontentspanel.cc src/gui/mainwindow/panels/welcomepanel.cc src/base/pluginmanager/plugin/blocks/plugininfo.cc src/base/pluginmanager/plugin/blocks/pluginoption.cc src/base/pluginmanager/plugin/blocks/pluginsection.cc src/gui/configwindow/sections/options/biintegeroption.cc src/gui/configwindow/sections/options/birealoption.cc src/gui/configwindow/sections/options/booleanoption.cc src/gui/configwindow/sections/options/enumoption.cc src/gui/configwindow/sections/options/integeroption.cc src/gui/configwindow/sections/options/realoption.cc src/gui/configwindow/sections/options/stringoption.cc src/base/pluginmanager/plugin/blocks/options/optionbiinteger.cc src/base/pluginmanager/plugin/blocks/options/optionbireal.cc src/base/pluginmanager/plugin/blocks/options/optionboolean.cc src/base/pluginmanager/plugin/blocks/options/optionenum.cc src/base/pluginmanager/plugin/blocks/options/optioninteger.cc src/base/pluginmanager/plugin/blocks/options/optionreal.cc src/base/pluginmanager/plugin/blocks/options/optionstring.cc debug/qmednafen-0.1.01.0.0/ && (cd `dirname debug/qmednafen-0.1.01.0.0` && $(TAR) qmednafen-0.1.01.0.0.tar qmednafen-0.1.01.0.0 && $(COMPRESS) qmednafen-0.1.01.0.0.tar) && $(MOVE) `dirname debug/qmednafen-0.1.01.0.0`/qmednafen-0.1.01.0.0.tar.gz . && $(DEL_FILE) -r debug/qmednafen-0.1.01.0.0
+	$(COPY_FILE) --parents $(SOURCES) $(DIST) debug/qmednafen-0.1.01.0.0/ && $(COPY_FILE) --parents resources.qrc debug/qmednafen-0.1.01.0.0/ && $(COPY_FILE) --parents src/base/base.h src/base/keys.h src/core/core.h src/gui/gui.h src/base/configuration/configuration.h src/base/pluginmanager/pluginmanager.h src/base/sharedcomponents/sharedcomponents.h src/base/text/text.h src/core/emulatormanager/emulatorinstance.h src/core/emulatormanager/emulatormanager.h src/core/kernel/kernel.h src/gui/aboutwindow/aboutwindow.h src/gui/configwindow/configwindow.h src/gui/instancemanager/instancecontrol.h src/gui/instancemanager/instancemanager.h src/gui/mainwindow/mainwindow.h src/base/pluginmanager/plugin/plugin.h src/gui/aboutwindow/panels/aboutpanel.h src/gui/aboutwindow/panels/authorsection.h src/gui/aboutwindow/panels/creditspanel.h src/gui/aboutwindow/panels/licensepanel.h src/gui/configwindow/sections/categorypanel.h src/gui/configwindow/sections/consoleinfopanel.h src/gui/configwindow/sections/pluginpanel.h src/gui/configwindow/sections/sectionpanel.h src/gui/configwindow/sections/systempanel.h src/gui/mainwindow/menubar/menubar.h src/gui/mainwindow/panels/buttonspanel.h src/gui/mainwindow/panels/controlspanel.h src/gui/mainwindow/panels/maincontentspanel.h src/gui/mainwindow/panels/welcomepanel.h src/base/pluginmanager/plugin/blocks/plugininfo.h src/base/pluginmanager/plugin/blocks/pluginoption.h src/base/pluginmanager/plugin/blocks/pluginsection.h src/gui/configwindow/sections/options/biintegeroption.h src/gui/configwindow/sections/options/birealoption.h src/gui/configwindow/sections/options/booleanoption.h src/gui/configwindow/sections/options/enumoption.h src/gui/configwindow/sections/options/integeroption.h src/gui/configwindow/sections/options/pathoption.h src/gui/configwindow/sections/options/realoption.h src/gui/configwindow/sections/options/stringoption.h src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h src/base/pluginmanager/plugin/blocks/options/optionbireal.h src/base/pluginmanager/plugin/blocks/options/optionboolean.h src/base/pluginmanager/plugin/blocks/options/optionenum.h src/base/pluginmanager/plugin/blocks/options/optioninteger.h src/base/pluginmanager/plugin/blocks/options/optionpath.h src/base/pluginmanager/plugin/blocks/options/optionreal.h src/base/pluginmanager/plugin/blocks/options/optionstring.h debug/qmednafen-0.1.01.0.0/ && $(COPY_FILE) --parents src/main.cc src/base/configuration/configuration.cc src/base/pluginmanager/pluginmanager.cc src/base/sharedcomponents/sharedcomponents.cc src/base/text/text.cc src/core/emulatormanager/emulatorinstance.cc src/core/emulatormanager/emulatormanager.cc src/core/kernel/kernel.cc src/gui/aboutwindow/aboutwindow.cc src/gui/configwindow/configwindow.cc src/gui/instancemanager/instancecontrol.cc src/gui/instancemanager/instancemanager.cc src/gui/mainwindow/mainwindow.cc src/base/pluginmanager/plugin/plugin.cc src/gui/aboutwindow/panels/aboutpanel.cc src/gui/aboutwindow/panels/authorsection.cc src/gui/aboutwindow/panels/creditspanel.cc src/gui/aboutwindow/panels/licensepanel.cc src/gui/configwindow/sections/categorypanel.cc src/gui/configwindow/sections/consoleinfopanel.cc src/gui/configwindow/sections/pluginpanel.cc src/gui/configwindow/sections/sectionpanel.cc src/gui/configwindow/sections/systempanel.cc src/gui/mainwindow/menubar/menubar.cc src/gui/mainwindow/panels/buttonspanel.cc src/gui/mainwindow/panels/controlspanel.cc src/gui/mainwindow/panels/maincontentspanel.cc src/gui/mainwindow/panels/welcomepanel.cc src/base/pluginmanager/plugin/blocks/plugininfo.cc src/base/pluginmanager/plugin/blocks/pluginoption.cc src/base/pluginmanager/plugin/blocks/pluginsection.cc src/gui/configwindow/sections/options/biintegeroption.cc src/gui/configwindow/sections/options/birealoption.cc src/gui/configwindow/sections/options/booleanoption.cc src/gui/configwindow/sections/options/enumoption.cc src/gui/configwindow/sections/options/integeroption.cc src/gui/configwindow/sections/options/pathoption.cc src/gui/configwindow/sections/options/realoption.cc src/gui/configwindow/sections/options/stringoption.cc src/base/pluginmanager/plugin/blocks/options/optionbiinteger.cc src/base/pluginmanager/plugin/blocks/options/optionbireal.cc src/base/pluginmanager/plugin/blocks/options/optionboolean.cc src/base/pluginmanager/plugin/blocks/options/optionenum.cc src/base/pluginmanager/plugin/blocks/options/optioninteger.cc src/base/pluginmanager/plugin/blocks/options/optionpath.cc src/base/pluginmanager/plugin/blocks/options/optionreal.cc src/base/pluginmanager/plugin/blocks/options/optionstring.cc debug/qmednafen-0.1.01.0.0/ && (cd `dirname debug/qmednafen-0.1.01.0.0` && $(TAR) qmednafen-0.1.01.0.0.tar qmednafen-0.1.01.0.0 && $(COMPRESS) qmednafen-0.1.01.0.0.tar) && $(MOVE) `dirname debug/qmednafen-0.1.01.0.0`/qmednafen-0.1.01.0.0.tar.gz . && $(DEL_FILE) -r debug/qmednafen-0.1.01.0.0
 
 
 clean:compiler_clean 
@@ -388,35 +404,35 @@ compiler_rcc_make_all: debug/qrc_resources.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) debug/qrc_resources.cpp
 debug/qrc_resources.cpp: resources.qrc \
-		resources/img/icon/unit-pce_fast-256x256.png \
-		resources/img/icon/unit-gg-256x256.png \
+		resources/img/icon/main-512x512.png \
+		resources/img/icon/unit-pcfx-256x256.png \
+		resources/img/icon/main-32x32.png \
+		resources/img/icon/unit-psx-256x256.png \
+		resources/img/icon/main-128x128.png \
+		resources/img/icon/unit-wswan-256x256.png \
 		resources/img/icon/unit-pce-256x256.png \
-		resources/img/icon/unit-unknown-256x256.png \
+		resources/img/icon/unit-gb-256x256.png \
+		resources/img/icon/unit-md-256x256.png \
 		resources/txt/spanish.lang \
 		resources/img/icon/unit-nes-256x256.png \
-		resources/txt/english.lang \
-		resources/img/icon/unit-pcfx-256x256.png \
-		resources/img/icon/main-512x512.png \
-		resources/img/icon/main-16x16.png \
-		resources/img/icon/unit-vb-256x256.png \
-		resources/img/icon/main-128x128.png \
+		resources/img/icon/unit-gg-256x256.png \
 		resources/img/icon/unit-snes-256x256.png \
+		resources/txt/english.lang \
+		resources/img/icon/unit-unknown-256x256.png \
+		resources/img/icon/unit-lynx-256x256.png \
+		resources/img/icon/main-16x16.png \
+		resources/img/icon/main-256x256.png \
 		resources/img/icon/main-64x64.png \
 		resources/img/icon/unit-sms-256x256.png \
-		resources/img/icon/unit-wswan-256x256.png \
-		resources/img/icon/unit-lynx-256x256.png \
+		resources/img/icon/unit-vb-256x256.png \
 		resources/img/icon/unit-gba-256x256.png \
-		resources/img/icon/unit-ngp-256x256.png \
-		resources/img/icon/unit-gb-256x256.png \
-		resources/img/icon/main-256x256.png \
-		resources/img/icon/unit-md-256x256.png \
-		resources/img/icon/main-32x32.png \
-		resources/img/icon/unit-psx-256x256.png
+		resources/img/icon/unit-pce_fast-256x256.png \
+		resources/img/icon/unit-ngp-256x256.png
 	/usr/lib/qt5/bin/rcc -name resources resources.qrc -o debug/qrc_resources.cpp
 
-compiler_moc_header_make_all: debug/moc_configuration.cpp debug/moc_pluginmanager.cpp debug/moc_sharedcomponents.cpp debug/moc_text.cpp debug/moc_emulatorinstance.cpp debug/moc_emulatormanager.cpp debug/moc_kernel.cpp debug/moc_aboutwindow.cpp debug/moc_configwindow.cpp debug/moc_mainwindow.cpp debug/moc_plugin.cpp debug/moc_aboutpanel.cpp debug/moc_authorsection.cpp debug/moc_creditspanel.cpp debug/moc_licensepanel.cpp debug/moc_categorypanel.cpp debug/moc_consoleinfopanel.cpp debug/moc_pluginpanel.cpp debug/moc_sectionpanel.cpp debug/moc_systempanel.cpp debug/moc_menubar.cpp debug/moc_buttonspanel.cpp debug/moc_controlspanel.cpp debug/moc_maincontentspanel.cpp debug/moc_welcomepanel.cpp debug/moc_plugininfo.cpp debug/moc_pluginoption.cpp debug/moc_pluginsection.cpp debug/moc_biintegeroption.cpp debug/moc_birealoption.cpp debug/moc_booleanoption.cpp debug/moc_enumoption.cpp debug/moc_integeroption.cpp debug/moc_realoption.cpp debug/moc_stringoption.cpp debug/moc_optionbiinteger.cpp debug/moc_optionbireal.cpp debug/moc_optionboolean.cpp debug/moc_optionenum.cpp debug/moc_optioninteger.cpp debug/moc_optionreal.cpp debug/moc_optionstring.cpp
+compiler_moc_header_make_all: debug/moc_configuration.cpp debug/moc_pluginmanager.cpp debug/moc_sharedcomponents.cpp debug/moc_text.cpp debug/moc_emulatorinstance.cpp debug/moc_emulatormanager.cpp debug/moc_kernel.cpp debug/moc_aboutwindow.cpp debug/moc_configwindow.cpp debug/moc_instancecontrol.cpp debug/moc_instancemanager.cpp debug/moc_mainwindow.cpp debug/moc_plugin.cpp debug/moc_aboutpanel.cpp debug/moc_authorsection.cpp debug/moc_creditspanel.cpp debug/moc_licensepanel.cpp debug/moc_categorypanel.cpp debug/moc_consoleinfopanel.cpp debug/moc_pluginpanel.cpp debug/moc_sectionpanel.cpp debug/moc_systempanel.cpp debug/moc_menubar.cpp debug/moc_buttonspanel.cpp debug/moc_controlspanel.cpp debug/moc_maincontentspanel.cpp debug/moc_welcomepanel.cpp debug/moc_plugininfo.cpp debug/moc_pluginoption.cpp debug/moc_pluginsection.cpp debug/moc_biintegeroption.cpp debug/moc_birealoption.cpp debug/moc_booleanoption.cpp debug/moc_enumoption.cpp debug/moc_integeroption.cpp debug/moc_pathoption.cpp debug/moc_realoption.cpp debug/moc_stringoption.cpp debug/moc_optionbiinteger.cpp debug/moc_optionbireal.cpp debug/moc_optionboolean.cpp debug/moc_optionenum.cpp debug/moc_optioninteger.cpp debug/moc_optionpath.cpp debug/moc_optionreal.cpp debug/moc_optionstring.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) debug/moc_configuration.cpp debug/moc_pluginmanager.cpp debug/moc_sharedcomponents.cpp debug/moc_text.cpp debug/moc_emulatorinstance.cpp debug/moc_emulatormanager.cpp debug/moc_kernel.cpp debug/moc_aboutwindow.cpp debug/moc_configwindow.cpp debug/moc_mainwindow.cpp debug/moc_plugin.cpp debug/moc_aboutpanel.cpp debug/moc_authorsection.cpp debug/moc_creditspanel.cpp debug/moc_licensepanel.cpp debug/moc_categorypanel.cpp debug/moc_consoleinfopanel.cpp debug/moc_pluginpanel.cpp debug/moc_sectionpanel.cpp debug/moc_systempanel.cpp debug/moc_menubar.cpp debug/moc_buttonspanel.cpp debug/moc_controlspanel.cpp debug/moc_maincontentspanel.cpp debug/moc_welcomepanel.cpp debug/moc_plugininfo.cpp debug/moc_pluginoption.cpp debug/moc_pluginsection.cpp debug/moc_biintegeroption.cpp debug/moc_birealoption.cpp debug/moc_booleanoption.cpp debug/moc_enumoption.cpp debug/moc_integeroption.cpp debug/moc_realoption.cpp debug/moc_stringoption.cpp debug/moc_optionbiinteger.cpp debug/moc_optionbireal.cpp debug/moc_optionboolean.cpp debug/moc_optionenum.cpp debug/moc_optioninteger.cpp debug/moc_optionreal.cpp debug/moc_optionstring.cpp
+	-$(DEL_FILE) debug/moc_configuration.cpp debug/moc_pluginmanager.cpp debug/moc_sharedcomponents.cpp debug/moc_text.cpp debug/moc_emulatorinstance.cpp debug/moc_emulatormanager.cpp debug/moc_kernel.cpp debug/moc_aboutwindow.cpp debug/moc_configwindow.cpp debug/moc_instancecontrol.cpp debug/moc_instancemanager.cpp debug/moc_mainwindow.cpp debug/moc_plugin.cpp debug/moc_aboutpanel.cpp debug/moc_authorsection.cpp debug/moc_creditspanel.cpp debug/moc_licensepanel.cpp debug/moc_categorypanel.cpp debug/moc_consoleinfopanel.cpp debug/moc_pluginpanel.cpp debug/moc_sectionpanel.cpp debug/moc_systempanel.cpp debug/moc_menubar.cpp debug/moc_buttonspanel.cpp debug/moc_controlspanel.cpp debug/moc_maincontentspanel.cpp debug/moc_welcomepanel.cpp debug/moc_plugininfo.cpp debug/moc_pluginoption.cpp debug/moc_pluginsection.cpp debug/moc_biintegeroption.cpp debug/moc_birealoption.cpp debug/moc_booleanoption.cpp debug/moc_enumoption.cpp debug/moc_integeroption.cpp debug/moc_pathoption.cpp debug/moc_realoption.cpp debug/moc_stringoption.cpp debug/moc_optionbiinteger.cpp debug/moc_optionbireal.cpp debug/moc_optionboolean.cpp debug/moc_optionenum.cpp debug/moc_optioninteger.cpp debug/moc_optionpath.cpp debug/moc_optionreal.cpp debug/moc_optionstring.cpp
 debug/moc_configuration.cpp: /usr/include/qt5/QtCore/QObject \
 		/usr/include/qt5/QtCore/qobject.h \
 		/usr/include/qt5/QtCore/qobjectdefs.h \
@@ -595,6 +611,11 @@ debug/moc_pluginmanager.cpp: /usr/include/qt5/QtCore/QObject \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
+		src/base/configuration/configuration.h \
+		/usr/include/qt5/QtCore/QSettings \
+		/usr/include/qt5/QtCore/qsettings.h \
+		src/base/keys.h \
 		src/base/pluginmanager/pluginmanager.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/base/pluginmanager/pluginmanager.h -o debug/moc_pluginmanager.cpp
 
@@ -701,6 +722,7 @@ debug/moc_sharedcomponents.cpp: /usr/include/qt5/QtCore/QObject \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/base/sharedcomponents/sharedcomponents.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/base/sharedcomponents/sharedcomponents.h -o debug/moc_sharedcomponents.cpp
 
@@ -899,6 +921,7 @@ debug/moc_emulatorinstance.cpp: /usr/include/qt5/QtCore/QObject \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/core/emulatormanager/emulatorinstance.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/core/emulatormanager/emulatorinstance.h -o debug/moc_emulatorinstance.cpp
 
@@ -1008,6 +1031,7 @@ debug/moc_emulatormanager.cpp: /usr/include/qt5/QtCore/QObject \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/core/emulatormanager/emulatorinstance.h \
 		/usr/include/qt5/QtCore/QProcess \
 		/usr/include/qt5/QtCore/qprocess.h \
@@ -1154,6 +1178,7 @@ debug/moc_kernel.cpp: /usr/include/qt5/QtWidgets/QFileDialog \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/core/emulatormanager/emulatormanager.h \
 		/usr/include/qt5/QtCore/QMapIterator \
 		src/core/emulatormanager/emulatorinstance.h \
@@ -1313,6 +1338,7 @@ debug/moc_aboutwindow.cpp: /usr/include/qt5/QtWidgets/QDialog \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/aboutwindow/panels/aboutpanel.h \
 		/usr/include/qt5/QtWidgets/QWidget \
 		/usr/include/qt5/QtWidgets/QLabel \
@@ -1475,6 +1501,7 @@ debug/moc_configwindow.cpp: /usr/include/qt5/QtWidgets/QDialog \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/configwindow/sections/systempanel.h \
 		/usr/include/qt5/QtWidgets/QWidget \
 		src/gui/configwindow/sections/pluginpanel.h \
@@ -1520,9 +1547,334 @@ debug/moc_configwindow.cpp: /usr/include/qt5/QtWidgets/QDialog \
 		/usr/include/qt5/QtGui/qtextformat.h \
 		/usr/include/qt5/QtGui/qpen.h \
 		/usr/include/qt5/QtGui/qtextoption.h \
+		src/gui/configwindow/sections/options/pathoption.h \
+		/usr/include/qt5/QtWidgets/QFileDialog \
+		/usr/include/qt5/QtWidgets/qfiledialog.h \
 		src/gui/configwindow/sections/consoleinfopanel.h \
 		src/gui/configwindow/configwindow.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/gui/configwindow/configwindow.h -o debug/moc_configwindow.cpp
+
+debug/moc_instancecontrol.cpp: /usr/include/qt5/QtWidgets/QWidget \
+		/usr/include/qt5/QtWidgets/qwidget.h \
+		/usr/include/qt5/QtGui/qwindowdefs.h \
+		/usr/include/qt5/QtCore/qglobal.h \
+		/usr/include/qt5/QtCore/qconfig.h \
+		/usr/include/qt5/QtCore/qfeatures.h \
+		/usr/include/qt5/QtCore/qsystemdetection.h \
+		/usr/include/qt5/QtCore/qprocessordetection.h \
+		/usr/include/qt5/QtCore/qcompilerdetection.h \
+		/usr/include/qt5/QtCore/qglobalstatic.h \
+		/usr/include/qt5/QtCore/qatomic.h \
+		/usr/include/qt5/QtCore/qbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt5/QtCore/qgenericatomic.h \
+		/usr/include/qt5/QtCore/qatomic_msvc.h \
+		/usr/include/qt5/QtCore/qatomic_integrity.h \
+		/usr/include/qt5/QtCore/qoldbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_vxworks.h \
+		/usr/include/qt5/QtCore/qatomic_power.h \
+		/usr/include/qt5/QtCore/qatomic_alpha.h \
+		/usr/include/qt5/QtCore/qatomic_armv7.h \
+		/usr/include/qt5/QtCore/qatomic_armv6.h \
+		/usr/include/qt5/QtCore/qatomic_armv5.h \
+		/usr/include/qt5/QtCore/qatomic_bfin.h \
+		/usr/include/qt5/QtCore/qatomic_ia64.h \
+		/usr/include/qt5/QtCore/qatomic_mips.h \
+		/usr/include/qt5/QtCore/qatomic_s390.h \
+		/usr/include/qt5/QtCore/qatomic_sh4a.h \
+		/usr/include/qt5/QtCore/qatomic_sparc.h \
+		/usr/include/qt5/QtCore/qatomic_x86.h \
+		/usr/include/qt5/QtCore/qatomic_cxx11.h \
+		/usr/include/qt5/QtCore/qatomic_gcc.h \
+		/usr/include/qt5/QtCore/qatomic_unix.h \
+		/usr/include/qt5/QtCore/qmutex.h \
+		/usr/include/qt5/QtCore/qlogging.h \
+		/usr/include/qt5/QtCore/qflags.h \
+		/usr/include/qt5/QtCore/qtypeinfo.h \
+		/usr/include/qt5/QtCore/qtypetraits.h \
+		/usr/include/qt5/QtCore/qsysinfo.h \
+		/usr/include/qt5/QtCore/qobjectdefs.h \
+		/usr/include/qt5/QtCore/qnamespace.h \
+		/usr/include/qt5/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt5/QtGui/qwindowdefs_win.h \
+		/usr/include/qt5/QtCore/qobject.h \
+		/usr/include/qt5/QtCore/qstring.h \
+		/usr/include/qt5/QtCore/qchar.h \
+		/usr/include/qt5/QtCore/qbytearray.h \
+		/usr/include/qt5/QtCore/qrefcount.h \
+		/usr/include/qt5/QtCore/qarraydata.h \
+		/usr/include/qt5/QtCore/qstringbuilder.h \
+		/usr/include/qt5/QtCore/qlist.h \
+		/usr/include/qt5/QtCore/qalgorithms.h \
+		/usr/include/qt5/QtCore/qiterator.h \
+		/usr/include/qt5/QtCore/qcoreevent.h \
+		/usr/include/qt5/QtCore/qscopedpointer.h \
+		/usr/include/qt5/QtCore/qmetatype.h \
+		/usr/include/qt5/QtCore/qvarlengtharray.h \
+		/usr/include/qt5/QtCore/qcontainerfwd.h \
+		/usr/include/qt5/QtCore/qisenum.h \
+		/usr/include/qt5/QtCore/qobject_impl.h \
+		/usr/include/qt5/QtCore/qmargins.h \
+		/usr/include/qt5/QtCore/qrect.h \
+		/usr/include/qt5/QtCore/qsize.h \
+		/usr/include/qt5/QtCore/qpoint.h \
+		/usr/include/qt5/QtGui/qpaintdevice.h \
+		/usr/include/qt5/QtGui/qpalette.h \
+		/usr/include/qt5/QtGui/qcolor.h \
+		/usr/include/qt5/QtGui/qrgb.h \
+		/usr/include/qt5/QtCore/qstringlist.h \
+		/usr/include/qt5/QtCore/qdatastream.h \
+		/usr/include/qt5/QtCore/qiodevice.h \
+		/usr/include/qt5/QtCore/qpair.h \
+		/usr/include/qt5/QtCore/qregexp.h \
+		/usr/include/qt5/QtCore/qstringmatcher.h \
+		/usr/include/qt5/QtGui/qbrush.h \
+		/usr/include/qt5/QtCore/qvector.h \
+		/usr/include/qt5/QtGui/qmatrix.h \
+		/usr/include/qt5/QtGui/qpolygon.h \
+		/usr/include/qt5/QtGui/qregion.h \
+		/usr/include/qt5/QtCore/qline.h \
+		/usr/include/qt5/QtGui/qtransform.h \
+		/usr/include/qt5/QtGui/qpainterpath.h \
+		/usr/include/qt5/QtGui/qimage.h \
+		/usr/include/qt5/QtGui/qpixmap.h \
+		/usr/include/qt5/QtCore/qsharedpointer.h \
+		/usr/include/qt5/QtCore/qshareddata.h \
+		/usr/include/qt5/QtCore/qsharedpointer_impl.h \
+		/usr/include/qt5/QtCore/qhash.h \
+		/usr/include/qt5/QtGui/qfont.h \
+		/usr/include/qt5/QtGui/qfontmetrics.h \
+		/usr/include/qt5/QtGui/qfontinfo.h \
+		/usr/include/qt5/QtWidgets/qsizepolicy.h \
+		/usr/include/qt5/QtGui/qcursor.h \
+		/usr/include/qt5/QtGui/qkeysequence.h \
+		/usr/include/qt5/QtGui/qevent.h \
+		/usr/include/qt5/QtCore/qvariant.h \
+		/usr/include/qt5/QtCore/qmap.h \
+		/usr/include/qt5/QtCore/qdebug.h \
+		/usr/include/qt5/QtCore/qtextstream.h \
+		/usr/include/qt5/QtCore/qlocale.h \
+		/usr/include/qt5/QtCore/qset.h \
+		/usr/include/qt5/QtCore/qcontiguouscache.h \
+		/usr/include/qt5/QtCore/qurl.h \
+		/usr/include/qt5/QtCore/qurlquery.h \
+		/usr/include/qt5/QtCore/qfile.h \
+		/usr/include/qt5/QtCore/qfiledevice.h \
+		/usr/include/qt5/QtGui/qvector2d.h \
+		/usr/include/qt5/QtGui/qtouchdevice.h \
+		/usr/include/qt5/QtWidgets/QHBoxLayout \
+		/usr/include/qt5/QtWidgets/qboxlayout.h \
+		/usr/include/qt5/QtWidgets/qlayout.h \
+		/usr/include/qt5/QtWidgets/qlayoutitem.h \
+		/usr/include/qt5/QtWidgets/qgridlayout.h \
+		/usr/include/qt5/QtWidgets/QLabel \
+		/usr/include/qt5/QtWidgets/qlabel.h \
+		/usr/include/qt5/QtWidgets/qframe.h \
+		/usr/include/qt5/QtWidgets/QPushButton \
+		/usr/include/qt5/QtWidgets/qpushbutton.h \
+		/usr/include/qt5/QtWidgets/qabstractbutton.h \
+		/usr/include/qt5/QtGui/qicon.h \
+		src/base/base.h \
+		src/base/configuration/configuration.h \
+		/usr/include/qt5/QtCore/QObject \
+		/usr/include/qt5/QtCore/QSettings \
+		/usr/include/qt5/QtCore/qsettings.h \
+		/usr/include/qt5/QtCore/QString \
+		src/base/keys.h \
+		src/base/text/text.h \
+		/usr/include/qt5/QtCore/QMap \
+		/usr/include/qt5/QtCore/QFile \
+		/usr/include/qt5/QtCore/QStringList \
+		/usr/include/qt5/QtCore/QDebug \
+		src/base/sharedcomponents/sharedcomponents.h \
+		src/base/pluginmanager/pluginmanager.h \
+		/usr/include/qt5/QtCore/QVector \
+		/usr/include/qt5/QtCore/QDir \
+		/usr/include/qt5/QtCore/qdir.h \
+		/usr/include/qt5/QtCore/qfileinfo.h \
+		src/base/pluginmanager/plugin/plugin.h \
+		/usr/include/qt5/QtCore/QList \
+		src/base/pluginmanager/plugin/blocks/plugininfo.h \
+		src/base/pluginmanager/plugin/blocks/pluginsection.h \
+		src/base/pluginmanager/plugin/blocks/pluginoption.h \
+		src/base/pluginmanager/plugin/blocks/options/optioninteger.h \
+		src/base/pluginmanager/plugin/blocks/options/optionreal.h \
+		src/base/pluginmanager/plugin/blocks/options/optionenum.h \
+		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
+		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
+		src/gui/instancemanager/instancecontrol.h
+	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/gui/instancemanager/instancecontrol.h -o debug/moc_instancecontrol.cpp
+
+debug/moc_instancemanager.cpp: /usr/include/qt5/QtWidgets/QDialog \
+		/usr/include/qt5/QtWidgets/qdialog.h \
+		/usr/include/qt5/QtWidgets/qwidget.h \
+		/usr/include/qt5/QtGui/qwindowdefs.h \
+		/usr/include/qt5/QtCore/qglobal.h \
+		/usr/include/qt5/QtCore/qconfig.h \
+		/usr/include/qt5/QtCore/qfeatures.h \
+		/usr/include/qt5/QtCore/qsystemdetection.h \
+		/usr/include/qt5/QtCore/qprocessordetection.h \
+		/usr/include/qt5/QtCore/qcompilerdetection.h \
+		/usr/include/qt5/QtCore/qglobalstatic.h \
+		/usr/include/qt5/QtCore/qatomic.h \
+		/usr/include/qt5/QtCore/qbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt5/QtCore/qgenericatomic.h \
+		/usr/include/qt5/QtCore/qatomic_msvc.h \
+		/usr/include/qt5/QtCore/qatomic_integrity.h \
+		/usr/include/qt5/QtCore/qoldbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_vxworks.h \
+		/usr/include/qt5/QtCore/qatomic_power.h \
+		/usr/include/qt5/QtCore/qatomic_alpha.h \
+		/usr/include/qt5/QtCore/qatomic_armv7.h \
+		/usr/include/qt5/QtCore/qatomic_armv6.h \
+		/usr/include/qt5/QtCore/qatomic_armv5.h \
+		/usr/include/qt5/QtCore/qatomic_bfin.h \
+		/usr/include/qt5/QtCore/qatomic_ia64.h \
+		/usr/include/qt5/QtCore/qatomic_mips.h \
+		/usr/include/qt5/QtCore/qatomic_s390.h \
+		/usr/include/qt5/QtCore/qatomic_sh4a.h \
+		/usr/include/qt5/QtCore/qatomic_sparc.h \
+		/usr/include/qt5/QtCore/qatomic_x86.h \
+		/usr/include/qt5/QtCore/qatomic_cxx11.h \
+		/usr/include/qt5/QtCore/qatomic_gcc.h \
+		/usr/include/qt5/QtCore/qatomic_unix.h \
+		/usr/include/qt5/QtCore/qmutex.h \
+		/usr/include/qt5/QtCore/qlogging.h \
+		/usr/include/qt5/QtCore/qflags.h \
+		/usr/include/qt5/QtCore/qtypeinfo.h \
+		/usr/include/qt5/QtCore/qtypetraits.h \
+		/usr/include/qt5/QtCore/qsysinfo.h \
+		/usr/include/qt5/QtCore/qobjectdefs.h \
+		/usr/include/qt5/QtCore/qnamespace.h \
+		/usr/include/qt5/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt5/QtGui/qwindowdefs_win.h \
+		/usr/include/qt5/QtCore/qobject.h \
+		/usr/include/qt5/QtCore/qstring.h \
+		/usr/include/qt5/QtCore/qchar.h \
+		/usr/include/qt5/QtCore/qbytearray.h \
+		/usr/include/qt5/QtCore/qrefcount.h \
+		/usr/include/qt5/QtCore/qarraydata.h \
+		/usr/include/qt5/QtCore/qstringbuilder.h \
+		/usr/include/qt5/QtCore/qlist.h \
+		/usr/include/qt5/QtCore/qalgorithms.h \
+		/usr/include/qt5/QtCore/qiterator.h \
+		/usr/include/qt5/QtCore/qcoreevent.h \
+		/usr/include/qt5/QtCore/qscopedpointer.h \
+		/usr/include/qt5/QtCore/qmetatype.h \
+		/usr/include/qt5/QtCore/qvarlengtharray.h \
+		/usr/include/qt5/QtCore/qcontainerfwd.h \
+		/usr/include/qt5/QtCore/qisenum.h \
+		/usr/include/qt5/QtCore/qobject_impl.h \
+		/usr/include/qt5/QtCore/qmargins.h \
+		/usr/include/qt5/QtCore/qrect.h \
+		/usr/include/qt5/QtCore/qsize.h \
+		/usr/include/qt5/QtCore/qpoint.h \
+		/usr/include/qt5/QtGui/qpaintdevice.h \
+		/usr/include/qt5/QtGui/qpalette.h \
+		/usr/include/qt5/QtGui/qcolor.h \
+		/usr/include/qt5/QtGui/qrgb.h \
+		/usr/include/qt5/QtCore/qstringlist.h \
+		/usr/include/qt5/QtCore/qdatastream.h \
+		/usr/include/qt5/QtCore/qiodevice.h \
+		/usr/include/qt5/QtCore/qpair.h \
+		/usr/include/qt5/QtCore/qregexp.h \
+		/usr/include/qt5/QtCore/qstringmatcher.h \
+		/usr/include/qt5/QtGui/qbrush.h \
+		/usr/include/qt5/QtCore/qvector.h \
+		/usr/include/qt5/QtGui/qmatrix.h \
+		/usr/include/qt5/QtGui/qpolygon.h \
+		/usr/include/qt5/QtGui/qregion.h \
+		/usr/include/qt5/QtCore/qline.h \
+		/usr/include/qt5/QtGui/qtransform.h \
+		/usr/include/qt5/QtGui/qpainterpath.h \
+		/usr/include/qt5/QtGui/qimage.h \
+		/usr/include/qt5/QtGui/qpixmap.h \
+		/usr/include/qt5/QtCore/qsharedpointer.h \
+		/usr/include/qt5/QtCore/qshareddata.h \
+		/usr/include/qt5/QtCore/qsharedpointer_impl.h \
+		/usr/include/qt5/QtCore/qhash.h \
+		/usr/include/qt5/QtGui/qfont.h \
+		/usr/include/qt5/QtGui/qfontmetrics.h \
+		/usr/include/qt5/QtGui/qfontinfo.h \
+		/usr/include/qt5/QtWidgets/qsizepolicy.h \
+		/usr/include/qt5/QtGui/qcursor.h \
+		/usr/include/qt5/QtGui/qkeysequence.h \
+		/usr/include/qt5/QtGui/qevent.h \
+		/usr/include/qt5/QtCore/qvariant.h \
+		/usr/include/qt5/QtCore/qmap.h \
+		/usr/include/qt5/QtCore/qdebug.h \
+		/usr/include/qt5/QtCore/qtextstream.h \
+		/usr/include/qt5/QtCore/qlocale.h \
+		/usr/include/qt5/QtCore/qset.h \
+		/usr/include/qt5/QtCore/qcontiguouscache.h \
+		/usr/include/qt5/QtCore/qurl.h \
+		/usr/include/qt5/QtCore/qurlquery.h \
+		/usr/include/qt5/QtCore/qfile.h \
+		/usr/include/qt5/QtCore/qfiledevice.h \
+		/usr/include/qt5/QtGui/qvector2d.h \
+		/usr/include/qt5/QtGui/qtouchdevice.h \
+		/usr/include/qt5/QtWidgets/QVBoxLayout \
+		/usr/include/qt5/QtWidgets/qboxlayout.h \
+		/usr/include/qt5/QtWidgets/qlayout.h \
+		/usr/include/qt5/QtWidgets/qlayoutitem.h \
+		/usr/include/qt5/QtWidgets/qgridlayout.h \
+		/usr/include/qt5/QtWidgets/QHBoxLayout \
+		/usr/include/qt5/QtWidgets/QPushButton \
+		/usr/include/qt5/QtWidgets/qpushbutton.h \
+		/usr/include/qt5/QtWidgets/qabstractbutton.h \
+		/usr/include/qt5/QtGui/qicon.h \
+		/usr/include/qt5/QtGui/QIcon \
+		src/base/base.h \
+		src/base/configuration/configuration.h \
+		/usr/include/qt5/QtCore/QObject \
+		/usr/include/qt5/QtCore/QSettings \
+		/usr/include/qt5/QtCore/qsettings.h \
+		/usr/include/qt5/QtCore/QString \
+		src/base/keys.h \
+		src/base/text/text.h \
+		/usr/include/qt5/QtCore/QMap \
+		/usr/include/qt5/QtCore/QFile \
+		/usr/include/qt5/QtCore/QStringList \
+		/usr/include/qt5/QtCore/QDebug \
+		src/base/sharedcomponents/sharedcomponents.h \
+		src/base/pluginmanager/pluginmanager.h \
+		/usr/include/qt5/QtCore/QVector \
+		/usr/include/qt5/QtCore/QDir \
+		/usr/include/qt5/QtCore/qdir.h \
+		/usr/include/qt5/QtCore/qfileinfo.h \
+		src/base/pluginmanager/plugin/plugin.h \
+		/usr/include/qt5/QtCore/QList \
+		src/base/pluginmanager/plugin/blocks/plugininfo.h \
+		src/base/pluginmanager/plugin/blocks/pluginsection.h \
+		src/base/pluginmanager/plugin/blocks/pluginoption.h \
+		src/base/pluginmanager/plugin/blocks/options/optioninteger.h \
+		src/base/pluginmanager/plugin/blocks/options/optionreal.h \
+		src/base/pluginmanager/plugin/blocks/options/optionenum.h \
+		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
+		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
+		src/core/core.h \
+		src/core/kernel/kernel.h \
+		/usr/include/qt5/QtWidgets/QFileDialog \
+		/usr/include/qt5/QtWidgets/qfiledialog.h \
+		src/core/emulatormanager/emulatormanager.h \
+		/usr/include/qt5/QtCore/QMapIterator \
+		src/core/emulatormanager/emulatorinstance.h \
+		/usr/include/qt5/QtCore/QProcess \
+		/usr/include/qt5/QtCore/qprocess.h \
+		src/gui/instancemanager/instancecontrol.h \
+		/usr/include/qt5/QtWidgets/QWidget \
+		/usr/include/qt5/QtWidgets/QLabel \
+		/usr/include/qt5/QtWidgets/qlabel.h \
+		/usr/include/qt5/QtWidgets/qframe.h \
+		src/gui/instancemanager/instancemanager.h
+	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/gui/instancemanager/instancemanager.h -o debug/moc_instancemanager.cpp
 
 debug/moc_mainwindow.cpp: /usr/include/qt5/QtWidgets/QMainWindow \
 		/usr/include/qt5/QtWidgets/qmainwindow.h \
@@ -1674,6 +2026,7 @@ debug/moc_mainwindow.cpp: /usr/include/qt5/QtWidgets/QMainWindow \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/mainwindow/menubar/menubar.h \
 		/usr/include/qt5/QtGui/QKeySequence \
 		src/gui/mainwindow/panels/maincontentspanel.h \
@@ -1781,18 +2134,19 @@ debug/moc_plugin.cpp: /usr/include/qt5/QtCore/QObject \
 		/usr/include/qt5/QtCore/qpoint.h \
 		/usr/include/qt5/QtCore/qset.h \
 		/usr/include/qt5/QtCore/qcontiguouscache.h \
+		/usr/include/qt5/QtCore/QStringList \
 		src/base/pluginmanager/plugin/blocks/plugininfo.h \
 		/usr/include/qt5/QtCore/QDebug \
 		src/base/pluginmanager/plugin/blocks/pluginsection.h \
 		src/base/pluginmanager/plugin/blocks/pluginoption.h \
 		src/base/pluginmanager/plugin/blocks/options/optioninteger.h \
-		/usr/include/qt5/QtCore/QStringList \
 		src/base/pluginmanager/plugin/blocks/options/optionreal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionenum.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/base/pluginmanager/plugin/plugin.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/base/pluginmanager/plugin/plugin.h -o debug/moc_plugin.cpp
 
@@ -1943,6 +2297,7 @@ debug/moc_aboutpanel.cpp: /usr/include/qt5/QtWidgets/QWidget \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/aboutwindow/panels/aboutpanel.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/gui/aboutwindow/panels/aboutpanel.h -o debug/moc_aboutpanel.cpp
 
@@ -2092,6 +2447,7 @@ debug/moc_authorsection.cpp: /usr/include/qt5/QtWidgets/QWidget \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/aboutwindow/panels/authorsection.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/gui/aboutwindow/panels/authorsection.h -o debug/moc_authorsection.cpp
 
@@ -2238,6 +2594,7 @@ debug/moc_creditspanel.cpp: /usr/include/qt5/QtWidgets/QWidget \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/aboutwindow/panels/authorsection.h \
 		/usr/include/qt5/QtWidgets/QLabel \
 		/usr/include/qt5/QtWidgets/qlabel.h \
@@ -2388,6 +2745,7 @@ debug/moc_licensepanel.cpp: /usr/include/qt5/QtWidgets/QWidget \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/aboutwindow/panels/licensepanel.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/gui/aboutwindow/panels/licensepanel.h -o debug/moc_licensepanel.cpp
 
@@ -2539,6 +2897,7 @@ debug/moc_categorypanel.cpp: /usr/include/qt5/QtWidgets/QWidget \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/configwindow/sections/sectionpanel.h \
 		/usr/include/qt5/QtWidgets/QGroupBox \
 		/usr/include/qt5/QtWidgets/qgroupbox.h \
@@ -2579,6 +2938,12 @@ debug/moc_categorypanel.cpp: /usr/include/qt5/QtWidgets/QWidget \
 		/usr/include/qt5/QtGui/qtextformat.h \
 		/usr/include/qt5/QtGui/qpen.h \
 		/usr/include/qt5/QtGui/qtextoption.h \
+		src/gui/configwindow/sections/options/pathoption.h \
+		/usr/include/qt5/QtWidgets/QPushButton \
+		/usr/include/qt5/QtWidgets/qpushbutton.h \
+		/usr/include/qt5/QtWidgets/QFileDialog \
+		/usr/include/qt5/QtWidgets/qfiledialog.h \
+		/usr/include/qt5/QtWidgets/qdialog.h \
 		src/gui/configwindow/sections/categorypanel.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/gui/configwindow/sections/categorypanel.h -o debug/moc_categorypanel.cpp
 
@@ -2729,6 +3094,7 @@ debug/moc_consoleinfopanel.cpp: /usr/include/qt5/QtWidgets/QWidget \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/configwindow/sections/consoleinfopanel.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/gui/configwindow/sections/consoleinfopanel.h -o debug/moc_consoleinfopanel.cpp
 
@@ -2878,6 +3244,7 @@ debug/moc_pluginpanel.cpp: /usr/include/qt5/QtWidgets/QWidget \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/configwindow/sections/categorypanel.h \
 		/usr/include/qt5/QtWidgets/QScrollArea \
 		/usr/include/qt5/QtWidgets/qscrollarea.h \
@@ -2922,6 +3289,12 @@ debug/moc_pluginpanel.cpp: /usr/include/qt5/QtWidgets/QWidget \
 		/usr/include/qt5/QtGui/qtextformat.h \
 		/usr/include/qt5/QtGui/qpen.h \
 		/usr/include/qt5/QtGui/qtextoption.h \
+		src/gui/configwindow/sections/options/pathoption.h \
+		/usr/include/qt5/QtWidgets/QPushButton \
+		/usr/include/qt5/QtWidgets/qpushbutton.h \
+		/usr/include/qt5/QtWidgets/QFileDialog \
+		/usr/include/qt5/QtWidgets/qfiledialog.h \
+		/usr/include/qt5/QtWidgets/qdialog.h \
 		src/gui/configwindow/sections/consoleinfopanel.h \
 		src/gui/configwindow/sections/pluginpanel.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/gui/configwindow/sections/pluginpanel.h -o debug/moc_pluginpanel.cpp
@@ -3071,6 +3444,7 @@ debug/moc_sectionpanel.cpp: /usr/include/qt5/QtWidgets/QGroupBox \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/configwindow/sections/options/integeroption.h \
 		/usr/include/qt5/QtWidgets/QWidget \
 		/usr/include/qt5/QtWidgets/QHBoxLayout \
@@ -3109,6 +3483,12 @@ debug/moc_sectionpanel.cpp: /usr/include/qt5/QtWidgets/QGroupBox \
 		/usr/include/qt5/QtGui/qtextformat.h \
 		/usr/include/qt5/QtGui/qpen.h \
 		/usr/include/qt5/QtGui/qtextoption.h \
+		src/gui/configwindow/sections/options/pathoption.h \
+		/usr/include/qt5/QtWidgets/QPushButton \
+		/usr/include/qt5/QtWidgets/qpushbutton.h \
+		/usr/include/qt5/QtWidgets/QFileDialog \
+		/usr/include/qt5/QtWidgets/qfiledialog.h \
+		/usr/include/qt5/QtWidgets/qdialog.h \
 		src/gui/configwindow/sections/sectionpanel.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/gui/configwindow/sections/sectionpanel.h -o debug/moc_sectionpanel.cpp
 
@@ -3250,6 +3630,7 @@ debug/moc_systempanel.cpp: /usr/include/qt5/QtWidgets/QWidget \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/configwindow/sections/systempanel.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/gui/configwindow/sections/systempanel.h -o debug/moc_systempanel.cpp
 
@@ -3399,6 +3780,7 @@ debug/moc_menubar.cpp: /usr/include/qt5/QtWidgets/QMenuBar \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/mainwindow/menubar/menubar.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/gui/mainwindow/menubar/menubar.h -o debug/moc_menubar.cpp
 
@@ -3549,6 +3931,7 @@ debug/moc_buttonspanel.cpp: /usr/include/qt5/QtWidgets/QWidget \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/mainwindow/panels/buttonspanel.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/gui/mainwindow/panels/buttonspanel.h -o debug/moc_buttonspanel.cpp
 
@@ -3703,6 +4086,7 @@ debug/moc_controlspanel.cpp: /usr/include/qt5/QtWidgets/QGroupBox \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/mainwindow/panels/controlspanel.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/gui/mainwindow/panels/controlspanel.h -o debug/moc_controlspanel.cpp
 
@@ -3849,6 +4233,7 @@ debug/moc_maincontentspanel.cpp: /usr/include/qt5/QtWidgets/QWidget \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/mainwindow/panels/welcomepanel.h \
 		/usr/include/qt5/QtWidgets/QHBoxLayout \
 		/usr/include/qt5/QtWidgets/QLabel \
@@ -4017,6 +4402,7 @@ debug/moc_welcomepanel.cpp: /usr/include/qt5/QtWidgets/QWidget \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/mainwindow/panels/welcomepanel.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/gui/mainwindow/panels/welcomepanel.h -o debug/moc_welcomepanel.cpp
 
@@ -4182,6 +4568,7 @@ debug/moc_pluginoption.cpp: /usr/include/qt5/QtCore/QObject \
 		/usr/include/qt5/QtCore/qset.h \
 		/usr/include/qt5/QtCore/qcontiguouscache.h \
 		/usr/include/qt5/QtCore/QMap \
+		/usr/include/qt5/QtCore/QStringList \
 		src/base/pluginmanager/plugin/blocks/pluginoption.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/base/pluginmanager/plugin/blocks/pluginoption.h -o debug/moc_pluginoption.cpp
 
@@ -4267,14 +4654,15 @@ debug/moc_pluginsection.cpp: /usr/include/qt5/QtCore/QObject \
 		/usr/include/qt5/QtCore/QList \
 		/usr/include/qt5/QtCore/QMap \
 		src/base/pluginmanager/plugin/blocks/pluginoption.h \
-		src/base/pluginmanager/plugin/blocks/options/optioninteger.h \
 		/usr/include/qt5/QtCore/QStringList \
+		src/base/pluginmanager/plugin/blocks/options/optioninteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionreal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionenum.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/base/pluginmanager/plugin/blocks/pluginsection.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/base/pluginmanager/plugin/blocks/pluginsection.h -o debug/moc_pluginsection.cpp
 
@@ -4429,6 +4817,7 @@ debug/moc_biintegeroption.cpp: /usr/include/qt5/QtWidgets/QWidget \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/configwindow/sections/options/biintegeroption.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/gui/configwindow/sections/options/biintegeroption.h -o debug/moc_biintegeroption.cpp
 
@@ -4583,6 +4972,7 @@ debug/moc_birealoption.cpp: /usr/include/qt5/QtWidgets/QWidget \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/configwindow/sections/options/birealoption.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/gui/configwindow/sections/options/birealoption.h -o debug/moc_birealoption.cpp
 
@@ -4736,6 +5126,7 @@ debug/moc_booleanoption.cpp: /usr/include/qt5/QtWidgets/QWidget \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/configwindow/sections/options/booleanoption.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/gui/configwindow/sections/options/booleanoption.h -o debug/moc_booleanoption.cpp
 
@@ -4900,6 +5291,7 @@ debug/moc_enumoption.cpp: /usr/include/qt5/QtWidgets/QWidget \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/configwindow/sections/options/enumoption.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/gui/configwindow/sections/options/enumoption.h -o debug/moc_enumoption.cpp
 
@@ -5054,8 +5446,172 @@ debug/moc_integeroption.cpp: /usr/include/qt5/QtWidgets/QWidget \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/configwindow/sections/options/integeroption.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/gui/configwindow/sections/options/integeroption.h -o debug/moc_integeroption.cpp
+
+debug/moc_pathoption.cpp: /usr/include/qt5/QtWidgets/QWidget \
+		/usr/include/qt5/QtWidgets/qwidget.h \
+		/usr/include/qt5/QtGui/qwindowdefs.h \
+		/usr/include/qt5/QtCore/qglobal.h \
+		/usr/include/qt5/QtCore/qconfig.h \
+		/usr/include/qt5/QtCore/qfeatures.h \
+		/usr/include/qt5/QtCore/qsystemdetection.h \
+		/usr/include/qt5/QtCore/qprocessordetection.h \
+		/usr/include/qt5/QtCore/qcompilerdetection.h \
+		/usr/include/qt5/QtCore/qglobalstatic.h \
+		/usr/include/qt5/QtCore/qatomic.h \
+		/usr/include/qt5/QtCore/qbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt5/QtCore/qgenericatomic.h \
+		/usr/include/qt5/QtCore/qatomic_msvc.h \
+		/usr/include/qt5/QtCore/qatomic_integrity.h \
+		/usr/include/qt5/QtCore/qoldbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_vxworks.h \
+		/usr/include/qt5/QtCore/qatomic_power.h \
+		/usr/include/qt5/QtCore/qatomic_alpha.h \
+		/usr/include/qt5/QtCore/qatomic_armv7.h \
+		/usr/include/qt5/QtCore/qatomic_armv6.h \
+		/usr/include/qt5/QtCore/qatomic_armv5.h \
+		/usr/include/qt5/QtCore/qatomic_bfin.h \
+		/usr/include/qt5/QtCore/qatomic_ia64.h \
+		/usr/include/qt5/QtCore/qatomic_mips.h \
+		/usr/include/qt5/QtCore/qatomic_s390.h \
+		/usr/include/qt5/QtCore/qatomic_sh4a.h \
+		/usr/include/qt5/QtCore/qatomic_sparc.h \
+		/usr/include/qt5/QtCore/qatomic_x86.h \
+		/usr/include/qt5/QtCore/qatomic_cxx11.h \
+		/usr/include/qt5/QtCore/qatomic_gcc.h \
+		/usr/include/qt5/QtCore/qatomic_unix.h \
+		/usr/include/qt5/QtCore/qmutex.h \
+		/usr/include/qt5/QtCore/qlogging.h \
+		/usr/include/qt5/QtCore/qflags.h \
+		/usr/include/qt5/QtCore/qtypeinfo.h \
+		/usr/include/qt5/QtCore/qtypetraits.h \
+		/usr/include/qt5/QtCore/qsysinfo.h \
+		/usr/include/qt5/QtCore/qobjectdefs.h \
+		/usr/include/qt5/QtCore/qnamespace.h \
+		/usr/include/qt5/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt5/QtGui/qwindowdefs_win.h \
+		/usr/include/qt5/QtCore/qobject.h \
+		/usr/include/qt5/QtCore/qstring.h \
+		/usr/include/qt5/QtCore/qchar.h \
+		/usr/include/qt5/QtCore/qbytearray.h \
+		/usr/include/qt5/QtCore/qrefcount.h \
+		/usr/include/qt5/QtCore/qarraydata.h \
+		/usr/include/qt5/QtCore/qstringbuilder.h \
+		/usr/include/qt5/QtCore/qlist.h \
+		/usr/include/qt5/QtCore/qalgorithms.h \
+		/usr/include/qt5/QtCore/qiterator.h \
+		/usr/include/qt5/QtCore/qcoreevent.h \
+		/usr/include/qt5/QtCore/qscopedpointer.h \
+		/usr/include/qt5/QtCore/qmetatype.h \
+		/usr/include/qt5/QtCore/qvarlengtharray.h \
+		/usr/include/qt5/QtCore/qcontainerfwd.h \
+		/usr/include/qt5/QtCore/qisenum.h \
+		/usr/include/qt5/QtCore/qobject_impl.h \
+		/usr/include/qt5/QtCore/qmargins.h \
+		/usr/include/qt5/QtCore/qrect.h \
+		/usr/include/qt5/QtCore/qsize.h \
+		/usr/include/qt5/QtCore/qpoint.h \
+		/usr/include/qt5/QtGui/qpaintdevice.h \
+		/usr/include/qt5/QtGui/qpalette.h \
+		/usr/include/qt5/QtGui/qcolor.h \
+		/usr/include/qt5/QtGui/qrgb.h \
+		/usr/include/qt5/QtCore/qstringlist.h \
+		/usr/include/qt5/QtCore/qdatastream.h \
+		/usr/include/qt5/QtCore/qiodevice.h \
+		/usr/include/qt5/QtCore/qpair.h \
+		/usr/include/qt5/QtCore/qregexp.h \
+		/usr/include/qt5/QtCore/qstringmatcher.h \
+		/usr/include/qt5/QtGui/qbrush.h \
+		/usr/include/qt5/QtCore/qvector.h \
+		/usr/include/qt5/QtGui/qmatrix.h \
+		/usr/include/qt5/QtGui/qpolygon.h \
+		/usr/include/qt5/QtGui/qregion.h \
+		/usr/include/qt5/QtCore/qline.h \
+		/usr/include/qt5/QtGui/qtransform.h \
+		/usr/include/qt5/QtGui/qpainterpath.h \
+		/usr/include/qt5/QtGui/qimage.h \
+		/usr/include/qt5/QtGui/qpixmap.h \
+		/usr/include/qt5/QtCore/qsharedpointer.h \
+		/usr/include/qt5/QtCore/qshareddata.h \
+		/usr/include/qt5/QtCore/qsharedpointer_impl.h \
+		/usr/include/qt5/QtCore/qhash.h \
+		/usr/include/qt5/QtGui/qfont.h \
+		/usr/include/qt5/QtGui/qfontmetrics.h \
+		/usr/include/qt5/QtGui/qfontinfo.h \
+		/usr/include/qt5/QtWidgets/qsizepolicy.h \
+		/usr/include/qt5/QtGui/qcursor.h \
+		/usr/include/qt5/QtGui/qkeysequence.h \
+		/usr/include/qt5/QtGui/qevent.h \
+		/usr/include/qt5/QtCore/qvariant.h \
+		/usr/include/qt5/QtCore/qmap.h \
+		/usr/include/qt5/QtCore/qdebug.h \
+		/usr/include/qt5/QtCore/qtextstream.h \
+		/usr/include/qt5/QtCore/qlocale.h \
+		/usr/include/qt5/QtCore/qset.h \
+		/usr/include/qt5/QtCore/qcontiguouscache.h \
+		/usr/include/qt5/QtCore/qurl.h \
+		/usr/include/qt5/QtCore/qurlquery.h \
+		/usr/include/qt5/QtCore/qfile.h \
+		/usr/include/qt5/QtCore/qfiledevice.h \
+		/usr/include/qt5/QtGui/qvector2d.h \
+		/usr/include/qt5/QtGui/qtouchdevice.h \
+		/usr/include/qt5/QtWidgets/QHBoxLayout \
+		/usr/include/qt5/QtWidgets/qboxlayout.h \
+		/usr/include/qt5/QtWidgets/qlayout.h \
+		/usr/include/qt5/QtWidgets/qlayoutitem.h \
+		/usr/include/qt5/QtWidgets/qgridlayout.h \
+		/usr/include/qt5/QtWidgets/QLabel \
+		/usr/include/qt5/QtWidgets/qlabel.h \
+		/usr/include/qt5/QtWidgets/qframe.h \
+		/usr/include/qt5/QtWidgets/QLineEdit \
+		/usr/include/qt5/QtWidgets/qlineedit.h \
+		/usr/include/qt5/QtGui/qtextcursor.h \
+		/usr/include/qt5/QtGui/qtextformat.h \
+		/usr/include/qt5/QtGui/qpen.h \
+		/usr/include/qt5/QtGui/qtextoption.h \
+		/usr/include/qt5/QtWidgets/QPushButton \
+		/usr/include/qt5/QtWidgets/qpushbutton.h \
+		/usr/include/qt5/QtWidgets/qabstractbutton.h \
+		/usr/include/qt5/QtGui/qicon.h \
+		/usr/include/qt5/QtWidgets/QFileDialog \
+		/usr/include/qt5/QtWidgets/qfiledialog.h \
+		/usr/include/qt5/QtCore/qdir.h \
+		/usr/include/qt5/QtCore/qfileinfo.h \
+		/usr/include/qt5/QtWidgets/qdialog.h \
+		src/base/base.h \
+		src/base/configuration/configuration.h \
+		/usr/include/qt5/QtCore/QObject \
+		/usr/include/qt5/QtCore/QSettings \
+		/usr/include/qt5/QtCore/qsettings.h \
+		/usr/include/qt5/QtCore/QString \
+		src/base/keys.h \
+		src/base/text/text.h \
+		/usr/include/qt5/QtCore/QMap \
+		/usr/include/qt5/QtCore/QFile \
+		/usr/include/qt5/QtCore/QStringList \
+		/usr/include/qt5/QtCore/QDebug \
+		src/base/sharedcomponents/sharedcomponents.h \
+		src/base/pluginmanager/pluginmanager.h \
+		/usr/include/qt5/QtCore/QVector \
+		/usr/include/qt5/QtCore/QDir \
+		src/base/pluginmanager/plugin/plugin.h \
+		/usr/include/qt5/QtCore/QList \
+		src/base/pluginmanager/plugin/blocks/plugininfo.h \
+		src/base/pluginmanager/plugin/blocks/pluginsection.h \
+		src/base/pluginmanager/plugin/blocks/pluginoption.h \
+		src/base/pluginmanager/plugin/blocks/options/optioninteger.h \
+		src/base/pluginmanager/plugin/blocks/options/optionreal.h \
+		src/base/pluginmanager/plugin/blocks/options/optionenum.h \
+		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
+		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
+		src/gui/configwindow/sections/options/pathoption.h
+	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/gui/configwindow/sections/options/pathoption.h -o debug/moc_pathoption.cpp
 
 debug/moc_realoption.cpp: /usr/include/qt5/QtWidgets/QWidget \
 		/usr/include/qt5/QtWidgets/qwidget.h \
@@ -5208,6 +5764,7 @@ debug/moc_realoption.cpp: /usr/include/qt5/QtWidgets/QWidget \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/configwindow/sections/options/realoption.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/gui/configwindow/sections/options/realoption.h -o debug/moc_realoption.cpp
 
@@ -5363,6 +5920,7 @@ debug/moc_stringoption.cpp: /usr/include/qt5/QtWidgets/QWidget \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/configwindow/sections/options/stringoption.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/gui/configwindow/sections/options/stringoption.h -o debug/moc_stringoption.cpp
 
@@ -5792,6 +6350,91 @@ debug/moc_optioninteger.cpp: /usr/include/qt5/QtCore/QObject \
 		src/base/pluginmanager/plugin/blocks/options/optioninteger.h
 	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/base/pluginmanager/plugin/blocks/options/optioninteger.h -o debug/moc_optioninteger.cpp
 
+debug/moc_optionpath.cpp: /usr/include/qt5/QtCore/QObject \
+		/usr/include/qt5/QtCore/qobject.h \
+		/usr/include/qt5/QtCore/qobjectdefs.h \
+		/usr/include/qt5/QtCore/qnamespace.h \
+		/usr/include/qt5/QtCore/qglobal.h \
+		/usr/include/qt5/QtCore/qconfig.h \
+		/usr/include/qt5/QtCore/qfeatures.h \
+		/usr/include/qt5/QtCore/qsystemdetection.h \
+		/usr/include/qt5/QtCore/qprocessordetection.h \
+		/usr/include/qt5/QtCore/qcompilerdetection.h \
+		/usr/include/qt5/QtCore/qglobalstatic.h \
+		/usr/include/qt5/QtCore/qatomic.h \
+		/usr/include/qt5/QtCore/qbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt5/QtCore/qgenericatomic.h \
+		/usr/include/qt5/QtCore/qatomic_msvc.h \
+		/usr/include/qt5/QtCore/qatomic_integrity.h \
+		/usr/include/qt5/QtCore/qoldbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_vxworks.h \
+		/usr/include/qt5/QtCore/qatomic_power.h \
+		/usr/include/qt5/QtCore/qatomic_alpha.h \
+		/usr/include/qt5/QtCore/qatomic_armv7.h \
+		/usr/include/qt5/QtCore/qatomic_armv6.h \
+		/usr/include/qt5/QtCore/qatomic_armv5.h \
+		/usr/include/qt5/QtCore/qatomic_bfin.h \
+		/usr/include/qt5/QtCore/qatomic_ia64.h \
+		/usr/include/qt5/QtCore/qatomic_mips.h \
+		/usr/include/qt5/QtCore/qatomic_s390.h \
+		/usr/include/qt5/QtCore/qatomic_sh4a.h \
+		/usr/include/qt5/QtCore/qatomic_sparc.h \
+		/usr/include/qt5/QtCore/qatomic_x86.h \
+		/usr/include/qt5/QtCore/qatomic_cxx11.h \
+		/usr/include/qt5/QtCore/qatomic_gcc.h \
+		/usr/include/qt5/QtCore/qatomic_unix.h \
+		/usr/include/qt5/QtCore/qmutex.h \
+		/usr/include/qt5/QtCore/qlogging.h \
+		/usr/include/qt5/QtCore/qflags.h \
+		/usr/include/qt5/QtCore/qtypeinfo.h \
+		/usr/include/qt5/QtCore/qtypetraits.h \
+		/usr/include/qt5/QtCore/qsysinfo.h \
+		/usr/include/qt5/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt5/QtCore/qstring.h \
+		/usr/include/qt5/QtCore/qchar.h \
+		/usr/include/qt5/QtCore/qbytearray.h \
+		/usr/include/qt5/QtCore/qrefcount.h \
+		/usr/include/qt5/QtCore/qarraydata.h \
+		/usr/include/qt5/QtCore/qstringbuilder.h \
+		/usr/include/qt5/QtCore/qlist.h \
+		/usr/include/qt5/QtCore/qalgorithms.h \
+		/usr/include/qt5/QtCore/qiterator.h \
+		/usr/include/qt5/QtCore/qcoreevent.h \
+		/usr/include/qt5/QtCore/qscopedpointer.h \
+		/usr/include/qt5/QtCore/qmetatype.h \
+		/usr/include/qt5/QtCore/qvarlengtharray.h \
+		/usr/include/qt5/QtCore/qcontainerfwd.h \
+		/usr/include/qt5/QtCore/qisenum.h \
+		/usr/include/qt5/QtCore/qobject_impl.h \
+		/usr/include/qt5/QtCore/QString \
+		/usr/include/qt5/QtCore/QFile \
+		/usr/include/qt5/QtCore/qfile.h \
+		/usr/include/qt5/QtCore/qfiledevice.h \
+		/usr/include/qt5/QtCore/qiodevice.h \
+		/usr/include/qt5/QtCore/QDebug \
+		/usr/include/qt5/QtCore/qdebug.h \
+		/usr/include/qt5/QtCore/qhash.h \
+		/usr/include/qt5/QtCore/qpair.h \
+		/usr/include/qt5/QtCore/qmap.h \
+		/usr/include/qt5/QtCore/qtextstream.h \
+		/usr/include/qt5/QtCore/qlocale.h \
+		/usr/include/qt5/QtCore/qvariant.h \
+		/usr/include/qt5/QtCore/qstringlist.h \
+		/usr/include/qt5/QtCore/qdatastream.h \
+		/usr/include/qt5/QtCore/qregexp.h \
+		/usr/include/qt5/QtCore/qstringmatcher.h \
+		/usr/include/qt5/QtCore/qshareddata.h \
+		/usr/include/qt5/QtCore/qvector.h \
+		/usr/include/qt5/QtCore/qpoint.h \
+		/usr/include/qt5/QtCore/qset.h \
+		/usr/include/qt5/QtCore/qcontiguouscache.h \
+		/usr/include/qt5/QtCore/QStringList \
+		src/base/pluginmanager/plugin/blocks/pluginoption.h \
+		/usr/include/qt5/QtCore/QMap \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h
+	/usr/lib/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/lib/gcc/include/c++/4.8.1 -I/usr/lib/gcc/include/c++/4.8.1/x86_64-unknown-linux-gnu -I/usr/lib/gcc/include/c++/4.8.1/backward -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-unknown-linux-gnu/4.8.1/include-fixed -I/usr/include src/base/pluginmanager/plugin/blocks/options/optionpath.h -o debug/moc_optionpath.cpp
+
 debug/moc_optionreal.cpp: /usr/include/qt5/QtCore/QObject \
 		/usr/include/qt5/QtCore/qobject.h \
 		/usr/include/qt5/QtCore/qobjectdefs.h \
@@ -6135,6 +6778,7 @@ debug/main.o: src/main.cc /usr/include/qt5/QtWidgets/QApplication \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/mainwindow/menubar/menubar.h \
 		/usr/include/qt5/QtGui/QKeySequence \
 		src/gui/mainwindow/panels/maincontentspanel.h \
@@ -6202,21 +6846,24 @@ debug/main.o: src/main.cc /usr/include/qt5/QtWidgets/QApplication \
 		/usr/include/qt5/QtGui/qtextformat.h \
 		/usr/include/qt5/QtGui/qpen.h \
 		/usr/include/qt5/QtGui/qtextoption.h \
+		src/gui/configwindow/sections/options/pathoption.h \
+		/usr/include/qt5/QtWidgets/QFileDialog \
+		/usr/include/qt5/QtWidgets/qfiledialog.h \
 		src/gui/configwindow/sections/consoleinfopanel.h \
 		src/gui/aboutwindow/aboutwindow.h \
 		src/gui/aboutwindow/panels/aboutpanel.h \
 		src/gui/aboutwindow/panels/creditspanel.h \
 		src/gui/aboutwindow/panels/authorsection.h \
 		src/gui/aboutwindow/panels/licensepanel.h \
+		src/gui/instancemanager/instancemanager.h \
 		src/core/core.h \
 		src/core/kernel/kernel.h \
-		/usr/include/qt5/QtWidgets/QFileDialog \
-		/usr/include/qt5/QtWidgets/qfiledialog.h \
 		src/core/emulatormanager/emulatormanager.h \
 		/usr/include/qt5/QtCore/QMapIterator \
 		src/core/emulatormanager/emulatorinstance.h \
 		/usr/include/qt5/QtCore/QProcess \
-		/usr/include/qt5/QtCore/qprocess.h
+		/usr/include/qt5/QtCore/qprocess.h \
+		src/gui/instancemanager/instancecontrol.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/main.o src/main.cc
 
 debug/configuration.o: src/base/configuration/configuration.cc src/base/configuration/configuration.h \
@@ -6397,7 +7044,12 @@ debug/pluginmanager.o: src/base/pluginmanager/pluginmanager.cc src/base/pluginma
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
-		src/base/pluginmanager/plugin/blocks/options/optionstring.h
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
+		src/base/configuration/configuration.h \
+		/usr/include/qt5/QtCore/QSettings \
+		/usr/include/qt5/QtCore/qsettings.h \
+		src/base/keys.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/pluginmanager.o src/base/pluginmanager/pluginmanager.cc
 
 debug/sharedcomponents.o: src/base/sharedcomponents/sharedcomponents.cc src/base/sharedcomponents/sharedcomponents.h \
@@ -6503,7 +7155,8 @@ debug/sharedcomponents.o: src/base/sharedcomponents/sharedcomponents.cc src/base
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
-		src/base/pluginmanager/plugin/blocks/options/optionstring.h
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/sharedcomponents.o src/base/sharedcomponents/sharedcomponents.cc
 
 debug/text.o: src/base/text/text.cc src/base/text/text.h \
@@ -6701,7 +7354,8 @@ debug/emulatorinstance.o: src/core/emulatormanager/emulatorinstance.cc src/core/
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
-		src/base/pluginmanager/plugin/blocks/options/optionstring.h
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/emulatorinstance.o src/core/emulatormanager/emulatorinstance.cc
 
 debug/emulatormanager.o: src/core/emulatormanager/emulatormanager.cc src/core/emulatormanager/emulatormanager.h \
@@ -6811,6 +7465,7 @@ debug/emulatormanager.o: src/core/emulatormanager/emulatormanager.cc src/core/em
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/core/emulatormanager/emulatorinstance.h \
 		/usr/include/qt5/QtCore/QProcess \
 		/usr/include/qt5/QtCore/qprocess.h
@@ -6957,6 +7612,7 @@ debug/kernel.o: src/core/kernel/kernel.cc src/core/kernel/kernel.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/core/emulatormanager/emulatormanager.h \
 		/usr/include/qt5/QtCore/QMapIterator \
 		src/core/emulatormanager/emulatorinstance.h \
@@ -7116,6 +7772,7 @@ debug/aboutwindow.o: src/gui/aboutwindow/aboutwindow.cc src/gui/aboutwindow/abou
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/aboutwindow/panels/aboutpanel.h \
 		/usr/include/qt5/QtWidgets/QWidget \
 		/usr/include/qt5/QtWidgets/QLabel \
@@ -7278,6 +7935,7 @@ debug/configwindow.o: src/gui/configwindow/configwindow.cc src/gui/configwindow/
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/configwindow/sections/systempanel.h \
 		/usr/include/qt5/QtWidgets/QWidget \
 		src/gui/configwindow/sections/pluginpanel.h \
@@ -7323,8 +7981,347 @@ debug/configwindow.o: src/gui/configwindow/configwindow.cc src/gui/configwindow/
 		/usr/include/qt5/QtGui/qtextformat.h \
 		/usr/include/qt5/QtGui/qpen.h \
 		/usr/include/qt5/QtGui/qtextoption.h \
+		src/gui/configwindow/sections/options/pathoption.h \
+		/usr/include/qt5/QtWidgets/QFileDialog \
+		/usr/include/qt5/QtWidgets/qfiledialog.h \
 		src/gui/configwindow/sections/consoleinfopanel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/configwindow.o src/gui/configwindow/configwindow.cc
+
+debug/instancecontrol.o: src/gui/instancemanager/instancecontrol.cc src/gui/instancemanager/instancemanager.h \
+		/usr/include/qt5/QtWidgets/QDialog \
+		/usr/include/qt5/QtWidgets/qdialog.h \
+		/usr/include/qt5/QtWidgets/qwidget.h \
+		/usr/include/qt5/QtGui/qwindowdefs.h \
+		/usr/include/qt5/QtCore/qglobal.h \
+		/usr/include/qt5/QtCore/qconfig.h \
+		/usr/include/qt5/QtCore/qfeatures.h \
+		/usr/include/qt5/QtCore/qsystemdetection.h \
+		/usr/include/qt5/QtCore/qprocessordetection.h \
+		/usr/include/qt5/QtCore/qcompilerdetection.h \
+		/usr/include/qt5/QtCore/qglobalstatic.h \
+		/usr/include/qt5/QtCore/qatomic.h \
+		/usr/include/qt5/QtCore/qbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt5/QtCore/qgenericatomic.h \
+		/usr/include/qt5/QtCore/qatomic_msvc.h \
+		/usr/include/qt5/QtCore/qatomic_integrity.h \
+		/usr/include/qt5/QtCore/qoldbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_vxworks.h \
+		/usr/include/qt5/QtCore/qatomic_power.h \
+		/usr/include/qt5/QtCore/qatomic_alpha.h \
+		/usr/include/qt5/QtCore/qatomic_armv7.h \
+		/usr/include/qt5/QtCore/qatomic_armv6.h \
+		/usr/include/qt5/QtCore/qatomic_armv5.h \
+		/usr/include/qt5/QtCore/qatomic_bfin.h \
+		/usr/include/qt5/QtCore/qatomic_ia64.h \
+		/usr/include/qt5/QtCore/qatomic_mips.h \
+		/usr/include/qt5/QtCore/qatomic_s390.h \
+		/usr/include/qt5/QtCore/qatomic_sh4a.h \
+		/usr/include/qt5/QtCore/qatomic_sparc.h \
+		/usr/include/qt5/QtCore/qatomic_x86.h \
+		/usr/include/qt5/QtCore/qatomic_cxx11.h \
+		/usr/include/qt5/QtCore/qatomic_gcc.h \
+		/usr/include/qt5/QtCore/qatomic_unix.h \
+		/usr/include/qt5/QtCore/qmutex.h \
+		/usr/include/qt5/QtCore/qlogging.h \
+		/usr/include/qt5/QtCore/qflags.h \
+		/usr/include/qt5/QtCore/qtypeinfo.h \
+		/usr/include/qt5/QtCore/qtypetraits.h \
+		/usr/include/qt5/QtCore/qsysinfo.h \
+		/usr/include/qt5/QtCore/qobjectdefs.h \
+		/usr/include/qt5/QtCore/qnamespace.h \
+		/usr/include/qt5/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt5/QtGui/qwindowdefs_win.h \
+		/usr/include/qt5/QtCore/qobject.h \
+		/usr/include/qt5/QtCore/qstring.h \
+		/usr/include/qt5/QtCore/qchar.h \
+		/usr/include/qt5/QtCore/qbytearray.h \
+		/usr/include/qt5/QtCore/qrefcount.h \
+		/usr/include/qt5/QtCore/qarraydata.h \
+		/usr/include/qt5/QtCore/qstringbuilder.h \
+		/usr/include/qt5/QtCore/qlist.h \
+		/usr/include/qt5/QtCore/qalgorithms.h \
+		/usr/include/qt5/QtCore/qiterator.h \
+		/usr/include/qt5/QtCore/qcoreevent.h \
+		/usr/include/qt5/QtCore/qscopedpointer.h \
+		/usr/include/qt5/QtCore/qmetatype.h \
+		/usr/include/qt5/QtCore/qvarlengtharray.h \
+		/usr/include/qt5/QtCore/qcontainerfwd.h \
+		/usr/include/qt5/QtCore/qisenum.h \
+		/usr/include/qt5/QtCore/qobject_impl.h \
+		/usr/include/qt5/QtCore/qmargins.h \
+		/usr/include/qt5/QtCore/qrect.h \
+		/usr/include/qt5/QtCore/qsize.h \
+		/usr/include/qt5/QtCore/qpoint.h \
+		/usr/include/qt5/QtGui/qpaintdevice.h \
+		/usr/include/qt5/QtGui/qpalette.h \
+		/usr/include/qt5/QtGui/qcolor.h \
+		/usr/include/qt5/QtGui/qrgb.h \
+		/usr/include/qt5/QtCore/qstringlist.h \
+		/usr/include/qt5/QtCore/qdatastream.h \
+		/usr/include/qt5/QtCore/qiodevice.h \
+		/usr/include/qt5/QtCore/qpair.h \
+		/usr/include/qt5/QtCore/qregexp.h \
+		/usr/include/qt5/QtCore/qstringmatcher.h \
+		/usr/include/qt5/QtGui/qbrush.h \
+		/usr/include/qt5/QtCore/qvector.h \
+		/usr/include/qt5/QtGui/qmatrix.h \
+		/usr/include/qt5/QtGui/qpolygon.h \
+		/usr/include/qt5/QtGui/qregion.h \
+		/usr/include/qt5/QtCore/qline.h \
+		/usr/include/qt5/QtGui/qtransform.h \
+		/usr/include/qt5/QtGui/qpainterpath.h \
+		/usr/include/qt5/QtGui/qimage.h \
+		/usr/include/qt5/QtGui/qpixmap.h \
+		/usr/include/qt5/QtCore/qsharedpointer.h \
+		/usr/include/qt5/QtCore/qshareddata.h \
+		/usr/include/qt5/QtCore/qsharedpointer_impl.h \
+		/usr/include/qt5/QtCore/qhash.h \
+		/usr/include/qt5/QtGui/qfont.h \
+		/usr/include/qt5/QtGui/qfontmetrics.h \
+		/usr/include/qt5/QtGui/qfontinfo.h \
+		/usr/include/qt5/QtWidgets/qsizepolicy.h \
+		/usr/include/qt5/QtGui/qcursor.h \
+		/usr/include/qt5/QtGui/qkeysequence.h \
+		/usr/include/qt5/QtGui/qevent.h \
+		/usr/include/qt5/QtCore/qvariant.h \
+		/usr/include/qt5/QtCore/qmap.h \
+		/usr/include/qt5/QtCore/qdebug.h \
+		/usr/include/qt5/QtCore/qtextstream.h \
+		/usr/include/qt5/QtCore/qlocale.h \
+		/usr/include/qt5/QtCore/qset.h \
+		/usr/include/qt5/QtCore/qcontiguouscache.h \
+		/usr/include/qt5/QtCore/qurl.h \
+		/usr/include/qt5/QtCore/qurlquery.h \
+		/usr/include/qt5/QtCore/qfile.h \
+		/usr/include/qt5/QtCore/qfiledevice.h \
+		/usr/include/qt5/QtGui/qvector2d.h \
+		/usr/include/qt5/QtGui/qtouchdevice.h \
+		/usr/include/qt5/QtWidgets/QVBoxLayout \
+		/usr/include/qt5/QtWidgets/qboxlayout.h \
+		/usr/include/qt5/QtWidgets/qlayout.h \
+		/usr/include/qt5/QtWidgets/qlayoutitem.h \
+		/usr/include/qt5/QtWidgets/qgridlayout.h \
+		/usr/include/qt5/QtWidgets/QHBoxLayout \
+		/usr/include/qt5/QtWidgets/QPushButton \
+		/usr/include/qt5/QtWidgets/qpushbutton.h \
+		/usr/include/qt5/QtWidgets/qabstractbutton.h \
+		/usr/include/qt5/QtGui/qicon.h \
+		/usr/include/qt5/QtGui/QIcon \
+		src/base/base.h \
+		src/base/configuration/configuration.h \
+		/usr/include/qt5/QtCore/QObject \
+		/usr/include/qt5/QtCore/QSettings \
+		/usr/include/qt5/QtCore/qsettings.h \
+		/usr/include/qt5/QtCore/QString \
+		src/base/keys.h \
+		src/base/text/text.h \
+		/usr/include/qt5/QtCore/QMap \
+		/usr/include/qt5/QtCore/QFile \
+		/usr/include/qt5/QtCore/QStringList \
+		/usr/include/qt5/QtCore/QDebug \
+		src/base/sharedcomponents/sharedcomponents.h \
+		src/base/pluginmanager/pluginmanager.h \
+		/usr/include/qt5/QtCore/QVector \
+		/usr/include/qt5/QtCore/QDir \
+		/usr/include/qt5/QtCore/qdir.h \
+		/usr/include/qt5/QtCore/qfileinfo.h \
+		src/base/pluginmanager/plugin/plugin.h \
+		/usr/include/qt5/QtCore/QList \
+		src/base/pluginmanager/plugin/blocks/plugininfo.h \
+		src/base/pluginmanager/plugin/blocks/pluginsection.h \
+		src/base/pluginmanager/plugin/blocks/pluginoption.h \
+		src/base/pluginmanager/plugin/blocks/options/optioninteger.h \
+		src/base/pluginmanager/plugin/blocks/options/optionreal.h \
+		src/base/pluginmanager/plugin/blocks/options/optionenum.h \
+		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
+		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
+		src/core/core.h \
+		src/core/kernel/kernel.h \
+		/usr/include/qt5/QtWidgets/QFileDialog \
+		/usr/include/qt5/QtWidgets/qfiledialog.h \
+		src/core/emulatormanager/emulatormanager.h \
+		/usr/include/qt5/QtCore/QMapIterator \
+		src/core/emulatormanager/emulatorinstance.h \
+		/usr/include/qt5/QtCore/QProcess \
+		/usr/include/qt5/QtCore/qprocess.h \
+		src/gui/instancemanager/instancecontrol.h \
+		/usr/include/qt5/QtWidgets/QWidget \
+		/usr/include/qt5/QtWidgets/QLabel \
+		/usr/include/qt5/QtWidgets/qlabel.h \
+		/usr/include/qt5/QtWidgets/qframe.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/instancecontrol.o src/gui/instancemanager/instancecontrol.cc
+
+debug/instancemanager.o: src/gui/instancemanager/instancemanager.cc src/gui/instancemanager/instancemanager.h \
+		/usr/include/qt5/QtWidgets/QDialog \
+		/usr/include/qt5/QtWidgets/qdialog.h \
+		/usr/include/qt5/QtWidgets/qwidget.h \
+		/usr/include/qt5/QtGui/qwindowdefs.h \
+		/usr/include/qt5/QtCore/qglobal.h \
+		/usr/include/qt5/QtCore/qconfig.h \
+		/usr/include/qt5/QtCore/qfeatures.h \
+		/usr/include/qt5/QtCore/qsystemdetection.h \
+		/usr/include/qt5/QtCore/qprocessordetection.h \
+		/usr/include/qt5/QtCore/qcompilerdetection.h \
+		/usr/include/qt5/QtCore/qglobalstatic.h \
+		/usr/include/qt5/QtCore/qatomic.h \
+		/usr/include/qt5/QtCore/qbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt5/QtCore/qgenericatomic.h \
+		/usr/include/qt5/QtCore/qatomic_msvc.h \
+		/usr/include/qt5/QtCore/qatomic_integrity.h \
+		/usr/include/qt5/QtCore/qoldbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_vxworks.h \
+		/usr/include/qt5/QtCore/qatomic_power.h \
+		/usr/include/qt5/QtCore/qatomic_alpha.h \
+		/usr/include/qt5/QtCore/qatomic_armv7.h \
+		/usr/include/qt5/QtCore/qatomic_armv6.h \
+		/usr/include/qt5/QtCore/qatomic_armv5.h \
+		/usr/include/qt5/QtCore/qatomic_bfin.h \
+		/usr/include/qt5/QtCore/qatomic_ia64.h \
+		/usr/include/qt5/QtCore/qatomic_mips.h \
+		/usr/include/qt5/QtCore/qatomic_s390.h \
+		/usr/include/qt5/QtCore/qatomic_sh4a.h \
+		/usr/include/qt5/QtCore/qatomic_sparc.h \
+		/usr/include/qt5/QtCore/qatomic_x86.h \
+		/usr/include/qt5/QtCore/qatomic_cxx11.h \
+		/usr/include/qt5/QtCore/qatomic_gcc.h \
+		/usr/include/qt5/QtCore/qatomic_unix.h \
+		/usr/include/qt5/QtCore/qmutex.h \
+		/usr/include/qt5/QtCore/qlogging.h \
+		/usr/include/qt5/QtCore/qflags.h \
+		/usr/include/qt5/QtCore/qtypeinfo.h \
+		/usr/include/qt5/QtCore/qtypetraits.h \
+		/usr/include/qt5/QtCore/qsysinfo.h \
+		/usr/include/qt5/QtCore/qobjectdefs.h \
+		/usr/include/qt5/QtCore/qnamespace.h \
+		/usr/include/qt5/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt5/QtGui/qwindowdefs_win.h \
+		/usr/include/qt5/QtCore/qobject.h \
+		/usr/include/qt5/QtCore/qstring.h \
+		/usr/include/qt5/QtCore/qchar.h \
+		/usr/include/qt5/QtCore/qbytearray.h \
+		/usr/include/qt5/QtCore/qrefcount.h \
+		/usr/include/qt5/QtCore/qarraydata.h \
+		/usr/include/qt5/QtCore/qstringbuilder.h \
+		/usr/include/qt5/QtCore/qlist.h \
+		/usr/include/qt5/QtCore/qalgorithms.h \
+		/usr/include/qt5/QtCore/qiterator.h \
+		/usr/include/qt5/QtCore/qcoreevent.h \
+		/usr/include/qt5/QtCore/qscopedpointer.h \
+		/usr/include/qt5/QtCore/qmetatype.h \
+		/usr/include/qt5/QtCore/qvarlengtharray.h \
+		/usr/include/qt5/QtCore/qcontainerfwd.h \
+		/usr/include/qt5/QtCore/qisenum.h \
+		/usr/include/qt5/QtCore/qobject_impl.h \
+		/usr/include/qt5/QtCore/qmargins.h \
+		/usr/include/qt5/QtCore/qrect.h \
+		/usr/include/qt5/QtCore/qsize.h \
+		/usr/include/qt5/QtCore/qpoint.h \
+		/usr/include/qt5/QtGui/qpaintdevice.h \
+		/usr/include/qt5/QtGui/qpalette.h \
+		/usr/include/qt5/QtGui/qcolor.h \
+		/usr/include/qt5/QtGui/qrgb.h \
+		/usr/include/qt5/QtCore/qstringlist.h \
+		/usr/include/qt5/QtCore/qdatastream.h \
+		/usr/include/qt5/QtCore/qiodevice.h \
+		/usr/include/qt5/QtCore/qpair.h \
+		/usr/include/qt5/QtCore/qregexp.h \
+		/usr/include/qt5/QtCore/qstringmatcher.h \
+		/usr/include/qt5/QtGui/qbrush.h \
+		/usr/include/qt5/QtCore/qvector.h \
+		/usr/include/qt5/QtGui/qmatrix.h \
+		/usr/include/qt5/QtGui/qpolygon.h \
+		/usr/include/qt5/QtGui/qregion.h \
+		/usr/include/qt5/QtCore/qline.h \
+		/usr/include/qt5/QtGui/qtransform.h \
+		/usr/include/qt5/QtGui/qpainterpath.h \
+		/usr/include/qt5/QtGui/qimage.h \
+		/usr/include/qt5/QtGui/qpixmap.h \
+		/usr/include/qt5/QtCore/qsharedpointer.h \
+		/usr/include/qt5/QtCore/qshareddata.h \
+		/usr/include/qt5/QtCore/qsharedpointer_impl.h \
+		/usr/include/qt5/QtCore/qhash.h \
+		/usr/include/qt5/QtGui/qfont.h \
+		/usr/include/qt5/QtGui/qfontmetrics.h \
+		/usr/include/qt5/QtGui/qfontinfo.h \
+		/usr/include/qt5/QtWidgets/qsizepolicy.h \
+		/usr/include/qt5/QtGui/qcursor.h \
+		/usr/include/qt5/QtGui/qkeysequence.h \
+		/usr/include/qt5/QtGui/qevent.h \
+		/usr/include/qt5/QtCore/qvariant.h \
+		/usr/include/qt5/QtCore/qmap.h \
+		/usr/include/qt5/QtCore/qdebug.h \
+		/usr/include/qt5/QtCore/qtextstream.h \
+		/usr/include/qt5/QtCore/qlocale.h \
+		/usr/include/qt5/QtCore/qset.h \
+		/usr/include/qt5/QtCore/qcontiguouscache.h \
+		/usr/include/qt5/QtCore/qurl.h \
+		/usr/include/qt5/QtCore/qurlquery.h \
+		/usr/include/qt5/QtCore/qfile.h \
+		/usr/include/qt5/QtCore/qfiledevice.h \
+		/usr/include/qt5/QtGui/qvector2d.h \
+		/usr/include/qt5/QtGui/qtouchdevice.h \
+		/usr/include/qt5/QtWidgets/QVBoxLayout \
+		/usr/include/qt5/QtWidgets/qboxlayout.h \
+		/usr/include/qt5/QtWidgets/qlayout.h \
+		/usr/include/qt5/QtWidgets/qlayoutitem.h \
+		/usr/include/qt5/QtWidgets/qgridlayout.h \
+		/usr/include/qt5/QtWidgets/QHBoxLayout \
+		/usr/include/qt5/QtWidgets/QPushButton \
+		/usr/include/qt5/QtWidgets/qpushbutton.h \
+		/usr/include/qt5/QtWidgets/qabstractbutton.h \
+		/usr/include/qt5/QtGui/qicon.h \
+		/usr/include/qt5/QtGui/QIcon \
+		src/base/base.h \
+		src/base/configuration/configuration.h \
+		/usr/include/qt5/QtCore/QObject \
+		/usr/include/qt5/QtCore/QSettings \
+		/usr/include/qt5/QtCore/qsettings.h \
+		/usr/include/qt5/QtCore/QString \
+		src/base/keys.h \
+		src/base/text/text.h \
+		/usr/include/qt5/QtCore/QMap \
+		/usr/include/qt5/QtCore/QFile \
+		/usr/include/qt5/QtCore/QStringList \
+		/usr/include/qt5/QtCore/QDebug \
+		src/base/sharedcomponents/sharedcomponents.h \
+		src/base/pluginmanager/pluginmanager.h \
+		/usr/include/qt5/QtCore/QVector \
+		/usr/include/qt5/QtCore/QDir \
+		/usr/include/qt5/QtCore/qdir.h \
+		/usr/include/qt5/QtCore/qfileinfo.h \
+		src/base/pluginmanager/plugin/plugin.h \
+		/usr/include/qt5/QtCore/QList \
+		src/base/pluginmanager/plugin/blocks/plugininfo.h \
+		src/base/pluginmanager/plugin/blocks/pluginsection.h \
+		src/base/pluginmanager/plugin/blocks/pluginoption.h \
+		src/base/pluginmanager/plugin/blocks/options/optioninteger.h \
+		src/base/pluginmanager/plugin/blocks/options/optionreal.h \
+		src/base/pluginmanager/plugin/blocks/options/optionenum.h \
+		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
+		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
+		src/core/core.h \
+		src/core/kernel/kernel.h \
+		/usr/include/qt5/QtWidgets/QFileDialog \
+		/usr/include/qt5/QtWidgets/qfiledialog.h \
+		src/core/emulatormanager/emulatormanager.h \
+		/usr/include/qt5/QtCore/QMapIterator \
+		src/core/emulatormanager/emulatorinstance.h \
+		/usr/include/qt5/QtCore/QProcess \
+		/usr/include/qt5/QtCore/qprocess.h \
+		src/gui/instancemanager/instancecontrol.h \
+		/usr/include/qt5/QtWidgets/QWidget \
+		/usr/include/qt5/QtWidgets/QLabel \
+		/usr/include/qt5/QtWidgets/qlabel.h \
+		/usr/include/qt5/QtWidgets/qframe.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/instancemanager.o src/gui/instancemanager/instancemanager.cc
 
 debug/mainwindow.o: src/gui/mainwindow/mainwindow.cc src/gui/mainwindow/mainwindow.h \
 		/usr/include/qt5/QtWidgets/QMainWindow \
@@ -7477,6 +8474,7 @@ debug/mainwindow.o: src/gui/mainwindow/mainwindow.cc src/gui/mainwindow/mainwind
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/mainwindow/menubar/menubar.h \
 		/usr/include/qt5/QtGui/QKeySequence \
 		src/gui/mainwindow/panels/maincontentspanel.h \
@@ -7584,18 +8582,19 @@ debug/plugin.o: src/base/pluginmanager/plugin/plugin.cc src/base/pluginmanager/p
 		/usr/include/qt5/QtCore/qpoint.h \
 		/usr/include/qt5/QtCore/qset.h \
 		/usr/include/qt5/QtCore/qcontiguouscache.h \
+		/usr/include/qt5/QtCore/QStringList \
 		src/base/pluginmanager/plugin/blocks/plugininfo.h \
 		/usr/include/qt5/QtCore/QDebug \
 		src/base/pluginmanager/plugin/blocks/pluginsection.h \
 		src/base/pluginmanager/plugin/blocks/pluginoption.h \
 		src/base/pluginmanager/plugin/blocks/options/optioninteger.h \
-		/usr/include/qt5/QtCore/QStringList \
 		src/base/pluginmanager/plugin/blocks/options/optionreal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionenum.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
-		src/base/pluginmanager/plugin/blocks/options/optionstring.h
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/plugin.o src/base/pluginmanager/plugin/plugin.cc
 
 debug/aboutpanel.o: src/gui/aboutwindow/panels/aboutpanel.cc src/gui/aboutwindow/panels/aboutpanel.h \
@@ -7745,7 +8744,8 @@ debug/aboutpanel.o: src/gui/aboutwindow/panels/aboutpanel.cc src/gui/aboutwindow
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
-		src/base/pluginmanager/plugin/blocks/options/optionstring.h
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/aboutpanel.o src/gui/aboutwindow/panels/aboutpanel.cc
 
 debug/authorsection.o: src/gui/aboutwindow/panels/authorsection.cc src/gui/aboutwindow/panels/authorsection.h \
@@ -7894,7 +8894,8 @@ debug/authorsection.o: src/gui/aboutwindow/panels/authorsection.cc src/gui/about
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
-		src/base/pluginmanager/plugin/blocks/options/optionstring.h
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/authorsection.o src/gui/aboutwindow/panels/authorsection.cc
 
 debug/creditspanel.o: src/gui/aboutwindow/panels/creditspanel.cc src/gui/aboutwindow/panels/creditspanel.h \
@@ -8041,6 +9042,7 @@ debug/creditspanel.o: src/gui/aboutwindow/panels/creditspanel.cc src/gui/aboutwi
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/aboutwindow/panels/authorsection.h \
 		/usr/include/qt5/QtWidgets/QLabel \
 		/usr/include/qt5/QtWidgets/qlabel.h \
@@ -8190,7 +9192,8 @@ debug/licensepanel.o: src/gui/aboutwindow/panels/licensepanel.cc src/gui/aboutwi
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
-		src/base/pluginmanager/plugin/blocks/options/optionstring.h
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/licensepanel.o src/gui/aboutwindow/panels/licensepanel.cc
 
 debug/categorypanel.o: src/gui/configwindow/sections/categorypanel.cc src/gui/configwindow/sections/categorypanel.h \
@@ -8342,6 +9345,7 @@ debug/categorypanel.o: src/gui/configwindow/sections/categorypanel.cc src/gui/co
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/configwindow/sections/sectionpanel.h \
 		/usr/include/qt5/QtWidgets/QGroupBox \
 		/usr/include/qt5/QtWidgets/qgroupbox.h \
@@ -8381,7 +9385,13 @@ debug/categorypanel.o: src/gui/configwindow/sections/categorypanel.cc src/gui/co
 		/usr/include/qt5/QtGui/qtextcursor.h \
 		/usr/include/qt5/QtGui/qtextformat.h \
 		/usr/include/qt5/QtGui/qpen.h \
-		/usr/include/qt5/QtGui/qtextoption.h
+		/usr/include/qt5/QtGui/qtextoption.h \
+		src/gui/configwindow/sections/options/pathoption.h \
+		/usr/include/qt5/QtWidgets/QPushButton \
+		/usr/include/qt5/QtWidgets/qpushbutton.h \
+		/usr/include/qt5/QtWidgets/QFileDialog \
+		/usr/include/qt5/QtWidgets/qfiledialog.h \
+		/usr/include/qt5/QtWidgets/qdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/categorypanel.o src/gui/configwindow/sections/categorypanel.cc
 
 debug/consoleinfopanel.o: src/gui/configwindow/sections/consoleinfopanel.cc src/gui/configwindow/sections/consoleinfopanel.h \
@@ -8531,7 +9541,8 @@ debug/consoleinfopanel.o: src/gui/configwindow/sections/consoleinfopanel.cc src/
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
-		src/base/pluginmanager/plugin/blocks/options/optionstring.h
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/consoleinfopanel.o src/gui/configwindow/sections/consoleinfopanel.cc
 
 debug/pluginpanel.o: src/gui/configwindow/sections/pluginpanel.cc src/gui/configwindow/sections/pluginpanel.h \
@@ -8681,6 +9692,7 @@ debug/pluginpanel.o: src/gui/configwindow/sections/pluginpanel.cc src/gui/config
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/configwindow/sections/categorypanel.h \
 		/usr/include/qt5/QtWidgets/QScrollArea \
 		/usr/include/qt5/QtWidgets/qscrollarea.h \
@@ -8725,6 +9737,12 @@ debug/pluginpanel.o: src/gui/configwindow/sections/pluginpanel.cc src/gui/config
 		/usr/include/qt5/QtGui/qtextformat.h \
 		/usr/include/qt5/QtGui/qpen.h \
 		/usr/include/qt5/QtGui/qtextoption.h \
+		src/gui/configwindow/sections/options/pathoption.h \
+		/usr/include/qt5/QtWidgets/QPushButton \
+		/usr/include/qt5/QtWidgets/qpushbutton.h \
+		/usr/include/qt5/QtWidgets/QFileDialog \
+		/usr/include/qt5/QtWidgets/qfiledialog.h \
+		/usr/include/qt5/QtWidgets/qdialog.h \
 		src/gui/configwindow/sections/consoleinfopanel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/pluginpanel.o src/gui/configwindow/sections/pluginpanel.cc
 
@@ -8874,6 +9892,7 @@ debug/sectionpanel.o: src/gui/configwindow/sections/sectionpanel.cc src/gui/conf
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/configwindow/sections/options/integeroption.h \
 		/usr/include/qt5/QtWidgets/QWidget \
 		/usr/include/qt5/QtWidgets/QHBoxLayout \
@@ -8911,7 +9930,13 @@ debug/sectionpanel.o: src/gui/configwindow/sections/sectionpanel.cc src/gui/conf
 		/usr/include/qt5/QtGui/qtextcursor.h \
 		/usr/include/qt5/QtGui/qtextformat.h \
 		/usr/include/qt5/QtGui/qpen.h \
-		/usr/include/qt5/QtGui/qtextoption.h
+		/usr/include/qt5/QtGui/qtextoption.h \
+		src/gui/configwindow/sections/options/pathoption.h \
+		/usr/include/qt5/QtWidgets/QPushButton \
+		/usr/include/qt5/QtWidgets/qpushbutton.h \
+		/usr/include/qt5/QtWidgets/QFileDialog \
+		/usr/include/qt5/QtWidgets/qfiledialog.h \
+		/usr/include/qt5/QtWidgets/qdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/sectionpanel.o src/gui/configwindow/sections/sectionpanel.cc
 
 debug/systempanel.o: src/gui/configwindow/sections/systempanel.cc src/gui/configwindow/sections/systempanel.h \
@@ -9052,7 +10077,8 @@ debug/systempanel.o: src/gui/configwindow/sections/systempanel.cc src/gui/config
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
-		src/base/pluginmanager/plugin/blocks/options/optionstring.h
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/systempanel.o src/gui/configwindow/sections/systempanel.cc
 
 debug/menubar.o: src/gui/mainwindow/menubar/menubar.cc src/gui/mainwindow/menubar/menubar.h \
@@ -9201,7 +10227,8 @@ debug/menubar.o: src/gui/mainwindow/menubar/menubar.cc src/gui/mainwindow/menuba
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
-		src/base/pluginmanager/plugin/blocks/options/optionstring.h
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/menubar.o src/gui/mainwindow/menubar/menubar.cc
 
 debug/buttonspanel.o: src/gui/mainwindow/panels/buttonspanel.cc src/gui/mainwindow/panels/buttonspanel.h \
@@ -9351,7 +10378,8 @@ debug/buttonspanel.o: src/gui/mainwindow/panels/buttonspanel.cc src/gui/mainwind
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
-		src/base/pluginmanager/plugin/blocks/options/optionstring.h
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/buttonspanel.o src/gui/mainwindow/panels/buttonspanel.cc
 
 debug/controlspanel.o: src/gui/mainwindow/panels/controlspanel.cc src/gui/mainwindow/panels/controlspanel.h \
@@ -9505,7 +10533,8 @@ debug/controlspanel.o: src/gui/mainwindow/panels/controlspanel.cc src/gui/mainwi
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
-		src/base/pluginmanager/plugin/blocks/options/optionstring.h
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/controlspanel.o src/gui/mainwindow/panels/controlspanel.cc
 
 debug/maincontentspanel.o: src/gui/mainwindow/panels/maincontentspanel.cc src/gui/mainwindow/panels/maincontentspanel.h \
@@ -9652,6 +10681,7 @@ debug/maincontentspanel.o: src/gui/mainwindow/panels/maincontentspanel.cc src/gu
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
 		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h \
 		src/gui/mainwindow/panels/welcomepanel.h \
 		/usr/include/qt5/QtWidgets/QHBoxLayout \
 		/usr/include/qt5/QtWidgets/QLabel \
@@ -9819,7 +10849,8 @@ debug/welcomepanel.o: src/gui/mainwindow/panels/welcomepanel.cc src/gui/mainwind
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
-		src/base/pluginmanager/plugin/blocks/options/optionstring.h
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/welcomepanel.o src/gui/mainwindow/panels/welcomepanel.cc
 
 debug/plugininfo.o: src/base/pluginmanager/plugin/blocks/plugininfo.cc src/base/pluginmanager/plugin/blocks/plugininfo.h \
@@ -9984,7 +11015,8 @@ debug/pluginoption.o: src/base/pluginmanager/plugin/blocks/pluginoption.cc src/b
 		/usr/include/qt5/QtCore/qpoint.h \
 		/usr/include/qt5/QtCore/qset.h \
 		/usr/include/qt5/QtCore/qcontiguouscache.h \
-		/usr/include/qt5/QtCore/QMap
+		/usr/include/qt5/QtCore/QMap \
+		/usr/include/qt5/QtCore/QStringList
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/pluginoption.o src/base/pluginmanager/plugin/blocks/pluginoption.cc
 
 debug/pluginsection.o: src/base/pluginmanager/plugin/blocks/pluginsection.cc src/base/pluginmanager/plugin/blocks/pluginsection.h \
@@ -10070,14 +11102,15 @@ debug/pluginsection.o: src/base/pluginmanager/plugin/blocks/pluginsection.cc src
 		/usr/include/qt5/QtCore/QList \
 		/usr/include/qt5/QtCore/QMap \
 		src/base/pluginmanager/plugin/blocks/pluginoption.h \
-		src/base/pluginmanager/plugin/blocks/options/optioninteger.h \
 		/usr/include/qt5/QtCore/QStringList \
+		src/base/pluginmanager/plugin/blocks/options/optioninteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionreal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionenum.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
-		src/base/pluginmanager/plugin/blocks/options/optionstring.h
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/pluginsection.o src/base/pluginmanager/plugin/blocks/pluginsection.cc
 
 debug/biintegeroption.o: src/gui/configwindow/sections/options/biintegeroption.cc src/gui/configwindow/sections/options/biintegeroption.h \
@@ -10231,7 +11264,8 @@ debug/biintegeroption.o: src/gui/configwindow/sections/options/biintegeroption.c
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
-		src/base/pluginmanager/plugin/blocks/options/optionstring.h
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/biintegeroption.o src/gui/configwindow/sections/options/biintegeroption.cc
 
 debug/birealoption.o: src/gui/configwindow/sections/options/birealoption.cc src/gui/configwindow/sections/options/birealoption.h \
@@ -10385,7 +11419,8 @@ debug/birealoption.o: src/gui/configwindow/sections/options/birealoption.cc src/
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
-		src/base/pluginmanager/plugin/blocks/options/optionstring.h
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/birealoption.o src/gui/configwindow/sections/options/birealoption.cc
 
 debug/booleanoption.o: src/gui/configwindow/sections/options/booleanoption.cc src/gui/configwindow/sections/options/booleanoption.h \
@@ -10538,7 +11573,8 @@ debug/booleanoption.o: src/gui/configwindow/sections/options/booleanoption.cc sr
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
-		src/base/pluginmanager/plugin/blocks/options/optionstring.h
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/booleanoption.o src/gui/configwindow/sections/options/booleanoption.cc
 
 debug/enumoption.o: src/gui/configwindow/sections/options/enumoption.cc src/gui/configwindow/sections/options/enumoption.h \
@@ -10702,7 +11738,8 @@ debug/enumoption.o: src/gui/configwindow/sections/options/enumoption.cc src/gui/
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
-		src/base/pluginmanager/plugin/blocks/options/optionstring.h
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/enumoption.o src/gui/configwindow/sections/options/enumoption.cc
 
 debug/integeroption.o: src/gui/configwindow/sections/options/integeroption.cc src/gui/configwindow/sections/options/integeroption.h \
@@ -10856,8 +11893,172 @@ debug/integeroption.o: src/gui/configwindow/sections/options/integeroption.cc sr
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
-		src/base/pluginmanager/plugin/blocks/options/optionstring.h
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/integeroption.o src/gui/configwindow/sections/options/integeroption.cc
+
+debug/pathoption.o: src/gui/configwindow/sections/options/pathoption.cc src/gui/configwindow/sections/options/pathoption.h \
+		/usr/include/qt5/QtWidgets/QWidget \
+		/usr/include/qt5/QtWidgets/qwidget.h \
+		/usr/include/qt5/QtGui/qwindowdefs.h \
+		/usr/include/qt5/QtCore/qglobal.h \
+		/usr/include/qt5/QtCore/qconfig.h \
+		/usr/include/qt5/QtCore/qfeatures.h \
+		/usr/include/qt5/QtCore/qsystemdetection.h \
+		/usr/include/qt5/QtCore/qprocessordetection.h \
+		/usr/include/qt5/QtCore/qcompilerdetection.h \
+		/usr/include/qt5/QtCore/qglobalstatic.h \
+		/usr/include/qt5/QtCore/qatomic.h \
+		/usr/include/qt5/QtCore/qbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt5/QtCore/qgenericatomic.h \
+		/usr/include/qt5/QtCore/qatomic_msvc.h \
+		/usr/include/qt5/QtCore/qatomic_integrity.h \
+		/usr/include/qt5/QtCore/qoldbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_vxworks.h \
+		/usr/include/qt5/QtCore/qatomic_power.h \
+		/usr/include/qt5/QtCore/qatomic_alpha.h \
+		/usr/include/qt5/QtCore/qatomic_armv7.h \
+		/usr/include/qt5/QtCore/qatomic_armv6.h \
+		/usr/include/qt5/QtCore/qatomic_armv5.h \
+		/usr/include/qt5/QtCore/qatomic_bfin.h \
+		/usr/include/qt5/QtCore/qatomic_ia64.h \
+		/usr/include/qt5/QtCore/qatomic_mips.h \
+		/usr/include/qt5/QtCore/qatomic_s390.h \
+		/usr/include/qt5/QtCore/qatomic_sh4a.h \
+		/usr/include/qt5/QtCore/qatomic_sparc.h \
+		/usr/include/qt5/QtCore/qatomic_x86.h \
+		/usr/include/qt5/QtCore/qatomic_cxx11.h \
+		/usr/include/qt5/QtCore/qatomic_gcc.h \
+		/usr/include/qt5/QtCore/qatomic_unix.h \
+		/usr/include/qt5/QtCore/qmutex.h \
+		/usr/include/qt5/QtCore/qlogging.h \
+		/usr/include/qt5/QtCore/qflags.h \
+		/usr/include/qt5/QtCore/qtypeinfo.h \
+		/usr/include/qt5/QtCore/qtypetraits.h \
+		/usr/include/qt5/QtCore/qsysinfo.h \
+		/usr/include/qt5/QtCore/qobjectdefs.h \
+		/usr/include/qt5/QtCore/qnamespace.h \
+		/usr/include/qt5/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt5/QtGui/qwindowdefs_win.h \
+		/usr/include/qt5/QtCore/qobject.h \
+		/usr/include/qt5/QtCore/qstring.h \
+		/usr/include/qt5/QtCore/qchar.h \
+		/usr/include/qt5/QtCore/qbytearray.h \
+		/usr/include/qt5/QtCore/qrefcount.h \
+		/usr/include/qt5/QtCore/qarraydata.h \
+		/usr/include/qt5/QtCore/qstringbuilder.h \
+		/usr/include/qt5/QtCore/qlist.h \
+		/usr/include/qt5/QtCore/qalgorithms.h \
+		/usr/include/qt5/QtCore/qiterator.h \
+		/usr/include/qt5/QtCore/qcoreevent.h \
+		/usr/include/qt5/QtCore/qscopedpointer.h \
+		/usr/include/qt5/QtCore/qmetatype.h \
+		/usr/include/qt5/QtCore/qvarlengtharray.h \
+		/usr/include/qt5/QtCore/qcontainerfwd.h \
+		/usr/include/qt5/QtCore/qisenum.h \
+		/usr/include/qt5/QtCore/qobject_impl.h \
+		/usr/include/qt5/QtCore/qmargins.h \
+		/usr/include/qt5/QtCore/qrect.h \
+		/usr/include/qt5/QtCore/qsize.h \
+		/usr/include/qt5/QtCore/qpoint.h \
+		/usr/include/qt5/QtGui/qpaintdevice.h \
+		/usr/include/qt5/QtGui/qpalette.h \
+		/usr/include/qt5/QtGui/qcolor.h \
+		/usr/include/qt5/QtGui/qrgb.h \
+		/usr/include/qt5/QtCore/qstringlist.h \
+		/usr/include/qt5/QtCore/qdatastream.h \
+		/usr/include/qt5/QtCore/qiodevice.h \
+		/usr/include/qt5/QtCore/qpair.h \
+		/usr/include/qt5/QtCore/qregexp.h \
+		/usr/include/qt5/QtCore/qstringmatcher.h \
+		/usr/include/qt5/QtGui/qbrush.h \
+		/usr/include/qt5/QtCore/qvector.h \
+		/usr/include/qt5/QtGui/qmatrix.h \
+		/usr/include/qt5/QtGui/qpolygon.h \
+		/usr/include/qt5/QtGui/qregion.h \
+		/usr/include/qt5/QtCore/qline.h \
+		/usr/include/qt5/QtGui/qtransform.h \
+		/usr/include/qt5/QtGui/qpainterpath.h \
+		/usr/include/qt5/QtGui/qimage.h \
+		/usr/include/qt5/QtGui/qpixmap.h \
+		/usr/include/qt5/QtCore/qsharedpointer.h \
+		/usr/include/qt5/QtCore/qshareddata.h \
+		/usr/include/qt5/QtCore/qsharedpointer_impl.h \
+		/usr/include/qt5/QtCore/qhash.h \
+		/usr/include/qt5/QtGui/qfont.h \
+		/usr/include/qt5/QtGui/qfontmetrics.h \
+		/usr/include/qt5/QtGui/qfontinfo.h \
+		/usr/include/qt5/QtWidgets/qsizepolicy.h \
+		/usr/include/qt5/QtGui/qcursor.h \
+		/usr/include/qt5/QtGui/qkeysequence.h \
+		/usr/include/qt5/QtGui/qevent.h \
+		/usr/include/qt5/QtCore/qvariant.h \
+		/usr/include/qt5/QtCore/qmap.h \
+		/usr/include/qt5/QtCore/qdebug.h \
+		/usr/include/qt5/QtCore/qtextstream.h \
+		/usr/include/qt5/QtCore/qlocale.h \
+		/usr/include/qt5/QtCore/qset.h \
+		/usr/include/qt5/QtCore/qcontiguouscache.h \
+		/usr/include/qt5/QtCore/qurl.h \
+		/usr/include/qt5/QtCore/qurlquery.h \
+		/usr/include/qt5/QtCore/qfile.h \
+		/usr/include/qt5/QtCore/qfiledevice.h \
+		/usr/include/qt5/QtGui/qvector2d.h \
+		/usr/include/qt5/QtGui/qtouchdevice.h \
+		/usr/include/qt5/QtWidgets/QHBoxLayout \
+		/usr/include/qt5/QtWidgets/qboxlayout.h \
+		/usr/include/qt5/QtWidgets/qlayout.h \
+		/usr/include/qt5/QtWidgets/qlayoutitem.h \
+		/usr/include/qt5/QtWidgets/qgridlayout.h \
+		/usr/include/qt5/QtWidgets/QLabel \
+		/usr/include/qt5/QtWidgets/qlabel.h \
+		/usr/include/qt5/QtWidgets/qframe.h \
+		/usr/include/qt5/QtWidgets/QLineEdit \
+		/usr/include/qt5/QtWidgets/qlineedit.h \
+		/usr/include/qt5/QtGui/qtextcursor.h \
+		/usr/include/qt5/QtGui/qtextformat.h \
+		/usr/include/qt5/QtGui/qpen.h \
+		/usr/include/qt5/QtGui/qtextoption.h \
+		/usr/include/qt5/QtWidgets/QPushButton \
+		/usr/include/qt5/QtWidgets/qpushbutton.h \
+		/usr/include/qt5/QtWidgets/qabstractbutton.h \
+		/usr/include/qt5/QtGui/qicon.h \
+		/usr/include/qt5/QtWidgets/QFileDialog \
+		/usr/include/qt5/QtWidgets/qfiledialog.h \
+		/usr/include/qt5/QtCore/qdir.h \
+		/usr/include/qt5/QtCore/qfileinfo.h \
+		/usr/include/qt5/QtWidgets/qdialog.h \
+		src/base/base.h \
+		src/base/configuration/configuration.h \
+		/usr/include/qt5/QtCore/QObject \
+		/usr/include/qt5/QtCore/QSettings \
+		/usr/include/qt5/QtCore/qsettings.h \
+		/usr/include/qt5/QtCore/QString \
+		src/base/keys.h \
+		src/base/text/text.h \
+		/usr/include/qt5/QtCore/QMap \
+		/usr/include/qt5/QtCore/QFile \
+		/usr/include/qt5/QtCore/QStringList \
+		/usr/include/qt5/QtCore/QDebug \
+		src/base/sharedcomponents/sharedcomponents.h \
+		src/base/pluginmanager/pluginmanager.h \
+		/usr/include/qt5/QtCore/QVector \
+		/usr/include/qt5/QtCore/QDir \
+		src/base/pluginmanager/plugin/plugin.h \
+		/usr/include/qt5/QtCore/QList \
+		src/base/pluginmanager/plugin/blocks/plugininfo.h \
+		src/base/pluginmanager/plugin/blocks/pluginsection.h \
+		src/base/pluginmanager/plugin/blocks/pluginoption.h \
+		src/base/pluginmanager/plugin/blocks/options/optioninteger.h \
+		src/base/pluginmanager/plugin/blocks/options/optionreal.h \
+		src/base/pluginmanager/plugin/blocks/options/optionenum.h \
+		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
+		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
+		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/pathoption.o src/gui/configwindow/sections/options/pathoption.cc
 
 debug/realoption.o: src/gui/configwindow/sections/options/realoption.cc src/gui/configwindow/sections/options/realoption.h \
 		/usr/include/qt5/QtWidgets/QWidget \
@@ -11010,7 +12211,8 @@ debug/realoption.o: src/gui/configwindow/sections/options/realoption.cc src/gui/
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
-		src/base/pluginmanager/plugin/blocks/options/optionstring.h
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/realoption.o src/gui/configwindow/sections/options/realoption.cc
 
 debug/stringoption.o: src/gui/configwindow/sections/options/stringoption.cc src/gui/configwindow/sections/options/stringoption.h \
@@ -11165,7 +12367,8 @@ debug/stringoption.o: src/gui/configwindow/sections/options/stringoption.cc src/
 		src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
 		src/base/pluginmanager/plugin/blocks/options/optionbireal.h \
 		src/base/pluginmanager/plugin/blocks/options/optionboolean.h \
-		src/base/pluginmanager/plugin/blocks/options/optionstring.h
+		src/base/pluginmanager/plugin/blocks/options/optionstring.h \
+		src/base/pluginmanager/plugin/blocks/options/optionpath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/stringoption.o src/gui/configwindow/sections/options/stringoption.cc
 
 debug/optionbiinteger.o: src/base/pluginmanager/plugin/blocks/options/optionbiinteger.cc src/base/pluginmanager/plugin/blocks/options/optionbiinteger.h \
@@ -11594,6 +12797,91 @@ debug/optioninteger.o: src/base/pluginmanager/plugin/blocks/options/optionintege
 		/usr/include/qt5/QtCore/QMap
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/optioninteger.o src/base/pluginmanager/plugin/blocks/options/optioninteger.cc
 
+debug/optionpath.o: src/base/pluginmanager/plugin/blocks/options/optionpath.cc src/base/pluginmanager/plugin/blocks/options/optionpath.h \
+		/usr/include/qt5/QtCore/QObject \
+		/usr/include/qt5/QtCore/qobject.h \
+		/usr/include/qt5/QtCore/qobjectdefs.h \
+		/usr/include/qt5/QtCore/qnamespace.h \
+		/usr/include/qt5/QtCore/qglobal.h \
+		/usr/include/qt5/QtCore/qconfig.h \
+		/usr/include/qt5/QtCore/qfeatures.h \
+		/usr/include/qt5/QtCore/qsystemdetection.h \
+		/usr/include/qt5/QtCore/qprocessordetection.h \
+		/usr/include/qt5/QtCore/qcompilerdetection.h \
+		/usr/include/qt5/QtCore/qglobalstatic.h \
+		/usr/include/qt5/QtCore/qatomic.h \
+		/usr/include/qt5/QtCore/qbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt5/QtCore/qgenericatomic.h \
+		/usr/include/qt5/QtCore/qatomic_msvc.h \
+		/usr/include/qt5/QtCore/qatomic_integrity.h \
+		/usr/include/qt5/QtCore/qoldbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_vxworks.h \
+		/usr/include/qt5/QtCore/qatomic_power.h \
+		/usr/include/qt5/QtCore/qatomic_alpha.h \
+		/usr/include/qt5/QtCore/qatomic_armv7.h \
+		/usr/include/qt5/QtCore/qatomic_armv6.h \
+		/usr/include/qt5/QtCore/qatomic_armv5.h \
+		/usr/include/qt5/QtCore/qatomic_bfin.h \
+		/usr/include/qt5/QtCore/qatomic_ia64.h \
+		/usr/include/qt5/QtCore/qatomic_mips.h \
+		/usr/include/qt5/QtCore/qatomic_s390.h \
+		/usr/include/qt5/QtCore/qatomic_sh4a.h \
+		/usr/include/qt5/QtCore/qatomic_sparc.h \
+		/usr/include/qt5/QtCore/qatomic_x86.h \
+		/usr/include/qt5/QtCore/qatomic_cxx11.h \
+		/usr/include/qt5/QtCore/qatomic_gcc.h \
+		/usr/include/qt5/QtCore/qatomic_unix.h \
+		/usr/include/qt5/QtCore/qmutex.h \
+		/usr/include/qt5/QtCore/qlogging.h \
+		/usr/include/qt5/QtCore/qflags.h \
+		/usr/include/qt5/QtCore/qtypeinfo.h \
+		/usr/include/qt5/QtCore/qtypetraits.h \
+		/usr/include/qt5/QtCore/qsysinfo.h \
+		/usr/include/qt5/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt5/QtCore/qstring.h \
+		/usr/include/qt5/QtCore/qchar.h \
+		/usr/include/qt5/QtCore/qbytearray.h \
+		/usr/include/qt5/QtCore/qrefcount.h \
+		/usr/include/qt5/QtCore/qarraydata.h \
+		/usr/include/qt5/QtCore/qstringbuilder.h \
+		/usr/include/qt5/QtCore/qlist.h \
+		/usr/include/qt5/QtCore/qalgorithms.h \
+		/usr/include/qt5/QtCore/qiterator.h \
+		/usr/include/qt5/QtCore/qcoreevent.h \
+		/usr/include/qt5/QtCore/qscopedpointer.h \
+		/usr/include/qt5/QtCore/qmetatype.h \
+		/usr/include/qt5/QtCore/qvarlengtharray.h \
+		/usr/include/qt5/QtCore/qcontainerfwd.h \
+		/usr/include/qt5/QtCore/qisenum.h \
+		/usr/include/qt5/QtCore/qobject_impl.h \
+		/usr/include/qt5/QtCore/QString \
+		/usr/include/qt5/QtCore/QFile \
+		/usr/include/qt5/QtCore/qfile.h \
+		/usr/include/qt5/QtCore/qfiledevice.h \
+		/usr/include/qt5/QtCore/qiodevice.h \
+		/usr/include/qt5/QtCore/QDebug \
+		/usr/include/qt5/QtCore/qdebug.h \
+		/usr/include/qt5/QtCore/qhash.h \
+		/usr/include/qt5/QtCore/qpair.h \
+		/usr/include/qt5/QtCore/qmap.h \
+		/usr/include/qt5/QtCore/qtextstream.h \
+		/usr/include/qt5/QtCore/qlocale.h \
+		/usr/include/qt5/QtCore/qvariant.h \
+		/usr/include/qt5/QtCore/qstringlist.h \
+		/usr/include/qt5/QtCore/qdatastream.h \
+		/usr/include/qt5/QtCore/qregexp.h \
+		/usr/include/qt5/QtCore/qstringmatcher.h \
+		/usr/include/qt5/QtCore/qshareddata.h \
+		/usr/include/qt5/QtCore/qvector.h \
+		/usr/include/qt5/QtCore/qpoint.h \
+		/usr/include/qt5/QtCore/qset.h \
+		/usr/include/qt5/QtCore/qcontiguouscache.h \
+		/usr/include/qt5/QtCore/QStringList \
+		src/base/pluginmanager/plugin/blocks/pluginoption.h \
+		/usr/include/qt5/QtCore/QMap
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/optionpath.o src/base/pluginmanager/plugin/blocks/options/optionpath.cc
+
 debug/optionreal.o: src/base/pluginmanager/plugin/blocks/options/optionreal.cc src/base/pluginmanager/plugin/blocks/options/optionreal.h \
 		/usr/include/qt5/QtCore/QObject \
 		/usr/include/qt5/QtCore/qobject.h \
@@ -11794,6 +13082,12 @@ debug/moc_aboutwindow.o: debug/moc_aboutwindow.cpp
 debug/moc_configwindow.o: debug/moc_configwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/moc_configwindow.o debug/moc_configwindow.cpp
 
+debug/moc_instancecontrol.o: debug/moc_instancecontrol.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/moc_instancecontrol.o debug/moc_instancecontrol.cpp
+
+debug/moc_instancemanager.o: debug/moc_instancemanager.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/moc_instancemanager.o debug/moc_instancemanager.cpp
+
 debug/moc_mainwindow.o: debug/moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/moc_mainwindow.o debug/moc_mainwindow.cpp
 
@@ -11866,6 +13160,9 @@ debug/moc_enumoption.o: debug/moc_enumoption.cpp
 debug/moc_integeroption.o: debug/moc_integeroption.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/moc_integeroption.o debug/moc_integeroption.cpp
 
+debug/moc_pathoption.o: debug/moc_pathoption.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/moc_pathoption.o debug/moc_pathoption.cpp
+
 debug/moc_realoption.o: debug/moc_realoption.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/moc_realoption.o debug/moc_realoption.cpp
 
@@ -11886,6 +13183,9 @@ debug/moc_optionenum.o: debug/moc_optionenum.cpp
 
 debug/moc_optioninteger.o: debug/moc_optioninteger.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/moc_optioninteger.o debug/moc_optioninteger.cpp
+
+debug/moc_optionpath.o: debug/moc_optionpath.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/moc_optionpath.o debug/moc_optionpath.cpp
 
 debug/moc_optionreal.o: debug/moc_optionreal.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/moc_optionreal.o debug/moc_optionreal.cpp

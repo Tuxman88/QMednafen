@@ -49,6 +49,9 @@ namespace Base
    const QString KeyCfgGuiShortcutAbout = "cfg.gui.shortcut.about";
    const QString ValCfgGuiShortcutAbout = "Ctrl+A";
    
+   const QString KeyCfgGuiShortcutInstanceManager = "cfg.gui.shortcut.instancemanager";
+   const QString ValCfgGuiShortcutInstanceManager = "Ctrl+I";
+   
    const QString KeyCfgCorePathsPlugins = "cfg.core.plugins.paths";
    const QString ValCfgCorePathsPlugins = "/";
    
@@ -57,6 +60,9 @@ namespace Base
    
    const QString KeyCfgCoreCommandOrder = "cfg.core.commandorder";
    const QString ValCfgCoreCommandOrder = "rom_options";
+   
+   const QString KeyCfgCoreRunVersion = "cfg.core.runversion";
+   const QString ValCfgCoreRunVersion = "0.9.34.1";
 
    /*
    * Keys about text. (there are just keys, the values are controlled in other place, in the "Text" class).
@@ -65,15 +71,17 @@ namespace Base
    const QString KeyTxtProgramName    = "txt.program.name";
    const QString KeyTxtProgramVersion = "txt.program.version";
    
-   const QString KeyTxtGuiMenuFile             = "txt.gui.menu.file";
-   const QString KeyTxtGuiMenuFileOpenRom      = "txt.gui.menu.file.openrom";
-   const QString KeyTxtGuiMenuFileOpenGameDisc = "txt.gui.menu.file.opengamedisc";
-   const QString KeyTxtGuiMenuFileLibrary      = "txt.gui.menu.file.library";
-   const QString KeyTxtGuiMenuFileExit         = "txt.gui.menu.file.exit";
-   const QString KeyTxtGuiMenuConfig           = "txt.gui.menu.config";
-   const QString KeyTxtGuiMenuConfigConfig     = "txt.gui.menu.config.config";
-   const QString KeyTxtGuiMenuHelp             = "txt.gui.menu.help";
-   const QString KeyTxtGuiMenuHelpAbout        = "txt.gui.menu.help.about";
+   const QString KeyTxtGuiMenuFile                  = "txt.gui.menu.file";
+   const QString KeyTxtGuiMenuFileOpenRom           = "txt.gui.menu.file.openrom";
+   const QString KeyTxtGuiMenuFileOpenGameDisc      = "txt.gui.menu.file.opengamedisc";
+   const QString KeyTxtGuiMenuFileExit              = "txt.gui.menu.file.exit";
+   const QString KeyTxtGuiMenuConfig                = "txt.gui.menu.config";
+   const QString KeyTxtGuiMenuConfigConfig          = "txt.gui.menu.config.config";
+   const QString KeyTxtGuiMenuTools                 = "txt.gui.menu.tools"; 
+   const QString KeyTxtGuiMenuToolsInstancesRunning = "txt.gui.menu.tools.instancemanager";
+   const QString KeyTxtGuiMenuToolsLibrary          = "txt.gui.menu.tools.library";
+   const QString KeyTxtGuiMenuHelp                  = "txt.gui.menu.help";
+   const QString KeyTxtGuiMenuHelpAbout             = "txt.gui.menu.help.about";
    
    const QString KeyTxtGuiMainVersion                 = "txt.gui.main.version";
    const QString KeyTxtGuiMainDescription             = "txt.gui.main.description";
@@ -113,6 +121,10 @@ namespace Base
    const QString KeyTxtGuiAboutAuthorDescription  = "txt.gui.about.%1.thanks";
    
    const QString KeyTxtGuiOpenROMSelectFile = "txt.gui.openrom.selectfile";
+   
+   const QString KeyTxtGuiInstanceManagerTitle           = "txt.gui.instancemanager.title";
+   const QString KeyTxtGuiInstanceManagerButtonClose     = "txt.gui.instancemanager.buttonclose";
+   const QString KeyTxtGuiInstanceManagerButtonCloseGame = "txt.gui.instancemanager.buttonclosegame";
 }
 
 # endif

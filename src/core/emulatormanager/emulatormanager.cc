@@ -49,6 +49,20 @@ Core::EmulatorManager::~EmulatorManager ( void )
    pointers.clear ();
 }
 
+QList< Core::EmulatorInstance* > Core::EmulatorManager::emulatorInstances ( void )
+{
+   QMapIterator< Core::EmulatorInstance* , Core::EmulatorInstance* > iterator ( game_instances );
+   QList< Core::EmulatorInstance* > pointers;
+   
+   while ( iterator.hasNext () )
+   {
+      iterator.next ();
+      pointers.append ( iterator.key () );
+   }
+   
+   return ( pointers );
+}
+
 void Core::EmulatorManager::addInstance ( const QString& file_path , const Core::EmulatorManager::DetectionType& file_type , const QStringList& options )
 {
    qDebug () << "EmulatorManager: Receiving request to add game instance.";
@@ -65,13 +79,20 @@ void Core::EmulatorManager::addInstance ( const QString& file_path , const Core:
    
    instance->run ();
    
+   emit updateGameList ();
+   
    return;
 }
 
 void Core::EmulatorManager::closeEmulatorInstance ( Core::EmulatorInstance* instance )
 {
-   delete instance;
+   qDebug () << "EmulatorManager: Receiving request to close game instance.";
    game_instances.remove ( instance );
+   
+   qDebug () << "EmulatorManager: Game instance removed. Updating game list.";
+   emit updateGameList ();
+   
+   delete instance;
    
    return;
 }

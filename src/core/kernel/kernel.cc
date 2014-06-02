@@ -32,6 +32,14 @@ Core::Kernel::~Kernel ( void )
    delete emulator_manager;
 }
 
+void Core::Kernel::instanceManager ( void )
+{
+   qDebug () << "Kernel: Displaying Instance Manager dialog";
+   emit openInstanceManager ( emulator_manager );
+   
+   return;
+}
+
 void Core::Kernel::about ( void )
 {
    qDebug () << "Kernel: Displaying About dialog";
@@ -53,6 +61,7 @@ void Core::Kernel::exitNow ( void )
    qDebug () << "Kernel: Closing program now";
    emit closeConfigWindow ();
    emit closeAboutWindow ();
+   emit closeInstanceManager ();
    emit closeMainWindow ();
    
    return;

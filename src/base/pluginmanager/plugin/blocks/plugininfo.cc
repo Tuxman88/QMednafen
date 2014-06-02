@@ -34,6 +34,11 @@ Base::PluginInfo::~PluginInfo(void)
 {
 }
 
+QStringList Base::PluginInfo::supportedVersions ( void ) const
+{
+   return ( plugin_supported_versions );
+}
+
 QStringList Base::PluginInfo::extentions ( void ) const
 {
    return ( plugin_extentions );
@@ -119,6 +124,10 @@ QFile& operator>> ( QFile& input_file , Base::PluginInfo& plugin_info )
          else if ( pieces[ 0 ] == "plugin.extentions" )
          {
             plugin_info.plugin_extentions = pieces[ 1 ].toLower ().split ( "," );
+         }
+         else if ( pieces[ 0 ] == "plugin.support" )
+         {
+            plugin_info.plugin_supported_versions = pieces[ 1 ].toLower ().split ( "," );
          }
       }
    }

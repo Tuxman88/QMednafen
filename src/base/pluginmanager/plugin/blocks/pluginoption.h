@@ -25,6 +25,7 @@
 # include <QtCore/QFile>
 # include <QtCore/QDebug>
 # include <QtCore/QMap>
+# include <QtCore/QStringList>
 
 namespace Base { class PluginOption; }
 
@@ -46,7 +47,8 @@ namespace Base
             Real ,
             BiReal ,
             Enum ,
-            String
+            String ,
+            Path
          };
       
       public:
@@ -70,6 +72,7 @@ namespace Base
       protected:
          QString option_description;
          OptionType option_type;
+         QStringList supported_versions;
    };
 }
 

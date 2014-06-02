@@ -101,6 +101,14 @@ void Gui::SectionPanel::buildGui ( void )
          }
             break;
             
+         case Base::PluginOption::Path:
+         {
+            Gui::PathOption* path_option;
+            path_option = new Gui::PathOption ( dynamic_cast< Base::OptionPath* > ( option ) );
+            main_layout->addWidget ( path_option );
+         }
+            break;
+            
          case Base::PluginOption::None:
             break;
       }

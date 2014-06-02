@@ -155,6 +155,10 @@ QFile& operator>> ( QFile& input_file , Base::PluginSection& plugin_section )
          {
             new_option = new Base::OptionString ( command_options , command_info );
          }
+         else if ( command_info[ 1 ] == "path" )
+         {
+            new_option = new Base::OptionPath ( command_options , command_info );
+         }
          
          plugin_section.section_options->append ( new_option );
       }

@@ -34,5 +34,6 @@
 # include "pluginmanager/plugin/blocks/options/optionbiinteger.h"
 # include "pluginmanager/plugin/blocks/options/optionbireal.h"
 # include "pluginmanager/plugin/blocks/options/optionstring.h"
+# include "pluginmanager/plugin/blocks/options/optionpath.h"
 
 # endif

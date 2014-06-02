@@ -40,6 +40,8 @@ namespace Core
          
          void setGame ( const QString& new_file_name , const QStringList& new_game_options , const int& new_game_type );
          void run ( void );
+         QString gameName ( void );
+         int gameType ( void );
          
       signals:
          void closeEmulatorInstance ( Core::EmulatorInstance* pointer );

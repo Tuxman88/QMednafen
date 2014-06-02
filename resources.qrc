@@ -7,6 +7,7 @@
       <file alias="icon-main-64">resources/img/icon/main-64x64.png</file>
       <file alias="icon-main-32">resources/img/icon/main-32x32.png</file>
       <file alias="icon-main-16">resources/img/icon/main-16x16.png</file>
+      <file alias="unit-auto-256">resources/img/icon/unit-auto-256x256.png</file>
       <file alias="unit-gb-256">resources/img/icon/unit-gb-256x256.png</file>
       <file alias="unit-gba-256">resources/img/icon/unit-gba-256x256.png</file>
       <file alias="unit-gg-256">resources/img/icon/unit-gg-256x256.png</file>

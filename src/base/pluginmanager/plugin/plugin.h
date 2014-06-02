@@ -25,6 +25,7 @@
 # include <QtCore/QFile>
 # include <QtCore/QList>
 # include <QtCore/QMap>
+# include <QtCore/QStringList>
 
 # include "blocks/plugininfo.h"
 # include "blocks/pluginsection.h"
@@ -51,6 +52,7 @@ namespace Base
          QList< Base::PluginSection* >* controlsOptions ( void );
          QList< Base::PluginSection* >* inGameOptions ( void );
          QStringList getOptions ( void );
+         bool isSupported ( const QString& running_version );
          
          friend QFile& (::operator>>) ( QFile& input_file , Base::Plugin& plugin );
          

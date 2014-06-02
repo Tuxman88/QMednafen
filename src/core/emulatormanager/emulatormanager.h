@@ -60,8 +60,12 @@ namespace Core
          virtual ~EmulatorManager ( void );
          
          void addInstance ( const QString& file_path , const DetectionType& file_type , const QStringList& options );
+         QList< Core::EmulatorInstance* > emulatorInstances ( void );
          
-      private slots:
+      signals:
+         void updateGameList ( void );
+         
+      public slots:
          void closeEmulatorInstance ( Core::EmulatorInstance* instance );
          
       private:

@@ -17,53 +17,53 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-# ifndef MAINWINDOW_H_
-# define MAINWINDOW_H_
+# ifndef INSTANCEMANAGER_H_
+# define INSTANCEMANAGER_H_
 
-# include <QtWidgets/QMainWindow>
-# include <QtWidgets/QMenuBar>
-# include <QtWidgets/QMenu>
-# include <QtWidgets/QAction>
-# include <QtGui/QCloseEvent>
+# include <QtWidgets/QDialog>
+# include <QtWidgets/QVBoxLayout>
+# include <QtWidgets/QHBoxLayout>
+# include <QtWidgets/QPushButton>
 # include <QtGui/QIcon>
+# include <QtGui/QListWidget>
+# include <QtGui/QListWidgetItem>
 
 # include "../../base/base.h"
-# include "menubar/menubar.h"
-# include "panels/maincontentspanel.h"
+# include "../../core/core.h"
+# include "instancecontrol.h"
 
 namespace Gui
 {
-   class MainWindow : public QMainWindow
+   class InstanceManager : public QDialog
    {
       Q_OBJECT
       
       public:
-         explicit MainWindow ( Base::SharedComponents* new_shared_components );
-         virtual ~MainWindow ( void );
-         
-      signals:
-         void openRom ( void );
-         void openGameDisc ( void );
-         void library ( void );
-         void instanceManager ( void );
-         void config ( void );
-         void exitNow ( void );
-         void about ( void );
-      
+         explicit InstanceManager ( Base::SharedComponents* new_shared_components );
+         virtual ~InstanceManager ( void );
+                  
       public slots:
+         void openInstanceManager ( Core::EmulatorManager* new_emulator_manager );
+         void closeInstanceManager ( void );
+         
+      private slots:
          void updateText ( void );
-         void closeMainWindow ( void );
+         void updateGameList ( void );
          
       private:
          void buildGui ( void );
          void connectAll ( void );
-         void closeEvent ( QCloseEvent* event );
          
       private:
+         QListWidget* list_widget;
+         QVBoxLayout* main_layout;
+         QHBoxLayout* buttons_layout;
+         QPushButton* button_close;
          Base::SharedComponents* shared_components;
-         Gui::MenuBar* menubar;
-         Gui::MainContentsPanel* main_contents_panel;
-         bool ignore_closing;
+         Core::EmulatorManager* emulator_manager;
+         bool already_added;
+         QList< Gui::InstanceControl* > list_instances;
+         QList< QListWidgetItem* > list_items;
    };
 }
 

@@ -34,7 +34,7 @@ Core::EmulatorInstance::~EmulatorInstance ( void )
 {   
    stop_signals = true;
    qDebug () << "EmulatorInstance: Closing game instance: " << file_path;
-   //emulator_process.close ();
+   emulator_process.close ();
 }
 
 void Core::EmulatorInstance::run ( void )
@@ -93,4 +93,16 @@ void Core::EmulatorInstance::commandFinished ( void )
    }
    
    return;
+}
+
+QString Core::EmulatorInstance::gameName ( void )
+{
+   QStringList file_pieces = file_path.split ( QDir::separator () );
+   
+   return ( file_pieces[ file_pieces.size () - 1 ] );
+}
+
+int Core::EmulatorInstance::gameType ( void )
+{
+   return ( game_type );
 }
