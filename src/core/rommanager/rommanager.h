@@ -15,15 +15,29 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */ 
+ */  
 
-# ifndef CORE_H_
-# define CORE_H_
+# ifndef ROMMANAGER_H_
+# define ROMMANAGER_H_
 
-# include "kernel/kernel.h"
-# include "emulatormanager/emulatormanager.h"
-# include "emulatormanager/emulatorinstance.h"
-# include "rommanager/rommanager.h"
-# include "rommanager/romentry.h"
+# include <QtCore/QObject>
+
+# include "../../base/base.h"
+# include "romentry.h"
+
+namespace Core
+{
+   class RomManager : public QObject
+   {
+      Q_OBJECT
+      
+      public:
+         explicit RomManager ( Base::SharedComponents* new_shared_components );
+         virtual ~RomManager ( void );
+         
+      private:
+         Base::SharedComponents* shared_components;
+   };
+}
 
 # endif

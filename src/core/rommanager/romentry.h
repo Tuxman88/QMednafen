@@ -15,15 +15,36 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */ 
+ */  
 
-# ifndef CORE_H_
-# define CORE_H_
+# ifndef ROMENTRY_H_
+# define ROMENTRY_H_
 
-# include "kernel/kernel.h"
-# include "emulatormanager/emulatormanager.h"
-# include "emulatormanager/emulatorinstance.h"
-# include "rommanager/rommanager.h"
-# include "rommanager/romentry.h"
+# include <QtCore/QObject>
+# include <QtCore/QString>
+
+namespace Core
+{
+   class RomEntry : public QObject
+   {
+      Q_OBJECT
+      
+      public:
+         explicit RomEntry ( void );
+         virtual ~RomEntry ( void );
+         
+         QString path ( void );
+         QString name ( void );
+         QString console ( void );
+         void setPath ( QString new_path );
+         void setName ( QString new_name );
+         void setConsole ( QString new_console );
+         
+      private:
+         QString rom_path;
+         QString rom_name;
+         QString rom_console;
+   };
+}
 
 # endif

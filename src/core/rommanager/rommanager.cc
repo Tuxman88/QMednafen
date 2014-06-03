@@ -15,15 +15,16 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */ 
+ */  
 
-# ifndef CORE_H_
-# define CORE_H_
+# include "rommanager.h"
 
-# include "kernel/kernel.h"
-# include "emulatormanager/emulatormanager.h"
-# include "emulatormanager/emulatorinstance.h"
-# include "rommanager/rommanager.h"
-# include "rommanager/romentry.h"
+Core::RomManager::RomManager ( Base::SharedComponents* new_shared_components )
+   : QObject ()
+{
+   shared_components = new_shared_components;
+}
 
-# endif
+Core::RomManager::~RomManager ( void )
+{
+}
