@@ -53,6 +53,7 @@ namespace Base
          void resetValues ( void );
          QVector< Base::Plugin* >* pluginsLoaded ( void );
          QStringList getOptions ( const QString& file_extention );
+         QString detectType ( const QString& file_extention );
          
       private:
          Base::Configuration* shared_configuration;

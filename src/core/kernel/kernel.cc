@@ -94,10 +94,11 @@ void Core::Kernel::openRom ( void )
    qDebug () << "Kernel: Requesting options for file.";
    
    QStringList emulator_options = shared_components->plugins ()->getOptions ( extractExtention ( selected_file ) );
+   Core::EmulatorManager::DetectionType game_type = emulator_manager->detectionStringType ( shared_components->plugins ()->detectType ( extractExtention ( selected_file ) ) );
    
    qDebug () << "Kernel: Requesting instance creation.";
    
-   emulator_manager->addInstance ( selected_file , Core::EmulatorManager::Auto , emulator_options );
+   emulator_manager->addInstance ( selected_file , game_type , emulator_options );
    
    return;
 }

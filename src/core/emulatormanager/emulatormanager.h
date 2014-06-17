@@ -61,16 +61,15 @@ namespace Core
          
          void addInstance ( const QString& file_path , const DetectionType& file_type , const QStringList& options );
          QList< Core::EmulatorInstance* > emulatorInstances ( void );
+         QString detectionTypeString ( const DetectionType& file_type );
+         DetectionType detectionStringType ( const QString& console_type );
          
       signals:
          void updateGameList ( void );
          
       public slots:
          void closeEmulatorInstance ( Core::EmulatorInstance* instance );
-         
-      private:
-         QString detectionTypeString ( const DetectionType& file_type );
-         
+                 
       private:
          Base::SharedComponents* shared_components;
          QMap< Core::EmulatorInstance* , Core::EmulatorInstance* > game_instances;

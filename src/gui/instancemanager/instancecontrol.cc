@@ -41,67 +41,67 @@ void Gui::InstanceControl::setGameInstance ( Core::EmulatorInstance* new_game_in
    switch ( game_instance->gameType () )
    {
       case 0:
-         console_icon->setPixmap ( QPixmap ( ":/unit-auto-256" ).scaled ( QSize ( 32 , 32 ) ) );
+         console_icon->setPixmap ( QPixmap ( ":/unit-auto-256" ).scaled ( QSize ( 30 , 30 ) , Qt::KeepAspectRatio , Qt::SmoothTransformation ) );
          break;
          
       case 1:
-         console_icon->setPixmap ( QPixmap ( ":/unit-lynx-256" ).scaled ( QSize ( 32 , 32 ) ) );
+         console_icon->setPixmap ( QPixmap ( ":/unit-lynx-256" ).scaled ( QSize ( 30 , 30 ) , Qt::KeepAspectRatio , Qt::SmoothTransformation ) );
          break;
          
       case 2:
-         console_icon->setPixmap ( QPixmap ( ":/unit-gb-256" ).scaled ( QSize ( 32 , 32 ) ) );
+         console_icon->setPixmap ( QPixmap ( ":/unit-gb-256" ).scaled ( QSize ( 30 , 30 ) , Qt::KeepAspectRatio , Qt::SmoothTransformation ) );
          break;
          
       case 3:
-         console_icon->setPixmap ( QPixmap ( ":/unit-gba-256" ).scaled ( QSize ( 32 , 32 ) ) );
+         console_icon->setPixmap ( QPixmap ( ":/unit-gba-256" ).scaled ( QSize ( 30 , 30 ) , Qt::KeepAspectRatio , Qt::SmoothTransformation ) );
          break;
          
       case 4:
-         console_icon->setPixmap ( QPixmap ( ":/unit-ngp-256" ).scaled ( QSize ( 32 , 32 ) ) );
+         console_icon->setPixmap ( QPixmap ( ":/unit-ngp-256" ).scaled ( QSize ( 30 , 30 ) , Qt::KeepAspectRatio , Qt::SmoothTransformation ) );
          break;
          
       case 5:
-         console_icon->setPixmap ( QPixmap ( ":/unit-nes-256" ).scaled ( QSize ( 32 , 32 ) ) );
+         console_icon->setPixmap ( QPixmap ( ":/unit-nes-256" ).scaled ( QSize ( 30 , 30 ) , Qt::KeepAspectRatio , Qt::SmoothTransformation ) );
          break;
          
       case 6:
-         console_icon->setPixmap ( QPixmap ( ":/unit-pce-256" ).scaled ( QSize ( 32 , 32 ) ) );
+         console_icon->setPixmap ( QPixmap ( ":/unit-pce-256" ).scaled ( QSize ( 30 , 30 ) , Qt::KeepAspectRatio , Qt::SmoothTransformation ) );
          break;
          
       case 7:
-         console_icon->setPixmap ( QPixmap ( ":/unit-pce_fast-256" ).scaled ( QSize ( 32 , 32 ) ) );
+         console_icon->setPixmap ( QPixmap ( ":/unit-pce_fast-256" ).scaled ( QSize ( 30 , 30 ) , Qt::KeepAspectRatio , Qt::SmoothTransformation ) );
          break;
          
       case 8:
-         console_icon->setPixmap ( QPixmap ( ":/unit-pcfx-256" ).scaled ( QSize ( 32 , 32 ) ) );
+         console_icon->setPixmap ( QPixmap ( ":/unit-pcfx-256" ).scaled ( QSize ( 30 , 30 ) , Qt::KeepAspectRatio , Qt::SmoothTransformation ) );
          break;
          
       case 9:
-         console_icon->setPixmap ( QPixmap ( ":/unit-gg-256" ).scaled ( QSize ( 32 , 32 ) ) );
+         console_icon->setPixmap ( QPixmap ( ":/unit-gg-256" ).scaled ( QSize ( 30 , 30 ) , Qt::KeepAspectRatio , Qt::SmoothTransformation ) );
          break;
          
       case 10:
-         console_icon->setPixmap ( QPixmap ( ":/unit-md-256" ).scaled ( QSize ( 32 , 32 ) ) );
+         console_icon->setPixmap ( QPixmap ( ":/unit-md-256" ).scaled ( QSize ( 30 , 30 ) , Qt::KeepAspectRatio , Qt::SmoothTransformation ) );
          break;
          
       case 11:
-         console_icon->setPixmap ( QPixmap ( ":/unit-sms-256" ).scaled ( QSize ( 32 , 32 ) ) );
+         console_icon->setPixmap ( QPixmap ( ":/unit-sms-256" ).scaled ( QSize ( 30 , 30 ) , Qt::KeepAspectRatio , Qt::SmoothTransformation ) );
          break;
          
       case 12:
-         console_icon->setPixmap ( QPixmap ( ":/unit-psx-256" ).scaled ( QSize ( 32 , 32 ) ) );
+         console_icon->setPixmap ( QPixmap ( ":/unit-psx-256" ).scaled ( QSize ( 30 , 30 ) , Qt::KeepAspectRatio , Qt::SmoothTransformation ) );
          break;
          
       case 13:
-         console_icon->setPixmap ( QPixmap ( ":/unit-snes-256" ).scaled ( QSize ( 32 , 32 ) ) );
+         console_icon->setPixmap ( QPixmap ( ":/unit-snes-256" ).scaled ( QSize ( 30 , 30 ) , Qt::KeepAspectRatio , Qt::SmoothTransformation ) );
          break;
          
       case 14:
-         console_icon->setPixmap ( QPixmap ( ":/unit-vb-256" ).scaled ( QSize ( 32 , 32 ) ) );
+         console_icon->setPixmap ( QPixmap ( ":/unit-vb-256" ).scaled ( QSize ( 30 , 30 ) , Qt::KeepAspectRatio , Qt::SmoothTransformation ) );
          break;
          
       case 15:
-         console_icon->setPixmap ( QPixmap ( ":/unit-wswan-256" ).scaled ( QSize ( 32 , 32 ) ) );
+         console_icon->setPixmap ( QPixmap ( ":/unit-wswan-256" ).scaled ( QSize ( 30 , 30 ) , Qt::KeepAspectRatio , Qt::SmoothTransformation ) );
          break;
    }
    

@@ -97,6 +97,84 @@ void Core::EmulatorManager::closeEmulatorInstance ( Core::EmulatorInstance* inst
    return;
 }
 
+Core::EmulatorManager::DetectionType Core::EmulatorManager::detectionStringType ( const QString& console_type )
+{
+   DetectionType name;
+   
+   qDebug () << "EXTENCION: " << console_type;
+   
+   if ( console_type == "auto" )
+   {
+      name = Auto;
+   }
+   else if ( console_type == "lynx" )
+   {
+      name = Lynx;
+   }
+   else if ( console_type == "gb" )
+   {
+      name = GB;
+   }
+   else if ( console_type == "gba" )
+   {
+      name = GBA;
+   }
+   else if ( console_type == "ngp" )
+   {
+      name = NeoGeoPocket;
+   }
+   else if ( console_type == "nes" )
+   {
+      name = NES;
+   }
+   else if ( console_type == "pce" )
+   {
+      name = PCE;
+   }
+   else if ( console_type == "pce_fast" )
+   {
+      name = PCE_FAST;
+   }
+   else if ( console_type == "pcfx" )
+   {
+      name = PCFX;
+   }
+   else if ( console_type == "gg" )
+   {
+      name = GG;
+   }
+   else if ( console_type == "md" )
+   {
+      name = MD;
+   }
+   else if ( console_type == "sms" )
+   {
+      name = SMS;
+   }
+   else if ( console_type == "psx" )
+   {
+      name = PSX;
+   }
+   else if ( console_type == "snes" )
+   {
+      name = SNES;
+   }
+   else if ( console_type == "vb" )
+   {
+      name = VB;
+   }
+   else if ( console_type == "wswan" )
+   {
+      name = WSWAN;
+   }
+   else
+   {
+      name = Auto;
+   }
+   
+   return ( name );
+}
+
 QString Core::EmulatorManager::detectionTypeString ( const Core::EmulatorManager::DetectionType& file_type )
 {
    QString name;
