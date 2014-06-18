@@ -17,35 +17,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */  
 
-# ifndef ROMENTRY_H_
-# define ROMENTRY_H_
+# ifndef FOLDERSCANNER_H_
+# define FOLDERSCANNER_H_
 
 # include <QtCore/QObject>
-# include <QtCore/QString>
+# include <QtCore/QRunnable>
 # include <QtCore/QStringList>
 # include <QtCore/QDir>
+# include <QtCore/QDebug>
 
 namespace Core
 {
-   class RomEntry : public QObject
+   class FolderScanner : public QObject , public QRunnable
    {
       Q_OBJECT
       
       public:
-         explicit RomEntry ( void );
-         virtual ~RomEntry ( void );
+         explicit FolderScanner ( const QStringList& new_folders_to_scan , const QStringList& new_supported_extentions );
          
-         QString path ( void );
-         QString name ( void );
-         QString console ( void );
-         void setPath ( QString new_path );
-         void setName ( QString new_name );
-         void setConsole ( QString new_console );
+         void run ();
+         void scanFolder ( const QString& path_to_scan );
+         
+      signals:
+         void scanningFolder ( const QString& folder_name );
+         void gameFound ( const QString& file_name );
          
       private:
-         QString rom_path;
-         QString rom_name;
-         QString rom_console;
+         QStringList folders_to_scan;
+         QStringList supported_extentions;
    };
 }
 

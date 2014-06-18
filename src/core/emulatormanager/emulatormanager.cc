@@ -101,8 +101,6 @@ Core::EmulatorManager::DetectionType Core::EmulatorManager::detectionStringType 
 {
    DetectionType name;
    
-   qDebug () << "EXTENCION: " << console_type;
-   
    if ( console_type == "auto" )
    {
       name = Auto;

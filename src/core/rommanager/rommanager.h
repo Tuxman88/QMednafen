@@ -21,9 +21,13 @@
 # define ROMMANAGER_H_
 
 # include <QtCore/QObject>
+# include <QtCore/QMap>
+# include <QtCore/QList>
+# include <QtCore/QThreadPool>
 
 # include "../../base/base.h"
 # include "romentry.h"
+# include "folderscanner.h"
 
 namespace Core
 {
@@ -35,8 +39,26 @@ namespace Core
          explicit RomManager ( Base::SharedComponents* new_shared_components );
          virtual ~RomManager ( void );
          
+      signals:
+         void scanningFolder ( const QString& folder_name );
+         
+      public slots:
+         void scanFolders ( void );
+         
+      private slots:
+         void gameFound ( const QString& file_name );
+         
+      private:
+         void tryCreateLibrary ( void );
+         void loadLibrary ( void );
+         void removeAllGames ( void );
+         
       private:
          Base::SharedComponents* shared_components;
+         QString library_path;
+         QStringList scan_paths;
+         QList< QString > console_list;
+         QMap< QString , QList< RomEntry* > > entry_map;
    };
 }
 

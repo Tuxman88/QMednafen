@@ -25,11 +25,15 @@ Core::Kernel::Kernel ( Base::SharedComponents* new_shared_components ) :
    shared_components = new_shared_components;
    
    emulator_manager = new Core::EmulatorManager ( shared_components );
+   rom_manager = new Core::RomManager ( shared_components );
+   
+   connect ( rom_manager , SIGNAL ( scanningFolder ( const QString& ) ) , this , SIGNAL ( scanningFolder ( const QString& ) ) );
 }
 
 Core::Kernel::~Kernel ( void )
 {
    delete emulator_manager;
+   delete rom_manager;
 }
 
 void Core::Kernel::instanceManager ( void )

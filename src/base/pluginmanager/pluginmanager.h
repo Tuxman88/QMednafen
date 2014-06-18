@@ -54,6 +54,7 @@ namespace Base
          QVector< Base::Plugin* >* pluginsLoaded ( void );
          QStringList getOptions ( const QString& file_extention );
          QString detectType ( const QString& file_extention );
+         QStringList getValidExtentions ( void );
          
       private:
          Base::Configuration* shared_configuration;

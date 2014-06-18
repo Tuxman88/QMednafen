@@ -55,6 +55,9 @@ namespace Base
    const QString KeyCfgCorePathsPlugins = "cfg.core.plugins.paths";
    const QString ValCfgCorePathsPlugins = "/";
    
+   const QString KeyCfgCorePathsLibrary = "cfg.core.library.paths";
+   const QString ValCfgCorePathsLibrary = "/";
+   
    const QString KeyCfgCorePathsMednafen = "cfg.core.mednafen.path";
    const QString ValCfgCorePathsMednafen = "mednafen";
    

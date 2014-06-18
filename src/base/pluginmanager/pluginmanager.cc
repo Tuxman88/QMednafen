@@ -198,3 +198,15 @@ QString Base::PluginManager::detectType ( const QString& file_extention )
    
    return ( console_type );
 }
+
+QStringList Base::PluginManager::getValidExtentions ( void )
+{
+   QStringList valid_extentions;
+   
+   for ( int i = 0; i < plugins_loaded->size (); i++ )
+   {
+      valid_extentions << plugins_loaded->operator[] ( i )->info ()->extentions ();
+   }
+   
+   return ( valid_extentions );
+}

@@ -60,6 +60,6 @@ void Core::RomEntry::setName ( QString new_name )
 void Core::RomEntry::setPath ( QString new_path )
 {
    rom_path = new_path;
-   
+      
    return;
 }

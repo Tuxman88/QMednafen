@@ -17,36 +17,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */  
 
-# ifndef ROMENTRY_H_
-# define ROMENTRY_H_
+# include "folderscanner.h"
 
-# include <QtCore/QObject>
-# include <QtCore/QString>
-# include <QtCore/QStringList>
-# include <QtCore/QDir>
-
-namespace Core
+Core::FolderScanner::FolderScanner ( const QStringList& new_folders_to_scan , const QStringList& new_supported_extentions )
 {
-   class RomEntry : public QObject
-   {
-      Q_OBJECT
-      
-      public:
-         explicit RomEntry ( void );
-         virtual ~RomEntry ( void );
-         
-         QString path ( void );
-         QString name ( void );
-         QString console ( void );
-         void setPath ( QString new_path );
-         void setName ( QString new_name );
-         void setConsole ( QString new_console );
-         
-      private:
-         QString rom_path;
-         QString rom_name;
-         QString rom_console;
-   };
+   folders_to_scan = new_folders_to_scan;
+   supported_extentions = new_supported_extentions;
 }
 
-# endif
+void Core::FolderScanner::run ()
+{
+   qDebug () << "FolderScanner: Starting scanning process of folders for games.";
+   
+   for ( int i = 0; i < folders_to_scan.size (); i++ )
+   {
+      if ( folders_to_scan[ i ] != "/" )
+      {
+         scanFolder ( folders_to_scan[ i ] );
+      }
+   }
+   
+   return;
+}
+
+void Core::FolderScanner::scanFolder ( const QString& path_to_scan )
+{
+   qDebug () << "FolderScanner: Scanning " << path_to_scan;
+   
+   emit scanningFolder ( path_to_scan );
+   
+   return;
+}

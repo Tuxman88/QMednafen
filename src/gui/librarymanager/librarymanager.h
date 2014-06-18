@@ -15,16 +15,31 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */ 
+ */
 
-# ifndef CORE_H_
-# define CORE_H_
+# ifndef LIBRARYMANAGER_H_
+# define LIBRARYMANAGER_H_
 
-# include "kernel/kernel.h"
-# include "emulatormanager/emulatormanager.h"
-# include "emulatormanager/emulatorinstance.h"
-# include "rommanager/rommanager.h"
-# include "rommanager/romentry.h"
-# include "rommanager/folderscanner.h"
+# include <QtWidgets/QDialog>
+
+# include "../../base/base.h"
+
+namespace Gui
+{
+   class LibraryManager : public QDialog
+   {
+      Q_OBJECT
+      
+      public:
+         explicit LibraryManager ( Base::SharedComponents* new_shared_components );
+         virtual ~LibraryManager ( void );
+         
+      public slots:
+         void scanningFolder ( const QString& folder_name );
+         
+      private:
+         Base::SharedComponents* shared_components;
+   };
+}
 
 # endif

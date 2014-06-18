@@ -26,6 +26,7 @@
 
 # include "../../base/base.h"
 # include "../emulatormanager/emulatormanager.h"
+# include "../rommanager/rommanager.h"
 
 namespace Core
 {
@@ -46,6 +47,7 @@ namespace Core
          void openAboutWindow ( void );
          void openInstanceManager ( Core::EmulatorManager* emulator_manager );
          void addInstance ( const QString& file_path , const Core::EmulatorManager::DetectionType& file_type , const QStringList& options );
+         void scanningFolder ( const QString& folder_name );
          
       public slots:
          void openRom ( void );
@@ -65,6 +67,7 @@ namespace Core
       private:
          Base::SharedComponents* shared_components;
          Core::EmulatorManager* emulator_manager;
+         Core::RomManager* rom_manager;
    };
 }
 

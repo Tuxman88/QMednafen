@@ -34,6 +34,7 @@ int main ( int argc , char** argv )
    Gui::ConfigWindow* config_window;
    Gui::AboutWindow* about_window;
    Gui::InstanceManager* instance_manager;
+   Gui::LibraryManager* library_manager;
    
    // Create components
    shared_components = new Base::SharedComponents ();
@@ -44,6 +45,7 @@ int main ( int argc , char** argv )
    config_window    = new Gui::ConfigWindow    ( shared_components );
    about_window     = new Gui::AboutWindow     ( shared_components );
    instance_manager = new Gui::InstanceManager ( shared_components );
+   library_manager  = new Gui::LibraryManager  ( shared_components );
    
    // Connect signals from the MainWindow
    QObject::connect ( main_window , SIGNAL ( exitNow () )         , kernel , SLOT ( exitNow () ) );
@@ -67,6 +69,7 @@ int main ( int argc , char** argv )
    QObject::connect ( kernel , SIGNAL ( openConfigWindow () )                            , config_window    , SLOT ( openConfigWindow () ) );
    QObject::connect ( kernel , SIGNAL ( openAboutWindow () )                             , about_window     , SLOT ( openAboutWindow () ) );
    QObject::connect ( kernel , SIGNAL ( openInstanceManager ( Core::EmulatorManager* ) ) , instance_manager , SLOT ( openInstanceManager ( Core::EmulatorManager* ) ) );
+   QObject::connect ( kernel , SIGNAL ( scanningFolder ( const QString& ) )              , library_manager  , SLOT ( scanningFolder ( const QString& ) ) );
    
    // Display window
    main_window->show ();
@@ -82,6 +85,7 @@ int main ( int argc , char** argv )
    delete main_window;
    delete config_window;
    delete about_window;
+   delete library_manager;
    delete shared_components;
    
    return ( 0 );

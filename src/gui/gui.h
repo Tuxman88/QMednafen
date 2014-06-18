@@ -46,5 +46,6 @@
 # include "aboutwindow/panels/authorsection.h"
 # include "instancemanager/instancemanager.h"
 # include "instancemanager/instancecontrol.h"
+# include "librarymanager/librarymanager.h"
 
 # endif
