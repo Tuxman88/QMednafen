@@ -66,10 +66,13 @@ int main ( int argc , char** argv )
    QObject::connect ( kernel , SIGNAL ( closeAboutWindow () )                            , about_window     , SLOT ( closeAboutWindow () ) );
    QObject::connect ( kernel , SIGNAL ( closeMainWindow () )                             , main_window      , SLOT ( closeMainWindow () ) );
    QObject::connect ( kernel , SIGNAL ( closeInstanceManager () )                        , instance_manager , SLOT ( closeInstanceManager () ) );
+   QObject::connect ( kernel , SIGNAL ( closeLibraryManager () )                         , library_manager  , SLOT ( closeLibraryManager () ) );
    QObject::connect ( kernel , SIGNAL ( openConfigWindow () )                            , config_window    , SLOT ( openConfigWindow () ) );
    QObject::connect ( kernel , SIGNAL ( openAboutWindow () )                             , about_window     , SLOT ( openAboutWindow () ) );
    QObject::connect ( kernel , SIGNAL ( openInstanceManager ( Core::EmulatorManager* ) ) , instance_manager , SLOT ( openInstanceManager ( Core::EmulatorManager* ) ) );
+   QObject::connect ( kernel , SIGNAL ( openLibraryManager ( Core::RomManager* ) )       , library_manager  , SLOT ( openLibraryManager ( Core::RomManager* ) ) );
    QObject::connect ( kernel , SIGNAL ( scanningFolder ( const QString& ) )              , library_manager  , SLOT ( scanningFolder ( const QString& ) ) );
+   QObject::connect ( kernel , SIGNAL ( updateList () )                                  , library_manager  , SLOT ( updateList () ) );
    
    // Display window
    main_window->show ();

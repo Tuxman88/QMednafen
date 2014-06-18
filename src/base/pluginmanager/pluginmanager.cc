@@ -183,9 +183,7 @@ QStringList Base::PluginManager::getOptions ( const QString& file_extention )
 QString Base::PluginManager::detectType ( const QString& file_extention )
 {
    QString console_type = "auto";
-   
-   qDebug () << "PluginManager: Requesting plugins options for console type of " << file_extention;
-   
+      
    for ( int i = 0; i < plugins_loaded->size () && console_type == "auto"; i++ )
    {
       if ( plugins_loaded->operator[] ( i )->info()->hasExtention ( file_extention ) &&

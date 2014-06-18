@@ -23,6 +23,7 @@
 # include <QtWidgets/QDialog>
 
 # include "../../base/base.h"
+# include "../../core/core.h"
 
 namespace Gui
 {
@@ -35,10 +36,21 @@ namespace Gui
          virtual ~LibraryManager ( void );
          
       public slots:
+         void openLibraryManager ( Core::RomManager* rom_manager );
+         void closeLibraryManager ( void );
+         
+      public slots:
          void scanningFolder ( const QString& folder_name );
+         void updateList ( void );
+         
+      private:
+         void buildGui ( void );
+         void connectAll ( void );
          
       private:
          Base::SharedComponents* shared_components;
+         Core::RomManager* manager;
+         bool already_added;
    };
 }
 

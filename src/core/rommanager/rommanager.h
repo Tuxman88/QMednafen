@@ -24,6 +24,7 @@
 # include <QtCore/QMap>
 # include <QtCore/QList>
 # include <QtCore/QThreadPool>
+# include <QtCore/QMutex>
 
 # include "../../base/base.h"
 # include "romentry.h"
@@ -41,17 +42,21 @@ namespace Core
          
       signals:
          void scanningFolder ( const QString& folder_name );
+         void updateList ( void );
          
       public slots:
          void scanFolders ( void );
          
       private slots:
          void gameFound ( const QString& file_name );
+         void scanComplete ( void );
          
       private:
          void tryCreateLibrary ( void );
          void loadLibrary ( void );
          void removeAllGames ( void );
+         QString extractExtention ( const QString& file_path );
+         QString extractName ( QString file_path );
          
       private:
          Base::SharedComponents* shared_components;
@@ -59,6 +64,8 @@ namespace Core
          QStringList scan_paths;
          QList< QString > console_list;
          QMap< QString , QList< RomEntry* > > entry_map;
+         bool scanning;
+         QMutex mutex;
    };
 }
 

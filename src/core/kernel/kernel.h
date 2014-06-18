@@ -43,11 +43,14 @@ namespace Core
          void closeConfigWindow ( void );
          void closeAboutWindow ( void );
          void closeInstanceManager ( void );
+         void closeLibraryManager ( void );
          void openConfigWindow ( void );
          void openAboutWindow ( void );
          void openInstanceManager ( Core::EmulatorManager* emulator_manager );
+         void openLibraryManager ( Core::RomManager* rom_manager );
          void addInstance ( const QString& file_path , const Core::EmulatorManager::DetectionType& file_type , const QStringList& options );
          void scanningFolder ( const QString& folder_name );
+         void updateList ( void );
          
       public slots:
          void openRom ( void );

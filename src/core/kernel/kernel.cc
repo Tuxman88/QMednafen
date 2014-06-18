@@ -28,6 +28,7 @@ Core::Kernel::Kernel ( Base::SharedComponents* new_shared_components ) :
    rom_manager = new Core::RomManager ( shared_components );
    
    connect ( rom_manager , SIGNAL ( scanningFolder ( const QString& ) ) , this , SIGNAL ( scanningFolder ( const QString& ) ) );
+   connect ( rom_manager , SIGNAL ( updateList () )                     , this , SIGNAL ( updateList () ) );
 }
 
 Core::Kernel::~Kernel ( void )

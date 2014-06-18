@@ -41,6 +41,7 @@ namespace Core
       signals:
          void scanningFolder ( const QString& folder_name );
          void gameFound ( const QString& file_name );
+         void scanComplete ( void );
          
       private:
          QStringList folders_to_scan;

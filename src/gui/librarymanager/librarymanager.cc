@@ -23,16 +23,56 @@ Gui::LibraryManager::LibraryManager ( Base::SharedComponents* new_shared_compone
    : QDialog ()
 {
    shared_components = new_shared_components;
+   
+   buildGui ();
+   connectAll ();
+   
+   already_added = false;
 }
 
 Gui::LibraryManager::~LibraryManager ( void )
 {
 }
 
+void Gui::LibraryManager::buildGui ( void )
+{   
+   return;
+}
+
+void Gui::LibraryManager::connectAll ( void )
+{
+   return;
+}
+
 void Gui::LibraryManager::scanningFolder ( const QString& folder_name )
 {
-   qDebug () << "LibraryManager: Scanning folder: " << folder_name;
+   return;
+}
+
+void Gui::LibraryManager::updateList ( void )
+{
+   qDebug () << "LibraryManager: Updating game list.";
    
    return;
 }
 
+void Gui::LibraryManager::closeLibraryManager ( void )
+{
+   setVisible ( false );
+   
+   return;
+}
+
+void Gui::LibraryManager::openLibraryManager ( Core::RomManager* rom_manager )
+{
+   if ( !already_added )
+   {
+      manager = rom_manager;
+      
+      updateList ();
+   }
+   
+   setVisible ( true );
+   
+   return;
+}

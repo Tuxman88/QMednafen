@@ -41,19 +41,53 @@ void Core::FolderScanner::run ()
       }
    }
    
+   emit scanComplete ();
+   
    return;
 }
 
 void Core::FolderScanner::scanFolder ( const QString& path_to_scan )
-{
-   qDebug () << "FolderScanner: Scanning " << path_to_scan;
+{   
+   QString path;
+   path = path_to_scan;
    
-   emit scanningFolder ( path_to_scan );
+   if ( !path.endsWith ( QDir::separator () ) )
+   {
+      path += QDir::separator ();
+   }
    
-   QDir dir ( path_to_scan );
-   //dir.setNameFilters ( supported_extentions );
+   qDebug () << "FolderScanner: Scanning " << path;
+ 
+   emit scanningFolder ( path );
    
+   QDir dir ( path );
    
+   // First, get folders
+   QStringList folders_to_scan;
+   
+   // Get All the folders of this path and sort them by name
+   folders_to_scan = dir.entryList ( supported_extentions , QDir::AllDirs , QDir::Name );
+   
+   // Now, get All the files of this path that match the filters and sort them by name
+   QStringList files_found;
+   files_found = dir.entryList ( supported_extentions , QDir::Files , QDir::Name );
+   
+   for ( int i = 0; i < files_found.size (); i++ )
+   {
+      qDebug () << "FolderScanner: Found: " << files_found[ i ];
+      emit gameFound ( path + files_found[ i ] );
+   }
+   
+   // Now, scan the sub-folders
+   for ( int i = 0; i < folders_to_scan.size (); i++ )
+   {
+      if ( folders_to_scan[ i ] != "." &&
+           folders_to_scan[ i ] != ".."
+         )
+      {
+         scanFolder ( path + folders_to_scan[ i ] );
+      }
+   }
    
    return;
 }

@@ -37,6 +37,8 @@ Core::RomManager::RomManager ( Base::SharedComponents* new_shared_components )
    loadLibrary ();
    
    scan_paths = shared_components->config ()->operator[] ( Base::KeyCfgCorePathsLibrary ).split ( ":" );
+   
+   scanning = false;
 }
 
 Core::RomManager::~RomManager ( void )
@@ -91,13 +93,13 @@ void Core::RomManager::loadLibrary ( void )
       line = file.readLine ();
       entry->setPath ( line );
       
-      entry_map[ entry->console () ].append ( entry );
-      
       if ( !entry_map.contains ( entry->console () ) )
       {
          console_list.append ( entry->console () );
       }
       
+      entry_map[ entry->console () ].append ( entry );
+            
       actual_entry++;
    }
    
@@ -106,9 +108,42 @@ void Core::RomManager::loadLibrary ( void )
 
 void Core::RomManager::gameFound ( const QString& file_name )
 {
-   qDebug () << "RomManager: Found game: " << file_name;
+   QString console;
+   console = shared_components->plugins ()->detectType ( extractExtention ( file_name ) );
+   
+   RomEntry* entry = new RomEntry ();
+
+   entry->setName ( extractName ( file_name ) );
+   entry->setConsole ( console );
+   entry->setPath ( file_name );
+   
+   if ( !entry_map.contains ( entry->console () ) )
+   {
+      console_list.append ( entry->console () );
+   }
+      
+   entry_map[ entry->console () ].append ( entry );
    
    return;
+}
+
+QString Core::RomManager::extractName ( QString file_path )
+{
+   QStringList path_pieces = file_path.split ( QDir::separator () );
+   QString file_name = path_pieces[ path_pieces.size () - 1 ];
+   
+   return ( file_name );
+}
+
+QString Core::RomManager::extractExtention ( const QString& name )
+{
+   QString extention;
+   QStringList pieces;
+   
+   pieces = name.split ( "." );
+   extention = pieces[ pieces.size () - 1 ];
+   
+   return ( extention );
 }
 
 void Core::RomManager::removeAllGames ( void )
@@ -131,8 +166,31 @@ void Core::RomManager::removeAllGames ( void )
    return;
 }
 
+void Core::RomManager::scanComplete ( void )
+{
+   mutex.lock ();
+   scanning = false;
+   mutex.unlock ();
+   
+   emit updateList ();
+   
+   return;
+}
+
 void Core::RomManager::scanFolders ( void )
 {
+   mutex.lock ();
+   
+   if ( scanning )
+   {
+      mutex.unlock ();
+      return;
+   }
+   
+   scanning = true;
+   mutex.unlock ();
+   
+   
    removeAllGames ();
    
    qDebug () << "RomManager: Starting to scan folders for games.";
@@ -141,8 +199,9 @@ void Core::RomManager::scanFolders ( void )
    folder_scanner = new FolderScanner ( scan_paths ,
                                         shared_components->plugins ()->getValidExtentions () );
    
-   connect ( folder_scanner , SIGNAL ( gameFound ( const QString& ) ) , this , SLOT ( gameFound ( const QString& ) ) );
+   connect ( folder_scanner , SIGNAL ( gameFound ( const QString& ) )      , this , SLOT   ( gameFound      ( const QString& ) ) );
    connect ( folder_scanner , SIGNAL ( scanningFolder ( const QString& ) ) , this , SIGNAL ( scanningFolder ( const QString& ) ) );
+   connect ( folder_scanner , SIGNAL ( scanComplete () )                   , this , SLOT   ( scanComplete   () ) );
    
    QThreadPool::globalInstance ()->start ( folder_scanner );
    
