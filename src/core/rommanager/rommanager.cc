@@ -135,6 +135,8 @@ void Core::RomManager::scanFolders ( void )
 {
    removeAllGames ();
    
+   qDebug () << "RomManager: Starting to scan folders for games.";
+   
    FolderScanner* folder_scanner;
    folder_scanner = new FolderScanner ( scan_paths ,
                                         shared_components->plugins ()->getValidExtentions () );

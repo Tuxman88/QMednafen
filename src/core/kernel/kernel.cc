@@ -74,6 +74,7 @@ void Core::Kernel::exitNow ( void )
 void Core::Kernel::library ( void )
 {
    qDebug () << "Kernel: Displaying Library dialog";
+   rom_manager->scanFolders ();
    
    return;
 }

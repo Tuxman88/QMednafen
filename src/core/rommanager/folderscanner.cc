@@ -22,7 +22,11 @@
 Core::FolderScanner::FolderScanner ( const QStringList& new_folders_to_scan , const QStringList& new_supported_extentions )
 {
    folders_to_scan = new_folders_to_scan;
-   supported_extentions = new_supported_extentions;
+   
+   for ( int i = 0; i < new_supported_extentions.size (); i++ )
+   {
+      supported_extentions << QString ( "*.%1" ).arg ( new_supported_extentions[ i ] );
+   }
 }
 
 void Core::FolderScanner::run ()
@@ -45,6 +49,11 @@ void Core::FolderScanner::scanFolder ( const QString& path_to_scan )
    qDebug () << "FolderScanner: Scanning " << path_to_scan;
    
    emit scanningFolder ( path_to_scan );
+   
+   QDir dir ( path_to_scan );
+   //dir.setNameFilters ( supported_extentions );
+   
+   
    
    return;
 }
