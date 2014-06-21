@@ -128,6 +128,14 @@ namespace Base
    const QString KeyTxtGuiInstanceManagerTitle           = "txt.gui.instancemanager.title";
    const QString KeyTxtGuiInstanceManagerButtonClose     = "txt.gui.instancemanager.buttonclose";
    const QString KeyTxtGuiInstanceManagerButtonCloseGame = "txt.gui.instancemanager.buttonclosegame";
+   
+   const QString KeyTxtGuiScanningDialogCancelScan = "txt.gui.scanningdialog.cancelscan";
+   const QString KeyTxtGuiScanningDialogScanning   = "txt.gui.scanningdialog.scanning";
+   const QString KeyTxtGuiScanningDialogTitle      = "txt.gui.scanningdialog.title";
+   
+   const QString KeyTxtGuiLibraryManagerScan  = "txt.gui.librarymanager.scan";
+   const QString KeyTxtGuiLibraryManagerClose = "txt.gui.librarymanager.close";
+   const QString KeyTxtGuiLibraryManagerTitle = "txt.gui.librarymanager.title";
 }
 
 # endif

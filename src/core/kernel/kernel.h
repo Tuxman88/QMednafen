@@ -63,6 +63,8 @@ namespace Core
          void saveOptions ( void );
          void reloadOptions ( void );
          void resetOptions ( void );
+         void scanLibraryFolders ( void );
+         void cancelScanProcess ( void );
          
       private:
          QString extractExtention ( const QString& name );

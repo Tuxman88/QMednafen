@@ -25,6 +25,7 @@
 # include <QtCore/QStringList>
 # include <QtCore/QDir>
 # include <QtCore/QDebug>
+# include <QtCore/QMutex>
 
 namespace Core
 {
@@ -43,9 +44,14 @@ namespace Core
          void gameFound ( const QString& file_name );
          void scanComplete ( void );
          
+      public slots:
+         void cancelScanProcess ( void );
+         
       private:
          QStringList folders_to_scan;
          QStringList supported_extentions;
+         QMutex mutex;
+         bool stop_scanning;
    };
 }
 

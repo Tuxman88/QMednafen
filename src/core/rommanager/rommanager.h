@@ -43,9 +43,11 @@ namespace Core
       signals:
          void scanningFolder ( const QString& folder_name );
          void updateList ( void );
+         void localCancelCall ( void );
          
       public slots:
          void scanFolders ( void );
+         void cancelScanProcess ( void );
          
       private slots:
          void gameFound ( const QString& file_name );

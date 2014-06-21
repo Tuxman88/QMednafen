@@ -74,6 +74,10 @@ int main ( int argc , char** argv )
    QObject::connect ( kernel , SIGNAL ( scanningFolder ( const QString& ) )              , library_manager  , SLOT ( scanningFolder ( const QString& ) ) );
    QObject::connect ( kernel , SIGNAL ( updateList () )                                  , library_manager  , SLOT ( updateList () ) );
    
+   // Connect signals from the library
+   QObject::connect ( library_manager , SIGNAL ( cancelScanProcess () )  , kernel , SLOT ( cancelScanProcess () ) );
+   QObject::connect ( library_manager , SIGNAL ( scanLibraryFolders () ) , kernel , SLOT ( scanLibraryFolders () ) );
+   
    // Display window
    main_window->show ();
    

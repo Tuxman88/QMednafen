@@ -22,6 +22,7 @@
 Core::FolderScanner::FolderScanner ( const QStringList& new_folders_to_scan , const QStringList& new_supported_extentions )
 {
    folders_to_scan = new_folders_to_scan;
+   stop_scanning = false;
    
    for ( int i = 0; i < new_supported_extentions.size (); i++ )
    {
@@ -46,10 +47,27 @@ void Core::FolderScanner::run ()
    return;
 }
 
+void Core::FolderScanner::cancelScanProcess ( void )
+{
+   mutex.lock ();
+   stop_scanning = true;
+   mutex.unlock ();
+   
+   return;
+}
+
 void Core::FolderScanner::scanFolder ( const QString& path_to_scan )
 {   
    QString path;
    path = path_to_scan;
+   
+   mutex.lock ();
+   if ( stop_scanning )
+   {
+      mutex.unlock ();
+      return;
+   }
+   mutex.unlock ();
    
    if ( !path.endsWith ( QDir::separator () ) )
    {

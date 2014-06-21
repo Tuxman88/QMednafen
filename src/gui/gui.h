@@ -47,5 +47,7 @@
 # include "instancemanager/instancemanager.h"
 # include "instancemanager/instancecontrol.h"
 # include "librarymanager/librarymanager.h"
+# include "librarymanager/consolespanel.h"
+# include "librarymanager/scanningdialog.h"
 
 # endif

@@ -45,6 +45,14 @@ Core::RomManager::~RomManager ( void )
 {
 }
 
+void Core::RomManager::cancelScanProcess ( void )
+{
+   qDebug () << "RomManager: Canceling scan processes if any.";
+   emit localCancelCall ();
+   
+   return;
+}
+
 void Core::RomManager::tryCreateLibrary ( void )
 {
    QFile file ( library_path );
@@ -148,6 +156,7 @@ QString Core::RomManager::extractExtention ( const QString& name )
 
 void Core::RomManager::removeAllGames ( void )
 {
+   qDebug () << "RomManager: Removing old games.";
    for ( int i = 0; i < console_list.size (); i++ )
    {
       QList< RomEntry* > roms;
@@ -159,6 +168,7 @@ void Core::RomManager::removeAllGames ( void )
       }
       
       roms.clear ();
+      entry_map[ console_list[ i ] ].clear ();
    }
    
    entry_map.clear ();
@@ -179,6 +189,7 @@ void Core::RomManager::scanComplete ( void )
 
 void Core::RomManager::scanFolders ( void )
 {
+   qDebug () << "RomManager: Requested to scan folders for games.";
    mutex.lock ();
    
    if ( scanning )
@@ -199,9 +210,10 @@ void Core::RomManager::scanFolders ( void )
    folder_scanner = new FolderScanner ( scan_paths ,
                                         shared_components->plugins ()->getValidExtentions () );
    
-   connect ( folder_scanner , SIGNAL ( gameFound ( const QString& ) )      , this , SLOT   ( gameFound      ( const QString& ) ) );
-   connect ( folder_scanner , SIGNAL ( scanningFolder ( const QString& ) ) , this , SIGNAL ( scanningFolder ( const QString& ) ) );
-   connect ( folder_scanner , SIGNAL ( scanComplete () )                   , this , SLOT   ( scanComplete   () ) );
+   connect ( folder_scanner , SIGNAL ( gameFound ( const QString& ) )      , this           , SLOT   ( gameFound      ( const QString& ) ) );
+   connect ( folder_scanner , SIGNAL ( scanningFolder ( const QString& ) ) , this           , SIGNAL ( scanningFolder ( const QString& ) ) );
+   connect ( folder_scanner , SIGNAL ( scanComplete () )                   , this           , SLOT   ( scanComplete   () ) );
+   connect ( this           , SIGNAL ( localCancelCall () )                , folder_scanner , SLOT   ( cancelScanProcess () ) );
    
    QThreadPool::globalInstance ()->start ( folder_scanner );
    

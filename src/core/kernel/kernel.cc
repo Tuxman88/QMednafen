@@ -37,6 +37,22 @@ Core::Kernel::~Kernel ( void )
    delete rom_manager;
 }
 
+void Core::Kernel::cancelScanProcess ( void )
+{
+   qDebug () << "Kernel: Requested to stop the scan process.";
+   rom_manager->cancelScanProcess ();
+   
+   return;
+}
+
+void Core::Kernel::scanLibraryFolders ( void )
+{
+   qDebug () << "Kernel: Requesting the RomManager to scan the games folders.";
+   rom_manager->scanFolders ();
+   
+   return;
+}
+
 void Core::Kernel::instanceManager ( void )
 {
    qDebug () << "Kernel: Displaying Instance Manager dialog";
@@ -64,6 +80,7 @@ void Core::Kernel::config ( void )
 void Core::Kernel::exitNow ( void )
 {
    qDebug () << "Kernel: Closing program now";
+   emit closeLibraryManager ();
    emit closeConfigWindow ();
    emit closeAboutWindow ();
    emit closeInstanceManager ();
@@ -75,7 +92,7 @@ void Core::Kernel::exitNow ( void )
 void Core::Kernel::library ( void )
 {
    qDebug () << "Kernel: Displaying Library dialog";
-   rom_manager->scanFolders ();
+   emit openLibraryManager ( rom_manager );
    
    return;
 }

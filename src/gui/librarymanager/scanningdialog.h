@@ -15,44 +15,36 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+ */ 
 
-# ifndef LIBRARYMANAGER_H_
-# define LIBRARYMANAGER_H_
+# ifndef SCANNINGDIALOG_H_
+# define SCANNINGDIALOG_H_
 
 # include <QtWidgets/QDialog>
 # include <QtWidgets/QVBoxLayout>
 # include <QtWidgets/QHBoxLayout>
 # include <QtWidgets/QPushButton>
+# include <QtWidgets/QLabel>
 
 # include "../../base/base.h"
-# include "../../core/core.h"
-# include "consolespanel.h"
-# include "scanningdialog.h"
 
 namespace Gui
 {
-   class LibraryManager : public QDialog
+   class ScanningDialog : public QDialog
    {
-      Q_OBJECT
+      Q_OBJECT 
       
       public:
-         explicit LibraryManager ( Base::SharedComponents* new_shared_components );
-         virtual ~LibraryManager ( void );
+         explicit ScanningDialog ( Base::SharedComponents* new_shared_components );
+         virtual ~ScanningDialog ( void );
          
       signals:
-         void scanLibraryFolders ( void );
-         void cancelScanProcess ( void );
+         void cancelScan ( void );
          
       public slots:
-         void openLibraryManager ( Core::RomManager* rom_manager );
-         void closeLibraryManager ( void );
          void scanningFolder ( const QString& folder_name );
-         void updateList ( void );
          
       private slots:
-         void startScanProcess ( void );
-         void cancelScan ( void );
          void updateText ( void );
          
       private:
@@ -61,14 +53,10 @@ namespace Gui
          
       private:
          Base::SharedComponents* shared_components;
-         Core::RomManager* manager;
-         Gui::ConsolesPanel* consoles_panel;
-         Gui::ScanningDialog* scanning_dialog;
          QVBoxLayout* main_layout;
          QHBoxLayout* buttons_layout;
-         QPushButton* scan_button;
-         QPushButton* close_button;
-         bool already_added;
+         QLabel* scanning_label;
+         QPushButton* cancel_button;
    };
 }
 
