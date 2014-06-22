@@ -45,6 +45,16 @@ Core::RomManager::~RomManager ( void )
 {
 }
 
+QList< QString >& Core::RomManager::consoleList ( void )
+{
+   return ( console_list );
+}
+
+QMap< QString, QList< Core::RomEntry* > >& Core::RomManager::entryMap ( void )
+{
+   return ( entry_map );
+}
+
 void Core::RomManager::cancelScanProcess ( void )
 {
    qDebug () << "RomManager: Canceling scan processes if any.";
@@ -74,6 +84,46 @@ void Core::RomManager::tryCreateLibrary ( void )
    return;
 }
 
+void Core::RomManager::saveLibrary ( void )
+{
+   // Try open the output file
+   QFile file ( library_path );
+   
+   if ( !file.open ( QIODevice::WriteOnly | QIODevice::Truncate ) )
+   {
+      return;
+   }
+   
+   QTextStream output ( &file );
+   
+   // Create a list of the RomEntry instances
+   QList< RomEntry* > roms;
+   
+   for ( int i = 0; i < console_list.size (); i++ )
+   {
+      QList< RomEntry* > console_roms;
+      console_roms = entry_map[ console_list[ i ] ];
+      
+      for ( int j = 0; j < console_roms.size (); j++ )
+      {
+         roms.append ( console_roms[ j ] );
+      }
+   }
+   
+   // Send the amount of entries to write
+   output << roms.size () << "\n";
+   
+   // Send the entries
+   for ( int i = 0; i < roms.size (); i++ )
+   {
+      output << roms[ i ]->name () << "\n";
+      output << roms[ i ]->console () << "\n";
+      output << roms[ i ]->path () << "\n";
+   }
+   
+   return;
+}
+
 void Core::RomManager::loadLibrary ( void )
 {
    qDebug () << "RomManager: Loading library located in " << library_path;
@@ -95,11 +145,11 @@ void Core::RomManager::loadLibrary ( void )
       RomEntry* entry = new RomEntry ();
       
       line = file.readLine ();
-      entry->setName ( line );
+      entry->setName ( QString ( line ).trimmed () );
       line = file.readLine ();
-      entry->setConsole ( line );
+      entry->setConsole ( QString ( line ).trimmed () );
       line = file.readLine ();
-      entry->setPath ( line );
+      entry->setPath ( QString ( line ).trimmed () );
       
       if ( !entry_map.contains ( entry->console () ) )
       {
@@ -172,6 +222,7 @@ void Core::RomManager::removeAllGames ( void )
    }
    
    entry_map.clear ();
+   console_list.clear ();
    
    return;
 }
@@ -181,6 +232,8 @@ void Core::RomManager::scanComplete ( void )
    mutex.lock ();
    scanning = false;
    mutex.unlock ();
+   
+   saveLibrary ();
    
    emit updateList ();
    

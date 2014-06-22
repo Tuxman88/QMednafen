@@ -23,8 +23,33 @@ Gui::ConsoleList::ConsoleList ( Base::SharedComponents* new_shared_components )
    : QListWidget ()
 {
    shared_components = new_shared_components;
+   connect ( this , SIGNAL ( itemDoubleClicked ( QListWidgetItem* ) ) , this , SLOT ( doubleClicked ( QListWidgetItem* ) ) );
 }
 
 Gui::ConsoleList::~ConsoleList ( void )
 {
+}
+
+void Gui::ConsoleList::setRomList ( QList< Core::RomEntry* >& rom_list )
+{
+   for ( int i = 0; i < rom_list.size (); i++ )
+   {      
+      QListWidgetItem* item;
+      item = new QListWidgetItem ( rom_list[ i ]->name () , this );
+      item->setSizeHint ( QSize ( size ().width () , 30 ) );
+      addItem ( item );
+      list_items.append ( item );
+      launch_paths[ rom_list[ i ]->name () ] = rom_list[ i ]->path ();
+   }
+   
+   return;
+}
+
+void Gui::ConsoleList::doubleClicked ( QListWidgetItem* item )
+{
+   qDebug () << "ConsoleList: Asking to launch game: " << launch_paths[ item->text () ];
+   
+   emit launchLibraryGame ( launch_paths[ item->text () ] );
+   
+   return;
 }

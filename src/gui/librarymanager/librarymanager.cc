@@ -27,7 +27,6 @@ Gui::LibraryManager::LibraryManager ( Base::SharedComponents* new_shared_compone
    buildGui ();
    connectAll ();
    updateText ();
-   updateList ();
    
    already_added = false;
 }
@@ -64,10 +63,11 @@ void Gui::LibraryManager::buildGui ( void )
 
 void Gui::LibraryManager::connectAll ( void )
 {
-   connect ( close_button               , SIGNAL ( clicked ( bool ) ) , this , SLOT ( closeLibraryManager () ) );
-   connect ( scan_button                , SIGNAL ( clicked ( bool ) ) , this , SLOT ( startScanProcess () ) );
-   connect ( scanning_dialog            , SIGNAL ( cancelScan () )    , this , SLOT ( cancelScan () ) );
-   connect ( shared_components->text () , SIGNAL ( updateText () )    , this , SLOT ( updateText () ) );
+   connect ( close_button               , SIGNAL ( clicked ( bool ) )                     , this , SLOT   ( closeLibraryManager () ) );
+   connect ( scan_button                , SIGNAL ( clicked ( bool ) )                     , this , SLOT   ( startScanProcess () ) );
+   connect ( scanning_dialog            , SIGNAL ( cancelScan () )                        , this , SLOT   ( cancelScan () ) );
+   connect ( shared_components->text () , SIGNAL ( updateText () )                        , this , SLOT   ( updateText () ) );
+   connect ( consoles_panel             , SIGNAL ( launchLibraryGame ( const QString& ) ) , this , SIGNAL ( launchLibraryGame ( const QString& ) ) );
    
    return;
 }
@@ -114,7 +114,8 @@ void Gui::LibraryManager::updateList ( void )
    scan_button->setEnabled ( true );
    scanning_dialog->setVisible ( false );
    
-   
+   consoles_panel->setRomManager ( manager );
+   consoles_panel->updateList ();
    
    return;
 }
@@ -134,6 +135,7 @@ void Gui::LibraryManager::openLibraryManager ( Core::RomManager* rom_manager )
       manager = rom_manager;
       
       updateList ();
+      already_added = true;
    }
    
    setFixedSize ( QSize ( 600 , 400 ) );

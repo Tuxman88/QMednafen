@@ -23,23 +23,62 @@ Gui::ConsolesPanel::ConsolesPanel ( Base::SharedComponents* new_shared_component
    : QWidget ()
 {
    shared_components = new_shared_components;
+   main_layout = new QVBoxLayout ( this );
+   setLayout ( main_layout );
+   tab_panel = new QTabWidget ();
+   main_layout->addWidget ( tab_panel );
 }
 
 Gui::ConsolesPanel::~ConsolesPanel ( void )
 {
 }
 
-void Gui::ConsolesPanel::buildGui ( void )
+void Gui::ConsolesPanel::setRomManager ( Core::RomManager* new_rom_manager )
 {
+   rom_manager = new_rom_manager;
+   
    return;
 }
 
-void Gui::ConsolesPanel::connectAll ( void )
+void Gui::ConsolesPanel::updateList ( void )
 {
+   removePanels ();
+   
+   // Create a copy of the console list
+   consoles_list = rom_manager->consoleList ();
+   
+   for ( int i = 0; i < consoles_list.size (); i++ )
+   {
+      ConsoleList* game_list;
+      
+      game_list = new ConsoleList ( shared_components );
+      game_list->setRomList ( rom_manager->entryMap ()[ consoles_list[ i ] ] );
+      consoles_map[ consoles_list[ i ] ] = game_list;
+      tab_panel->addTab ( game_list , consoles_list[ i ] );
+      connect ( game_list , SIGNAL ( launchLibraryGame ( const QString& ) ) , this , SIGNAL ( launchLibraryGame ( const QString& ) ) );
+   }
+   
    return;
 }
 
-void Gui::ConsolesPanel::updateText ( void )
+void Gui::ConsolesPanel::removePanels ( void )
 {
+   for ( int i = 0; i < consoles_list.size (); i++ )
+   {
+      int index = tab_panel->indexOf ( consoles_map[ consoles_list[ i ] ] );
+      
+      if ( index != -1 ) // If the widget is found
+      {
+         tab_panel->removeTab ( index );
+      }
+      
+      delete consoles_map[ consoles_list[ i ] ];
+      consoles_map[ consoles_list[ i ] ] = 0;
+   }
+   
+   consoles_list.clear ();
+   consoles_map.clear ();
+   
+   qDebug () << "Salen: " << consoles_list.size ();
    return;
 }

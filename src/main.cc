@@ -75,8 +75,9 @@ int main ( int argc , char** argv )
    QObject::connect ( kernel , SIGNAL ( updateList () )                                  , library_manager  , SLOT ( updateList () ) );
    
    // Connect signals from the library
-   QObject::connect ( library_manager , SIGNAL ( cancelScanProcess () )  , kernel , SLOT ( cancelScanProcess () ) );
-   QObject::connect ( library_manager , SIGNAL ( scanLibraryFolders () ) , kernel , SLOT ( scanLibraryFolders () ) );
+   QObject::connect ( library_manager , SIGNAL ( cancelScanProcess () )                 , kernel , SLOT ( cancelScanProcess () ) );
+   QObject::connect ( library_manager , SIGNAL ( scanLibraryFolders () )                , kernel , SLOT ( scanLibraryFolders () ) );
+   QObject::connect ( library_manager , SIGNAL ( launchLibraryGame ( const QString& ) ) , kernel , SLOT ( launchLibraryGame ( const QString& ) ) );
    
    // Display window
    main_window->show ();

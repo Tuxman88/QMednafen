@@ -40,6 +40,9 @@ namespace Core
          explicit RomManager ( Base::SharedComponents* new_shared_components );
          virtual ~RomManager ( void );
          
+         QList< QString >& consoleList ( void );
+         QMap< QString , QList< RomEntry* > >& entryMap ( void );
+         
       signals:
          void scanningFolder ( const QString& folder_name );
          void updateList ( void );
@@ -56,6 +59,7 @@ namespace Core
       private:
          void tryCreateLibrary ( void );
          void loadLibrary ( void );
+         void saveLibrary ( void );
          void removeAllGames ( void );
          QString extractExtention ( const QString& file_path );
          QString extractName ( QString file_path );

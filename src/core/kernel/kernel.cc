@@ -37,6 +37,14 @@ Core::Kernel::~Kernel ( void )
    delete rom_manager;
 }
 
+void Core::Kernel::launchLibraryGame ( const QString& game_path )
+{
+   qDebug () << "Kernel: Requested to launch a game from the library.";
+   launchFile ( game_path );
+   
+   return;
+}
+
 void Core::Kernel::cancelScanProcess ( void )
 {
    qDebug () << "Kernel: Requested to stop the scan process.";
@@ -104,6 +112,21 @@ void Core::Kernel::openGameDisc ( void )
    return;
 }
 
+void Core::Kernel::launchFile ( const QString& file_path )
+{
+   qDebug () << "Kernel: File to open: " << file_path;
+   qDebug () << "Kernel: Requesting options for file.";
+   
+   QStringList emulator_options = shared_components->plugins ()->getOptions ( extractExtention ( file_path ) );
+   Core::EmulatorManager::DetectionType game_type = emulator_manager->detectionStringType ( shared_components->plugins ()->detectType ( extractExtention ( file_path ) ) );
+   
+   qDebug () << "Kernel: Requesting instance creation.";
+   
+   emulator_manager->addInstance ( file_path , game_type , emulator_options );
+   
+   return;
+}
+
 void Core::Kernel::openRom ( void )
 {
    QString selected_file = QFileDialog::getOpenFileName ( 0 , shared_components->text ()->operator[] ( Base::KeyTxtGuiOpenROMSelectFile ) );
@@ -113,15 +136,7 @@ void Core::Kernel::openRom ( void )
       return;
    }
    
-   qDebug () << "Kernel: File to open: " << selected_file;
-   qDebug () << "Kernel: Requesting options for file.";
-   
-   QStringList emulator_options = shared_components->plugins ()->getOptions ( extractExtention ( selected_file ) );
-   Core::EmulatorManager::DetectionType game_type = emulator_manager->detectionStringType ( shared_components->plugins ()->detectType ( extractExtention ( selected_file ) ) );
-   
-   qDebug () << "Kernel: Requesting instance creation.";
-   
-   emulator_manager->addInstance ( selected_file , game_type , emulator_options );
+   launchFile ( selected_file );
    
    return;
 }

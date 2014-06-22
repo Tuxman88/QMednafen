@@ -65,9 +65,11 @@ namespace Core
          void resetOptions ( void );
          void scanLibraryFolders ( void );
          void cancelScanProcess ( void );
+         void launchLibraryGame ( const QString& game_path );
          
       private:
          QString extractExtention ( const QString& name );
+         void launchFile ( const QString& file_path );
          
       private:
          Base::SharedComponents* shared_components;

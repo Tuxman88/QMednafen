@@ -23,7 +23,7 @@
 # include <QtWidgets/QListWidget>
 
 # include "../../base/base.h"
-# include "consoleentry.h"
+# include "../../core/core.h"
 
 namespace Gui
 {
@@ -35,8 +35,18 @@ namespace Gui
          explicit ConsoleList ( Base::SharedComponents* new_shared_components );
          virtual ~ConsoleList ( void );
          
+         void setRomList ( QList< Core::RomEntry* >& rom_list );
+         
+      signals:
+         void launchLibraryGame ( const QString& game_path );
+         
+      private slots:
+         void doubleClicked ( QListWidgetItem* item );
+         
       private:
          Base::SharedComponents* shared_components;
+         QList< QListWidgetItem* > list_items;
+         QMap< QString , QString > launch_paths;
    };
 }
 

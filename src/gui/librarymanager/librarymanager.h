@@ -43,6 +43,7 @@ namespace Gui
       signals:
          void scanLibraryFolders ( void );
          void cancelScanProcess ( void );
+         void launchLibraryGame ( const QString& game_path );
          
       public slots:
          void openLibraryManager ( Core::RomManager* rom_manager );

@@ -26,24 +26,34 @@
 
 # include "../../base/base.h"
 # include "consolelist.h"
+# include "../../core/rommanager/rommanager.h"
 
 namespace Gui
 {
    class ConsolesPanel : public QWidget
    {
+      Q_OBJECT
+      
       public:
          explicit ConsolesPanel ( Base::SharedComponents* new_shared_components );
          virtual ~ConsolesPanel ( void );
          
+         void setRomManager ( Core::RomManager* new_rom_manager );
+         void updateList ( void );
+         
+      signals:
+         void launchLibraryGame ( const QString& game_path );
+         
       private:
-         void buildGui ( void );
-         void updateText ( void );
-         void connectAll ( void );
+         void removePanels ( void );
          
       private:
          Base::SharedComponents* shared_components;
          QVBoxLayout* main_layout;
          QTabWidget* tab_panel;
+         Core::RomManager* rom_manager;
+         QList< QString > consoles_list;
+         QMap< QString , ConsoleList* > consoles_map;
    };
 }
 
