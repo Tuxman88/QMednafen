@@ -171,6 +171,7 @@ void Base::Plugin::loadOptions ( void )
       {
          plugin_ingame_options->operator[] ( i )->autoLoad ( values );
       }
+      
    }
    
    return;

@@ -138,7 +138,7 @@ void Gui::LibraryManager::openLibraryManager ( Core::RomManager* rom_manager )
       already_added = true;
    }
    
-   setFixedSize ( QSize ( 600 , 400 ) );
+   setMinimumSize ( QSize ( 640 , 480 ) );
    setVisible ( true );
    
    return;

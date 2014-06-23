@@ -23,6 +23,9 @@ Gui::LicensePanel::LicensePanel ( Base::SharedComponents* new_shared_components 
    : QWidget ()
 {
    shared_components = new_shared_components;
+   
+   buildGui ();
+   updateText ();
 }
 
 Gui::LicensePanel::~LicensePanel ( void )
@@ -31,6 +34,12 @@ Gui::LicensePanel::~LicensePanel ( void )
 
 void Gui::LicensePanel::buildGui(void)
 {
+   main_layout = new QVBoxLayout ( this );
+   setLayout ( main_layout );
+   
+   text_edit = new QTextEdit ( this );
+   main_layout->addWidget ( text_edit );
+   
    return;
 }
 
@@ -44,5 +53,22 @@ void Gui::LicensePanel::connectAll ( void )
 
 void Gui::LicensePanel::updateText ( void )
 {
+   QFile file ( ":/license" );
+   
+   if ( !file.open ( QIODevice::ReadOnly | QIODevice::Text ) )
+   {
+      qDebug () << "LicensePanel: WARNING: Can't load license file.";
+      return;
+   }
+   
+   QTextStream stream ( &file );
+   
+   QString line;
+   while ( !stream.atEnd () )
+   {
+      line = stream.readLine ();
+      text_edit->setText ( text_edit->toPlainText () + line + "\n" );
+   }
+   
    return;
 }

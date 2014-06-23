@@ -54,11 +54,49 @@ void Gui::ConsolesPanel::updateList ( void )
       game_list = new ConsoleList ( shared_components );
       game_list->setRomList ( rom_manager->entryMap ()[ consoles_list[ i ] ] );
       consoles_map[ consoles_list[ i ] ] = game_list;
-      tab_panel->addTab ( game_list , consoles_list[ i ] );
+      tab_panel->addTab ( game_list , consoleName ( consoles_list[ i ] ) );
       connect ( game_list , SIGNAL ( launchLibraryGame ( const QString& ) ) , this , SIGNAL ( launchLibraryGame ( const QString& ) ) );
    }
    
    return;
+}
+
+QString Gui::ConsolesPanel::consoleName ( const QString& console_id )
+{
+   QString name = console_id;
+   
+   if ( console_id == "gb" )
+      name = "Game Boy";
+   else if ( console_id == "gba" )
+      name = "Game Boy Advance";
+   else if ( console_id == "gg" )
+      name = "Game Gear";
+   else if ( console_id == "lynx" )
+      name = "Lynx";
+   else if ( console_id == "md" )
+      name = "Genesis/Mega Drive";
+   else if ( console_id == "nes" )
+      name = "NES";
+   else if ( console_id == "ngp" )
+      name = "NeoGeo Pocket";
+   else if ( console_id == "pce" )
+      name = "PC-Engine";
+   else if ( console_id == "pce_fast" )
+      name = "PC-Engine Fast";
+   else if ( console_id == "pcfx" )
+      name = "PC-FX";
+   else if ( console_id == "psx" )
+      name = "PSOne";
+   else if ( console_id == "sms" )
+      name = "Sega Master System";
+   else if ( console_id == "snes" )
+      name = "SNES";
+   else if ( console_id == "vb" )
+      name = "Virtual Boy";
+   else if ( console_id == "wswan" )
+      name = "Wonder Swan";
+   
+   return ( name );
 }
 
 void Gui::ConsolesPanel::removePanels ( void )

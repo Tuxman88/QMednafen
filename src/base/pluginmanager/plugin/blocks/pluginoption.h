@@ -41,14 +41,14 @@ namespace Base
          enum OptionType
          {
             None = 0 ,
-            Boolean ,
-            Integer ,
-            BiInteger ,
-            Real ,
-            BiReal ,
-            Enum ,
-            String ,
-            Path
+            Boolean , // 1
+            Integer , // 2
+            BiInteger , // 3
+            Real , // 4
+            BiReal , // 5
+            Enum , // 6
+            String , // 7
+            Path // 8
          };
       
       public:

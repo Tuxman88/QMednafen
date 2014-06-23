@@ -89,6 +89,10 @@ void Core::EmulatorInstance::commandFinished ( void )
    if ( !stop_signals )
    {
       qDebug () << "EmulatorInstance: Game closed.";
+      
+      qDebug () << "Salida: " << emulator_process.readAllStandardOutput ();
+      qDebug () << "Errores: " << emulator_process.readAllStandardError ();
+      
       emit closeEmulatorInstance ( this );
    }
    

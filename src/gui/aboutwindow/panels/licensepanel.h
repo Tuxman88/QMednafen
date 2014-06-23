@@ -22,6 +22,7 @@
 
 # include <QtWidgets/QWidget>
 # include <QtWidgets/QVBoxLayout>
+# include <QtWidgets/QTextEdit>
 
 # include "../../../base/base.h"
 
@@ -44,6 +45,8 @@ namespace Gui
          
       private:
          Base::SharedComponents* shared_components;
+         QVBoxLayout* main_layout;
+         QTextEdit* text_edit;
    };
 }
 

@@ -99,7 +99,7 @@ void Gui::ConfigWindow::updateText ( void )
 void Gui::ConfigWindow::openConfigWindow ( void )
 {
    this->setVisible ( true );
-   setFixedSize ( size () );
+   setMinimumSize ( size () );
    
    return;
 }

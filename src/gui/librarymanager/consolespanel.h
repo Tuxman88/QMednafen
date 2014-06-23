@@ -46,6 +46,7 @@ namespace Gui
          
       private:
          void removePanels ( void );
+         QString consoleName ( const QString& console_id );
          
       private:
          Base::SharedComponents* shared_components;
