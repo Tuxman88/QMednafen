@@ -32,6 +32,7 @@ Core::RomManager::RomManager ( Base::SharedComponents* new_shared_components )
    }
    
    library_path += ".QMednafenLibrary.lib";
+   qDebug () << "RomManager: Library file path: " << library_path;
    
    tryCreateLibrary ();
    loadLibrary ();
@@ -86,6 +87,7 @@ void Core::RomManager::tryCreateLibrary ( void )
 
 void Core::RomManager::saveLibrary ( void )
 {
+   qDebug () << "RomManager: Saving library contents to " << library_path;
    // Try open the output file
    QFile file ( library_path );
    
@@ -137,9 +139,7 @@ void Core::RomManager::loadLibrary ( void )
    QByteArray line = file.readLine ();
    unsigned int entry_amount = QString ( line ).toUInt ();
    unsigned int actual_entry = 0;
-   
-   qDebug () << "RomManager: Entries to load: " << entry_amount;
-   
+      
    while ( !file.atEnd () && actual_entry < entry_amount )
    {
       RomEntry* entry = new RomEntry ();
@@ -206,7 +206,6 @@ QString Core::RomManager::extractExtention ( const QString& name )
 
 void Core::RomManager::removeAllGames ( void )
 {
-   qDebug () << "RomManager: Removing old games.";
    for ( int i = 0; i < console_list.size (); i++ )
    {
       QList< RomEntry* > roms;

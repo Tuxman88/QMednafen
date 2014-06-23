@@ -1,7 +1,7 @@
 QMednafen
 =========
 
-Multi-platform interface for Mednafen, writen with Qt Framework.
+Multi-platform interface for Mednafen, written with Qt Framework.
 
 This is a Qt 5 project, so, to compile it, you need to install all the relevant packages needed to compile a Qt 5 project.
 
@@ -18,6 +18,7 @@ Make sure that QMake is using Qt 5, since various GNU/Linux distros use both 4.8
 Once the command was launched, open and edit the *.pro file created. Add these options:
 
 CONFIG += debug_and_release
+
 QT += widgets
 
 Save and close the file. Now, run this command:

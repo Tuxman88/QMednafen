@@ -71,7 +71,7 @@ void Base::PluginManager::resetValues ( void )
 }
 
 Base::PluginManager::LoadState Base::PluginManager::load ( QStringList folder_paths )
-{  
+{
    // Iterate over the list of paths where might be plugins
    for ( int i = 0; i < folder_paths.size (); i++ )
    {
@@ -140,6 +140,7 @@ Base::PluginManager::LoadState Base::PluginManager::load ( QStringList folder_pa
                }
                else
                {
+                  // The plugin is empty
                   delete new_plugin;
                }
             }
@@ -167,6 +168,7 @@ QVector< Base::Plugin* >* Base::PluginManager::pluginsLoaded ( void )
 QStringList Base::PluginManager::getOptions ( const QString& file_extention )
 {
    qDebug () << "PluginManager: Requesting plugins options for file extention " << file_extention;
+   
    QStringList options;
    
    for ( int i = 0; i < plugins_loaded->size (); i++ )

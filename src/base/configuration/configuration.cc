@@ -22,6 +22,7 @@
 Base::Configuration::Configuration ( void )
    : QObject ()
 {
+   qDebug () << "Configuration: Loading/creating config file.";
    settings = new QSettings ( tr ( "TuxmanSoft" ) , tr ( "QMednafen 0.1.0" ) );
    
    // Validate the information of the configuration. Check if all the needed keys exists.
@@ -70,11 +71,13 @@ Base::Configuration::Configuration ( void )
 
 Base::Configuration::~Configuration ( void )
 {
+   settings->sync ();
    delete settings;
 }
 
 void Base::Configuration::resetValues ( void )
 {
+   qDebug () << "Configuration: Reseting values.";
    settings->setValue ( Base::KeyCfgGuiLanguage                , Base::ValCfgGuiLanguage );
    settings->setValue ( Base::KeyCfgGuiShortcutOpenRom         , Base::ValCfgGuiShortcutOpenRom );
    settings->setValue ( Base::KeyCfgGuiShortcutOpenGameDisc    , Base::ValCfgGuiShortcutOpenGameDisc );
@@ -88,7 +91,8 @@ void Base::Configuration::resetValues ( void )
    settings->setValue ( Base::KeyCfgCorePathsMednafen          , Base::ValCfgCorePathsMednafen );
    settings->setValue ( Base::KeyCfgCoreCommandOrder           , Base::ValCfgCoreCommandOrder );
    settings->setValue ( Base::KeyCfgCoreRunVersion             , Base::ValCfgCoreRunVersion );
-   
+      
+   settings->sync ();
    emit updateValues ();
    
    return;
@@ -97,6 +101,8 @@ void Base::Configuration::resetValues ( void )
 void Base::Configuration::set ( const QString& key , const QString& value )
 {
    settings->setValue ( key , value );
+   settings->sync ();
+   emit updateValues ();
    
    return;
 }

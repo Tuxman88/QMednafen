@@ -21,6 +21,11 @@
 # define SYSTEMPANEL_H_
 
 # include <QtWidgets/QWidget>
+# include <QtWidgets/QVBoxLayout>
+# include <QtWidgets/QHBoxLayout>
+# include <QtWidgets/QGroupBox>
+# include <QtWidgets/QLabel>
+# include <QtWidgets/QComboBox>
 
 # include "../../../base/base.h"
 
@@ -37,12 +42,28 @@ namespace Gui
       public slots:
          void updateText ( void );
          
+      private slots:
+         void languageChanged ( void );
+         
       private:
          void buildGui ( void );
          void connectAll ( void );
+         void buildLanguageSection ( void );
          
       private:
          Base::SharedComponents* shared_components;
+         QVBoxLayout* main_layout;
+         
+         QGroupBox* language_group;
+         QHBoxLayout* language_layout;
+         QLabel* language_label;
+         QComboBox* language_combo;
+         
+         QGroupBox* mednafen_group;
+         
+         QGroupBox* paths_group;
+         
+         QGroupBox* shortcuts_group;
    };
 }
 

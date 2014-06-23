@@ -22,6 +22,7 @@
 Core::Kernel::Kernel ( Base::SharedComponents* new_shared_components ) :
    QObject ()
 {
+   qDebug () << "Kernel: Creating EmulatorManager and RomManager instances.";
    shared_components = new_shared_components;
    
    emulator_manager = new Core::EmulatorManager ( shared_components );
@@ -109,19 +110,21 @@ void Core::Kernel::openGameDisc ( void )
 {
    qDebug () << "Kernel: Opening game disc";
    
+   QStringList emulator_options = shared_components->plugins ()->getOptions ( "cue" ); // Only the consoles that support discs have CUE extentions
+   Core::EmulatorManager::DetectionType game_type = emulator_manager->detectionStringType ( shared_components->plugins ()->detectType ( "cue" ) );
+      
+   emulator_manager->addInstance ( "-physcd" , game_type , emulator_options );
+   
    return;
 }
 
 void Core::Kernel::launchFile ( const QString& file_path )
 {
    qDebug () << "Kernel: File to open: " << file_path;
-   qDebug () << "Kernel: Requesting options for file.";
    
    QStringList emulator_options = shared_components->plugins ()->getOptions ( extractExtention ( file_path ) );
    Core::EmulatorManager::DetectionType game_type = emulator_manager->detectionStringType ( shared_components->plugins ()->detectType ( extractExtention ( file_path ) ) );
-   
-   qDebug () << "Kernel: Requesting instance creation.";
-   
+      
    emulator_manager->addInstance ( file_path , game_type , emulator_options );
    
    return;

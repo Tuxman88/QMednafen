@@ -36,10 +36,10 @@ Gui::MenuBar::~MenuBar ( void )
 
 void Gui::MenuBar::buildGui(void)
 {
-   menu_file   = addMenu ( shared_components->text ()->operator[] ( Base::KeyTxtGuiMenuFile ) );
-   menu_config = addMenu ( shared_components->text ()->operator[] ( Base::KeyTxtGuiMenuConfig ) );
-   menu_tools  = addMenu ( shared_components->text ()->operator[] ( Base::KeyTxtGuiMenuTools ) );
-   menu_help   = addMenu ( shared_components->text ()->operator[] ( Base::KeyTxtGuiMenuHelp ) );
+   menu_file   = addMenu ( "..." );
+   menu_config = addMenu ( "..." );
+   menu_tools  = addMenu ( "..." );
+   menu_help   = addMenu ( "..." );
    
    file_openrom          = menu_file->addAction ( "..." );
    file_opengamedisc     = menu_file->addAction ( "..." );
@@ -68,20 +68,25 @@ void Gui::MenuBar::updateConfig ( void )
 
 void Gui::MenuBar::connectAll ( void )
 {
-   connect ( shared_components->text () , SIGNAL ( updateText () )      , this , SLOT   ( updateText () ) );
-   connect ( file_openrom               , SIGNAL ( triggered ( bool ) ) , this , SIGNAL ( openRom () ) );
-   connect ( file_opengamedisc          , SIGNAL ( triggered ( bool ) ) , this , SIGNAL ( openGameDisc () ) );
-   connect ( file_exit                  , SIGNAL ( triggered ( bool ) ) , this , SIGNAL ( exitNow () ) );
-   connect ( config_config              , SIGNAL ( triggered ( bool ) ) , this , SIGNAL ( config () ) );
-   connect ( tools_library              , SIGNAL ( triggered ( bool ) ) , this , SIGNAL ( library () ) );
-   connect ( tools_instancemanager      , SIGNAL ( triggered ( bool ) ) , this , SIGNAL ( instanceManager () ) );
-   connect ( help_about                 , SIGNAL ( triggered ( bool ) ) , this , SIGNAL ( about () ) );
+   connect ( shared_components->text ()   , SIGNAL ( updateText () )      , this , SLOT   ( updateText () ) );
+   connect ( shared_components->config () , SIGNAL ( updateValues () )    , this , SLOT   ( updateConfig () ) );
+   connect ( file_openrom                 , SIGNAL ( triggered ( bool ) ) , this , SIGNAL ( openRom () ) );
+   connect ( file_opengamedisc            , SIGNAL ( triggered ( bool ) ) , this , SIGNAL ( openGameDisc () ) );
+   connect ( file_exit                    , SIGNAL ( triggered ( bool ) ) , this , SIGNAL ( exitNow () ) );
+   connect ( config_config                , SIGNAL ( triggered ( bool ) ) , this , SIGNAL ( config () ) );
+   connect ( tools_library                , SIGNAL ( triggered ( bool ) ) , this , SIGNAL ( library () ) );
+   connect ( tools_instancemanager        , SIGNAL ( triggered ( bool ) ) , this , SIGNAL ( instanceManager () ) );
+   connect ( help_about                   , SIGNAL ( triggered ( bool ) ) , this , SIGNAL ( about () ) );
    
    return;
 }
 
 void Gui::MenuBar::updateText ( void )
 {
+   menu_file->setTitle            ( shared_components->text ()->operator[] ( Base::KeyTxtGuiMenuFile ) );
+   menu_config->setTitle          ( shared_components->text ()->operator[] ( Base::KeyTxtGuiMenuConfig ) );
+   menu_tools->setTitle           ( shared_components->text ()->operator[] ( Base::KeyTxtGuiMenuTools ) );
+   menu_help->setTitle            ( shared_components->text ()->operator[] ( Base::KeyTxtGuiMenuHelp ) );
    file_openrom->setText          ( shared_components->text ()->operator[] ( Base::KeyTxtGuiMenuFileOpenRom ) );
    file_opengamedisc->setText     ( shared_components->text ()->operator[] ( Base::KeyTxtGuiMenuFileOpenGameDisc ) );
    file_exit->setText             ( shared_components->text ()->operator[] ( Base::KeyTxtGuiMenuFileExit ) );

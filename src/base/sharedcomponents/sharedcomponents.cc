@@ -22,6 +22,7 @@
 Base::SharedComponents::SharedComponents ( void )
    : QObject ()
 {
+   qDebug () << "SharedComponents: Creating shared components.";
    shared_configuration = new Base::Configuration ();
    shared_text = new Base::Text ( shared_configuration );
    shared_plugins = new Base::PluginManager ( shared_configuration );

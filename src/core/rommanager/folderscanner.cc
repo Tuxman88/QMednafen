@@ -49,6 +49,7 @@ void Core::FolderScanner::run ()
 
 void Core::FolderScanner::cancelScanProcess ( void )
 {
+   qDebug () << "FolderScanner: Activating flag to stop the scanning process.";
    mutex.lock ();
    stop_scanning = true;
    mutex.unlock ();

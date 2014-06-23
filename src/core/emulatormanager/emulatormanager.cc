@@ -89,7 +89,6 @@ void Core::EmulatorManager::closeEmulatorInstance ( Core::EmulatorInstance* inst
    qDebug () << "EmulatorManager: Receiving request to close game instance.";
    game_instances.remove ( instance );
    
-   qDebug () << "EmulatorManager: Game instance removed. Updating game list.";
    emit updateGameList ();
    
    delete instance;

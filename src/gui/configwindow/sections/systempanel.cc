@@ -35,17 +35,57 @@ Gui::SystemPanel::~SystemPanel ( void )
 
 void Gui::SystemPanel::buildGui ( void )
 {
+   main_layout = new QVBoxLayout ( this );
+   setLayout ( main_layout );
+   
+   buildLanguageSection ();
+   
+   main_layout->addStretch ();
+   
    return;
 }
 
 void Gui::SystemPanel::connectAll ( void )
 {
-   connect ( shared_components->text () , SIGNAL ( updateText () ) , this , SLOT ( updateText () ) );
+   connect ( shared_components->text () , SIGNAL ( updateText () )                   , this , SLOT ( updateText () ) );
+   connect ( language_combo             , SIGNAL ( currentIndexChanged ( QString ) ) , this , SLOT ( languageChanged () ) );
    
    return;
 }
 
 void Gui::SystemPanel::updateText ( void )
 {
+   language_group->setTitle ( shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigSystemConfigLanguage ) );
+   language_label->setText ( shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigSystemConfigSelectLanguage ) );
+   
+   return;
+}
+
+void Gui::SystemPanel::buildLanguageSection ( void )
+{
+   language_group = new QGroupBox ();
+   main_layout->addWidget ( language_group );
+   
+   language_layout = new QHBoxLayout ();
+   language_group->setLayout ( language_layout );
+   
+   language_label = new QLabel ( "..." );
+   language_layout->addWidget ( language_label );
+   language_layout->addStretch ();
+   
+   language_combo = new QComboBox ();
+   language_layout->addWidget ( language_combo );
+   language_combo->addItem ( "English" );
+   language_combo->addItem ( "Spanish" );
+   QString current_language = ( shared_components->config ()->operator[] ( Base::KeyCfgGuiLanguage ) == "english" ) ? "English" : "Spanish";
+   language_combo->setCurrentText ( current_language );
+   
+   return;
+}
+
+void Gui::SystemPanel::languageChanged ( void )
+{
+   shared_components->config ()->set ( Base::KeyCfgGuiLanguage , language_combo->currentText ().toLower () );
+   
    return;
 }

@@ -23,14 +23,24 @@ Base::Text::Text ( Base::Configuration* new_config )
    : QObject ()
 {
    config = new_config;
+   connect ( config , SIGNAL ( updateValues () ) , this , SLOT ( reloadText () ) );
    
+   reloadText ();
+}
+
+Base::Text::~Text ( void )
+{
+}
+
+void Base::Text::reloadText ( void )
+{
    // Open and load the resource file of the text for the application
    QFile resource_file ( QString ( ":/lang-%1" ).arg ( config->operator[] ( Base::KeyCfgGuiLanguage ) ) );
    
    if ( !resource_file.open ( QIODevice::ReadOnly | QIODevice::Text ) )
    {
-      qDebug () << "Base::Text::Text: ERROR: Can't open resource file " << QString ( ":/lang-%1" ).arg ( config->operator[] ( Base::KeyCfgGuiLanguage ) );
-      qDebug () << "                         Fallback to default english.";
+      qDebug () << "Text: ERROR: Can't open resource file " << QString ( ":/lang-%1" ).arg ( config->operator[] ( Base::KeyCfgGuiLanguage ) );
+      qDebug () << "      Fallback to default english.";
       
       fillDefault ();
    }
@@ -53,10 +63,10 @@ Base::Text::Text ( Base::Configuration* new_config )
          }
       }
    }
-}
-
-Base::Text::~Text ( void )
-{
+   
+   emit updateText ();
+   
+   return;
 }
 
 void Base::Text::fillDefault ( void )
@@ -112,6 +122,7 @@ void Base::Text::fillDefault ( void )
    current_text[ QString ( "txt.gui.about.blueamnesiac.thanks" ) ] = QString ( "Author of the original Sega Game Gear, Sega Master System, Nintendo Game Boy, Nintendo Game Boy Advance, SNK Neo Geo Pocket and Atari Lynx images." );
    
    current_text[ QString ( "txt.gui.config.systemconfig" ) ]          = QString ( "&System" );
+   current_text[ QString ( "txt.gui.config.systemconfig.language" ) ] = QString ( "Language options" );
    current_text[ QString ( "txt.gui.config.videooptions" ) ]          = QString ( "&Video options" );
    current_text[ QString ( "txt.gui.config.audiooptions" ) ]          = QString ( "&Audio options" );
    current_text[ QString ( "txt.gui.config.controloptions" ) ]        = QString ( "&Control options" );

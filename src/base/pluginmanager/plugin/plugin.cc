@@ -181,6 +181,7 @@ void Base::Plugin::saveOptions ( void )
 {
    // Try to open the file in write-mode and try to save all the configurations.
    qDebug () << "Plugin: Saving options to " << save_path;
+   
    QFile file ( save_path );
    
    if ( !file.open ( QIODevice::WriteOnly | QIODevice::Text ) )

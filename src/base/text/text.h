@@ -45,6 +45,9 @@ namespace Base
       signals:
          void updateText ( void );
          
+      private slots:
+         void reloadText ( void );
+         
       private:
          void fillDefault ( void );
          Base::Configuration* config;

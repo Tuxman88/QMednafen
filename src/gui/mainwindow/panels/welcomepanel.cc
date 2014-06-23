@@ -27,10 +27,18 @@ Gui::WelcomePanel::WelcomePanel ( Base::SharedComponents* new_shared_components 
    
    buildGui ();   
    updateText ();
+   connectAll ();
 }
 
 Gui::WelcomePanel::~WelcomePanel ( void )
 {
+}
+
+void Gui::WelcomePanel::connectAll ( void )
+{
+   connect ( shared_components->text () , SIGNAL ( updateText () ) , this , SLOT ( updateText () ) );
+   
+   return;
 }
 
 void Gui::WelcomePanel::buildGui ( void )

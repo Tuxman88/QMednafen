@@ -71,7 +71,6 @@ void Gui::ConfigWindow::buildGui ( void )
    
    QPixmap program_icon ( ":/icon-main-16" );
    setWindowIcon ( QIcon ( program_icon ) );
-   setWindowTitle ( shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigTitle ) );
    
    return;
 }
@@ -92,6 +91,7 @@ void Gui::ConfigWindow::updateText ( void )
    save_button->setText   ( shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigSave ) );
    reload_button->setText ( shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigReload ) );
    reset_button->setText  ( shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigReset ) );
+   setWindowTitle ( shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigTitle ) );
    
    return;
 }

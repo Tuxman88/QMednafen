@@ -37,6 +37,7 @@ Gui::InstanceManager::~InstanceManager ( void )
 void Gui::InstanceManager::connectAll ( void )
 {
    connect ( button_close , SIGNAL ( clicked ( bool ) ) , this , SLOT ( closeInstanceManager () ) );
+   connect ( shared_components->text () , SIGNAL ( updateText () ) , this , SLOT ( updateText () ) );
    
    return;
 }

@@ -44,6 +44,7 @@ namespace Gui
          
       private:
          void buildGui ( void );
+         void connectAll ( void );
          
       private:
          Base::SharedComponents* shared_components;

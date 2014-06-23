@@ -59,8 +59,7 @@ void Core::EmulatorInstance::run ( void )
    qDebug () << "EmulatorInstance: Running: " << shared_components->config ()->operator[] ( Base::KeyCfgCorePathsMednafen ) << " " << complete_options;
    
    emulator_process.start ( shared_components->config ()->operator[] ( Base::KeyCfgCorePathsMednafen ) , complete_options );
-   
-   
+      
    return;
 }
 
@@ -89,9 +88,7 @@ void Core::EmulatorInstance::commandFinished ( void )
    if ( !stop_signals )
    {
       qDebug () << "EmulatorInstance: Game closed.";
-      
-      qDebug () << "Salida: " << emulator_process.readAllStandardOutput ();
-      qDebug () << "Errores: " << emulator_process.readAllStandardError ();
+      qDebug () << "Stardard Ouput: " << emulator_process.readAllStandardOutput ();
       
       emit closeEmulatorInstance ( this );
    }

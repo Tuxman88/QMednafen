@@ -28,9 +28,28 @@ namespace Base
    * Keys about program configuration.
    */
 
+   // Basic options
    const QString KeyCfgGuiLanguage = "cfg.gui.language";
    const QString ValCfgGuiLanguage = "english";
    
+   // Mednafen control
+   const QString KeyCfgCoreCommandOrder = "cfg.core.commandorder";
+   const QString ValCfgCoreCommandOrder = "rom_options";
+   
+   const QString KeyCfgCoreRunVersion = "cfg.core.runversion";
+   const QString ValCfgCoreRunVersion = "0.9.34.1";
+   
+   // Paths
+   const QString KeyCfgCorePathsMednafen = "cfg.core.mednafen.path";
+   const QString ValCfgCorePathsMednafen = "mednafen";
+   
+   const QString KeyCfgCorePathsPlugins = "cfg.core.plugins.paths";
+   const QString ValCfgCorePathsPlugins = "/";
+   
+   const QString KeyCfgCorePathsLibrary = "cfg.core.library.paths";
+   const QString ValCfgCorePathsLibrary = "/";
+   
+   // Shortcuts   
    const QString KeyCfgGuiShortcutOpenRom = "cfg.gui.shortcut.openrom";
    const QString ValCfgGuiShortcutOpenRom = "Ctrl+O";
    
@@ -51,21 +70,6 @@ namespace Base
    
    const QString KeyCfgGuiShortcutInstanceManager = "cfg.gui.shortcut.instancemanager";
    const QString ValCfgGuiShortcutInstanceManager = "Ctrl+I";
-   
-   const QString KeyCfgCorePathsPlugins = "cfg.core.plugins.paths";
-   const QString ValCfgCorePathsPlugins = "/";
-   
-   const QString KeyCfgCorePathsLibrary = "cfg.core.library.paths";
-   const QString ValCfgCorePathsLibrary = "/";
-   
-   const QString KeyCfgCorePathsMednafen = "cfg.core.mednafen.path";
-   const QString ValCfgCorePathsMednafen = "mednafen";
-   
-   const QString KeyCfgCoreCommandOrder = "cfg.core.commandorder";
-   const QString ValCfgCoreCommandOrder = "rom_options";
-   
-   const QString KeyCfgCoreRunVersion = "cfg.core.runversion";
-   const QString ValCfgCoreRunVersion = "0.9.34.1";
 
    /*
    * Keys about text. (there are just keys, the values are controlled in other place, in the "Text" class).
@@ -100,18 +104,20 @@ namespace Base
    const QString KeyTxtGuiMainLibrary                 = "txt.gui.main.library";
    const QString KeyTxtGuiMainLibraryDescription      = "txt.gui.main.librarydescription";
    
-   const QString KeyTxtGuiConfigSystemConfig          = "txt.gui.config.systemconfig";
-   const QString KeyTxtGuiConfigVideoOptions          = "txt.gui.config.videooptions";
-   const QString KeyTxtGuiConfigAudioOptions          = "txt.gui.config.audiooptions";
-   const QString KeyTxtGuiConfigControlOptions        = "txt.gui.config.controloptions";
-   const QString KeyTxtGuiConfigInGameOptions         = "txt.gui.config.ingameoptions";
-   const QString KeyTxtGuiConfigConsoleName           = "txt.gui.config.console.%1";
-   const QString KeyTxtGuiConfigConsoleAuthor         = "txt.gui.config.console.author";
-   const QString KeyTxtGuiConfigTitle                 = "txt.gui.config.title";
-   const QString KeyTxtGuiConfigSave                  = "txt.gui.config.save";
-   const QString KeyTxtGuiConfigReload                = "txt.gui.config.reload";
-   const QString KeyTxtGuiConfigReset                 = "txt.gui.config.reset";
-   const QString KeyTxtGuiConfigConsolePluginVersion  = "txt.gui.config.console.pluginversion";
+   const QString KeyTxtGuiConfigSystemConfig               = "txt.gui.config.systemconfig";
+   const QString KeyTxtGuiConfigSystemConfigLanguage       = "txt.gui.config.systemconfig.language";
+   const QString KeyTxtGuiConfigSystemConfigSelectLanguage = "txt.gui.config.systemconfig.selectlanguage";
+   const QString KeyTxtGuiConfigVideoOptions               = "txt.gui.config.videooptions";
+   const QString KeyTxtGuiConfigAudioOptions               = "txt.gui.config.audiooptions";
+   const QString KeyTxtGuiConfigControlOptions             = "txt.gui.config.controloptions";
+   const QString KeyTxtGuiConfigInGameOptions              = "txt.gui.config.ingameoptions";
+   const QString KeyTxtGuiConfigConsoleName                = "txt.gui.config.console.%1";
+   const QString KeyTxtGuiConfigConsoleAuthor              = "txt.gui.config.console.author";
+   const QString KeyTxtGuiConfigTitle                      = "txt.gui.config.title";
+   const QString KeyTxtGuiConfigSave                       = "txt.gui.config.save";
+   const QString KeyTxtGuiConfigReload                     = "txt.gui.config.reload";
+   const QString KeyTxtGuiConfigReset                      = "txt.gui.config.reset";
+   const QString KeyTxtGuiConfigConsolePluginVersion       = "txt.gui.config.console.pluginversion";
    
    const QString KeyTxtGuiAboutAboutTitle         = "txt.gui.about.abouttitle";
    const QString KeyTxtGuiAboutAboutTab           = "txt.gui.about.abouttab";
