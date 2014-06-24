@@ -26,6 +26,7 @@
 # include <QtWidgets/QGroupBox>
 # include <QtWidgets/QLabel>
 # include <QtWidgets/QComboBox>
+# include <QtWidgets/QLineEdit>
 
 # include "../../../base/base.h"
 
@@ -44,11 +45,26 @@ namespace Gui
          
       private slots:
          void languageChanged ( void );
+         void formatChanged ( void );
+         void versionChanged ( void );
+         void binaryChanged ( void );
+         void pluginsChanged ( void );
+         void libraryChanged ( void );
+         void openRomChanged ( void );
+         void openDiscChanged ( void );
+         void openAboutChanged ( void );
+         void openInstancesChanged ( void );
+         void openConfigChanged ( void );
+         void openLibraryChanged ( void );
+         void exitChanged ( void );
          
       private:
          void buildGui ( void );
          void connectAll ( void );
          void buildLanguageSection ( void );
+         void buildMednafenSection ( void );
+         void buildPathsSection ( void );
+         void buildShortcutsSection ( void );
          
       private:
          Base::SharedComponents* shared_components;
@@ -60,10 +76,49 @@ namespace Gui
          QComboBox* language_combo;
          
          QGroupBox* mednafen_group;
+         QVBoxLayout* mednafen_layout;
+         QHBoxLayout* mednafen_format_layout;
+         QHBoxLayout* mednafen_version_layout;
+         QLabel* mednafen_format_label;
+         QLabel* mednafen_version_label;
+         QComboBox* mednafen_format_combo;
+         QComboBox* mednafen_version_combo;
          
          QGroupBox* paths_group;
+         QVBoxLayout* paths_layout;
+         QHBoxLayout* binary_layout;
+         QHBoxLayout* plugins_layout;
+         QHBoxLayout* library_layout;
+         QLabel* binary_label;
+         QLabel* plugins_label;
+         QLabel* library_label;
+         QLineEdit* binary_line;
+         QLineEdit* plugins_line;
+         QLineEdit* library_line;
          
          QGroupBox* shortcuts_group;
+         QVBoxLayout* shortcuts_layout;
+         QHBoxLayout* openrom_layout;
+         QHBoxLayout* opendisc_layout;
+         QHBoxLayout* openabout_layout;
+         QHBoxLayout* openinstances_layout;
+         QHBoxLayout* openconfig_layout;
+         QHBoxLayout* openlibrary_layout;
+         QHBoxLayout* exit_layout;
+         QLabel* openrom_label;
+         QLabel* opendisc_label;
+         QLabel* openabout_label;
+         QLabel* openinstances_label;
+         QLabel* openconfig_label;
+         QLabel* openlibrary_label;
+         QLabel* exit_label;
+         QLineEdit* openrom_line;
+         QLineEdit* opendisc_line;
+         QLineEdit* openabout_line;
+         QLineEdit* openinstances_line;
+         QLineEdit* openconfig_line;
+         QLineEdit* openlibrary_line;
+         QLineEdit* exit_line;
    };
 }
 

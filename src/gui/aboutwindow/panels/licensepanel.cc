@@ -38,6 +38,7 @@ void Gui::LicensePanel::buildGui(void)
    setLayout ( main_layout );
    
    text_edit = new QTextEdit ( this );
+   text_edit->setReadOnly ( true );
    main_layout->addWidget ( text_edit );
    
    return;

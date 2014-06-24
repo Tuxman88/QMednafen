@@ -28,6 +28,12 @@
 
 namespace Base
 {
+   const unsigned int ComboWidth = 200;
+   const unsigned int LineWidth = 200;
+   const unsigned int LabelWidth = 400;
+   const unsigned int SpinWidth = 200;
+   const unsigned int BiSpinWidth = 91;
+   
    class Configuration : public QObject
    {
       Q_OBJECT

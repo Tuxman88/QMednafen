@@ -38,7 +38,10 @@ void Gui::IntegerOption::buildGui ( void )
    setLayout ( main_layout );
    
    title_label = new QLabel ( option->description () );
+   title_label->setFixedWidth ( Base::LabelWidth );
+   title_label->setWordWrap ( true );
    value_spin = new QSpinBox ();
+   value_spin->setFixedWidth ( Base::SpinWidth );
    
    value_spin->setRange ( option->minValue () , option->maxValue () );
    value_spin->setValue ( option->currentValue () );

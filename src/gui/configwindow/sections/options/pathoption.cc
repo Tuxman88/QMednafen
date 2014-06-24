@@ -38,14 +38,18 @@ void Gui::PathOption::buildGui ( void )
    setLayout ( main_layout );
    
    title_label = new QLabel ( option->description () );
+   title_label->setFixedWidth ( Base::LabelWidth );
+   title_label->setWordWrap ( true );
    value_line = new QLineEdit ();
+   value_line->setFixedWidth ( Base::LineWidth );
    select_file = new QPushButton ( "..." );
-   
+      
    value_line->setText ( option->currentValue () );
    
    main_layout->addWidget ( title_label );
    main_layout->addStretch ();
    main_layout->addWidget ( value_line );
+   main_layout->addSpacing ( 5 );
    main_layout->addWidget ( select_file );
    
    return;

@@ -117,6 +117,5 @@ void Gui::ConsolesPanel::removePanels ( void )
    consoles_list.clear ();
    consoles_map.clear ();
    
-   qDebug () << "Salen: " << consoles_list.size ();
    return;
 }

@@ -39,8 +39,11 @@ QStringList Base::OptionPath::toString ( void )
 {
    QStringList string_form;
    
-   string_form << QString ( "-%1" ).arg ( option_command );
-   string_form << QString ( "%1" ).arg ( option_current_value );
+   if ( option_current_value != "/" )
+   {
+      string_form << QString ( "-%1" ).arg ( option_command );
+      string_form << QString ( "%1" ).arg ( option_current_value );
+   }
    
    return ( string_form );
 }

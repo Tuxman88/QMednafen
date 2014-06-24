@@ -38,6 +38,8 @@ void Gui::BooleanOption::buildGui ( void )
    setLayout ( main_layout );
    
    title_label = new QLabel ( option->description () );
+   title_label->setFixedWidth ( Base::LabelWidth );
+   title_label->setWordWrap ( true );
    value_check = new QCheckBox ();
    
    value_check->setChecked ( option->currentValue () );

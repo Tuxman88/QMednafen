@@ -82,7 +82,7 @@ void Gui::InstanceManager::openInstanceManager ( Core::EmulatorManager* new_emul
    }
    
    this->setVisible ( true );
-   this->setFixedSize ( QSize ( 500 , 300 ) );
+   this->setMinimumSize ( QSize ( 500 , 300 ) );
    
    return;
 }

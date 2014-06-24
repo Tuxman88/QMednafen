@@ -56,6 +56,8 @@ void Gui::PluginPanel::buildGui ( void )
    setLayout ( main_layout );
    
    console_info = new Gui::ConsoleInfoPanel ( shared_components , plugin->info () );
+   console_info->adjustSize ();
+   console_info->setFixedHeight ( console_info->size ().height () );
    main_layout->addWidget ( console_info );
    
    tab_widgets = new QTabWidget ();

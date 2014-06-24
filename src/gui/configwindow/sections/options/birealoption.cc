@@ -38,9 +38,13 @@ void Gui::BiRealOption::buildGui ( void )
    setLayout ( main_layout );
    
    title_label = new QLabel ( option->description () );
+   title_label->setFixedWidth ( Base::LabelWidth );
+   title_label->setWordWrap ( true );
    separator_label = new QLabel ( "x" );
    value_spin_a = new QDoubleSpinBox ();
+   value_spin_a->setFixedWidth ( Base::BiSpinWidth );
    value_spin_b = new QDoubleSpinBox ();
+   value_spin_b->setFixedWidth ( Base::BiSpinWidth );
    
    value_spin_a->setRange ( option->minValue () , option->maxValue () );
    value_spin_a->setValue ( option->currentValueA () );

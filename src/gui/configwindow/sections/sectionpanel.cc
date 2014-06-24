@@ -114,7 +114,7 @@ void Gui::SectionPanel::buildGui ( void )
       }
    }
    
-   main_layout->addStretch ();
+   //main_layout->addStretch ();
    
    return;
 }

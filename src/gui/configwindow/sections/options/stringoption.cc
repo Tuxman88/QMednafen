@@ -38,7 +38,10 @@ void Gui::StringOption::buildGui ( void )
    setLayout ( main_layout );
    
    title_label = new QLabel ( option->description () );
+   title_label->setFixedWidth ( Base::LabelWidth );
+   title_label->setWordWrap ( true );
    value_line = new QLineEdit ();
+   value_line->setFixedWidth ( Base::LineWidth );
    
    value_line->setText ( option->currentValue () );
    

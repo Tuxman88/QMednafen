@@ -38,7 +38,10 @@ void Gui::EnumOption::buildGui ( void )
    setLayout ( main_layout );
    
    title_label = new QLabel ( option->description () );
+   title_label->setFixedWidth ( Base::LabelWidth );
+   title_label->setWordWrap ( true );
    value_combo = new QComboBox ();
+   value_combo->setFixedWidth ( Base::ComboWidth );
    
    QStringList items;
    
