@@ -24,6 +24,7 @@
 # include <QtWidgets/QMenu>
 # include <QtWidgets/QAction>
 # include <QtGui/QKeySequence>
+# include <QtCore/QDebug>
 
 # include "../../../base/base.h"
 
@@ -45,6 +46,7 @@ namespace Gui
          void config ( void );
          void exitNow ( void );
          void about ( void );
+         void openManual ( void );
          
       public slots:
          void updateText ( void );
@@ -67,6 +69,7 @@ namespace Gui
          QAction* config_config;
          QAction* tools_instancemanager;
          QAction* tools_library;
+         QAction* help_manual;
          QAction* help_about;
    };
 }

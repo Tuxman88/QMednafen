@@ -70,6 +70,9 @@ namespace Base
    
    const QString KeyCfgGuiShortcutInstanceManager = "cfg.gui.shortcut.instancemanager";
    const QString ValCfgGuiShortcutInstanceManager = "Ctrl+I";
+   
+   const QString KeyCfgGuiShortcutManual = "cfg.gui.shortcut.manual";
+   const QString ValCfgGuiShortcutManual = "Ctrl+H";
 
    /*
    * Keys about text. (there are just keys, the values are controlled in other place, in the "Text" class).
@@ -88,6 +91,7 @@ namespace Base
    const QString KeyTxtGuiMenuToolsInstancesRunning = "txt.gui.menu.tools.instancemanager";
    const QString KeyTxtGuiMenuToolsLibrary          = "txt.gui.menu.tools.library";
    const QString KeyTxtGuiMenuHelp                  = "txt.gui.menu.help";
+   const QString KeyTxtGuiMenuHelpManual            = "txt.gui.menu.help.manual";
    const QString KeyTxtGuiMenuHelpAbout             = "txt.gui.menu.help.about";
    
    const QString KeyTxtGuiMainVersion                 = "txt.gui.main.version";
@@ -118,6 +122,7 @@ namespace Base
    const QString KeyTxtGuiConfigSystemConfigShortcutOpenRom             = "txt.gui.config.systemconfig.shortcut.openrom";
    const QString KeyTxtGuiConfigSystemConfigShortcutOpenDisc            = "txt.gui.config.systemconfig.shortcut.opendisc";
    const QString KeyTxtGuiConfigSystemConfigShortcutOpenLibrary         = "txt.gui.config.systemconfig.shortcut.openlibrary";
+   const QString KeyTxtGuiConfigSystemConfigShortcutOpenManual         = "txt.gui.config.systemconfig.shortcut.openmanual";
    const QString KeyTxtGuiConfigSystemConfigShortcutExit                = "txt.gui.config.systemconfig.shortcut.exit";
    const QString KeyTxtGuiConfigSystemConfigShortcutOpenConfig          = "txt.gui.config.systemconfig.shortcut.openconfig";
    const QString KeyTxtGuiConfigSystemConfigShortcutOpenAbout           = "txt.gui.config.systemconfig.shortcut.openabout";
@@ -157,6 +162,9 @@ namespace Base
    const QString KeyTxtGuiLibraryManagerScan  = "txt.gui.librarymanager.scan";
    const QString KeyTxtGuiLibraryManagerClose = "txt.gui.librarymanager.close";
    const QString KeyTxtGuiLibraryManagerTitle = "txt.gui.librarymanager.title";
+   
+   const QString KeyTxtGuiManualClose = "txt.gui.manual.close";
+   const QString KeyTxtGuiManualTitle = "txt.gui.manual.title";
 }
 
 # endif

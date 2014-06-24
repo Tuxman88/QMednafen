@@ -93,6 +93,7 @@ void Core::Kernel::exitNow ( void )
    emit closeConfigWindow ();
    emit closeAboutWindow ();
    emit closeInstanceManager ();
+   emit closeManual ();
    emit closeMainWindow ();
    
    return;

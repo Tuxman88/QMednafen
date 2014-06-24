@@ -49,5 +49,6 @@
 # include "librarymanager/librarymanager.h"
 # include "librarymanager/consolespanel.h"
 # include "librarymanager/scanningdialog.h"
+# include "manualwindow/manualwindow.h"
 
 # endif

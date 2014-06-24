@@ -34,7 +34,7 @@ Gui::MenuBar::~MenuBar ( void )
 {
 }
 
-void Gui::MenuBar::buildGui(void)
+void Gui::MenuBar::buildGui ( void )
 {
    menu_file   = addMenu ( "..." );
    menu_config = addMenu ( "..." );
@@ -48,6 +48,7 @@ void Gui::MenuBar::buildGui(void)
    config_config         = menu_config->addAction ( "..." );
    tools_library         = menu_tools->addAction ( "..." );
    tools_instancemanager = menu_tools->addAction ( "..." );
+   help_manual           = menu_help->addAction ( "..." );
    help_about            = menu_help->addAction ( "..." );
    
    return;
@@ -62,6 +63,7 @@ void Gui::MenuBar::updateConfig ( void )
    tools_library->setShortcut         ( QKeySequence ( shared_components->config ()->operator[] ( Base::KeyCfgGuiShortcutLibrary ) ) );
    tools_instancemanager->setShortcut ( QKeySequence ( shared_components->config ()->operator[] ( Base::KeyCfgGuiShortcutInstanceManager ) ) );
    help_about->setShortcut            ( QKeySequence ( shared_components->config ()->operator[] ( Base::KeyCfgGuiShortcutAbout ) ) );
+   help_manual->setShortcut           ( QKeySequence ( shared_components->config ()->operator[] ( Base::KeyCfgGuiShortcutManual ) ) );
    
    return;
 }
@@ -76,6 +78,7 @@ void Gui::MenuBar::connectAll ( void )
    connect ( config_config                , SIGNAL ( triggered ( bool ) ) , this , SIGNAL ( config () ) );
    connect ( tools_library                , SIGNAL ( triggered ( bool ) ) , this , SIGNAL ( library () ) );
    connect ( tools_instancemanager        , SIGNAL ( triggered ( bool ) ) , this , SIGNAL ( instanceManager () ) );
+   connect ( help_manual                  , SIGNAL ( triggered ( bool ) ) , this , SIGNAL ( openManual () ) );
    connect ( help_about                   , SIGNAL ( triggered ( bool ) ) , this , SIGNAL ( about () ) );
    
    return;
@@ -93,6 +96,7 @@ void Gui::MenuBar::updateText ( void )
    config_config->setText         ( shared_components->text ()->operator[] ( Base::KeyTxtGuiMenuConfigConfig ) );
    tools_library->setText         ( shared_components->text ()->operator[] ( Base::KeyTxtGuiMenuToolsLibrary ) );
    tools_instancemanager->setText ( shared_components->text ()->operator[] ( Base::KeyTxtGuiMenuToolsInstancesRunning ) );
+   help_manual->setText           ( shared_components->text ()->operator[] ( Base::KeyTxtGuiMenuHelpManual ) );
    help_about->setText            ( shared_components->text ()->operator[] ( Base::KeyTxtGuiMenuHelpAbout ) );
    
    return;

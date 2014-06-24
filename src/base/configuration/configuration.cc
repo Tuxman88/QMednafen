@@ -51,6 +51,12 @@ Base::Configuration::Configuration ( void )
    if ( !settings->contains ( Base::KeyCfgGuiShortcutAbout ) )
       settings->setValue ( Base::KeyCfgGuiShortcutAbout , Base::ValCfgGuiShortcutAbout );
    
+   if ( !settings->contains ( Base::KeyCfgGuiShortcutManual ) )
+      settings->setValue ( Base::KeyCfgGuiShortcutManual , Base::ValCfgGuiShortcutManual );
+   
+   if ( !settings->contains ( Base::KeyCfgGuiShortcutConfig ) )
+      settings->setValue ( Base::KeyCfgGuiShortcutConfig , Base::ValCfgGuiShortcutConfig );
+   
    if ( !settings->contains ( Base::KeyCfgCorePathsPlugins ) )
       settings->setValue ( Base::KeyCfgCorePathsPlugins , Base::ValCfgCorePathsPlugins );
    
@@ -86,6 +92,8 @@ void Base::Configuration::resetValues ( void )
    settings->setValue ( Base::KeyCfgGuiShortcutExit            , Base::ValCfgGuiShortcutExit );
    settings->setValue ( Base::KeyCfgGuiShortcutConfig          , Base::ValCfgGuiShortcutConfig );
    settings->setValue ( Base::KeyCfgGuiShortcutAbout           , Base::ValCfgGuiShortcutAbout );
+   settings->setValue ( Base::KeyCfgGuiShortcutManual          , Base::ValCfgGuiShortcutManual );
+   settings->setValue ( Base::KeyCfgGuiShortcutConfig          , Base::ValCfgGuiShortcutConfig );
    settings->setValue ( Base::KeyCfgCorePathsPlugins           , Base::ValCfgCorePathsPlugins );
    settings->setValue ( Base::KeyCfgCorePathsLibrary           , Base::ValCfgCorePathsLibrary );
    settings->setValue ( Base::KeyCfgCorePathsMednafen          , Base::ValCfgCorePathsMednafen );

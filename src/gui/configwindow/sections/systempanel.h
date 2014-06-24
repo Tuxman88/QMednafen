@@ -56,6 +56,7 @@ namespace Gui
          void openInstancesChanged ( void );
          void openConfigChanged ( void );
          void openLibraryChanged ( void );
+         void openManualChanged ( void );
          void exitChanged ( void );
          
       private:
@@ -104,6 +105,7 @@ namespace Gui
          QHBoxLayout* openinstances_layout;
          QHBoxLayout* openconfig_layout;
          QHBoxLayout* openlibrary_layout;
+         QHBoxLayout* openmanual_layout;
          QHBoxLayout* exit_layout;
          QLabel* openrom_label;
          QLabel* opendisc_label;
@@ -111,6 +113,7 @@ namespace Gui
          QLabel* openinstances_label;
          QLabel* openconfig_label;
          QLabel* openlibrary_label;
+         QLabel* openmanual_label;
          QLabel* exit_label;
          QLineEdit* openrom_line;
          QLineEdit* opendisc_line;
@@ -118,6 +121,7 @@ namespace Gui
          QLineEdit* openinstances_line;
          QLineEdit* openconfig_line;
          QLineEdit* openlibrary_line;
+         QLineEdit* openmanual_line;
          QLineEdit* exit_line;
    };
 }

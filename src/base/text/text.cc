@@ -84,6 +84,7 @@ void Base::Text::fillDefault ( void )
    current_text[ QString ( "txt.gui.menu.tools.instancemanager" ) ] = QString ( "Running games" );
    current_text[ QString ( "txt.gui.menu.tools.library" ) ]         = QString ( "Games library" );
    current_text[ QString ( "txt.gui.menu.help" ) ]                  = QString ( "Help" );
+   current_text[ QString ( "txt.gui.menu.help.about" ) ]            = QString ( "Manual" );
    current_text[ QString ( "txt.gui.menu.help.about" ) ]            = QString ( "About" );
    
    current_text[ QString ( "txt.gui.main.version" ) ]                 = QString ( "Version" );
@@ -137,6 +138,7 @@ void Base::Text::fillDefault ( void )
    current_text[ QString ( "txt.gui.config.systemconfig.shortcut.openinstancemanager" ) ] = QString ( "Open instance manager window" );
    current_text[ QString ( "txt.gui.config.systemconfig.shortcut.opendisc" ) ]            = QString ( "Open game from disc" );
    current_text[ QString ( "txt.gui.config.systemconfig.shortcut.openlibrary" ) ]         = QString ( "Open library window" );
+   current_text[ QString ( "txt.gui.config.systemconfig.shortcut.openmanual" ) ]          = QString ( "Open manual window" );
    current_text[ QString ( "txt.gui.config.systemconfig.shortcut.exit" ) ]                = QString ( "Exit program" );
    current_text[ QString ( "txt.gui.config.systemconfig.shortcut.openconfig" ) ]          = QString ( "Open config window" );
    current_text[ QString ( "txt.gui.config.videooptions" ) ]                              = QString ( "&Video options" );
@@ -178,6 +180,9 @@ void Base::Text::fillDefault ( void )
    current_text[ QString ( "txt.gui.librarymanager.scan" ) ]  = QString ( "&Scan" );
    current_text[ QString ( "txt.gui.librarymanager.close" ) ] = QString ( "&Close" );
    current_text[ QString ( "txt.gui.librarymanager.title" ) ] = QString ( "Library manager" );
+   
+   current_text[ QString ( "txt.gui.manual.close" ) ] = QString ( "&Close" );
+   current_text[ QString ( "txt.gui.manual.title" ) ] = QString ( "Quick user manual" );
    
    return;
 }

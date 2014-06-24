@@ -17,54 +17,43 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
-# ifndef MAINWINDOW_H_
-# define MAINWINDOW_H_
+# ifndef MANUALWINDOW_H_
+# define MANUALWINDOW_H_
 
-# include <QtWidgets/QMainWindow>
-# include <QtWidgets/QMenuBar>
-# include <QtWidgets/QMenu>
-# include <QtWidgets/QAction>
-# include <QtGui/QCloseEvent>
-# include <QtGui/QIcon>
+# include <QtWidgets/QDialog>
+# include <QtWidgets/QVBoxLayout>
+# include <QtWidgets/QHBoxLayout>
+# include <QtWidgets/QPushButton>
+# include <QtWidgets/QTextEdit>
+# include <QtWidgets/QTextBrowser>
 
 # include "../../base/base.h"
-# include "menubar/menubar.h"
-# include "panels/maincontentspanel.h"
 
 namespace Gui
 {
-   class MainWindow : public QMainWindow
+   class ManualWindow : public QDialog
    {
       Q_OBJECT
       
       public:
-         explicit MainWindow ( Base::SharedComponents* new_shared_components );
-         virtual ~MainWindow ( void );
+         explicit ManualWindow ( Base::SharedComponents* new_shared_components );
+         virtual ~ManualWindow ( void );
          
-      signals:
-         void openRom ( void );
-         void openGameDisc ( void );
-         void library ( void );
-         void instanceManager ( void );
-         void config ( void );
-         void exitNow ( void );
-         void about ( void );
-         void openManual ( void );
-      
       public slots:
-         void updateText ( void );
-         void closeMainWindow ( void );
+         void closeManualWindow ( void );
+         void openManualWindow ( void );
          
-      private:
+      private slots:
          void buildGui ( void );
          void connectAll ( void );
-         void closeEvent ( QCloseEvent* event );
+         void updateText ( void );
          
       private:
          Base::SharedComponents* shared_components;
-         Gui::MenuBar* menubar;
-         Gui::MainContentsPanel* main_contents_panel;
-         bool ignore_closing;
+         QVBoxLayout* main_layout;
+         QHBoxLayout* buttons_layout;
+         QTextBrowser* document_body;
+         QPushButton* close_button;
    };
 }
 

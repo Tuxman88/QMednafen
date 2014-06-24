@@ -63,6 +63,7 @@ void Gui::SystemPanel::connectAll ( void )
    connect ( openinstances_line         , SIGNAL ( textChanged ( QString ) )         , this , SLOT ( openInstancesChanged () ) );
    connect ( openconfig_line            , SIGNAL ( textChanged ( QString ) )         , this , SLOT ( openConfigChanged () ) );
    connect ( openlibrary_line           , SIGNAL ( textChanged ( QString ) )         , this , SLOT ( openLibraryChanged () ) );
+   connect ( openmanual_line            , SIGNAL ( textChanged ( QString ) )         , this , SLOT ( openManualChanged () ) );
    connect ( exit_line                  , SIGNAL ( textChanged ( QString ) )         , this , SLOT ( exitChanged () ) );
    
    return;
@@ -85,6 +86,7 @@ void Gui::SystemPanel::updateText ( void )
    opendisc_label->setText         ( shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigSystemConfigShortcutOpenDisc ) );
    openinstances_label->setText    ( shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigSystemConfigShortcutOpenInstanceManager ) );
    openlibrary_label->setText      ( shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigSystemConfigShortcutOpenLibrary ) );
+   openmanual_label->setText       ( shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigSystemConfigShortcutOpenManual ) );
    openrom_label->setText          ( shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigSystemConfigShortcutOpenRom ) );
    exit_label->setText             ( shared_components->text ()->operator[] ( Base::KeyTxtGuiConfigSystemConfigShortcutExit ) );
    
@@ -233,6 +235,8 @@ void Gui::SystemPanel::buildShortcutsSection ( void )
    shortcuts_layout->addLayout ( openconfig_layout );
    openlibrary_layout = new QHBoxLayout ();
    shortcuts_layout->addLayout ( openlibrary_layout );
+   openmanual_layout = new QHBoxLayout ();
+   shortcuts_layout->addLayout ( openmanual_layout );
    exit_layout = new QHBoxLayout ();
    shortcuts_layout->addLayout ( exit_layout );
    
@@ -290,6 +294,15 @@ void Gui::SystemPanel::buildShortcutsSection ( void )
    openlibrary_layout->addStretch ();
    openlibrary_layout->addWidget ( openlibrary_line );
    
+   openmanual_label = new QLabel ( "..." );
+   openmanual_label->setFixedWidth ( Base::LabelWidth );
+   openmanual_label->setWordWrap ( true );
+   openmanual_line = new QLineEdit ();
+   openmanual_line->setFixedWidth ( Base::LineWidth );
+   openmanual_layout->addWidget ( openmanual_label );
+   openmanual_layout->addStretch ();
+   openmanual_layout->addWidget ( openmanual_line );
+   
    exit_label = new QLabel ( "..." );
    exit_label->setFixedWidth ( Base::LabelWidth );
    exit_label->setWordWrap ( true );
@@ -305,6 +318,7 @@ void Gui::SystemPanel::buildShortcutsSection ( void )
    openinstances_line->setText ( shared_components->config ()->operator[] ( Base::KeyCfgGuiShortcutInstanceManager ) );
    openconfig_line->setText    ( shared_components->config ()->operator[] ( Base::KeyCfgGuiShortcutConfig ) );
    openlibrary_line->setText   ( shared_components->config ()->operator[] ( Base::KeyCfgGuiShortcutLibrary ) );
+   openmanual_line->setText   ( shared_components->config ()->operator[] ( Base::KeyCfgGuiShortcutManual ) );
    exit_line->setText          ( shared_components->config ()->operator[] ( Base::KeyCfgGuiShortcutExit ) );
    
    return;
@@ -397,6 +411,13 @@ void Gui::SystemPanel::openInstancesChanged ( void )
 void Gui::SystemPanel::openLibraryChanged ( void )
 {
    shared_components->config ()->set ( Base::KeyCfgGuiShortcutLibrary , openlibrary_line->text () );
+   
+   return;
+}
+
+void Gui::SystemPanel::openManualChanged ( void )
+{
+   shared_components->config ()->set ( Base::KeyCfgGuiShortcutManual , openmanual_line->text () );
    
    return;
 }

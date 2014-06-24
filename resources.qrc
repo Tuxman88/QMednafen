@@ -2,6 +2,7 @@
 <RCC version="1.0">
    <qresource>
       <file alias="license">resources/txt/license.txt</file>
+      <file alias="manual">resources/txt/manual.html</file>
       <file alias="icon-main-512">resources/img/icon/main-512x512.png</file>
       <file alias="icon-main-256">resources/img/icon/main-256x256.png</file>
       <file alias="icon-main-128">resources/img/icon/main-128x128.png</file>

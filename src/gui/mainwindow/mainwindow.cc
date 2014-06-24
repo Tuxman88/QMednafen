@@ -56,6 +56,7 @@ void Gui::MainWindow::connectAll ( void )
    connect ( menubar                    , SIGNAL ( config () )          , this , SIGNAL ( config () ) );
    connect ( menubar                    , SIGNAL ( exitNow () )         , this , SIGNAL ( exitNow () ) );
    connect ( menubar                    , SIGNAL ( about () )           , this , SIGNAL ( about () ) );
+   connect ( menubar                    , SIGNAL ( openManual () )      , this , SIGNAL ( openManual () ) );
    connect ( main_contents_panel        , SIGNAL ( openRom () )         , this , SIGNAL ( openRom () ) );   
    connect ( main_contents_panel        , SIGNAL ( openGameDisc () )    , this , SIGNAL ( openGameDisc () ) );
    connect ( main_contents_panel        , SIGNAL ( library () )         , this , SIGNAL ( library () ) );

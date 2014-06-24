@@ -36,6 +36,7 @@ int main ( int argc , char** argv )
    Gui::AboutWindow* about_window;
    Gui::InstanceManager* instance_manager;
    Gui::LibraryManager* library_manager;
+   Gui::ManualWindow* manual_window;
    
    // Create components
    qDebug () << "Main: Creating shared components.";
@@ -49,16 +50,18 @@ int main ( int argc , char** argv )
    about_window     = new Gui::AboutWindow     ( shared_components );
    instance_manager = new Gui::InstanceManager ( shared_components );
    library_manager  = new Gui::LibraryManager  ( shared_components );
+   manual_window    = new Gui::ManualWindow    ( shared_components );
    
    // Connect signals from the MainWindow
    qDebug () << "Main: Connecting MainWindow signals.";
-   QObject::connect ( main_window , SIGNAL ( exitNow () )         , kernel , SLOT ( exitNow () ) );
-   QObject::connect ( main_window , SIGNAL ( about () )           , kernel , SLOT ( about () ) );
-   QObject::connect ( main_window , SIGNAL ( openGameDisc () )    , kernel , SLOT ( openGameDisc () ) );
-   QObject::connect ( main_window , SIGNAL ( openRom () )         , kernel , SLOT ( openRom () ) );
-   QObject::connect ( main_window , SIGNAL ( config () )          , kernel , SLOT ( config () ) );
-   QObject::connect ( main_window , SIGNAL ( library () )         , kernel , SLOT ( library () ) );
-   QObject::connect ( main_window , SIGNAL ( instanceManager () ) , kernel , SLOT ( instanceManager () ) );
+   QObject::connect ( main_window , SIGNAL ( exitNow () )         , kernel        , SLOT ( exitNow () ) );
+   QObject::connect ( main_window , SIGNAL ( about () )           , kernel        , SLOT ( about () ) );
+   QObject::connect ( main_window , SIGNAL ( openGameDisc () )    , kernel        , SLOT ( openGameDisc () ) );
+   QObject::connect ( main_window , SIGNAL ( openRom () )         , kernel        , SLOT ( openRom () ) );
+   QObject::connect ( main_window , SIGNAL ( config () )          , kernel        , SLOT ( config () ) );
+   QObject::connect ( main_window , SIGNAL ( library () )         , kernel        , SLOT ( library () ) );
+   QObject::connect ( main_window , SIGNAL ( instanceManager () ) , kernel        , SLOT ( instanceManager () ) );
+   QObject::connect ( main_window , SIGNAL ( openManual () )      , manual_window , SLOT ( openManualWindow () ) );
    
    // Connect signals from the ConfigWindow
    qDebug () << "Main: Connecting ConfigWindow signals.";
@@ -73,6 +76,7 @@ int main ( int argc , char** argv )
    QObject::connect ( kernel , SIGNAL ( closeMainWindow () )                             , main_window      , SLOT ( closeMainWindow () ) );
    QObject::connect ( kernel , SIGNAL ( closeInstanceManager () )                        , instance_manager , SLOT ( closeInstanceManager () ) );
    QObject::connect ( kernel , SIGNAL ( closeLibraryManager () )                         , library_manager  , SLOT ( closeLibraryManager () ) );
+   QObject::connect ( kernel , SIGNAL ( closeManual () )                                 , manual_window    , SLOT ( closeManualWindow () ) );
    QObject::connect ( kernel , SIGNAL ( openConfigWindow () )                            , config_window    , SLOT ( openConfigWindow () ) );
    QObject::connect ( kernel , SIGNAL ( openAboutWindow () )                             , about_window     , SLOT ( openAboutWindow () ) );
    QObject::connect ( kernel , SIGNAL ( openInstanceManager ( Core::EmulatorManager* ) ) , instance_manager , SLOT ( openInstanceManager ( Core::EmulatorManager* ) ) );
@@ -102,6 +106,7 @@ int main ( int argc , char** argv )
    delete config_window;
    delete about_window;
    delete library_manager;
+   delete manual_window;
    delete shared_components;
    
    qDebug () << "Main: All clear.";

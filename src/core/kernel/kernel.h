@@ -44,6 +44,7 @@ namespace Core
          void closeAboutWindow ( void );
          void closeInstanceManager ( void );
          void closeLibraryManager ( void );
+         void closeManual ( void );
          void openConfigWindow ( void );
          void openAboutWindow ( void );
          void openInstanceManager ( Core::EmulatorManager* emulator_manager );
