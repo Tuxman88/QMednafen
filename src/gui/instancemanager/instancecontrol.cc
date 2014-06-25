@@ -122,6 +122,8 @@ void Gui::InstanceControl::buildGui ( void )
    
    console_icon = new QLabel ();
    game_name = new QLabel ( "..." );
+   game_name->setFixedWidth ( Base::LabelWidth );
+   game_name->setWordWrap ( true );
    close_game = new QPushButton ( "..." );
    
    main_layout->addWidget ( console_icon );

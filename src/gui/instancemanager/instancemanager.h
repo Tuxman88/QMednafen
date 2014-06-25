@@ -24,9 +24,9 @@
 # include <QtWidgets/QVBoxLayout>
 # include <QtWidgets/QHBoxLayout>
 # include <QtWidgets/QPushButton>
+# include <QtWidgets/QListWidget>
+# include <QtWidgets/QListWidgetItem>
 # include <QtGui/QIcon>
-# include <QtGui/QListWidget>
-# include <QtGui/QListWidgetItem>
 
 # include "../../base/base.h"
 # include "../../core/core.h"

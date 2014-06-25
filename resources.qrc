@@ -26,6 +26,17 @@
       <file alias="unit-unknown-256">resources/img/icon/unit-unknown-256x256.png</file>
       <file alias="unit-vb-256">resources/img/icon/unit-vb-256x256.png</file>
       <file alias="unit-wswan-256">resources/img/icon/unit-wswan-256x256.png</file>
+      <file alias="mainwindow">resources/img/shots/mainwindow.png</file>
+      <file alias="menu-file">resources/img/shots/menu-file.png</file>
+      <file alias="configwindow">resources/img/shots/configwindow.png</file>
+      <file alias="configwindow-plugins">resources/img/shots/configwindow-plugins.png</file>
+      <file alias="selectfile">resources/img/shots/selectfile.png</file>
+      <file alias="commontab">resources/img/shots/commontab.png</file>
+      <file alias="biossection">resources/img/shots/biossection.png</file>
+      <file alias="library">resources/img/shots/library.png</file>
+      <file alias="libraryscanning">resources/img/shots/libraryscanning.png</file>
+      <file alias="instances">resources/img/shots/instances.png</file>
+      <file alias="instancesrunning">resources/img/shots/instancesrunning.png</file>
       <file alias="lang-english">resources/txt/english.lang</file>
       <file alias="lang-spanish">resources/txt/spanish.lang</file>
    </qresource>

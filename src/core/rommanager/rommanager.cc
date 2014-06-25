@@ -37,7 +37,7 @@ Core::RomManager::RomManager ( Base::SharedComponents* new_shared_components )
    tryCreateLibrary ();
    loadLibrary ();
    
-   scan_paths = shared_components->config ()->operator[] ( Base::KeyCfgCorePathsLibrary ).split ( ":" );
+   scan_paths = shared_components->config ()->operator[] ( Base::KeyCfgCorePathsLibrary ).split ( ";" );
    
    scanning = false;
 }

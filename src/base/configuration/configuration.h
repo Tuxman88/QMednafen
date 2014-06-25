@@ -33,6 +33,7 @@ namespace Base
    const unsigned int LabelWidth = 400;
    const unsigned int SpinWidth = 200;
    const unsigned int BiSpinWidth = 91;
+   const unsigned int InstanceWidth = 300;
    
    class Configuration : public QObject
    {

@@ -1,6 +1,6 @@
 <html>
    <body>
-      <center><img src=":/icon-main-256" alt="Cool"></center>
+      <center><img src=":/icon-main-256" alt="QMednafen"></center>
       
       <center><h1>QMednafen</h1></center>
       <center><h2>Quick user guide</h2></center>
@@ -8,28 +8,229 @@
       <ul>
          <li><a href="#introduction">Introduction</a></li>
          <li><a href="#quickusage">Quick usage of QMednafen</a></li>
-         <li><a href="#advancedusage">Advanced usage of QMednafen</a></li>
          <li><a href="#about">About QMednafen</a></li>
       </ul>
       
       <center><h2><a name="introduction">Introduction</a></h2></center>
       <p>
-      QMednafen is a graphical user interface intended to ease the usage of Mednafen, a multi-console and multi-platform emulator. This basic guide will show you the basic components of the interface and how to use them.
+         QMednafen is a graphical user interface intended to ease the usage of Mednafen, a multi-console and multi-platform emulator. This basic guide will show you the basic components of the interface and how to use them. Also, you will find here the needed information to create custom plugins for QMednafen.
       </p>
       
       <center><h2><a name="quickusage">Quick usage of QMednafen</a></h2></center>
       <p>
-      QMednafen is a graphical user interface intended to ease the usage of Mednafen, a multi-console and multi-platform emulator. This basic guide will show you the basic components of the interface and how to use them.
+         Once opened, you can see the Main Window of QMednafen:
       </p>
       
-      <center><h2><a name="advancedusage">Advanced usage of QMednafen</a></h2></center>
+      <center><img src=":/mainwindow" alt="QMednafen Main Window"></center>
+      
       <p>
-      QMednafen is a graphical user interface intended to ease the usage of Mednafen, a multi-console and multi-platform emulator. This basic guide will show you the basic components of the interface and how to use them.
+         In the Main Window you can see the Menu Bar with the options <b>File</b>, <b>Options</b>, <b>Tools</b> and <b>Help</b>. Below it you can see the main icon of the application, the name, current running version and a small slogan. Then, you can see the section <u>Main options</u> that contains some buttons that bring quick single click access to the most common options. And finally, bellow the <u>Main options</u> section, can be seen the <b>About</b> and <b>Exit</b> buttons.
       </p>
       
+      <p>
+         The <b>File</b> menu has three options: <b>Open ROM</b>, <b>Open game disc</b> and <b>Exit</b>. These options are the same as the buttons located in the <u>Main options</u> section and the bottom button <b>Exit</b>. Also, as you can see if you open the menu, these options have shortcuts assigned, so you can execute them even faster than with a click.
+      </p>
+      
+      <center><img src=":/menu-file" alt="QMednafen File menu contents."></center>
+      
+      <p>
+         The <b>Options</b> menu has the <b>Config</b> option, that is the same as the <b>Config</b> button in the <u>Main options</u> section. The <b>Tools</b> menu has the <b>Library</b> and <b>Games running</b> options. The <b>Library</b> option is the same as the <b>Library</b> button found in the <u>Main options</u> section, meanwhile, the <b>Games running</b> option can be accessed only using this menu or it's assigned shortcut.
+      </p>
+      
+      <p>
+         Finally, the <b>Help</b> menu has the options <b>Manual</b> and <b>About</b>. The <b>Manual</b> option displays this little tutorial and can be accessed only using that menu or its assigned shortcut. The <b>About</b> option is the same as the <b>About</b> button and can also be accessed using the assigned shortcut.
+      </p>
+      
+      <p>
+         Continue reading to know how to setup QMednafen for the first time.
+      </p>
+      
+      <center><h3>Basic setup 1 - Plugins</h3></center>
+      
+      <p>
+         QMednafen doesn't have any internal plugin, so, all the options must be specified through external plugins. First, you need to download the Official Plugins Pack for QMednafen. To download the latest Plugin Pack, follow these steps:
+      
+         <ul>
+            <li>Go to https://sourceforge.net/projects/qmednafen/files/</li>
+            <li>Enter the latest version folder.</li>
+            <li>Clic on the file <u>"QMednafen X.Y.Z - Plugin pack.tar.gz"</u> file.</li>
+            <li>Download the file.</li>
+         </ul>
+      </p>
+      
+      <p>
+         Once downloaded the file, uncompress it. You will find lots of files with <b>qmp</b> extension. Copy or move those files to a folder where you want to store them. Be sure that you have write permissions on the selected folder, since QMednafen will create more files (in the same folder) to store your configuration values.
+      </p>
+      
+      <p>
+         Now, open QMednafen and go to the Config Window (<b>Options</b> -> <b>Config</b> menu or just click the <b>Config</b> button on the Main Window). The Config Window will appear and you will see a screen like the next one:
+      </p>
+      
+      <center><img src=":/configwindow" alt="QMednafen Config Window without plugins."></center>
+      
+      <p>
+         Go the System tab and, in the "System paths" group, you can see an option called "Paths for plugins...". In such option you need to place the full paths (no relative paths supported) to the folder where you have placed your <b>qmp</b> files. The next lines are examples of how you can add paths to QMednafen to search for plugins (the first line is for GNU/Linux systems, the second one is for Windows systems).
+      </p>
+      
+      <center>/home/user/Plugins;/mnt/Data;/mnt/Disk/Folder</center>
+      <center>C:\Plugins;D:\Games\Folder;E:\MyFolder</center>
+      
+      <p>
+         Obviously, you can set only one path. The semicolons are needed only if you add more than one. QMednafen supports paths with spaces.
+      </p>
+      
+      <p>
+         Once you have added the paths, you need to restart QMednafen (all the values on the System tab are saved automatically on change). If you have set a valid folder path and in such folder are located <b>qmp</b> plugin files, the next time you open the Config Window you will see more tabs. Every tab represents a system.
+      </p>
+      
+      <center><img src=":/configwindow-plugins" alt="QMednafen Config Window with plugins."></center>
+      
+      <center><h3>Basic setup 2 - Setting Mednafen path</h3></center>
+      
+      <p>
+         QMednafen is "just" an interface for Mednafen, the real emulator. So, QMednafen needs to know where is Mednafen in your system to be able to run it. QMednafen has a configuration value that tells it where is located the binary file of Mednafen, and such value, by default, is "mednafen". In GNU/Linux systems, this value is just enough, but for Windows systems, you need to set the full path (even with the EXE file name). To set the Mendafen binary path for QMednafen, open QMednafen and open the Config Window (<b>Options</b> -> <b>Config</b> menu or just click the <b>Config</b> button on the Main Window). In the System tab, in the "System paths" group, you can see a value named "Mednafen binary path". There, in its default value, you can see the "mednafen" string. Replace such string with the full path of the Mednafen binary. The next two lines are examples of valid paths (the first one is for GNU/Linux systems, the second is for Windows systems).
+      </p>
+      
+      <center>/usr/local/bin/mednafen</center>
+      <center>C:\Program Files/Mednafen/mednafen.exe</center>
+      
+      <p>
+         Remember: In this value you can set only ONE path. There is no support for multiple paths.
+      </p>
+      
+      <p>
+         After setting the path, close and open again QMednafen. The value is now ready.
+      </p>
+      
+      <center><h3>Basic setup 3 - Command format</h3></center>
+      
+      <p>
+         Mednafen has a different behaviour in different systems. The most important change and difference is the command format, and, as such, QMednafen is aware of this difference. In GNU/Linux systems, the format that is almost sure to work is the <b>ROM OPTIONS</b> format. In Windows systems, the format that is almost sure to work is the <b>OPTIONS ROM</b> format. If QMednafen is not able to open your ROM file, try to change the format.
+      </p>
+      
+      <p>
+         To change the format that QMednafen is using to run Mednafen, open QMendafen and open the Config Window (<b>Options</b> -> <b>Config</b> menu or just click the <b>Config</b> button on the Main Window). In the System tab, in the "Mednafen options" group, you can see the option "Command format". Change the format from <b>ROM OPTIONS</b> to <b>OPTIONS ROM</b> or from <b>OPTIONS ROM</b> to <b>ROM OPTIONS</b>. Once changed, close and open again QMednafen and the change will be applied.
+      </p>
+      
+      <center><h3>Basic setup 4 - Opening a ROM file</h3></center>
+      
+      <p>
+         QMednafen let you to select a ROM file from your system and launch it with Mednafen. Once configured, to open a ROM file, press the <b>Open ROM</b> button on the Main Window or go to <b>File</b> -> <b>Open ROM</b> or use the shortcut Ctrl+O (by default). A file selection dialog will appear. Use such dialog to search your ROM file.
+      </p>
+      
+      <center><img src=":/selectfile" alt="QMednafen file selection dialog."></center>
+      
+      <p>
+         Once selected, click on the "Open" button on the dialog and QMednafen will open your ROM file.
+      </p>
+      
+      <center><h3>Basic setup 5 - Opening a real game disc</h3></center>
+      
+      <p>
+         If you have a physical disc (like a PlayStation 1 game), Mednafen has the support to play them. To open a real game disc, insert the disc in your system tray, open QMednafen and press the <b>Open game disc</b> button on the Main Window, or go to <b>File</b> -> <b>Open game disc</b>, or use the shortcut Ctrl+D (by default).
+      </p>
+      
+      <p>
+         Once activated such option, QMednafen will tell to Mednafen to try to use the first optical drive of the system to run a game from there.
+      </p>
+      
+      <center><h3>Basic setup 6 - BIOS files</h3></center>
+      
+      <p>
+         Mednafen will require some special files to run games of some systems (PC-Engine, PC-FX, Sega CD/Mega CD, PSOne and Lynx). Such needed files are the BIOS files. Mednafen requires such files to play games of those systems (in this case, there is needed 2 BIOS files for PC-Engine and 3 for the PSOne, not just one). You can search on the internet how to get such files (for example, there is possible to use your own PSOne console and extract the BIOS to a file, and such file is the one needed by Mednafen).
+      </p>
+      
+      <p>
+         If you already has all the consoles that requires BIOS files and you have already extracted their BIOS to files in your system, then, you can use them. To do this, you can just copy the files to the config folder of Mednafen (/home/user/.mednafen/ in GNU/Linux systems or the folder where is the EXE file in Windows systems). The files must follow some name conventions:
+         
+         <ul>
+            <li>PC-Engine: <b>syscard3.pce</b></li>
+            <li>PC-Engine GE: <b>gecard.pce</b></li>
+            <li>PC-FX: <b>pcfx.rom</b></li>
+            <li>Sega CD/Mega CD: <b>us_scd1_9210.bin</b></li>
+            <li>Eurpope PSX: <b>scph5502.bin</b></li>
+            <li>Japan PSX: <b>scph5500.bin</b></li>
+            <li>North America PSX: <b>scph5501.bin</b></li>
+            <li>Atary Lynx: <b>lynxboot.img</b></li>
+         </ul>
+      </p>
+      
+      <p>
+         Once copied, you will be able to run games from those systems. Also, if you already has the files in other folder, QMednafen will let you to set the paths to those files. Open QMednafen, open the Config Window (<b>Options</b> -> <b>Config</b> menu or just click the <b>Config</b> button on the Main Window). In the Config Window, if you have already added the Official Plugins Pack for QMednafen, you can see a tab named "Common". Go to such tab.
+      </p>
+      
+      <center><img src=":/commontab" alt="Contents of the Official Common plugin for QMednafen."></center>
+      
+      <p>
+         Once there, go to the section "In-Game options". There, you will see the section "BIOS files".
+      </p>
+      
+      <center><img src=":/biossection" alt="BIOS section of the Common plugin."></center>
+      
+      <p>
+         In such section, you can see all the supported options (Hint: There is no option to set the path for the Atari Lynx, such BIOS <u>must</u> be placed in the config folder of Mednafen). To select a plugin file, just click on the button <b>...</b> to open a file selection dialog. Search for your plugin file, select it and click on <b>Open</b>. The path to the file will be automatically added to the text field. Using this method, the BIOS files doesn't require to be named as specified since QMednafen will tell to Mednafen exactly which file is which BIOS.
+      </p>
+      
+      <center><h3>Basic setup 7 - Library support</h3></center>
+      
+      <p>
+         QMednafen offers to the user basic and early support to create a game library. At this version, QMednafen can scan a series of folders and create a list of files with specific extensions. To configure the library, open the Config Window (<b>Options</b> -> <b>Config</b> menu or just click the <b>Config</b> button on the Main Window) and in the System tab you can see the "System paths" section. In such section, you can see the option "Paths for library...". In such field you can place the full paths to the folders where you have games stored. QMednafen will scan all the folders contained in such path and add the files to the library by extension.
+      </p>
+      
+      <p>
+         Once you add the paths to the field, close and open again QMednafen. Now, to scan the folders, you need to open the library. Do a click on the <b>Library</b> button on the Main Window, go to <b>Tools</b> -> <b>Library</b> or just use the shortcut Ctrl+L (by default). Now you can see a window like this one:
+      </p>
+      
+      <center><img src=":/library" alt="Empty library."></center>
+      
+      <p>
+         If you have already added paths to scan, you can now press the <b>Scan for games</b> button. If the folder contains just a few files and/or folders, you will only see how the Library Window now displays tabs. Each tab represents a system.
+      </p>
+      
+      <p>
+         If the folder has a lot of sub-folders and/or files, QMednafen will require more time to complete the scan. In such case, a dialog will appear and will display the current folder to be scanned.
+      </p>
+      
+      <center><img src=":/libraryscanning" alt="Scanning dialog."></center>
+      
+      <p>
+         To cancel the scan process, just press the <b>Cancel</b> button.
+      </p>
+      
+      <center><h3>Basic setup 8 - Control of the running instances</h3></center>
+      
+      <p>
+         Every time QMednafen opens a game, the game is stored in an internal list. To see such list, you can open the Instance Manager. To open it, go to <b>Tools</b> -> <b>Games running</b> or just use the shortcut Ctrl+I (by default). Once opened, you can see a window like this one:
+      </p>
+      
+      <center><img src=":/instances" alt="Instances manager."></center>
+      
+      <p>
+         Once you open a game, you can see that the Instance Manager have added a line for such game:
+      </p>
+      
+      <center><img src=":/instancesrunning" alt="Instances manager with a running game."></center>
+      
+      <p>
+         As you can see, the Instance Manager will display a new row on the list with a <b>Close game</b> button. This means that, if you want, you can close all your running games using the Instance Manager.
+      </p>
+            
       <center><h2><a name="about">About QMednafen</a></h2></center>
+      
       <p>
-      QMednafen is a graphical user interface intended to ease the usage of Mednafen, a multi-console and multi-platform emulator. This basic guide will show you the basic components of the interface and how to use them.
+         QMednafen is a graphical user interface developed with C++ and the Qt Framework 5.3.0 on Chakra GNU/Linux. The GNU/Linux version of this application was developed using KDevelop 4.6 and GCC 4.9 on a 64 bit system. The Windows version of this application was compiled in a Microsoft Windows 7 Professional (32 bits) and tested on such version and in Microsoft Windows 8 (32 bits). To compile the application, were used the tools provided by the Qt Framework (32 bits) for Microsoft Windows. All the DLL files provided with the Windows binary are part of the Qt Creator application.
+      </p>
+      
+      <p>
+         I claim none ownership over the Company names, Brand names or Console names used in the application or the Plugins provided. All the Company names, Brand names or Console names are property of their respective owners.
+      </p>
+      
+      <p>
+         The game console icons are property of their respective artists to whom I give credits on the About Window.
+      </p>
+      
+      <p>
+         This is a full Open Source project, and as such, all the resources of the program can be found in it's GitHub project page: https://github.com/Tuxman88/QMednafen
       </p>
    </body>
 </html>
