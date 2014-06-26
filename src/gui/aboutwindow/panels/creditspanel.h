@@ -47,6 +47,10 @@ namespace Gui
          Gui::AuthorSection* author_doctorg;
          Gui::AuthorSection* author_blueamnesiac;
          Gui::AuthorSection* author_psychotic;
+         Gui::AuthorSection* author_s4rs;
+         Gui::AuthorSection* author_wardee;
+         Gui::AuthorSection* author_waterrat;
+         Gui::AuthorSection* author_wikimedia;
    };
 }
 

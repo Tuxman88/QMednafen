@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=QMednafen
+GenericName=Qt GUI for Mednafen
+Comment=Qt GUI for Mednafen
+Icon=/usr/share/icons/qmednafen.png
+Exec=/usr/bin/qmednafen
+Encoding=UTF-8
+Categories=Game
+Terminal=false

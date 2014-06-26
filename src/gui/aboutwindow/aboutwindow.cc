@@ -92,7 +92,6 @@ void Gui::AboutWindow::closeAboutWindow ( void )
 void Gui::AboutWindow::openAboutWindow ( void )
 {
    this->setVisible ( true );
-   setFixedSize ( size () );
-   
+      
    return;
 }

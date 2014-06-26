@@ -1,9 +1,8 @@
-QMednafen
-=========
+QMednafen - README file
+=======================
 
-Multi-platform interface for Mednafen, written with Qt Framework.
-
-This is a Qt 5 project, so, to compile it, you need to install all the relevant packages needed to compile a Qt 5 project.
+QMednafen is an user interface (GUI) for Mednafen, the multi-system and multi-platform
+emulator. This software provides to the user a convenient way to use Mednafen.
 
 --------------------
 --- REQUIREMENTS ---
