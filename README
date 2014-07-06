@@ -61,6 +61,7 @@ easy to use a binary named "qmednafen.exe". Now, your TARGET value must look lik
 Now, add the following options after the TARGET value:
 
    CONFIG += debug_and_release
+   CONFIG += console
    QT += widgets
    
 Those values are needed to compile the project. On GNU/Linux systems, you might want to
@@ -81,6 +82,7 @@ entry. So, now, your file must start looking like this:
    TEMPLATE = app
    TARGET = qmednafen
    CONFIG += debug_and_release
+   CONFIG += console
    QT += widgets
    target.path = /usr/bin/
    icons.path = /usr/share/icons/

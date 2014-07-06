@@ -5,6 +5,7 @@
 TEMPLATE = app
 TARGET = qmednafen
 CONFIG += debug_and_release
+CONFIG += console
 QT += widgets
 target.path = /usr/bin/
 icons.path = /usr/share/icons/
