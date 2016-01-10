@@ -67,7 +67,7 @@ Those values are needed to compile the project. On GNU/Linux systems, you might 
 
 > target.path = /usr/bin/
 
-> icons.path = /usr/share/icons/
+> icons.path = /usr/share/icons/hicolor/512x512/apps/
 
 > icons.files = resources/img/icon/qmednafen.png
 
