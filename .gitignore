@@ -1,0 +1,9 @@
+# qmake-generated files
+debug/
+release/
+Makefile
+Makefile.Debug
+Makefile.Release
+
+# compilation output
+qmednafen
